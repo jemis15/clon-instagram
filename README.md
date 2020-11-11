@@ -1,2 +1,2 @@
-# clon-instagram
-aprendiendo a crear un clon de instagram
+# Web de la municipalidad de mazamari
+Desarrollando la plataforma web de la municipalidad de mazamari
