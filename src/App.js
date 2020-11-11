@@ -32,7 +32,8 @@ import GastronomiaAndTurismo from './Views/GastronomiaAndTurismo';
 import Gastronomia from './Views/Gastronomia/Gastronomia';
 import Turismo from './Views/Turismo/Turismo';
 import Blank from './Views/Blank';
-import Frame from './Views/Frame'
+import Frame from './Views/Frame';
+import VisionMision from './Views/VisionMision';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -122,6 +123,7 @@ function App() {
         <Route path="/frame" render={() => <Frame />} />
         {/* fin protected */}
 
+        <Route path="/vision_mision" render={() => <VisionMision />} />
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />
         <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />
