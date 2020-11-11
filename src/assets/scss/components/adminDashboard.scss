@@ -1,0 +1,26 @@
+.menu-dashboard {
+  .menu-dashboard-link {
+    border-bottom: 2px solid transparent;
+    color: $secondary;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+    
+    &:hover {
+      border-color: $primary;
+      background-color: $light;
+      color: $dark;
+    }
+    &.active {
+      border-color: $primary;
+      background-color: $light;
+      color: $dark;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .menu-dashboard-link {
+    border-bottom: none !important;
+    border-left: 2px solid transparent;
+  }
+}

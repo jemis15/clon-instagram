@@ -1,0 +1,57 @@
+.grid-foto {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-mayor-5 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "caja1 caja2"
+    "caja1 caja3";
+}
+
+.grid-image1 {
+  grid-area: caja1;
+}
+.grid-image2 {
+  grid-area: caja2;
+}
+.grid-image3 {
+  grid-area: caja3;
+}
+
+.publication {
+  .publication-tag {
+		top: 25px;
+		right: 0;
+		border: 1px solid orange;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		background-color: rgb(250, 233, 201);
+		color: orange;
+	}
+}
+
+.tabs-tab {
+  .tabs-item {
+    &.active {
+      border-bottom: 3px solid $primary;
+      color: $primary;
+    }
+    &:hover {
+      border-bottom: 3px solid $primary;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .tabs-item{
+		&.active{
+			border-bottom: 0 !important;
+		}
+		&:hover{
+			border-bottom: 0 !important;
+		}
+	}
+}

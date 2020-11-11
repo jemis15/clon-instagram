@@ -1,0 +1,21 @@
+.grid-team {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  column-gap: 2rem;
+  justify-content: center;  
+}
+@include media-breakpoint-up(sm) {
+  .grid-team {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@include media-breakpoint-up(md) {
+  .grid-team {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@include media-breakpoint-up(lg) {
+  .grid-team {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

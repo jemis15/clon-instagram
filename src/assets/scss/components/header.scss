@@ -1,0 +1,36 @@
+body {
+  &.logged-in {
+    @include media-breakpoint-up(lg) {
+      .header {
+        left: var(--sidebar-collapse-width);
+        right: 0;
+      }
+    }
+  }
+}
+body {
+  &.logged-in {
+    @include media-breakpoint-up(xl) {
+      .header {
+        left: var(--sidebar-width);
+        right: 0;
+      }
+    }
+  }
+}
+
+.header {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--white-bg);
+  height: var(--header-height);
+  font-family: var(--heading-font);
+
+  transition: all var(--transition-collapse);
+}
+
+
+

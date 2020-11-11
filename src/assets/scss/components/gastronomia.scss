@@ -1,0 +1,75 @@
+.gastronomia-box {
+  .gastronomia-menu-content {
+    .gastronomia-menu {
+      .gastronomia-menu-item {
+        &:hover {
+          background-color: var(--grey-300);
+          color: $dark;
+        }
+      }
+    }
+  }
+}
+
+.gastronomia-menu {
+  width: 15rem;
+  .gastronomia-menu-item {
+    &.active {
+      background-color: var(--grey-300);
+    }
+    &:hover {
+      background-color: var(--grey-300);
+    }
+  }
+}
+
+.grid-gastronomia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-auto-rows: auto;
+  grid-auto-flow: dense;
+  grid-gap: 1rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+.content-lugares-turisticos {
+  .lugar-turistico {
+    // even -------------------------
+    &:nth-child(even) {
+      img {
+        border-radius: 70% 1rem 1rem 70% / 50% 1rem 1rem 50%;
+      }
+    }
+
+    // odd ----------------------------
+    &:nth-child(odd) {
+      // text-align: right;
+      .container {
+        background-color: var(--container-bg);
+        border-radius: 1rem;
+      }
+      img {
+        border-radius: 1rem 70% 70% 1rem / 1rem 50% 50% 1rem;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      &:nth-child(even) {
+        .section-image {
+          order: 2;
+        }
+      }
+    }
+  }
+
+  .lugar-turistico-button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+  }
+}

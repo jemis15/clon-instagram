@@ -1,0 +1,119 @@
+.btn-animado {
+  border: 0;
+  min-width: 50px;
+  min-height: 50px;
+  background-color: $secondary;
+  border-radius: 10px;
+  transform: rotateZ(-10deg);
+  transform-origin: left bottom;
+  transition: 0.2s transform ease-in-out;
+  box-shadow: -5px 20px 20px -15px black;
+  outline: 0;
+  &:hover {
+    transform: rotateZ(0);
+    box-shadow: none;
+  }
+  &.primary {
+    background-color: $primary;
+    &:hover {
+      background-color: rgb(0, 60, 255);
+    }
+  }
+  &.secondary {
+    background-color: $secondary;
+    &:hover {
+      background-color: black;
+    }
+  }
+}
+
+.options-bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.facebook {
+  border: 1px solid $primary;
+  border-radius: 10px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 150px;
+  right: 15px;
+  z-index: 1000;
+}
+.social {
+  transition: 0.3s all ease-in;
+  &:hover {
+    transform: rotateZ(360deg);
+    color: white;
+  }
+}
+.btn-facebook {
+  color: #3b5998;
+  &:hover {
+    background-color: #3b5998;
+  }
+}
+.btn-facebook-fill {
+  color: white;
+  background-color: #3b5998;
+}
+.btn-youtube {
+  color: #c4302b;
+  &:hover {
+    background-color: #c4302b;
+  }
+}
+.btn-youtube-fill {
+  color: white;
+  background-color: #c4302b;
+}
+.btn-twitter {
+  color: #00acee;
+  &:hover {
+    background-color: #00acee;
+  }
+}
+.btn-twitter-fill {
+  color: white;
+  background-color: #00acee;
+}
+.btn-whatsapp {
+  color: #00bb2d;
+  &:hover {
+    background-color: #00bb2d;
+  }
+}
+.btn-whatsapp-fill {
+  color: white;
+  background-color: #00bb2d;
+}
+.btn-pinterest {
+  color: #c8232c;
+  &:hover {
+    background-color: #c8232c;
+  }
+}
+.btn-pinterest-fill {
+  color: white;
+  background-color: #c8232c;
+}
+
+// Botón para activar el tema oscuro
+.change-theme-button {
+  font-size   : 20px;
+  font-weight : 600;
+  outline     : none;
+  color       : var(--title-color);
+  background  : none;
+  border      : none;
+  cursor      : pointer;
+
+  &::before {
+    content : '🌞 Tema claro';
+
+    .dark-theme & {
+      content :  '🌝 Tema oscuro';
+    }
+  }
+}

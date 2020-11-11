@@ -1,0 +1,61 @@
+.contador-visitas{
+  border: 1px solid $dark;
+  .contador-number{
+    border-right: 1px solid $secondary;
+    &:last-child{
+      border-right: 0;
+    }
+  }
+}
+.contador-visitas__old {
+  li {
+    line-height: 1.3em;
+    padding: 0px 10px;
+    margin-right: 3px;
+    border: 2px solid $secondary;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 1px 2px $secondary;
+    // color: $secondary;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover{
+      animation: temblor infinite 1s reverse;
+    }
+  }
+}
+
+@keyframes temblor {
+  0% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(20deg);
+  }
+  20% {
+    transform: rotate(-20deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  40% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  60% {
+    transform: rotate(-20deg);
+  }
+  70% {
+    transform: rotate(20deg);
+  }
+  80% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

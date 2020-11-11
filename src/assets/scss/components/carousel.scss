@@ -1,0 +1,45 @@
+.transition-personalizado{
+  transform: none;
+}
+
+.indicators-carousel-b {
+  li {
+    border: 1px solid white;
+    background-color: $secondary;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:last-child {
+      margin-left: 0;
+    }
+    &.active {
+      background-color: $danger;
+    }
+  }
+}
+
+.content-carousel-b {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  max-width: 500px;
+}
+
+.indicators-carousel-b {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.item2{
+  width: 90%;
+  transition: 0.2s transform ease-in-out;
+  &:hover{
+    transform: scale(1.07);
+    z-index: 100000;
+  }
+}

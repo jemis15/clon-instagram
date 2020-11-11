@@ -1,0 +1,40 @@
+.subtitle {
+  color: var(--light-text-color);
+}
+
+.text-small {
+  font-family: var(--body-font);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--body-line-height);
+}
+.text-smaller {
+  font-family: var(--body-font);
+  font-size: var(--font-size-smaller);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+
+.text-hover-white {
+  color: $secondary !important;
+  &:hover {
+    color: $white !important;
+  }
+}
+
+.font-weight-800{
+  font-weight: 800;
+}
+.font-weight-700{
+  font-weight: 700;
+}
+.font-weight-600{
+  font-weight: 600;
+}
+.font-weight-400{
+  font-weight: 400;
+}
+.font-weight-300{
+  font-weight: 300;
+}

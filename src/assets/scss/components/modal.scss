@@ -1,0 +1,36 @@
+.modalmodal {
+  .modal-content {
+    // border: 1px solid red;
+    .modal-header {
+      border-bottom: 0;
+      bottom: 0;
+      margin: 0;
+
+      .modal-title {
+        text-align: center;
+      }
+
+      button {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+      }
+    }
+  }
+  .modal-body {
+
+  }
+  .modal-footer {
+    border-top: 0;
+    padding-top: 0;
+    display: block;
+    button {
+      display: block;
+      width: 100%;
+      margin-bottom: 0;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
