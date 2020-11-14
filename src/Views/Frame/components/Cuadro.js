@@ -1,13 +1,18 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 
 export default function Cuadro({ children }) {
-    return <Row noGutters>{children}</Row>
+    return <div className="frame d-flex flex-column flex-md-row">
+        {children}
+    </div>
 }
 
 export function CuadroLeft({ children }) {
-    return <Col xs="4" className="px-4 border-right" style={{ minHeight: '100vh' }}>{children}</Col>
+    return <section className="frame-metadata">
+        <div className="container py-4 h-100">{children}</div>
+    </section>
 }
 export function CuadroRight({ children }) {
-    return <Col xs="8" className="px-5">{children}</Col>
+    return <section className="frame-preview">
+        <div className="container py-4">{children}</div>
+    </section>
 }

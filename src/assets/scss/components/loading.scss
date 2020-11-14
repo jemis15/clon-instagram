@@ -5,3 +5,7 @@
   right: 0;
   bottom: 0;
 }
+
+.h-frame-loading{
+  height: calc(100vh - (var(--topbar-height) + var(--header-height)))
+}
