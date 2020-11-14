@@ -1,17 +1,14 @@
 import React from "react";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
 
-import Gastronomias from "./Gastronomia/Lista";
-import GastronomiaEditar from "./Gastronomia/Editar";
-import Turismos from "./Turismo/Lista";
-import TurismoEditar from "./Turismo/Editar";
-import ViewCarousel from "./Carousel";
-import ViewGrupoLink from "./GrupoLink";
+import ViewTurismo from "./Frame/Turismo";
+import ViewCarousel from "./Frame/Carousel";
+import ViewGrupoLink from "./Frame/GrupoLink";
 
 export default function Frame() {
   return (
     <>
-      <div className="py-2 px-3 border-bottom">
+      <div className="border-bottom py-2 px-3">
         <NavLink
           to="/frame/carouseles"
           className="pr-1 py-2 px-3 button-nav-j rounded-lg text-decoration-none d-inline-block"
@@ -53,17 +50,11 @@ export default function Frame() {
         <Route path="/frame/grupolinks">
           <ViewGrupoLink />
         </Route>
-        <Route path="/frame/gastronomias" exact>
-          <Gastronomias />
+        <Route path="/frame/gastronomias">
+          <ViewGrupoLink />
         </Route>
-        <Route path="/frame/gastronomias/:gastronomia_id">
-          <GastronomiaEditar />
-        </Route>
-        <Route path="/frame/turismos" exact>
-          <Turismos />
-        </Route>
-        <Route path="/frame/turismos/:turismo_id">
-          <TurismoEditar />
+        <Route path="/frame/turismos">
+          <ViewTurismo />
         </Route>
         <Redirect to="/frame/carouseles" />
       </Switch>

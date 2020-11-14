@@ -10,6 +10,9 @@
   display: block;
   transition: 0.2s all ease-in-out;
   overflow: hidden;
+  &:hover {
+    background-color: yellow;
+  }
 }
 
 .sub-menu {
@@ -33,7 +36,45 @@
 
 .nav-item {
   .nav-link {
-    color: var(--color-text) !important;
+    color: black !important;
     font-size: 17px;
+  }
+
+  .nav-menu {
+    padding: 10px 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: none;
+    .menus {
+      border-left: 1px dotted white;
+      .menu {
+        .menu-title {
+          border-bottom: 1px solid white;
+          padding-bottom: 5px;
+        }
+        .menu-list {
+            li{
+                margin-bottom: 5px;
+                font-size: 14px;
+                a{
+                    color: white;
+                    text-decoration: none;
+                    &:hover{
+                        background-color: $dark;
+                    }
+                }
+            }
+        }
+      }
+    }
+  }
+  &:hover {
+    .nav-menu {
+      display: block;
+    }
   }
 }

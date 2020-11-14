@@ -1,45 +1,90 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useLocation, useHistory } from 'react-router-dom';
+import MDEditor from '@uiw/react-md-editor';
 
 import imageDefault from '../assets/images/paisaje.jpg';
+import imageItem from '../assets/images/img6.jpg';
+import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
+const numberOfGastronomia = Array(10).fill(null);
 export default function GastronomiaYTurismo() {
+    const query = useQuery();
+    const tipo = query.get('tipo');
+    const titulo = query.get('titulo');
     const [gastronomias, setGastronomias] = useState([]);
     const [turismos, setTurismos] = useState([]);
-    const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(true);
+    const [imagePortada, setImagePortada] = useState(null);
+    const [gastronomiaOrTurismo, setGastronomiaOrTurismo] = useState(null);
 
     // inicio
     useEffect(() => {
         async function loadGastronomiaYTurismo() {
             try {
-                setLoadingTurismosYGastronomias(true);
                 const { data: apiTurismos } = await Axios.get(`/apimuni/turismos_p`);
-                const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias_p`);
-                setGastronomias(apiGastronomia);
+                const {data: apiImagePortada} = await Axios.get(`/apimuni/turismos/${apiTurismos.id}/image_portada`);
+                setGastronomias([]);
                 setTurismos(apiTurismos);
-                setLoadingTurismosYGastronomias(false)
+                setImagePortada(apiImagePortada);
             } catch (error) {
                 console.log(error);
-                setLoadingTurismosYGastronomias(false);
             }
         }
 
         loadGastronomiaYTurismo();
     }, []);
 
-    function getTitulo(titulo) {
-        const palabras = titulo.split(' ');
-        let oracion = '';
-        palabras.forEach((letra, key) => {
-            if (palabras.length > (key + 1)) {
-                oracion += letra + '_';
-            } else {
-                oracion += letra;
+    // carga un item para mostrar detalle completo
+    useEffect(() => {
+        async function loadGastronomia() {
+            try {
+                setGastronomiaOrTurismo({
+                    titulo: 'Titulo de la gastronomia'
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        async function loadTurismo() {
+            try {
+                const { data: apiTurismo } = await Axios.get(`/apimuni/turismos/${titulo}/titulo`);
+                setGastronomiaOrTurismo(apiTurismo);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        if (tipo === 'gastronomia') {
+            loadGastronomia();
+        } else if (tipo === 'turismo') {
+            loadTurismo();
+        } else {
+            setGastronomiaOrTurismo(null);
+        }
+    }, [tipo, titulo]);
+
+    function getImagePortada(images) {
+        if (!images) {
+            return null;
+        }
+
+        let imagePortada = null;
+        images.map(image => {
+            if (image.portada === 1 && imagePortada === null) {
+                imagePortada = image;
             }
         });
-        return oracion;
+
+        if (imagePortada) {
+            return '/apimuni/images/turismos/' + imagePortada.url;
+        }
+
+        return imageDefault;
+    }
+
+    if (gastronomiaOrTurismo) {
+        return <DetalleOfGastronomiaOrTurismo gastronomiaOrTurismo={gastronomiaOrTurismo} />
     }
 
     return <>
@@ -58,11 +103,7 @@ export default function GastronomiaYTurismo() {
                         </p>
                     </Col>
                     <Col md="5" className="align-self-center">
-                        <img src={imageDefault} 
-                        className="img-fluid rounded-lg" 
-                        alt="gastonomia y turismo" 
-                        loading="lazy"
-                        />
+                        <img src={imageDefault} className="img-fluid rounded-lg" alt="gastonomia y turismo" />
                     </Col>
                 </Row>
             </Container>
@@ -71,37 +112,26 @@ export default function GastronomiaYTurismo() {
         <Container className="py-xl">
             <h2 className="h2 text-center mb-4">Platos Tipicos</h2>
             <Gastronomias>
-                {gastronomias.map(gastronomia => (
-                    <Gastronomia key={gastronomia.id}>
+                {numberOfGastronomia.map(item => (
+                    <Gastronomia>
                         <div className="mb-2">
-                            <img src={`/apimuni/images/gastronomias/${gastronomia.image}`}
-                                className="img-fluid rounded-lg"
-                                alt="gastronomia"
-                                loading="lazy"
-                            />
+                            <img src={imageItem} className="img-fluid rounded-lg" alt="gastronomia" />
                         </div>
                         <div>
                             <h4 className="h4">
                                 <Link className="text-decoration-none"
-                                    to={`/gastronomias/${getTitulo(gastronomia.titulo)}`}>
-                                    {gastronomia.titulo}
+                                    to={{ search: `?tipo=gastronomia&titulo=Titulo de la gastronomia` }}>
+                                    Titulo de la gastronomia
                                 </Link>
                             </h4>
                             <p className="text-small overflow-hidden">
-                                {gastronomia.descripcion}
-                            </p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Dolores quaerat.
+                        </p>
                         </div>
                     </Gastronomia>
                 ))}
             </Gastronomias>
-            {gastronomias.length === 0 && (
-                <div className="container border p-5">
-                    {loadingTurismosYGastronomias ?
-                        <p className="text-center mb-0">Cargando...</p> :
-                        <p className="text-center mb-0">Sin registros</p>
-                    }
-                </div>
-            )}
         </Container>
 
         <section className="content-lugares-turisticos mb-5">
@@ -113,11 +143,7 @@ export default function GastronomiaYTurismo() {
                             <Row>
                                 <Col md="5" className="align-self-center section-image">
                                     <div className="content-image-gastronomia-right overflow-hidden">
-                                        <img src={`/apimuni/images/turismos/${turismo.image}`}
-                                            className="img-fluid"
-                                            alt="lugar turistico"
-                                            loading="lazy"
-                                        />
+                                        <img src={getImagePortada(turismo.images)} className="img-fluid" alt="lugar turistico" />
                                     </div>
                                 </Col>
                                 <Col md="7" className="align-self-center section-description">
@@ -129,23 +155,13 @@ export default function GastronomiaYTurismo() {
                                     </p>
                                     <div className="text-center text-md-left">
                                         <Button className="lugar-turistico-button mt-3 mt-md-0"
-                                            as={Link} to={`/turismos/${getTitulo(turismo.titulo)}`}>
-                                            Ver mas detalle
-                                        </Button>
+                                            as={Link} to={`/gastronomia?tipo=turismo&titulo=${turismo.titulo}`}>Ver mas detalle</Button>
                                     </div>
                                 </Col>
                             </Row>
                         </div>
                     </Turismo>
                 ))}
-                {turismos.length === 0 && (
-                    <div className="container border p-5">
-                        {loadingTurismosYGastronomias ?
-                            <p className="text-center mb-0">Cargando...</p> :
-                            <p className="text-center mb-0">Sin registros</p>
-                        }
-                    </div>
-                )}
             </Turismos>
         </section>
     </>
@@ -169,4 +185,37 @@ function Turismo({ children }) {
     return <article className="lugar-turistico">
         {children}
     </article>
+}
+
+function DetalleOfGastronomiaOrTurismo({ gastronomiaOrTurismo }) {
+    const history = useHistory();
+
+    return <>
+        <div className="py-5 mb-5 banner bg-container">
+            <Container>
+                <Row>
+                    <Col md="7" className="align-self-center">
+                        <h1 className="banner-title text-center text-md-left">
+                            {gastronomiaOrTurismo.titulo}
+                        </h1>
+                        <p className="banner-descripcion text-center text-md-left">
+                            {gastronomiaOrTurismo.descripcion}
+                        </p>
+                    </Col>
+                    <Col md="5" className="align-self-center">
+                        <img src={imageDefault} className="img-fluid rounded-lg" alt="gastonomia y turismo" />
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+
+        <div className="py-3 mb-5 container border rounded" style={{ maxWidth: '700px' }}>
+            <MDEditor.Markdown source={gastronomiaOrTurismo.contenido} />
+            <Button onClick={() => history.goBack()}>Atras</Button>
+        </div>
+    </>
+}
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
 }

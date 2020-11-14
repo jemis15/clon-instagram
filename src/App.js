@@ -32,7 +32,19 @@ import GastronomiaAndTurismo from './Views/GastronomiaAndTurismo';
 import Gastronomia from './Views/Gastronomia/Gastronomia';
 import Turismo from './Views/Turismo/Turismo';
 import Blank from './Views/Blank';
-import Frame from './Views/Frame/Frame'
+import Frame from './Views/Frame';
+import VisionMision from './Views/VisionMision';
+import Certificacion from './Views/Certificacion';
+import Normativa from './Views/Normativa';
+import TributoMuniDocument from './Views/TributoMuniDocument';
+import Licencia from './Views/Licencia';
+import Regidores from './Views/Regidores';
+import PerfilA from './Views/PerfilA';
+import ConvocatoriaCass from './Views/ConvocatoriaCass';
+import Serenazgo from './Views/Serenazgo';
+import Himno from './Views/Himno';
+import Presentacion from './Views/Presentacion';
+import RegistCivilDocument from './Views/RegistCivilDocument';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -122,6 +134,19 @@ function App() {
         <Route path="/frame" render={() => <Frame />} />
         {/* fin protected */}
 
+        <Route path="/vision_mision" render={() => <VisionMision />} />
+        <Route path="/Certificacion" render={() => <Certificacion/>}/>
+        <Route path="/Normativa" render={() => <Normativa/>}/>
+        <Route path="/TributoMuniDocument" render={() => <TributoMuniDocument/>}/>
+        <Route path="/Licencia" render={() => <Licencia/>}/>
+        <Route path="/Regidores" render={() => <Regidores/>}/>
+        <Route path="/PerfilA" render={() => <PerfilA/> } />
+        <Route path="/ConvocatoriaCass" render={() => <ConvocatoriaCass/> }/>
+        <Route path="/Serenazgo" render={() => <Serenazgo/>}/>
+        <Route path="/Himno"  render={() => <Himno/>}/>
+        <Route path="/Presentacion"  render={() => <Presentacion/>}/>
+        <Route path="/RegistCivilDocument"  render={() => <RegistCivilDocument/>}/>
+ 
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />
         <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />

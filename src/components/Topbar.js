@@ -1,4 +1,4 @@
-// import Axios from 'axios';
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const TOPBAR = 'removed_topbar';
@@ -9,6 +9,8 @@ export default function Topbar() {
     // verificando si el body contiene la clase has-topbar
     let containsClassTopbar = document.body.classList.contains(CLASE_TOPBAR)
     const [topbar, setTopbar] = useState(null);
+
+    console.log(clientRemovedTheTopbar);
 
     useEffect(() => {
         async function loadTopbar() {
@@ -27,6 +29,18 @@ export default function Topbar() {
 
         loadTopbar();
     }, []);
+
+    // useEffect(() => {
+    //     let divTopbar = document.getElementById('topbar');
+    //     window.addEventListener('resize', cambiarHeightTopbar);
+    //     function cambiarHeightTopbar() {
+    //         console.log('desde el otro useefet');
+    //         if (divTopbar) {
+    //             document.documentElement.style.setProperty('--topbar-height', `${divTopbar.clientHeight}px`);
+    //         }
+    //     }
+    //     return () => window.removeEventListener('resize', cambiarHeightTopbar);
+    // }, []);
 
     // preguntado si el estado topbar tiene algo que mostrar
     // false = remove class y null
