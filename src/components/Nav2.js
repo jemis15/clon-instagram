@@ -40,7 +40,7 @@ export default function AppNav() {
                         </li>
                     </ul>
                     <hr />
-                    <LinkNavigation to="/gastronomia">
+                    <LinkNavigation to="/gastronomiayturismo">
                         Gastronomia y turismo
                     </LinkNavigation>
                 </DropMenu>
