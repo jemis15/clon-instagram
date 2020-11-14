@@ -1,0 +1,65 @@
+.CertiCaja{
+    width: 450px;
+    height: auto;
+    position: relative;
+
+    .letra{
+        font-family: oblique bold 120% cursive; 
+        color: purple;
+    }
+
+    .font-weight-800{
+        font-weight: 800;
+        font-size: 40pt;
+        color: rgb(11, 24, 1);
+    }
+
+    .imgRequi{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        right: 15%;
+        
+    }
+
+    .imgcostos{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        left: 15%;
+    }
+
+    .imgplazo{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        right: 5%;
+    }
+
+    .imghorario{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        left: 15%;
+    }
+
+    .imgtelefono{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        right: 15%;
+    }
+
+    .imgemail{
+        width: 6rem;
+        height:6rem;
+        position: absolute;
+        top: -50px;
+        left: 15%;
+    }
+}
