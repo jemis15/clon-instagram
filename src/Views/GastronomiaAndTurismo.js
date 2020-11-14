@@ -1,14 +1,10 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useLocation, useHistory } from 'react-router-dom';
-import MDEditor from '@uiw/react-md-editor';
 
 import imageDefault from '../assets/images/paisaje.jpg';
-import imageItem from '../assets/images/img6.jpg';
-import { Link } from 'react-router-dom';
-import Axios from 'axios';
 
-const numberOfGastronomia = Array(10).fill(null);
 export default function GastronomiaYTurismo() {
     const [gastronomias, setGastronomias] = useState([]);
     const [turismos, setTurismos] = useState([]);
@@ -20,8 +16,8 @@ export default function GastronomiaYTurismo() {
             try {
                 setLoadingTurismosYGastronomias(true);
                 const { data: apiTurismos } = await Axios.get(`/apimuni/turismos_p`);
-                // const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias_p`);
-                // setGastronomias(apiGastronomia);
+                const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias_p`);
+                setGastronomias(apiGastronomia);
                 setTurismos(apiTurismos);
                 setLoadingTurismosYGastronomias(false)
             } catch (error) {
@@ -62,7 +58,11 @@ export default function GastronomiaYTurismo() {
                         </p>
                     </Col>
                     <Col md="5" className="align-self-center">
-                        <img src={imageDefault} className="img-fluid rounded-lg" alt="gastonomia y turismo" />
+                        <img src={imageDefault} 
+                        className="img-fluid rounded-lg" 
+                        alt="gastonomia y turismo" 
+                        loading="lazy"
+                        />
                     </Col>
                 </Row>
             </Container>
@@ -71,26 +71,37 @@ export default function GastronomiaYTurismo() {
         <Container className="py-xl">
             <h2 className="h2 text-center mb-4">Platos Tipicos</h2>
             <Gastronomias>
-                {numberOfGastronomia.map((item, key) => (
-                    <Gastronomia key={key}>
+                {gastronomias.map(gastronomia => (
+                    <Gastronomia key={gastronomia.id}>
                         <div className="mb-2">
-                            <img src={imageItem} className="img-fluid rounded-lg" alt="gastronomia" />
+                            <img src={`/apimuni/images/gastronomias/${gastronomia.image}`}
+                                className="img-fluid rounded-lg"
+                                alt="gastronomia"
+                                loading="lazy"
+                            />
                         </div>
                         <div>
                             <h4 className="h4">
                                 <Link className="text-decoration-none"
-                                    to={{ search: `?tipo=gastronomia&titulo=Titulo de la gastronomia` }}>
-                                    Titulo de la gastronomia
+                                    to={`/gastronomias/${getTitulo(gastronomia.titulo)}`}>
+                                    {gastronomia.titulo}
                                 </Link>
                             </h4>
                             <p className="text-small overflow-hidden">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Dolores quaerat.
-                        </p>
+                                {gastronomia.descripcion}
+                            </p>
                         </div>
                     </Gastronomia>
                 ))}
             </Gastronomias>
+            {gastronomias.length === 0 && (
+                <div className="container border p-5">
+                    {loadingTurismosYGastronomias ?
+                        <p className="text-center mb-0">Cargando...</p> :
+                        <p className="text-center mb-0">Sin registros</p>
+                    }
+                </div>
+            )}
         </Container>
 
         <section className="content-lugares-turisticos mb-5">
@@ -102,7 +113,11 @@ export default function GastronomiaYTurismo() {
                             <Row>
                                 <Col md="5" className="align-self-center section-image">
                                     <div className="content-image-gastronomia-right overflow-hidden">
-                                        <img src={`/apimuni/images/turismos/${turismo.image}`} className="img-fluid" alt="lugar turistico" />
+                                        <img src={`/apimuni/images/turismos/${turismo.image}`}
+                                            className="img-fluid"
+                                            alt="lugar turistico"
+                                            loading="lazy"
+                                        />
                                     </div>
                                 </Col>
                                 <Col md="7" className="align-self-center section-description">

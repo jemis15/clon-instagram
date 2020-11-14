@@ -1,48 +1,48 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Col, Form, Modal, Row, Spinner } from 'react-bootstrap';
 
 import Cuadro, { CuadroLeft, CuadroRight } from '../components/Cuadro';
 
 export default function Editar() {
-    const { turismo_id } = useParams();
-    const [turismo, setTurismo] = useState(null);
-    const [loadingTurismo, setLoadingTurismo] = useState(true);
+    const { gastronomia_id } = useParams();
+    const [gastronomia, setGastronomia] = useState(null);
+    const [loadingGastronomia, setLoadingGastronomia] = useState(true);
 
     useEffect(() => {
-        // cargar los lugares turisticos
-        async function loadTurismo() {
+        // cargar la gastronomia a editar
+        async function loadGastronomia() {
             try {
-                // empezando la carga de turismo
-                setLoadingTurismo(true);
-                // peticion a la base de datos para obtener los lugares turisticos
-                const { data: apiTurismo } = await Axios.get(`/apimuni/turismos/${turismo_id}`);
-                setTurismo(apiTurismo);
-                // finalizando la carga del turismo
-                setLoadingTurismo(false);
+                // empezando la carga de la gastronomia
+                setLoadingGastronomia(true);
+                // peticion a la base de datos para obtener la gastronomia
+                const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias/${gastronomia_id}`);
+                setGastronomia(apiGastronomia);
+                // finalizando la carga de la gastronomia
+                setLoadingGastronomia(false);
             } catch (error) {
                 console.log(error);
 
-                // finalizando la carga del turismo
-                setLoadingTurismo(false);
+                // finalizando la carga de la gastronomia
+                setLoadingGastronomia(false);
             }
         }
 
-        loadTurismo();
+        loadGastronomia();
     }, []);
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const { data: apiTurismo } = await Axios({
+            const { data: apiGastronomia } = await Axios({
                 method: 'patch',
-                url: `/apimuni/turismos/${turismo_id}`,
-                params: turismo
+                url: `/apimuni/gastronomias/${gastronomia_id}`,
+                params: gastronomia
             });
-            console.log(apiTurismo);
+            console.log(apiGastronomia);
             console.log('Exito se a guardado');
         } catch (error) {
             console.log(error);
@@ -50,31 +50,31 @@ export default function Editar() {
     }
 
     async function handleSelectedImagePortada(e) {
+        console.log('subiendo umagen');
         try {
             var formData = new FormData;
-            formData.append('imageturismo', e.target.files[0]);
+            formData.append('imagegastronomia', e.target.files[0]);
 
             const config = {
                 headers: {
                     'Content-Type': "multipart/form-data"
                 }
             }
-            const { data: apiTurismo } = await Axios.post(`/apimuni/turismos/${turismo_id}/upload_portada`, formData, config);
-            setTurismo({ ...turismo, image: apiTurismo.image });
+            const { data: apiGastronomia } = await Axios.post(`/apimuni/gastronomias/${gastronomia_id}/upload_portada`, formData, config);
+            setGastronomia({ ...gastronomia, image: apiGastronomia.image });
         } catch (error) {
             console.log(error);
         }
     }
 
     function handleInputChange(e) {
-        console.log(turismo);
-        setTurismo({ ...turismo, [e.target.name]: e.target.value });
+        setGastronomia({ ...gastronomia, [e.target.name]: e.target.value });
     }
     function handleInputChecked(e) {
-        setTurismo({ ...turismo, publicado: e.target.checked ? 1 : 0 });
+        setGastronomia({ ...gastronomia, publicado: e.target.checked ? 1 : 0 });
     }
 
-    if (!turismo) {
+    if (!gastronomia) {
         // convertirse en componente general
         return <div className="h-frame-loading d-flex justify-content-center align-items-center">
             <div>
@@ -89,14 +89,14 @@ export default function Editar() {
         <Cuadro>
             <CuadroLeft>
                 <h4 className="mb-5">Encabezado</h4>
-                {loadingTurismo ? <>
+                {loadingGastronomia ? <>
                     <div className="bg-container" style={{ height: '100vh' }}></div>
                 </> : <>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Imagen</label>
                                 <label className="mb-0 border rounded upload-image text-center cursor-pointer overflow-hidden">
-                                    <img src={`/apimuni/images/turismos/${turismo.image}`} className="img-fluid" />
+                                    <img src={`/apimuni/images/gastronomias/${gastronomia.image}`} className="img-fluid" />
                                     <span className="upload-image-icon rounded-circle">
                                         <i className="fas fa-arrow-up" />
                                     </span>
@@ -106,7 +106,7 @@ export default function Editar() {
                             <Form.Group>
                                 <label>Titulo</label>
                                 <Form.Control
-                                    value={turismo.titulo}
+                                    value={gastronomia.titulo}
                                     name="titulo"
                                     onChange={handleInputChange}
                                 />
@@ -116,7 +116,7 @@ export default function Editar() {
                                 <Form.Control
                                     as="textarea"
                                     name="descripcion"
-                                    value={turismo.descripcion}
+                                    value={gastronomia.descripcion}
                                     onChange={handleInputChange}
                                     rows="7"
                                 />
@@ -126,20 +126,20 @@ export default function Editar() {
                                 <Form.Control
                                     as="textarea"
                                     name="contenido"
-                                    value={turismo.contenido}
+                                    value={gastronomia.contenido}
                                     onChange={handleInputChange}
                                     className="input-markdown-editor"
                                     rows="7"
                                 />
                             </Form.Group>
 
-                            <ImagesUtilitarios idTurismo={turismo_id} />
+                            <ImagesUtilitarios idGastronomia={gastronomia_id} />
 
                             <Form.Group>
                                 <label>Publicar</label>
                                 <Form.Check
                                     name="publicado"
-                                    checked={turismo.publicado}
+                                    checked={gastronomia.publicado}
                                     onChange={handleInputChecked}
                                 />
                             </Form.Group>
@@ -158,16 +158,16 @@ export default function Editar() {
             <CuadroRight>
                 <h4 className="mb-5">Vista preliminar</h4>
                 <p>Encabezado</p>
-                {!loadingTurismo && <>
+                {!loadingGastronomia && <>
                     <Turismos>
                         <Turismo>
                             <div className="py-2 mb-3">
                                 <Row>
                                     <Col md="5" className="align-self-center section-image">
                                         <div className="content-image-gastronomia-right overflow-hidden">
-                                            {turismo.image ? (
-                                                <img src={`/apimuni/images/turismos/${turismo.image}`}
-                                                    className="img-fluid rounded-lg"
+                                            {gastronomia.image ? (
+                                                <img src={`/apimuni/images/gastronomias/${gastronomia.image}`}
+                                                    className="img-fluid rounded-lg img-thumbnail"
                                                     alt="lugar turistico"
                                                 />
                                             ) : (
@@ -177,14 +177,14 @@ export default function Editar() {
                                     </Col>
                                     <Col md="7" className="align-self-center section-description">
                                         <h2 className="banner-title text-center text-md-left">
-                                            {turismo.titulo}
+                                            {gastronomia.titulo}
                                         </h2>
                                         <p className="banner-descripcion text-center text-md-left">
-                                            {turismo.descripcion}
+                                            {gastronomia.descripcion}
                                         </p>
                                         <div className="text-center text-md-left">
                                             <Button className="lugar-turistico-button mt-3 mt-md-0"
-                                                as={Link} to="/gastronomia?tipo=turismo&titulo=El lugar turistico">
+                                                as={Link} to="/gastronomia?tipo=gastronomia&titulo=El lugar turistico">
                                                 Ver mas detalle
                                             </Button>
                                         </div>
@@ -196,7 +196,7 @@ export default function Editar() {
 
                     <p>Contenido</p>
                     <div className="container border rounded py-4">
-                        <MDEditor.Markdown source={turismo.contenido} />
+                        <MDEditor.Markdown source={gastronomia.contenido} />
                     </div>
                 </>}
             </CuadroRight>
@@ -204,19 +204,19 @@ export default function Editar() {
     </>
 }
 
-function ImagesUtilitarios({ idTurismo }) {
+function ImagesUtilitarios({ idGastronomia }) {
     const [imageUtilitarios, setImageUtilitarios] = useState([]);
     const [loadingCargaImages, setLoadingCargaImages] = useState(true);
 
     useEffect(() => {
-        // cargar las imagenes utilitarios del turismo
+        // cargar las imagenes utilitarios de la gastronomia
         async function loadImageUtilitarios() {
             try {
                 // cangando imagenes
                 setLoadingCargaImages(true);
 
-                // peticion a la api para obtener imagenes utilitarios del turismo
-                const { data: apiImagesUtilitario } = await Axios.get(`/apimuni/turismos/${idTurismo}/images`);
+                // peticion a la api para obtener imagenes utilitarios de la gastronomia
+                const { data: apiImagesUtilitario } = await Axios.get(`/apimuni/gastronomias/${idGastronomia}/images`);
                 // guardando los valores obtenidos de la base de datos
                 setImageUtilitarios(apiImagesUtilitario);
 
@@ -231,19 +231,19 @@ function ImagesUtilitarios({ idTurismo }) {
         }
 
         loadImageUtilitarios();
-    }, [idTurismo]);
+    }, [idGastronomia]);
 
     async function handleSelectImageUtilitarios(e) {
         try {
             var formData = new FormData;
-            formData.append('imageturismo', e.target.files[0]);
+            formData.append('imagegastronomia', e.target.files[0]);
 
             const config = {
                 headers: {
                     'Content-Type': "multipart/form-data"
                 }
             }
-            const { data: apiImageUpload } = await Axios.post(`/apimuni/turismos/${idTurismo}/upload_utilitarios`, formData, config);
+            const { data: apiImageUpload } = await Axios.post(`/apimuni/gastronomias/${idGastronomia}/upload_utilitarios`, formData, config);
             setImageUtilitarios([...imageUtilitarios, apiImageUpload]);
         } catch (error) {
             console.log(error);
@@ -283,7 +283,7 @@ function ImageUtilitarios({ image, onDelete }) {
     return <>
         <div className="content-image-markdown d-flex flex-center border position-relative">
             <img
-                src={`/apimuni/images/turismos/${image.url}`}
+                src={`/apimuni/images/gastronomias/${image.url}`}
                 className="cursor-pointer"
                 onClick={toggle}
                 alt="markdown utilitarios"
@@ -296,7 +296,7 @@ function ImageUtilitarios({ image, onDelete }) {
             <Modal.Body>
                 <h4>Copia el texto para insertar la imagen</h4>
                 <div className="bg-container px-3 py-2 rounded text-wrap">
-                    [![Descripcion](/apimuni/images/turismos/{image.url})](URL)
+                    [![Descripcion](/apimuni/images/gastronomias/{image.url})](URL)
                 </div>
             </Modal.Body>
         </Modal>

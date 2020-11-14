@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
 
+import Gastronomias from "./Gastronomia/Lista";
+import GastronomiaEditar from "./Gastronomia/Editar";
 import Turismos from "./Turismo/Lista";
 import TurismoEditar from "./Turismo/Editar";
 import ViewCarousel from "./Carousel";
@@ -51,8 +53,11 @@ export default function Frame() {
         <Route path="/frame/grupolinks">
           <ViewGrupoLink />
         </Route>
-        <Route path="/frame/gastronomias">
-          <ViewGrupoLink />
+        <Route path="/frame/gastronomias" exact>
+          <Gastronomias />
+        </Route>
+        <Route path="/frame/gastronomias/:gastronomia_id">
+          <GastronomiaEditar />
         </Route>
         <Route path="/frame/turismos" exact>
           <Turismos />
