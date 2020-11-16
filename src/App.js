@@ -32,7 +32,7 @@ import GastronomiaAndTurismo from './Views/GastronomiaAndTurismo';
 import Gastronomia from './Views/Gastronomia/Gastronomia';
 import Turismo from './Views/Turismo/Turismo';
 import Blank from './Views/Blank';
-import Frame from './Views/Frame';
+import Frame from './Views/Frame/Frame'
 import VisionMision from './Views/VisionMision';
 import Certificacion from './Views/Certificacion';
 import Normativa from './Views/Normativa';
