@@ -45,6 +45,7 @@ import Serenazgo from './Views/Serenazgo';
 import Himno from './Views/Himno';
 import Presentacion from './Views/Presentacion';
 import RegistCivilDocument from './Views/RegistCivilDocument';
+import MultiItemsCarousel from './components/MultiItemsCarousel';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -135,18 +136,18 @@ function App() {
         {/* fin protected */}
 
         <Route path="/vision_mision" render={() => <VisionMision />} />
-        <Route path="/Certificacion" render={() => <Certificacion/>}/>
-        <Route path="/Normativa" render={() => <Normativa/>}/>
-        <Route path="/TributoMuniDocument" render={() => <TributoMuniDocument/>}/>
-        <Route path="/Licencia" render={() => <Licencia/>}/>
-        <Route path="/Regidores" render={() => <Regidores/>}/>
-        <Route path="/PerfilA" render={() => <PerfilA/> } />
-        <Route path="/ConvocatoriaCass" render={() => <ConvocatoriaCass/> }/>
-        <Route path="/Serenazgo" render={() => <Serenazgo/>}/>
-        <Route path="/Himno"  render={() => <Himno/>}/>
-        <Route path="/Presentacion"  render={() => <Presentacion/>}/>
-        <Route path="/RegistCivilDocument"  render={() => <RegistCivilDocument/>}/>
- 
+        <Route path="/Certificacion" render={() => <Certificacion />} />
+        <Route path="/Normativa" render={() => <Normativa />} />
+        <Route path="/TributoMuniDocument" render={() => <TributoMuniDocument />} />
+        <Route path="/Licencia" render={() => <Licencia />} />
+        <Route path="/Regidores" render={() => <Regidores />} />
+        <Route path="/PerfilA" render={() => <PerfilA />} />
+        <Route path="/ConvocatoriaCass" render={() => <ConvocatoriaCass />} />
+        <Route path="/Serenazgo" render={() => <Serenazgo />} />
+        <Route path="/Himno" render={() => <Himno />} />
+        <Route path="/Presentacion" render={() => <Presentacion />} />
+        <Route path="/RegistCivilDocument" render={() => <RegistCivilDocument />} />
+
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />
         <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />
@@ -158,6 +159,16 @@ function App() {
         <Route path="/" render={() => <Inicio />} />
       </Switch>
 
+      {/* ruta de los carousel links */}
+      <Switch>
+        <Route path="/login" render={() => null} />
+        <Route render={() => (
+          <MultiItemsCarousel
+            title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
+            grupo="secundario"
+          />
+        )} />
+      </Switch>
       <Footer />
       <Options />
     </Router >

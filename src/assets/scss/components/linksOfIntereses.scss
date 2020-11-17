@@ -1,0 +1,112 @@
+.link-of-intereses {
+  width: 90%;
+  height: 100px;
+  transition: transform 0.3s;
+  border: 1px solid var(--color-border);
+
+  &:hover {
+    transform: scale(1.1);
+    .options-editable{
+        display: flex;
+    }
+  }
+
+  .options-editable {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    .option-editable {
+      color: white;
+      border-radius: 50%;
+      background-color: rgba(black, 0.7);
+      cursor: pointer;
+
+      &:hover {
+        &.edit {
+          background-color: $primary;
+        }
+        &.delete {
+          background-color: $danger;
+        }
+      }
+    }
+  }
+}
+.link-of-intereses_number{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: $primary;
+    color: white;
+}
+.links-of-intereses_header{
+  .icon{
+    width: 1rem;
+    height: 1rem;
+  }
+  .texto{
+    width: 10rem;
+    height: 1rem;
+  }
+}
+.links-of-intereses_loading{
+  display: none;
+  width: 50%;
+  &>div{
+    width: 90%;
+    height: 100px;
+  }
+  &:nth-child(1){
+    display: inline-block;
+  }
+  &:nth-child(2){
+    display: inline-block;
+  }
+  
+  @include media-breakpoint-up(sm) {
+    width: 33%;
+    &:nth-child(3){
+      display: inline-block;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    width: 20%;
+    display: inline-block;
+  }
+}
+
+.upload-image{
+    border: 3px dotted var(--grey-500);
+    border-radius: 5px;
+
+    &:hover{
+        color: $primary;
+    }
+}
+
+//global
+.content-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-plus{
+    &:hover{
+        background-color: $success;
+        color: white;
+    }
+}

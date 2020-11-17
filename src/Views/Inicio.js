@@ -130,11 +130,6 @@ export default function Inicio() {
     <div className="mt-5 mb-5">
       <Section />
     </div>
-
-    <MultiItemsCarousel
-      title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
-      grupo="secundario"
-    />
   </>
 }
 
