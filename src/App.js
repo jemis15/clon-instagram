@@ -161,6 +161,7 @@ function App() {
 
       {/* ruta de los carousel links */}
       <Switch>
+        <Route path="/frame" render={() => null} />
         <Route path="/login" render={() => null} />
         <Route render={() => (
           <MultiItemsCarousel
@@ -169,7 +170,12 @@ function App() {
           />
         )} />
       </Switch>
-      <Footer />
+
+      <Switch>
+        <Route path="/frame" render={() => null} />
+        <Route render={() => <Footer />} />
+      </Switch>
+
       <Options />
     </Router >
   );

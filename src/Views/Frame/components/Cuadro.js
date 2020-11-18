@@ -1,14 +1,14 @@
 import React from 'react';
 
 export default function Cuadro({ children }) {
-    return <div className="frame d-flex flex-column flex-md-row">
+    return <div className="frame-body h-100 d-flex flex-column flex-md-row">
         {children}
     </div>
 }
 
 export function CuadroLeft({ children }) {
     return <section className="frame-metadata">
-        <div className="container py-4 h-100">{children}</div>
+        <div className="container py-4">{children}</div>
     </section>
 }
 export function CuadroRight({ children }) {
