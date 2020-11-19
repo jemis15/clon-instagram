@@ -46,6 +46,7 @@ import Himno from './Views/Himno';
 import Presentacion from './Views/Presentacion';
 import RegistCivilDocument from './Views/RegistCivilDocument';
 import MultiItemsCarousel from './components/MultiItemsCarousel';
+import Pages from './Views/Pages';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -148,6 +149,7 @@ function App() {
         <Route path="/Presentacion" render={() => <Presentacion />} />
         <Route path="/RegistCivilDocument" render={() => <RegistCivilDocument />} />
 
+        <Route path="/p" render={() => <Pages />} />
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />
         <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />

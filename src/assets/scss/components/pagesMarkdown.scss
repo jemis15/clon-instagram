@@ -1,0 +1,61 @@
+.pages-markdown {
+//   width: 100%;
+//   max-width: 700px;
+//   margin-left: auto;
+//   margin-right: auto;
+
+  &.edit {
+    .options {
+      display: inline-block;
+    }
+  }
+
+  .options {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-120%);
+
+    .icon {
+      display: inline-block;
+      background-color: darkblue;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+    }
+  }
+
+  .textarea-markdown{
+      min-height: 50rem;
+  }
+
+  .btn-guardar{
+      border: 0;
+      background: transparent;
+      width: 2rem;
+      height: 2rem;
+      background-color: turquoise;
+  }
+}
+
+.content-lists-page{
+  position: sticky;
+  top: calc(var(--header-height) + 30px);
+
+  .lista-pages{
+      li{
+          // margin-bottom: 0.5rem;
+          a{
+              &.active{
+                  background-color: rgba($primary, 0.2);
+                  color: $primary;
+              }
+              &:hover{
+                  background-color: rgba($primary, 0.2);
+                  color: $primary;
+              }
+          }
+      }
+  }
+}

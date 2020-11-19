@@ -1,7 +1,8 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import Banner from '../components/Banner';
 
 export default function GastronomiaYTurismo() {
     const [gastronomias, setGastronomias] = useState([]);
@@ -41,7 +42,7 @@ export default function GastronomiaYTurismo() {
     }
 
     return <>
-        <Banner />
+        <Banner id="1" />
 
         <Container className="py-xl">
             <h2 className="h2 text-center mb-4">Platos Tipicos</h2>
@@ -144,174 +145,4 @@ function Turismo({ children }) {
     return <article className="lugar-turistico">
         {children}
     </article>
-}
-
-function Banner() {
-    const banner_id = 1;
-    const [banner, setBanner] = useState(null);
-    const [bannerUpdate, setBannerUpdate] = useState({
-        titulo: '',
-        descripcion: ''
-    });
-    const [loading, setLoading] = useState(true);
-    const [modalUpdate, setModalUpdate] = useState(false);
-    const [uploadingImage, setUploadingImage] = useState(false);
-    const [updatingBanner, setUpdatingBanner] = useState(false);
-
-    useEffect(() => {
-        async function loadBanner() {
-            try {
-                setLoading(true);
-                const { data: apiBanner } = await Axios.get(`/apimuni/banners/${banner_id}`);
-                setBanner(apiBanner);
-                setLoading(false);
-            } catch (error) {
-                console.log(banner);
-                setLoading(false);
-            }
-        }
-
-        loadBanner();
-    }, []);
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        if (updatingBanner) {
-            return null;
-        }
-
-        try {
-            setUpdatingBanner(true);
-            const { data: apiBanner } = await Axios({
-                method: 'patch',
-                url: `/apimuni/banners/${banner_id}`,
-                params: bannerUpdate
-            });
-            setBanner(apiBanner);
-            setUpdatingBanner(false)
-        } catch (error) {
-            console.log(error);
-            setUpdatingBanner(false)
-        }
-    }
-
-    async function handleSelectImage(e) {
-        if (uploadingImage) {
-            return;
-        }
-
-        try {
-            setUploadingImage(true);
-            var formDataImage = new FormData();
-            formDataImage.append('imagebanners', e.target.files[0]);
-            const config = {
-                headers: {
-                    'Content-Type': "multipart/form-data"
-                }
-            }
-            const { data: apiBanner } = await Axios.post(`/apimuni/banners/${banner_id}/upload`, formDataImage, config);
-            setBanner(apiBanner);
-            setUploadingImage(false)
-        } catch (error) {
-            console.log(error);
-            setUploadingImage(false)
-        }
-    }
-
-    function showModalUpdate() {
-        setModalUpdate(true);
-        setBannerUpdate(banner)
-    }
-    function hideModalUpdate() {
-        setModalUpdate(false);
-        setBannerUpdate(banner);
-    }
-
-    const handleInputChange = (e) => setBannerUpdate({
-        ...bannerUpdate,
-        [e.target.name]: e.target.value
-    });
-
-    if (loading) {
-        return <p>Cargando...</p>
-    }
-
-    return <div className="py-5 banner edit bg-container">
-        <Container>
-            <Row>
-                <Col md="7" className="align-self-center banner-left">
-                    <h1 className="banner-title text-center text-md-left">
-                        {banner.titulo}
-                    </h1>
-                    <p className="banner-descripcion text-center text-md-left">
-                        {banner.descripcion}
-                    </p>
-
-                    <div className="options top-right">
-                        <span className="icon" onClick={showModalUpdate}>
-                            <i className="fas fa-user" />
-                        </span>
-                    </div>
-                </Col>
-                <Col md="5" className="align-self-center banner-right">
-                    <div className="banner-content-image position-relative">
-                        <img src={`/apimuni/images/banners/${banner.image}`}
-                            className="img-fluid rounded-lg"
-                            alt="gastonomia y turismo"
-                            loading="lazy"
-                        />
-                        <div className="options center">
-                            <label className="icon d-inline-block mb-0 pb-0">
-                                <i className="fas fa-user" />
-                                <input
-                                    type="file"
-                                    className="d-none"
-                                    onChange={handleSelectImage}
-                                />
-                            </label>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-
-        <Modal show={modalUpdate} onHide={hideModalUpdate}>
-            <Modal.Header closeButton>Editar</Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                        <label>Titulo</label>
-                        <Form.Control
-                            type="text"
-                            name="titulo"
-                            value={bannerUpdate.titulo}
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <label>Descripcion</label>
-                        <Form.Control
-                            as="textarea"
-                            name="descripcion"
-                            rows="10"
-                            value={bannerUpdate.descripcion}
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
-                    <div className="text-right">
-                        <Button
-                            className="mr-2"
-                            variant="light"
-                            onClick={hideModalUpdate}>
-                            Cancelar
-                        </Button>
-                        <Button type="submit">
-                            {updatingBanner ? 'Actualizando...' : 'Actualizar'}
-                        </Button>
-                    </div>
-                </Form>
-            </Modal.Body>
-        </Modal>
-    </div>
 }

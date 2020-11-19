@@ -4,36 +4,12 @@ import Carousel from 'react-multi-carousel';
 
 import equipoimage from '../assets/images/paisaje.jpg';
 import codigoimage from '../assets/images/codigo.png';
+import Banner from '../components/Banner';
 
 export default function Historia() {
     return <div>
-        <div className="py-5 banner bg-container">
-            <Container>
-                <Row>
-                    <Col md="7">
-                        <h1 className="banner-title text-center text-md-left">Historia</h1>
-                        <p className="banner-descripcion text-center text-md-left">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Dolores quaerat, illum harum repudiandae eius impedit cum
-                            reprehenderit odit nam minima earum quia placeat et animi
-                            rerum, architecto necessitatibus, sint hic.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Dolores quaerat, illum harum repudiandae eius impedit cum
-                            reprehenderit odit nam minima earum quia placeat et animi
-                            rerum, architecto necessitatibus, sint hic.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Dolores quaerat, illum harum repudiandae eius impedit cum
-                            reprehenderit odit nam minima earum quia placeat et animi
-                            rerum, architecto necessitatibus, sint hic.
-                        </p>
-                    </Col>
-                    <Col md="5" className="align-self-center">
-                        <div className="rounded-lg overflow-hidden">
-                            <img src={equipoimage} className="img-fluid" />
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+        <Banner id="2" />
+        <div className="pb-5 banner bg-container">
             <Carousel
                 additionalTransfrom={0}
                 arrows={false}
