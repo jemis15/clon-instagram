@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, Col, Container, Media, Row } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
 
@@ -7,7 +7,7 @@ import MultiItemsCarousel from '../components/MultiItemsCarousel';
 import Section from '../components/Section';
 
 import fotoAlcalde from '../assets/images/img1.jpg';
-import imagebanner from '../assets/images/paisajes.jpg'
+import imagebanner from '../assets/images/FLAYER_2_A.png';
 
 export default function Inicio() {
   return <>
@@ -18,7 +18,7 @@ export default function Inicio() {
       autoPlaySpeed={5000}
       centerMode={false}
       className=""
-      containerClass=""
+      containerClass="carousel-banner-inicio"
       dotListClass=""
       draggable
       focusOnSelect={false}

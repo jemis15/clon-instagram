@@ -12,6 +12,46 @@
   --grey-800: #22303a;
   --grey-900: #1a252d;
 
+  --blue-100: #e7f4fd;
+  --blue-200: #b7defa;
+  --blue-300: #88c8f7;
+  --blue-400: #58b3f3;
+  --blue-500: #1192ee;
+  --blue-600: #1083d5;
+  --blue-700: #0c66a6;
+  --blue-800: #094977;
+  --blue-900: #052c48;
+
+  --red-100: #fdeded;
+  --red-200: #f9cdcd;
+  --red-300: #f5adad;
+  --red-400: #f18888;
+  --red-500: #eb5656;
+  --red-600: #d44e4e;
+  --red-700: #a43d3d;
+  --red-800: #772c2c;
+  --red-900: #471a1a;
+
+  --green-100: #eafbf2;
+  --green-200: #c0f2d9;
+  --green-300: #96e9bf;
+  --green-400: #6ce0a6;
+  --green-500: #2dd280;
+  --green-600: #28bd73;
+  --green-700: #1f9359;
+  --green-800: #166a40;
+  --green-900: #0d3f26;
+
+  --yelow-100: #fff8eb;
+  --yelow-200: #ffeac7;
+  --yelow-300: #ffdb9e;
+  --yelow-400: #ffce7a;
+  --yelow-500: #ffba42;
+  --yelow-600: #e5a638;
+  --yelow-700: #b4822d;
+  --yelow-800: #7e5c20;
+  --yelow-900: #4e3813;
+
   --black-300: var(--grey-500);
   --black-400: var(--grey-600);
   --black-500: var(--grey-700);
@@ -25,13 +65,13 @@
   --color-text: var(--black-700);
   --color-text-light: var(--grey-600);
   --color-text-lighter: var(--grey-500);
-  --color-border: var(--grey-400);
+  --color-border: var(--grey-300);
 
   --white-bg: #fff;
   --container-bg: var(--grey-300);
   --body-bg: white;
   --body-line-height: 1.6;
-  --body-font: 'Open Sans', sans-serif;
+  --body-font: "Open Sans", sans-serif;
 
   --font-size-normal: 1rem;
   --font-size-small: 0.875rem;
@@ -63,15 +103,20 @@ body.dark-theme {
 
 :root {
   // Transitions
-  --transition-collapse: 0.5s;
+  --transition-collapse: 0.2s;
 
   // Header
   --topbar-height: 3rem;
   --header-height: 4rem;
   --header-topbar-height: calc(var(--topbar-height) + var(--header-height));
   --header-height-when-collapse-sidebar: 6rem;
+  --transparent-header-height: 6rem;
 
   // Sidevar
   --sidebar-width: 16.25rem;
   --sidebar-collapse-width: 4.25rem;
+
+  @include media-breakpoint-up(xl) {
+    --header-height: 4rem;
+  }
 }

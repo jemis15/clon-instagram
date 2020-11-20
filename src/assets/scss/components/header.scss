@@ -1,6 +1,6 @@
 body {
   &.logged-in {
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
       .header {
         left: var(--sidebar-collapse-width);
         right: 0;
@@ -26,11 +26,36 @@ body {
   right: 0;
   z-index: 1000;
   background-color: var(--white-bg);
+  color: var(--color-text);
   height: var(--header-height);
   font-family: var(--heading-font);
+  border-bottom: 1px solid var(--color-border);
 
   transition: all var(--transition-collapse);
+
+  @include media-breakpoint-up(xl) {
+    &.is-transparent {
+      height: var(--transparent-header-height);
+      background-color: transparent;
+      border: transparent;
+      color: var(--grey-300);
+
+      .btn-go_iniciar_session {
+        &:hover {
+          background-color: white;
+          color: var(--black-700);
+        }
+      }
+    }
+  }
+
+  .btn-go_iniciar_session {
+    display: none;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    &:hover {
+      background-color: $primary;
+      color: white;
+    }
+  }
 }
-
-
-

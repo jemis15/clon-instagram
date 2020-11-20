@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 
-function Banner({id}) {
+function Banner({ id }) {
   const banner_id = id;
   const [banner, setBanner] = useState(null);
   const [bannerUpdate, setBannerUpdate] = useState({
@@ -55,10 +55,12 @@ function Banner({id}) {
       setBanner(apiBanner);
       // la actualizacion a finalizado
       setUpdatingBanner(false)
+      setModalUpdate(false);
     } catch (error) {
       console.log(error);
       // la actualizacion a finalizado
       setUpdatingBanner(false)
+      setModalUpdate(false);
     }
   }
 
@@ -110,24 +112,26 @@ function Banner({id}) {
     return <p>Cargando...</p>
   }
 
-  return <div className="py-5 banner edit bg-container">
+  return <div className="banner edit">
     <Container>
       <Row>
-        <Col md="7" className="align-self-center banner-left">
-          <h1 className="banner-title text-center text-md-left">
-            {banner.titulo}
-          </h1>
-          <p className="banner-descripcion text-center text-md-left">
-            {banner.descripcion}
-          </p>
+        <Col md="7" className="align-self-center banner-info">
+          <div className="position-relative">
+            <h1 className="banner-title text-center text-md-left">
+              {banner.titulo}
+            </h1>
+            <p className="banner-descripcion text-center text-md-left">
+              {banner.descripcion}
+            </p>
 
-          <div className="options top-right">
-            <span className="icon" onClick={showModalUpdate}>
-              <i className="fas fa-user" />
-            </span>
+            <div className="options top-right">
+              <span className="icon" onClick={showModalUpdate}>
+                <i className="fas fa-pencil" />
+              </span>
+            </div>
           </div>
         </Col>
-        <Col md="5" className="align-self-center banner-right">
+        <Col md="5" className="align-self-center img-banner">
           <div className="banner-content-image position-relative">
             <img src={`/apimuni/images/banners/${banner.image}`}
               className="img-fluid rounded-lg"
@@ -135,8 +139,8 @@ function Banner({id}) {
               loading="lazy"
             />
             <div className="options center">
-              <label className="icon d-inline-block mb-0 pb-0">
-                <i className="fas fa-user" />
+              <label className="icon mb-0 pb-0">
+                <i className="fas fa-arrow-up" />
                 <input
                   type="file"
                   className="d-none"

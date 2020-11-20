@@ -43,3 +43,10 @@
     z-index: 100000;
   }
 }
+
+@include media-breakpoint-up(xl){
+  // margin negativo cuando el header es transparent
+  .carousel-banner-inicio{
+    margin-top: calc(var(--transparent-header-height) * -1);
+  }
+}

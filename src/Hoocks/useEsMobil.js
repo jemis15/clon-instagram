@@ -4,7 +4,7 @@ export default function useEsMobil() {
 	const [esMobil, setEsMobil] = useState(null);
 
 	useEffect(() => {
-		const mql = window.matchMedia('(min-width: 992px)');
+		const mql = window.matchMedia('(min-width: 1200px)');
 
 		mql.addListener(revisarSiEsMobil);
 

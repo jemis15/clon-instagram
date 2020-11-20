@@ -1,6 +1,31 @@
 .banner {
+  $color-title: white;
+  $color-description: var(--blue-100); 
+  $bg-banner: var(--blue-600);
+  margin-top: calc(var(--transparent-header-height) * -1);
+  background: $bg-banner;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(var(--transparent-header-height) + 5rem);
+  padding-bottom: 7rem;
+
+  &::before{
+    content: "";
+    width: 55%;
+    height: 150%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform-origin: bottom left;
+    transform: skew(-30deg,0deg);
+    background: linear-gradient(233deg,#fff 5%,hsla(0,0%,100%,.01) 95%);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
   &.edit {
-    .banner-left {
+    .banner-info {
       &:hover {
         .options {
           display: block;
@@ -30,15 +55,20 @@
     }
 
     .icon {
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 2rem;
       height: 2rem;
-      background-color: $danger;
+      color: white;
+      background-color: rgba(black, 0.5);
+      border-radius: 50%;
       cursor: pointer;
     }
   }
 
   .banner-title {
+    color: $color-title;
     font-size: 2rem;
     margin-bottom: 1.5rem;
     font-weight: 800;
@@ -46,14 +76,30 @@
     letter-spacing: 0.015em;
   }
   .banner-descripcion {
+    color: $color-description;
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
     line-height: var(--body-line-height);
   }
+}
 
-  .banner-button {
-    padding: 0.8rem 1.5rem;
-    border: none;
+// pages
+body{
+  &.historia{
+    .banner{
+      background-color: var(--red-500);
+      .banner-descripcion{
+        color: var(--red-100);
+      }
+    }
+  }
+  &.gastronomiayturismo{
+    .banner{
+      background-color: var(--blue-700);
+      .banner-descripcion{
+        color: var(--blue-100);
+      }
+    }
   }
 }
 

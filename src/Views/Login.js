@@ -11,7 +11,7 @@ export default function Login({ login }) {
 		e.preventDefault();
 		try {
 			login(user);
-			setUser({nickname: '', password: ''});
+			setUser({ nickname: '', password: '' });
 		} catch (error) {
 			console.log(error);
 		}

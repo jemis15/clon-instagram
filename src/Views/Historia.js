@@ -9,7 +9,7 @@ import Banner from '../components/Banner';
 export default function Historia() {
     return <div>
         <Banner id="2" />
-        <div className="pb-5 banner bg-container">
+        <div className="pb-5 bg-container">
             <Carousel
                 additionalTransfrom={0}
                 arrows={false}

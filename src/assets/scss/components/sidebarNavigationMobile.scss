@@ -57,10 +57,4 @@
   a:active {
     background-color: rgb(214, 243, 214);
   }
-
-  @include media-breakpoint-up(lg) {
-    .button-bars {
-      display: none;
-    }
-  }
 }

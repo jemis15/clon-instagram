@@ -1,6 +1,12 @@
 .nav {
   .item-navigation {
+    .nav-link{
+      &:hover{
+        color: $primary;
+      }
+    }
     .drop-menu {
+      color: var(--color-text);
       pointer-events: auto;
       transform: translateY(0.5rem) translateX(-1rem) scale(0.98);
       background-color: var(--white-bg);
@@ -27,8 +33,9 @@
       }
     }
   }
-}
 
-.text-black {
-  color: black;
+  display: none;
+  @include media-breakpoint-up(xl) {
+    display: block;
+  }
 }

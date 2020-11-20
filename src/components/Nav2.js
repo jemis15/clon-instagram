@@ -5,12 +5,12 @@ export default function AppNav() {
     return <nav className="nav align-self-center ml-auto">
         <ul className="d-flex align-items-center list-unstyled mb-0">
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/">
                     Inicio
                 </NavLink>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/historia">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/historia">
                     Mazamari
                 </NavLink>
                 <DropMenu>
@@ -46,7 +46,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Municipalidad
                 </NavLink>
                 <DropMenu>
@@ -77,7 +77,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/Normativa">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/Normativa">
                     Normatividad
                 </NavLink>
                 <DropMenu>
@@ -148,7 +148,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Transparencia
                 </NavLink>
                 <DropMenu>
@@ -228,7 +228,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Informacion en linea
                 </NavLink>
                 <DropMenu>
@@ -265,7 +265,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Programas
                 </NavLink>
                 <DropMenu>
@@ -290,7 +290,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Seguridad
                 </NavLink>
                 <DropMenu>
@@ -309,7 +309,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Servicios
                 </NavLink>
                 <DropMenu>
@@ -328,7 +328,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
                     Contactos
                 </NavLink>
                 <DropMenu>
