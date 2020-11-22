@@ -27,11 +27,13 @@
 @import "global";
 @import "loading";
 @import "markdown";
+@import "markers";
 @import "modal";
 @import "nav";
 @import "nav2";
 @import "pagesMarkdown";
 @import "perfil";
+@import "posts";
 @import "root";
 @import "section";
 @import "sidebar";
@@ -43,6 +45,7 @@
 @import "vars";
 @import "Presentacion";
 @import "Himno";
+@import "viewInicio";
 
 //utitidades
 @import './utilities/index';

@@ -5,11 +5,13 @@ import Carousel from 'react-multi-carousel';
 
 import MultiItemsCarousel from '../components/MultiItemsCarousel';
 import Section from '../components/Section';
+import Posts from '../components/Posts';
+import Markers from '../components/Markers';
 
 import fotoAlcalde from '../assets/images/img1.jpg';
 import imagebanner from '../assets/images/FLAYER_2_A.png';
 
-export default function Inicio() {
+export default function Inicio({ user }) {
   return <>
     <Carousel
       additionalTransfrom={0}
@@ -130,6 +132,24 @@ export default function Inicio() {
     <div className="mt-5 mb-5">
       <Section />
     </div>
+
+    <Row className="py-xl justify-content-between px-3" noGutters>
+      <Col className="content-markers">
+        <div className="sticky-from-header-30">
+          <Markers grupo="primario" className="border-bottom pb-3" />
+          <h5 className="px-3">Plataformas</h5>
+          <Markers grupo="plataforma" />
+        </div>
+      </Col>
+      <Col className="content-posts">
+        <Posts user={user} all />
+      </Col>
+      <Col className="content-markers">
+        <div className="sticky-from-header-30">
+          <Markers grupo="primario" />
+        </div>
+      </Col>
+    </Row>
   </>
 }
 

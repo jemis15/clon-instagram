@@ -158,7 +158,7 @@ function App() {
         <Route path="/login" exact render={() => <Login login={login} />} />
         <Route path="/equipo" render={() => <Equipo />} />
         <Route path="/:user" exact render={() => <Perfil />} />
-        <Route path="/" render={() => <Inicio />} />
+        <Route path="/" render={() => <Inicio user={user} />} />
       </Switch>
 
       {/* ruta de los carousel links */}
