@@ -100,29 +100,7 @@ export default function Inicio({ user }) {
       </div>
     </form>
 
-    <Container className="p-5 mt-5">
-      <Row>
-        <Col md="auto">
-          <img
-            width="250"
-            className="avatar-decorate rounded"
-            src={fotoAlcalde}
-            alt="alcalde de mazamari"
-          />
-        </Col>
-        <Col>
-          <Media.Body>
-            <Card.Title>MARCELINO CAMARENA TORRES</Card.Title>
-            <h6><i>Alcalde Distrital de Mazamari</i></h6>
-            <p className="mb-0">
-              Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión.
-              Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari.
-              La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.
-            				</p>
-          </Media.Body>
-        </Col>
-      </Row>
-    </Container>
+    <SaludosAlcalde />
 
     <MultiItemsCarousel
       title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
@@ -163,5 +141,32 @@ function WithStyled() {
         alt="banner header"
       />
     </a>
+  </div>
+}
+
+function SaludosAlcalde() {
+  return <div className="saludo-alcalde py-xl">
+    <div className="pb-3 mb-2">
+      <h2 className="h1 mb-0 text-center">Marcelino Camarena Torres</h2>
+      <p className="mb-0 color-text-light text-center">Alcalde Distrital de Mazamari</p>
+    </div>
+    <Container className="pb-5">
+      <Row>
+        <Col md="5">
+          <img
+            className="rounded img-fluid"
+            src={fotoAlcalde}
+            alt="alcalde de mazamari"
+          />
+        </Col>
+        <Col md="7">
+          <p className="mb-0">
+            Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión.
+            Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari.
+            La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.
+                </p>
+        </Col>
+      </Row>
+    </Container>
   </div>
 }

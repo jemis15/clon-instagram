@@ -1,0 +1,10 @@
+.saludo-alcalde {
+    background-color: white;
+}
+
+.dark-theme{
+    .saludo-alcalde{
+        background-color: var(--black-600);
+        color: white;
+    }
+}
