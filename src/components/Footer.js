@@ -35,34 +35,36 @@ export default function Footer() {
 									</div>
 									<div className="collapse-horarios p-3 rounded shadow-sm">
 										<table className="text-small color-text-light">
-											<tr className="color-text">
-												<td className="pr-2">lunes</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">martes</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">miercoles</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">jueves</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">viernes</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">savado</td>
-												<td>08:00─17:00</td>
-											</tr>
-											<tr>
-												<td className="pr-2">domingo</td>
-												<td>Cerrado</td>
-											</tr>
+											<tbody>
+												<tr className="color-text">
+													<td className="pr-2">lunes</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">martes</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">miercoles</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">jueves</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">viernes</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">savado</td>
+													<td>08:00─17:00</td>
+												</tr>
+												<tr>
+													<td className="pr-2">domingo</td>
+													<td>Cerrado</td>
+												</tr>
+											</tbody>
 										</table>
 									</div>
 								</li>

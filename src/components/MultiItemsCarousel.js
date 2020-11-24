@@ -10,7 +10,7 @@ const config = {
     }
 }
 
-export default function MultiItemsCarousel({ title, grupo }) {
+export default function MultiItemsCarousel({ title, grupo, user }) {
     const [carouselLinks, setCarouselLinks] = useState();
     const [carouselLink, setCarouselLink] = useState({
         image: '',
@@ -21,6 +21,7 @@ export default function MultiItemsCarousel({ title, grupo }) {
     const [loading, setLoading] = useState(true);
     const [modalPlus, setModalPlus] = useState(false);
     const [modalEdit, setModalEdit] = useState(false);
+    const hasPrivilege = user !== null;// 
 
     useEffect(() => {
         async function loadCarouselLinks() {
@@ -137,13 +138,15 @@ export default function MultiItemsCarousel({ title, grupo }) {
     }
 
     return <>
-        <div className="py-5">
+        <div className="py-5 multi-items-carousel">
             <div className="mb-3 d-flex align-items-center container">
                 <h4 className="mr-3 mb-0">{title}</h4>
-                <span className="content-icon rounded-circle icon-plus cursor-pointer"
-                    onClick={toggleModalPlus}>
-                    <i className="fas fa-plus" />
-                </span>
+                {hasPrivilege && (
+                    <span className="content-icon rounded-circle icon-plus cursor-pointer"
+                        onClick={toggleModalPlus}>
+                        <i className="fas fa-plus" />
+                    </span>
+                )}
             </div>
             <Carousel
                 additionalTransfrom={0}
@@ -152,7 +155,7 @@ export default function MultiItemsCarousel({ title, grupo }) {
                 autoPlaySpeed={3000}
                 centerMode={false}
                 className="py-2"
-                containerClass="container pt-2 pb-5"
+                containerClass="container pt-2 pb-5 mb-n5"
                 dotListClass=""
                 draggable={false}
                 focusOnSelect={false}
@@ -168,7 +171,7 @@ export default function MultiItemsCarousel({ title, grupo }) {
                             max: 3000,
                             min: 1024
                         },
-                        items: 5,
+                        items: 7,
                         partialVisibilityGutter: 40
                     },
                     mobile: {
@@ -176,7 +179,7 @@ export default function MultiItemsCarousel({ title, grupo }) {
                             max: 464,
                             min: 0
                         },
-                        items: 2,
+                        items: 3,
                         partialVisibilityGutter: 30
                     },
                     tablet: {
@@ -184,7 +187,7 @@ export default function MultiItemsCarousel({ title, grupo }) {
                             max: 1024,
                             min: 464
                         },
-                        items: 3,
+                        items: 4,
                         partialVisibilityGutter: 30
                     }
                 }}
@@ -202,50 +205,53 @@ export default function MultiItemsCarousel({ title, grupo }) {
                         update={updateCarouselLink}
                         deleteLink={deleteLink}
                         number={key}
+                        hasPrivilege={hasPrivilege}
                     />
                 ))}
             </Carousel>
         </ div>
 
-        <Modal show={modalPlus} onHide={toggleModalPlus}>
-            <Modal.Header closeButton>Nuevo link de intereses</Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmitNew}>
-                    <Form.Group>
-                        <label>Image</label>
-                        <label className="d-block upload-image d-flex justify-content-center align-items-center overflow-hidden"
-                            onChange={handleSelectImage}>
-                            {carouselLink.image ? (
-                                <img
-                                    src={`/apimuni/images/carousellinks/${carouselLink.image}`}
-                                    className="img-fluid"
-                                />
-                            ) : (
-                                    <i className="fas fa-arrow-circle-up fa-2x" />
-                                )}
-                            <Form.Control type="file" className="d-none" />
-                        </label>
-                    </Form.Group>
-                    <Form.Group>
-                        <label>Url (Direcci&oacute;n donde se redirecionara)</label>
-                        <Form.Control type="url" name="url" onChange={handleInputChange} />
-                    </Form.Group>
-                    <div className="text-right">
-                        <Button
-                            className="mr-2"
-                            type="reset"
-                            variant="ligh"
-                            onClick={toggleModalPlus}
-                        >Cancelar</Button>
-                        <Button type="submit">Crear link</Button>
-                    </div>
-                </Form>
-            </Modal.Body>
-        </Modal>
+        {hasPrivilege && (
+            <Modal show={modalPlus} onHide={toggleModalPlus}>
+                <Modal.Header closeButton>Nuevo link de intereses</Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handleSubmitNew}>
+                        <Form.Group>
+                            <label>Image</label>
+                            <label className="d-block upload-image d-flex justify-content-center align-items-center overflow-hidden"
+                                onChange={handleSelectImage}>
+                                {carouselLink.image ? (
+                                    <img
+                                        src={`/apimuni/images/carousellinks/${carouselLink.image}`}
+                                        className="img-fluid"
+                                    />
+                                ) : (
+                                        <i className="fas fa-arrow-circle-up fa-2x" />
+                                    )}
+                                <Form.Control type="file" className="d-none" />
+                            </label>
+                        </Form.Group>
+                        <Form.Group>
+                            <label>Url (Direcci&oacute;n donde se redirecionara)</label>
+                            <Form.Control type="url" name="url" onChange={handleInputChange} />
+                        </Form.Group>
+                        <div className="text-right">
+                            <Button
+                                className="mr-2"
+                                type="reset"
+                                variant="ligh"
+                                onClick={toggleModalPlus}
+                            >Cancelar</Button>
+                            <Button type="submit">Crear link</Button>
+                        </div>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+        )}
     </>
 }
 
-function CarouselLink({ url, image, number, carousellink_id, update, deleteLink }) {
+function CarouselLink({ url, image, number, carousellink_id, update, deleteLink, hasPrivilege }) {
     const [modalEdit, setModalEdit] = useState(false)
     const [modalDelete, setModalDelete] = useState(false);
     const [carouselLink, setCarouselLink] = useState({
@@ -359,20 +365,24 @@ function CarouselLink({ url, image, number, carousellink_id, update, deleteLink 
                         loading="lazy"
                     />
                 </a>
-                <div className="options-editable">
-                    <span className="mr-1 content-icon option-editable edit"
-                        onClick={toggleModalEdit}>
-                        <i className="fas fa-pen" />
-                    </span>
-                    <span className="content-icon option-editable delete"
-                        onClick={toggleModalDelete}>
-                        <i className="fas fa-trash" />
-                    </span>
-                </div>
+                {hasPrivilege && <>
+                    <div className="options-editable">
+                        <span className="mr-1 content-icon option-editable edit"
+                            onClick={toggleModalEdit}>
+                            <i className="fas fa-pen" />
+                        </span>
+                        <span className="content-icon option-editable delete"
+                            onClick={toggleModalDelete}>
+                            <i className="fas fa-trash" />
+                        </span>
+                    </div>
+                </>}
             </div>
-            <span className="link-of-intereses_number">
-                {number + 1}
-            </span>
+            {hasPrivilege && (
+                <span className="link-of-intereses_number">
+                    {number + 1}
+                </span>
+            )}
         </div>
 
 

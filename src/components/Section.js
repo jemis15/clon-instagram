@@ -18,15 +18,14 @@ export default function Section() {
   if (loading) {
     return <p>Cargando...</p>
   }
-  console.log(grupoLinksTipoWithLinks);
+
   return (
     <div>
       <Container>
         <Row>
           {grupoLinksTipoWithLinks.map(grupoLinkWithLinks => (
-            <Col lg="6" className="mb-4">
+            <Col lg="6" className="mb-4" key={grupoLinkWithLinks.id}>
               <SectionItem
-                key={grupoLinkWithLinks.id}
                 icon={<i className={grupoLinkWithLinks.icon} />}
                 title={grupoLinkWithLinks.nombre}
                 grid>

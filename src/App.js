@@ -157,7 +157,7 @@ function App() {
         <Route path="/turismos/:titulo" render={() => <Turismo />} />
         <Route path="/login" exact render={() => <Login login={login} />} />
         <Route path="/equipo" render={() => <Equipo />} />
-        <Route path="/:user" exact render={() => <Perfil />} />
+        <Route path="/:user" exact render={() => <Perfil user={user} />} />
         <Route path="/" render={() => <Inicio user={user} />} />
       </Switch>
 
@@ -169,6 +169,7 @@ function App() {
           <MultiItemsCarousel
             title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
             grupo="secundario"
+            user={user}
           />
         )} />
       </Switch>

@@ -44,6 +44,11 @@
   }
 }
 
+// iconos de left y right
+.react-multiple-carousel__arrow{
+  z-index: 0 !important;
+}
+
 @include media-breakpoint-up(xl){
   // margin negativo cuando el header es transparent
   .carousel-banner-inicio{
