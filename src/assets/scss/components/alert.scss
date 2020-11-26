@@ -1,0 +1,34 @@
+.alert-pie {
+  $distancia: calc(100% + 0.5rem);
+
+  bottom: 0.5rem;
+  left: 50%;
+  z-index: 1500;
+  transform: translate(-50%, $distancia);
+
+  width: 90%;
+  min-width: 250px;
+  max-width: 400px;
+  min-height: 2.5rem;
+
+  background: black;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: 0.5s transform ease;
+
+  &.active {
+    transform: translate(-50%,0);
+  }
+
+  .close-alert {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translate(0, -50%);
+
+    display: inline-block;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+}

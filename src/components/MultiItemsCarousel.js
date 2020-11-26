@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
@@ -11,6 +12,7 @@ const config = {
 }
 
 export default function MultiItemsCarousel({ title, grupo, user }) {
+    const params = useLocation();
     const [carouselLinks, setCarouselLinks] = useState();
     const [carouselLink, setCarouselLink] = useState({
         image: '',
@@ -21,7 +23,8 @@ export default function MultiItemsCarousel({ title, grupo, user }) {
     const [loading, setLoading] = useState(true);
     const [modalPlus, setModalPlus] = useState(false);
     const [modalEdit, setModalEdit] = useState(false);
-    const hasPrivilege = user !== null;// 
+    const hasPrivilege = user !== null;
+    const pagesPermitidos = ['/', '/historia'];
 
     useEffect(() => {
         async function loadCarouselLinks() {
@@ -106,6 +109,10 @@ export default function MultiItemsCarousel({ title, grupo, user }) {
 
     const toggleModalPlus = () => setModalPlus(!modalPlus);
     const toggleModalEdit = () => setModalEdit(!modalEdit);
+
+    if (!pagesPermitidos.find(url => url === params.pathname)) {
+        return <></>
+    }
 
     if (loading) {
         return <div className="container py-5">

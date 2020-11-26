@@ -14,6 +14,7 @@ import Banner from './components/Banner';
 import SidebarNavigationMobile from './components/SidebarNavigationMobile.js';
 import Sidebar from './components/Sidebar';
 import Loading from './components/Loading';
+import Alert from './components/Alert';
 
 import Dashboard from './Views/Dashboard/Dashboard';
 import Usuarios from './Views/Usuarios/Usuarios';
@@ -48,11 +49,17 @@ import RegistCivilDocument from './Views/RegistCivilDocument';
 import MultiItemsCarousel from './components/MultiItemsCarousel';
 import Pages from './Views/Pages';
 
+let timeoutAlert;
 function App() {
   const [user, setUser] = useState(null);
   const [sidebarNavigationMobile, setSidebarNavigationMobile] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [alert, setAlert] = useState({
+    type: '',
+    mensaje: '',
+    show: false
+  });
   const esMobil = useEsMobil();
 
   useEffect(() => {
@@ -105,6 +112,18 @@ function App() {
     setSidebar(!sidebar);
   }
 
+  const showAlert = (type, mensaje) => {
+    setAlert({ ...alert, type, mensaje, show: true });// {}
+    clearTimeout(timeoutAlert)
+    timeoutAlert = setTimeout(() => {
+      setAlert({ ...alert, show: false });
+    }, 5000);
+  }
+  const hideAlert = () => {
+    setAlert({ ...alert, show: false });
+    clearTimeout(timeoutAlert);
+  }
+
   return (
     <Router>
       {/* Loading inicial */}
@@ -132,7 +151,7 @@ function App() {
       <Switch>
         {/* protected */}
         <Route path="/admin" render={() => <Dashboard />} />
-        <Route path="/usuarios" render={() => <Usuarios />} />
+        <Route path="/usuarios" render={() => <Usuarios showAlert={showAlert} />} />
         <Route path="/frame" render={() => <Frame />} />
         {/* fin protected */}
 
@@ -161,24 +180,15 @@ function App() {
         <Route path="/" render={() => <Inicio user={user} />} />
       </Switch>
 
-      {/* ruta de los carousel links */}
-      <Switch>
-        <Route path="/frame" render={() => null} />
-        <Route path="/login" render={() => null} />
-        <Route render={() => (
-          <MultiItemsCarousel
-            title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
-            grupo="secundario"
-            user={user}
-          />
-        )} />
-      </Switch>
+      <MultiItemsCarousel
+        title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
+        grupo="secundario"
+        user={user}
+      />
 
-      <Switch>
-        <Route path="/frame" render={() => null} />
-        <Route render={() => <Footer />} />
-      </Switch>
+      <Alert type={alert.type} show={alert.show} mensaje={alert.mensaje} onHide={hideAlert} />
 
+      <Footer />
       <Options />
     </Router >
   );

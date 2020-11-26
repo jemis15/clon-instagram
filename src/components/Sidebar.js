@@ -13,11 +13,11 @@ export default function Sidebar({ user, logout }) {
 		<header className="border-bottom overflow-hidden user-header d-flex flex-nowrap align-items-center justify-content-start hover-when-collapse-sidebar"
 			onClick={toggleCollapseSidebar}>
 			<div className="d-flex align-items-center">
-				<Avatar className="mr-3" image={user.image} size="sm" initials="FL" />
+				<Avatar className="mr-3" image={user.image && `/apimuni/images/faces/${user.image}`} size="sm" initials={user.nombre && user.nombre[0]} />
 			</div>
 			<div className="align-self-center overflow-hidden flex-fill d-none-when-collapse-sidebar">
 				<p className="mb-0 color-text text-truncate font-weight-600">
-					FLORES MEZA JAFETT JAMIS
+					{user.nombre}
 				</p>
 			</div>
 			<div className="mr-auto d-none-when-collapse-sidebar" onClick={toggleCollapseSidebar}>

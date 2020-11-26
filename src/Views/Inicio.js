@@ -1,6 +1,5 @@
-import Axios from 'axios';
 import React from 'react';
-import { Card, Col, Container, Media, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
 
 import MultiItemsCarousel from '../components/MultiItemsCarousel';
@@ -101,6 +100,7 @@ export default function Inicio({ user }) {
     </form>
 
     <SaludosAlcalde />
+    {/* <Saludo2 /> */}
 
     <MultiItemsCarousel
       title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
@@ -133,10 +133,10 @@ export default function Inicio({ user }) {
 
 function WithStyled() {
   return <div className="text-center">
-    <a href="#to" className="d-inline-block">
+    <a href="#to" className="d-block">
       <img
         src={imagebanner}
-        className="img-fluid"
+        className="w-100"
         loading="lazy"
         alt="banner header"
       />
@@ -145,28 +145,48 @@ function WithStyled() {
 }
 
 function SaludosAlcalde() {
-  return <div className="saludo-alcalde py-xl">
-    <div className="pb-3 mb-2">
-      <h2 className="h1 mb-0 text-center">Marcelino Camarena Torres</h2>
-      <p className="mb-0 color-text-light text-center">Alcalde Distrital de Mazamari</p>
-    </div>
-    <Container className="pb-5">
+  return <div className="saludo-alcalde py-5">
+    <Container className="py-3">
       <Row>
-        <Col md="5">
+        <Col className="mb-3 mb-lg-0" lg="6">
           <img
-            className="rounded img-fluid"
-            src={fotoAlcalde}
+            className="w-100"
+            src="http://munimazamari.gob.pe/wp-content/uploads/2019/10/maxi.jpg"
             alt="alcalde de mazamari"
           />
         </Col>
-        <Col md="7">
-          <p className="mb-0">
+        <Col lg="6">
+          <h3 className="mb-0">Marcelino Camarena Torres</h3>
+          <p className="mb-2 color-text-light text-small">Alcalde Distrital de Mazamari</p>
+          <p className="mb-0 text-small">
             Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión.
             Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari.
             La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.
                 </p>
         </Col>
       </Row>
+    </Container>
+  </div>
+}
+
+function Saludo2() {
+  return <div className="saludo-alcalde py-xl">
+
+    <Container className="pb-5 clearfix py-5 rounded-lg" style={{ background: 'var(--green-700)' }}>
+      <img
+        className="rounded img-fluid float-left mr-4 border rounded bg-white p-2 pb-4"
+        src={fotoAlcalde}
+        alt="alcalde de mazamari"
+      />
+      <div className="pb-3 mb-2">
+        <h2 className="h1 mb-0 text-center text-white">Marcelino Camarena Torres</h2>
+        <p className="mb-0 color-text-light text-center text-white">Alcalde Distrital de Mazamari</p>
+      </div>
+      <p className="mb-0 text-white">
+        Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión.
+        Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari.
+        La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.
+              </p>
     </Container>
   </div>
 }
