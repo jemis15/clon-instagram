@@ -1,0 +1,64 @@
+.CajaPrinci {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 2rem;
+
+  .CajaTours {
+    background-color: rgb(0, 0, 0);
+    height: 100%;
+    width: 100%;
+    color: white;
+    position: relative;
+
+    .img_tours {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .button-tours {
+    padding: 10px;
+    width: 80%;
+    font-family: sans-serif;
+    text-align: left;
+    transition: 0.3s;
+    display: block;
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    opacity: 0.7;
+  }
+  .button-tours.open {
+    background: #16a085;
+    color: #fff;
+}
+.button-tours:hover {
+    background: #1abc9c;
+}
+  .opcion {
+    --border-width: 0.3rem;
+    padding: 2px;
+    font-family: sans-serif;
+    background-color: rgb(209, 9, 9);
+    position: absolute;
+    top: 20px;
+    right: calc(0rem - (var(--border-width)) * 2);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      border-width: var(--border-width);
+      border-color: transparent;
+      border-style: solid;
+      border-left-color: $black;
+      border-top-color: $black;
+    }
+  }
+}

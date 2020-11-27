@@ -1,0 +1,38 @@
+
+    .imgRestaurante{
+        overflow: hidden;
+        height: 300px;
+        img{
+            width: 100%;
+        }
+    }
+    .Titulo_Restaurante{
+        background-color:orange;
+        border-top: 10px solid white;
+        border-bottom: 10px solid white;
+        padding: 3px;
+        text-align: center;
+        color: black;
+    }
+    .Descrip_rest{
+        background-color: rgba(189, 150, 143, 0.411);
+        color: black;
+        border-radius: 10%;
+
+    }
+    .img_plato{
+        width: 159px;
+        height: 150px;
+        border: 3px solid transparent;
+        justify-content: space-around;
+    }
+    .img_plato1{
+        width: 100%;
+        height: 150px;
+        border: 3px solid transparent;
+    }
+    .Informes_Restaurantes{
+        text-align: center;
+        background-color:orange;
+        padding: 3px;
+    }

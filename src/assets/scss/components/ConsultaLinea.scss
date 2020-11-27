@@ -1,0 +1,35 @@
+.Simbolo{
+    position: relative;
+    display: block;
+    padding: 10px;
+    font-weight: 200;
+    background: --grey-400;
+    color: #000;
+    text-decoration: none;
+}
+.Simbolo.open {
+    background: #16a085;
+    color: #fff;
+}
+.Simbolo:hover {
+    background: #1abc9c;
+}
+.fa-plus{
+    color: rgb(10, 206, 231);
+}
+.fa-pencil-alt{
+    color: rgb(170, 59, 15);
+}
+.fa-trash-alt{
+    color: red;
+}
+
+.menunav-link{
+    &.active{
+        background-color: rgb(14, 14, 184);
+        color:white;
+    }
+    &:hover{
+        background-color: rgb(112, 193, 218);
+    }
+}

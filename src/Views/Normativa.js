@@ -1,10 +1,14 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 export default function Normativa() {
     
-    return <div className="container py-5">
-        <section>
+    return <div className="container border my-5" style={{width:'800px'}}>
+        <div className="mx-n3" style={{ height:"50px", backgroundColor:"green", color:'white'}} >
+        <h1 className="text-center px-n2">Busqueda de Normatividad</h1>
+        </div>
+    <div className="containerNor  my-5">
+        <section className="border p-3">
             <Row> 
                 <Col sm="2">
                         <label><strong>Tipo normatividad: </strong></label>
@@ -80,5 +84,6 @@ export default function Normativa() {
             </tbody>
         </table>
         </div>
+    </div>
     </div>
 }

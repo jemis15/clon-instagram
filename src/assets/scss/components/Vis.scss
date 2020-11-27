@@ -1,0 +1,55 @@
+.img_Vis{
+width: 150px;
+height: 150px;
+//border:  solid 10px #521313;
+transition: 1s;
+transform: skewX(-10deg);
+border-left: solid 10px brown;
+border-bottom: solid 10px brown;
+}
+.img_Vis:hover{
+transform: scale(2);
+}
+.img_Vis1{
+width: 150px;
+height: 150px;
+//border:  solid 10px #521313;
+transition: 1s;
+transform: skewX(-10deg);
+border-right: solid 10px brown;
+border-bottom: solid 10px brown;
+}
+.img_Vis1:hover{
+transform: scale(2);
+}
+.log{
+    width: 100px;
+    height: 100px;
+}
+.texto{
+    transform: skewX(-10deg);
+}
+.barrain{
+    display: flex;
+
+    .barra_inf1{
+        width: 500px;
+        height: 20px;
+        background: brown;
+        transform: skewX(-10deg);
+    }
+    .barra_inf2{
+        width: 15px;
+        height: 20px;
+        background: rgb(158, 103, 103);
+        margin-left: 10px;
+        margin-right: 10px;
+        transform: skewX(-10deg);
+    }
+    .barra_inf3{
+        width: 15px;
+        height: 20px;
+        background: rgb(187, 167, 167);
+        transform: skewX(-10deg);
+    }
+}

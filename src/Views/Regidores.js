@@ -4,7 +4,7 @@ import { Col, Row, Card } from 'react-bootstrap';
 import img_perfil from '../assets/images/web/paisaje.jpg';
 
 export default function Regidores() {
-    return <div className="container mt-5">
+    return <div className="container mt-5" style={{width:"700px"}}>
         <h1 className="text-center">REGIDORES</h1>
         <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed veniam alias molestias corrupti assumenda architecto eos dignissimos, consequuntur temporibus aliquam ducimus, non eum, delectus aperiam distinctio tenetur. Fugit, exercitationem pariatur!</h6>
         <br/><br/>

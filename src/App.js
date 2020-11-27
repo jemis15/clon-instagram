@@ -34,7 +34,7 @@ import Turismo from './Views/Turismo/Turismo';
 import Blank from './Views/Blank';
 import Frame from './Views/Frame';
 import VisionMision from './Views/VisionMision';
-import Certificacion from './Views/Certificacion';
+import Certificacion from './Views/ConsultasLinea/Certificacion';
 import Normativa from './Views/Normativa';
 import TributoMuniDocument from './Views/TributoMuniDocument';
 import Licencia from './Views/Licencia';
@@ -45,6 +45,22 @@ import Serenazgo from './Views/Serenazgo';
 import Himno from './Views/Himno';
 import Presentacion from './Views/Presentacion';
 import RegistCivilDocument from './Views/RegistCivilDocument';
+import ConsultaLinea from './Views/ConsultasLinea';
+import QuejaReclamo from './Views/QuejaReclamo';
+import Direcctorio from './Views/Direcctorio';
+import Alcaldes from './Views/Alcaldes';
+import Dise from './Views/Dise';
+import Vis from './Views/Vis';
+import Funcionarios from './Views/Funcionarios';
+import DirectorioTelefono from './Views/DirectorioTelefono';
+import Tours from './Views/Tours';
+import DescripcionTurismo from './Views/DescripcionTurismo';
+import Restaurantes from './Views/Restaurantes';
+import Hoteles from './Views/Hoteles';
+import Platos_Tipicos from './Views/Platos_Tipicos';
+import Agroindustrias from './Views/Agroindustrias';
+import ListaReclamos from './Views/ListaReclamos';
+import NavMazamari from './Views/NavMazamari';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -146,7 +162,23 @@ function App() {
         <Route path="/Himno"  render={() => <Himno/>}/>
         <Route path="/Presentacion"  render={() => <Presentacion/>}/>
         <Route path="/RegistCivilDocument"  render={() => <RegistCivilDocument/>}/>
- 
+        <Route path="/c" render={() => <ConsultaLinea/>}/>
+        <Route path="/QuejaReclamo" render={() => <QuejaReclamo/>}/>
+        <Route path="/Direcctorio" render={() => <Direcctorio/>}/>
+        <Route path="/Alcaldes"render={() => <Alcaldes/>}/>
+        <Route path="/Dise" render={() => <Dise/>}/>
+        <Route path="/Vis" render={() => <Vis/>}/>
+        <Route path="/Funcionarios" render={() => <Funcionarios/>}/>
+        <Route path="/DirectorioTelefono" render={() => <DirectorioTelefono/>}/>
+        <Route path="/Tours" render={() => <Tours/>}/>
+        <Route path="/Descripcionturismo" render={() => <DescripcionTurismo/>}/>
+        <Route path="/Restaurantes" render={() => <Restaurantes/>}/>
+        <Route path="/Hoteles"  render={() => <Hoteles/>}/>
+        <Route path="/Platos_Tipicos" render={() => <Platos_Tipicos/>}/>
+        <Route path="/Agroindustrias" render={() => <Agroindustrias/>}/>
+        <Route path="/ListaReclamos" render={() => <ListaReclamos/>}/>
+        <Route path="/NavMazamari" render={() => <NavMazamari/>}/>
+
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />
         <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />
