@@ -1,17 +1,31 @@
-import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
 
 import MultiItemsCarousel from '../components/MultiItemsCarousel';
-import Section from '../components/Section';
-import Posts from '../components/Posts';
-import Markers from '../components/Markers';
 
-import fotoAlcalde from '../assets/images/img1.jpg';
-import imagebanner from '../assets/images/FLAYER_2_A.png';
+import image from '../assets/images/icons/camara.svg'
+import flayer_1 from '../assets/images/FLAYER_1.png';
+import flayer_2 from '../assets/images/FLAYER_2.png';
+import flayer_3 from '../assets/images/FLAYER_3.png';
+import Axios from 'axios';
 
 export default function Inicio({ user }) {
-  return <>
+  const [grupoLinks, setGrupoLinks] = useState([]);
+  const [modalEditar, setModalEditar] = useState(false);
+
+  useEffect(() => {
+    async function loadLinks() {
+      const { data: apiLinks } = await Axios.get('/apimuni/grupolinkstipo/with/links');
+      setGrupoLinks(apiLinks);
+    }
+
+    loadLinks();
+  }, []);
+
+  const toggleModalEditar = () => setModalEditar(!modalEditar);
+
+  return <div>
     <Carousel
       additionalTransfrom={0}
       arrows
@@ -59,12 +73,12 @@ export default function Inicio({ user }) {
       sliderClass=""
       slidesToSlide={1}
       swipeable>
-      <WithStyled />
-      <WithStyled />
-      <WithStyled />
+      <WithStyled image={flayer_1} />
+      <WithStyled image={flayer_2} />
+      <WithStyled image={flayer_3} />
     </Carousel>
 
-    <form className="bg-dark position-relative d-none d-lg-block">
+    {/* <form className="bg-dark position-relative d-none d-lg-block">
       <div className="py-3 position-absolute" style={{ bottom: 0, left: 0, right: 0 }}>
         <div className="container position-relative">
           <div className="position-absolute icon-convinado bg-dark text-white rounded-circle d-flex align-items-center justify-content-center">
@@ -97,46 +111,137 @@ export default function Inicio({ user }) {
           </div>
         </div>
       </div>
-    </form>
+    </form> */}
 
     <SaludosAlcalde />
-    {/* <Saludo2 /> */}
 
     <MultiItemsCarousel
       title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
       grupo="principal"
+      user={user}
     />
 
-    <div className="mt-5 mb-5">
-      <Section />
+    <div>
+      <Container className="py-4">
+        <Row>
+          <Col md="3" className="d-none">
+            <p className="mb-1 px-3 text-small font-weight-600">Intrumentos de gestion</p>
+            <ul className="list-unstyled lista_j">
+              <li><JLink value="MOF" to="/" /></li>
+              <li><JLink value="ROF" to="/" /></li>
+              <li><JLink value="TUPA" to="/" /></li>
+              <li><JLink value="CAP" to="/" /></li>
+              <li><JLink value="MAPRO" to="/" /></li>
+              <li><JLink value="POI" to="/" /></li>
+              <li><JLink value="RIC" to="/" /></li>
+              <li><JLink value="PDC" to="/" /></li>
+              <li><JLink value="PDC al 2030" to="/" /></li>
+              <li><JLink value="PEI" to="/" /></li>
+            </ul>
+            <p className="mb-1 px-3 mt-5 text-small font-weight-600">Transparencia</p>
+            <ul className="list-unstyled lista_j">
+              <li><JLink value="Datos generales" to="/" /></li>
+              <li><JLink value="Planeamiento y organización" to="/" /></li>
+              <li><JLink value="Presupuesto" to="/" /></li>
+              <li><JLink value="Proyecto de inversion" to="/" /></li>
+              <li><JLink value="Participacion ciudadana" to="/" /></li>
+              <li><JLink value="Personal contratacion de bienes y servicios" to="/" /></li>
+              <li><JLink value="Normas públicas" to="/" /></li>
+            </ul>
+          </Col>
+          <Col md="12">
+            <Row>
+              {grupoLinks.map((grupo, key) => (
+                <Col key={grupo.id} md="6">
+                  <div className="d-flex">
+                    <h3>{grupo.nombre}</h3>
+                    <span className="ml-auto cursor-pointer" onClick={toggleModalEditar}>
+                      <i className="fas fa-pen text-primary" />
+                    </span>
+                  </div>
+                  <div className="mb-5 p-2 border grid-2 bg-white rounded-lg">
+                    {grupo.links.map(link => {
+                      return <LinkWithCircleBadge
+                        key={link.id}
+                        image={`/apimuni/images/grupolinks/${link.image}`}
+                        value={link.titulo}
+                        to={link.url}
+                        hover
+                      />
+                    })}
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </div>
 
-    <Row className="py-xl justify-content-between px-3" noGutters>
-      <Col className="content-markers">
-        <div className="sticky-from-header-30">
-          <Markers grupo="primario" className="border-bottom pb-3" />
-          <h5 className="px-3">Plataformas</h5>
-          <Markers grupo="plataforma" />
+    <Modal show={modalEditar} onHide={toggleModalEditar} size="lg">
+      <Modal.Header closeButton>Titulo</Modal.Header>
+      <Modal.Body><EditarLink /></Modal.Body>
+    </Modal>
+  </div>
+}
+
+function EditarLink() {
+  return <div>
+    <Row>
+      <Col>
+        <h4>Datos</h4>
+        <div>
+          <Form>
+            <Form.Group>
+              <label>Nombre del link</label>
+              <Form.Control type="text" placeholder="Nombre del link" />
+            </Form.Group>
+            <Form.Group>
+              <label>Descripcion</label>
+              <Form.Control as="textarea" placeholder="Descripcion del link" />
+            </Form.Group>
+          </Form>
         </div>
       </Col>
-      <Col className="content-posts">
-        <Posts user={user} all />
-      </Col>
-      <Col className="content-markers">
-        <div className="sticky-from-header-30">
-          <Markers grupo="primario" />
+      <Col className="align-self-start">
+        <h4>Vista preliminar</h4>
+        <div className="d-flex justity-content-center align-self-center">
+          <LinkWithCircleBadge image={image} value="Esto es un texto para el link" />
         </div>
       </Col>
     </Row>
-  </>
+
+  </div>
 }
 
-function WithStyled() {
-  return <div className="text-center">
-    <a href="#to" className="d-block">
+function LinksEditar() {
+  return <div>
+    <div>
+      <Form>
+        <Form.Group className="position-relative">
+          <span className="position-absolute" style={{ top: '50%', left: '1rem', transform: 'translateY(-50%)' }}>
+            <i className="fas fa-search" />
+          </span>
+          <Form.Control className="pl-5" type="search" placeholder="Buscar..." />
+        </Form.Group>
+      </Form>
+    </div>
+    <div className="grid-2">
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover active />
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover />
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover />
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover />
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover />
+      <LinkWithCircleBadge className="p-1 border" image={image} value="hola mundo" hover />
+    </div>
+  </div>
+}
+
+function WithStyled({ image }) {
+  return <div className="inicio-banner">
+    <a href="#hola">
       <img
-        src={imagebanner}
-        className="w-100"
+        src={image}
         loading="lazy"
         alt="banner header"
       />
@@ -145,7 +250,7 @@ function WithStyled() {
 }
 
 function SaludosAlcalde() {
-  return <div className="saludo-alcalde py-5">
+  return <div className="py-5">
     <Container className="py-3">
       <Row>
         <Col className="mb-3 mb-lg-0" lg="6">
@@ -169,24 +274,31 @@ function SaludosAlcalde() {
   </div>
 }
 
-function Saludo2() {
-  return <div className="saludo-alcalde py-xl">
+function JLink({ value, to, className }) {
+  return <a
+    href={to}
+    className={`px-3 py-2 ${className} rounded-lg text-small text-decoration-none d-block`}>
+    <span>{value}</span>
+  </a>
+}
 
-    <Container className="pb-5 clearfix py-5 rounded-lg" style={{ background: 'var(--green-700)' }}>
-      <img
-        className="rounded img-fluid float-left mr-4 border rounded bg-white p-2 pb-4"
-        src={fotoAlcalde}
-        alt="alcalde de mazamari"
-      />
-      <div className="pb-3 mb-2">
-        <h2 className="h1 mb-0 text-center text-white">Marcelino Camarena Torres</h2>
-        <p className="mb-0 color-text-light text-center text-white">Alcalde Distrital de Mazamari</p>
-      </div>
-      <p className="mb-0 text-white">
-        Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión.
-        Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari.
-        La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.
-              </p>
-    </Container>
+function LinkWithCircleBadge({ image, value, to, className, active, hover }) {
+  return <a href={to}
+    target="_blank"
+    className={`marker ${active && 'active'} ${hover && 'hover'} rounded-lg d-flex text-decoration-none ${className}`}>
+    <div>
+      <CircleBadge className="mr-3">
+        <img src={image} className="img-fluid w-50" loading="lazy" alt="link" />
+      </CircleBadge>
+    </div>
+    <div className="text-small font-weight-600 w-100 align-self-center">
+      <span>{value}</span>
+    </div>
+  </a>
+}
+
+function CircleBadge({ className, children }) {
+  return <div className={`circle-badge shadown-sm ${className}`}>
+    {children}
   </div>
 }

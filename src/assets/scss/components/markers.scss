@@ -25,3 +25,22 @@
     vertical-align: center;
   }
 }
+
+
+.marker{
+  &.active{
+    background-color: var(--blue-500);
+    color: white;
+
+    &:hover{
+      background-color: var(--blue-400) !important;
+      color: white !important;
+    }
+  }
+  &.hover{
+    &:hover{
+      background-color: var(--grey-300);
+      color: black;
+    }
+  }
+}

@@ -48,6 +48,7 @@ import Presentacion from './Views/Presentacion';
 import RegistCivilDocument from './Views/RegistCivilDocument';
 import MultiItemsCarousel from './components/MultiItemsCarousel';
 import Pages from './Views/Pages';
+import Comunidad from './Views/Comunidad';
 
 let timeoutAlert;
 function App() {
@@ -176,6 +177,7 @@ function App() {
         <Route path="/turismos/:titulo" render={() => <Turismo />} />
         <Route path="/login" exact render={() => <Login login={login} />} />
         <Route path="/equipo" render={() => <Equipo />} />
+        <Route path="/comunidad" exact render={() => <Comunidad user={user} />} />
         <Route path="/:user" exact render={() => <Perfil user={user} />} />
         <Route path="/" render={() => <Inicio user={user} />} />
       </Switch>

@@ -1,0 +1,19 @@
+.inicio-banner {
+  img {
+    height: 100%;
+    filter: brightness(0.7);
+  }
+}
+
+.circle-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 3.7rem;
+  height: 3.7rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid var(--grey-300);
+}
