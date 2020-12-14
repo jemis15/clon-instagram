@@ -1,11 +1,11 @@
 
-import React from 'react';
-import { Table, Button, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Table, Button, Card, Modal } from 'react-bootstrap';
 
 export default function ListaReclamos(){
-
 return <div className="container  my-5" style={{width:'800px'}}>
     <div className="TituloReclamo mb-5" style={{textAlign:'center', fontFamily: "cursive"}}>
+        
         <h2>Reclamos Realizados</h2>
     </div>
     <div className="ListaReclamos my-3">

@@ -22,7 +22,7 @@ export default function CodigoEtica() {
         </AccordionItem>
     </Accordion>
 
-    <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}>
+    <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}  animation={false}>
         <Modal.Header closeButton style={{background:'#DFE8FE'}}>
             Nueva Información
         </Modal.Header>
@@ -103,7 +103,7 @@ function AccordionItem({eventKey, titulo, children}) {
       </Card.Body>
     </Accordion.Collapse>
   </Card>
-  <Modal show={modalNewItem} onHide={toggleModalNewItem}>
+  <Modal show={modalNewItem} onHide={toggleModalNewItem}  animation={false}>
                 <Modal.Header closeButton style={{background:'#DFE8F3'}}>
                     Agregar Información
                 </Modal.Header>

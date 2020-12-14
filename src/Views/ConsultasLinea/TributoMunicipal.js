@@ -48,7 +48,7 @@ export default function TributoMunicipal(){
             </Card>
             </Tab.Container>
 
-            <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}>
+            <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}  animation={false}>
                 <Modal.Header closeButton style={{background:'#DFE8F3'}}>Nueva Información</Modal.Header>
                 <Modal.Body>
                     <NewGrupo closeModal={toggleModalNewGrupo} />
@@ -116,7 +116,7 @@ function AcordionItem({eventKey, titulo}) {
   </Accordion.Collapse>
 </Card>
 
-<Modal show={modalNewItem} onHide={toggleModalNewItem}>
+<Modal show={modalNewItem} onHide={toggleModalNewItem}  animation={false}>
               <Modal.Header closeButton style={{background:'#DFE8F3'}}>
                   Agregar Información
               </Modal.Header>

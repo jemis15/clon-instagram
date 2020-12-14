@@ -63,7 +63,7 @@ const [modalNewItem, setModalNewItem] = useState(false);
                     </Accordion>
 
 
-            <Modal show={modalNewGrupo} onHide={tooggleModalNewGrupo}>
+            <Modal show={modalNewGrupo} onHide={tooggleModalNewGrupo} animation={false}>
                 <Modal.Header closeButton style={{background:'#DFE8F3'}}>
                     Nueva Informacion
                 </Modal.Header>
@@ -144,7 +144,7 @@ function AcordionItem({eventKey, titulo, children}) {
       </Card.Body>
     </Accordion.Collapse>
   </Card>
-  <Modal show={modalNewItem} onHide={toggleModalNewItem}>
+  <Modal show={modalNewItem} onHide={toggleModalNewItem}  animation={false}>
                 <Modal.Header closeButton style={{background:'#DFE8F3'}}>
                     Agregar Información
                 </Modal.Header>

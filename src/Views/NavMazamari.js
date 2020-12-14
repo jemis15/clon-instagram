@@ -1,8 +1,10 @@
 import React from 'react';
 import Switch from 'react-bootstrap/esm/Switch';
 import { Link, NavLink, Route } from 'react-router-dom';
+import ListAgroindustrias from './ListAgroindustrias';
 import ListPlatosTipicos from './ListPlatosTipicos';
 import ListRestaurantes from './ListRestaurantes';
+import ListHoteles from './ListHoteles';
 import Tours from './Tours';
 
 export default function (){
@@ -53,10 +55,10 @@ export default function (){
                 <ListPlatosTipicos/>
             </Route>
             <Route path="/NavMazamari/Hoteles">
-                <Tours/>
+                <ListHoteles/>
             </Route>
             <Route path="/NavMazamari/Agroindustrias">
-                <Tours/>
+                <ListAgroindustrias/>
             </Route>
           </Switch>
         </div>

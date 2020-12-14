@@ -40,19 +40,19 @@ export default function AppNav() {
                         </li>
                     </ul>
                     <hr />
-                    <LinkNavigation to="/DescripcionTurismo">
+                    <LinkNavigation to="/NavMazamari/Tours">
                         Turismo
                     </LinkNavigation>
-                    <LinkNavigation to="/Restaurantes">
+                    <LinkNavigation to="/NavMazamari/Restaurantes">
                         Restaurantes
                     </LinkNavigation>
-                    <LinkNavigation to="/Hoteles">
+                    <LinkNavigation to="/NavMazamari/Hoteles">
                         Hoteles
                     </LinkNavigation>
-                    <LinkNavigation to="/Agroindustrias">
+                    <LinkNavigation to="/NavMazamari/Agroindustrias">
                         Agroindustrias
                     </LinkNavigation>
-                    <LinkNavigation to="/Platos_Tipicos">
+                    <LinkNavigation to="/NavMazamari/Platos_Tipicos">
                         Platos Tipicos
                     </LinkNavigation>
                 </DropMenu>

@@ -122,7 +122,7 @@ export default function LicenciaFuncionamiento() {
           </Card>
     </Tab.Container>
 
-    <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}>
+    <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}  animation={false}>
                 <Modal.Header closeButton style={{background:'#DFE8F3'}}>Nueva Información</Modal.Header>
                 <Modal.Body>
                     <NewGrupo closeModalGrupo={toggleModalNewGrupo} />
@@ -165,7 +165,7 @@ function AcordionItem({eventKey, titulo}) {
     </Card>
     
       <Modal show={modalNewItem} onHide={toggleModalNewItem}>
-                  <Modal.Header closeButton style={{background:'#DFE8F3'}}>
+                  <Modal.Header closeButton style={{background:'#DFE8F3'}}  animation={false}>
                       Agregar Información
                   </Modal.Header>
                   <Modal.Body>

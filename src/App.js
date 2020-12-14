@@ -61,6 +61,10 @@ import Platos_Tipicos from './Views/Platos_Tipicos';
 import Agroindustrias from './Views/Agroindustrias';
 import ListaReclamos from './Views/ListaReclamos';
 import NavMazamari from './Views/NavMazamari';
+import Agenda from './Views/Agenda';
+import ListHoteles from './Views/ListHoteles';
+import Noticias from './Views/Noticias';
+import InformacionAgro from './Views/InformacionAgro';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -178,6 +182,10 @@ function App() {
         <Route path="/Agroindustrias" render={() => <Agroindustrias/>}/>
         <Route path="/ListaReclamos" render={() => <ListaReclamos/>}/>
         <Route path="/NavMazamari" render={() => <NavMazamari/>}/>
+        <Route path="/Agenda" render={() => <Agenda/>}/>
+        <Route path="/ListHoteles" render={() => <ListHoteles/>}/>
+        <Route path="/Noticias" render={() => <Noticias/> }/>
+        <Route path="/InformacionAgro" render={() => <InformacionAgro/>}/>
 
         <Route path="/blank" render={() => <Blank />} />
         <Route path="/historia" render={() => <Historia />} />

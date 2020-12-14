@@ -69,8 +69,8 @@ export default function Agroindustrias(){
                 <div className="Circulo3">
                 <img src={img_Agro } alt="Agroindustrias" />
                 </div>
-                <div className="Bolsa">
-                <img src={img_Bolsa } alt="Agroindustrias" />
+                <div className="position-relative">
+                <img src={img_Bolsa } alt="Agroindustrias" className="Bolsa"/>
                 </div>
             </Col>
         </Row>
