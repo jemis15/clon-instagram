@@ -1,66 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import AppNav from './Nav2';
 import Avatar from './utilitarios/Avatar';
+import defaultLogo from '../logo.svg';
 
-import logo from '../assets/images/logo.png';
-
-export default function Header({ toggle, user }) {
+export default function Header({ toggle, user, settings }) {
 	const [isHeaderTransparent, setIsHeaderTransparent] = useState(false);
 	const params = useLocation();
+
 	useEffect(() => {
 		window.addEventListener('scroll', changeHeaderTransparent);
 
 		function changeHeaderTransparent() {
-			// pagina en la cual se esta navegando
-			const pageActual = window.location;
-			// posicion actual del scroll
-			const scrollY = window.scrollY;
-			var estaEnLaUrlCorrecta = false;
-
-			switch (pageActual.pathname) {
-				case '/':
-					estaEnLaUrlCorrecta = true;
-					break;
-				case '/historia':
-					estaEnLaUrlCorrecta = true;
-					break;
-				case '/gastronomiayturismo':
-					estaEnLaUrlCorrecta = true;
-					break;
-
-				default:
-					document.body.classList.remove('with-transparent-header');
-					setIsHeaderTransparent(false);
-					break;
+			if (!document.body.classList.contains('with-transparent-header')) {
+				setIsHeaderTransparent(false);
+				return;
 			}
 
-			if (estaEnLaUrlCorrecta) {
-				if (scrollY < 20) {
-					// activamos el header transparent
-					document.body.classList.add('with-transparent-header');
-					setIsHeaderTransparent(true);
-					// document.body.classList.contains('with-transparent-header');
-				} else {
-					// le quitamos el header transparent
-					document.body.classList.remove('with-transparent-header');
-					setIsHeaderTransparent(false);
-					// document.body.classList.contains('with-transparent-header')
-				}
+			// posicion actual del scroll
+			const scrollY = window.scrollY;
+
+			if (scrollY < 20) {
+				setIsHeaderTransparent(true);
+			} else {
+				setIsHeaderTransparent(false);
 			}
 		}
 
-
 		changeHeaderTransparent();
 		return () => window.removeEventListener('scroll', changeHeaderTransparent);
+	}, []);
+
+	useEffect(() => {
+		// comparando la url actual con la lista de url's que tienen permitido un header transparent
+		const index = urlWithHeaderTransparent.indexOf(params.pathname)
+		if (index !== -1) {
+			if (window.scrollY < 20) {
+				setIsHeaderTransparent(true);
+			}
+			document.body.classList.add('with-transparent-header');
+		} else {
+			setIsHeaderTransparent(false);
+			document.body.classList.remove('with-transparent-header');
+		}
 	}, [params]);
+
+	if (!settings || !settings.logo) {
+		return <p>No hay configuraci&oacute;n inicial</p>;
+	}
 
 	return <header
 		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
 		<div className="container-fluid d-flex">
 			<Link className="mr-4" to="/">
-				<img src={logo} width="60px" alt="logo mazamari" />
+				{settings && settings.logo
+					? <img
+						src={`/apimuni/images/settings/${settings.logo}`}
+						height="60px"
+						loading="lazy"
+						alt="logo mazamari"
+					/>
+					: <img
+						src={defaultLogo}
+						height="60px"
+						loading="lazy"
+						alt="default logo"
+					/>
+				}
 			</Link>
 			<AppNav />
 			<div className="ml-auto d-flex align-self-center align-items-center">
@@ -77,7 +84,7 @@ export default function Header({ toggle, user }) {
 						</Link>
 						<Link
 							to="/login"
-							className="mr-2 py-2 px-3 btn-go_iniciar_session text-small font-weight-600 text-decoration-none d-none d-xl-inline-block">
+							className="mr-2 btn btn-outline-warning btn-sm text-small font-weight-600 text-decoration-none d-none d-xl-inline-block">
 							Iniciar session
 						</Link>
 						<div
@@ -91,3 +98,5 @@ export default function Header({ toggle, user }) {
 		</div>
 	</header>
 }
+
+const urlWithHeaderTransparent = ['/', '/historia', 'gastronomia'];

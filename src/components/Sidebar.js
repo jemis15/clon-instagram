@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Avatar from './utilitarios/Avatar';
-import ThemeButton from './utilitarios/ThemeButton';
 
 export default function Sidebar({ user, logout }) {
 	function toggleCollapseSidebar() {
@@ -16,9 +15,10 @@ export default function Sidebar({ user, logout }) {
 				<Avatar className="mr-3" image={user.image && `/apimuni/images/faces/${user.image}`} size="sm" initials={user.nombre && user.nombre[0]} />
 			</div>
 			<div className="align-self-center overflow-hidden flex-fill d-none-when-collapse-sidebar">
-				<p className="mb-0 color-text text-truncate font-weight-600">
+				<p className="mb-0 color-text text-small text-truncate font-weight-700">
 					{user.nombre}
 				</p>
+				<p className="text-smaller mb-0 text-muted text-truncate">@{user.nickname}</p>
 			</div>
 			<div className="mr-auto d-none-when-collapse-sidebar" onClick={toggleCollapseSidebar}>
 				<span className="cursor-pointer color-text-light"
@@ -33,35 +33,74 @@ export default function Sidebar({ user, logout }) {
 				<li className="navigation-item">
 					<NavigationLink
 						to="/home"
-						FAIcon="fas fa-home"
+						FAIcon="far fa-home"
 						texto="Inicio"
 					/>
 				</li>
 				<li className="navigation-item">
 					<NavigationLink
+						to="/Cas"
+						FAIcon="far fa-hammer"
+						texto="Cas"
+					/>
+				</li>
+				<li className="navigation-item">
+					<NavigationLink
+						to="/comunidad"
+						FAIcon="far fa-compass"
+						texto="Comunidad"
+					/>
+				</li>
+				<li className="navigation-item">
+					<NavigationLink
+						to="/Blogs"
+						FAIcon="far fa-project-diagram"
+						texto="Blogs"
+					/>
+				</li>
+				<li className="navigation-item">
+					<NavigationLink
+						to="/Comunicados"
+						FAIcon="far fa-bullhorn"
+						texto="Comunicados"
+					/>
+				</li>
+
+				<Separador />
+
+				<li className="navigation-item">
+					<NavigationLink
+						to="/frame"
+						FAIcon="far fa-crop-alt"
+						texto="Espacio de trabajo"
+					/>
+				</li>
+
+				<Separador />
+
+				<li className="navigation-item">
+					<NavigationLink
 						to="/admin"
-						FAIcon="fas fa-globe-africa"
+						FAIcon="far fa-cog"
 						texto="Configuracion"
 					/>
 				</li>
 				<li className="navigation-item">
 					<NavigationLink
-						to="/usuarios"
-						FAIcon="fas fa-users"
-						texto="Usuarios"
+						to="/settings"
+						FAIcon="far fa-cog"
+						texto="Ajustes"
 					/>
 				</li>
 				<li className="navigation-item">
 					<NavigationLink
-						to="/frame"
-						FAIcon="fas fa-crop-alt"
-						texto="Espacio de trabajo"
+						to={`/@${user.nickname}`}
+						FAIcon="far fa-user"
+						texto="Perfil"
 					/>
 				</li>
+
 				<li className="navigation-item mt-auto">
-					<ThemeButton className="text-nowrap d-inline-block w-100 h-100 px-4 py-3 text-left hover-sidebar-link" />
-				</li>
-				<li className="navigation-item">
 					<NavigationLinkClose onClick={logout} />
 				</li>
 			</ul>
@@ -73,16 +112,24 @@ export default function Sidebar({ user, logout }) {
 function NavigationLink({ to, FAIcon, texto }) {
 	return <NavLink
 		to={to}
-		className="px-4 py-3 text-nowrap d-block text-decoration-none navigation-link"
+		className="px-4 text-nowrap d-block text-decoration-none navigation-link"
 		activeClassName="active">
-		<span className="mr-2 font-weight-600 d-inline-block navigation-link-icon"><i className={`${FAIcon} fa-lg`} /></span>
-		<span className="text-nowrap font-weight-600 d-none-when-collapse-sidebar">{texto}</span>
+		<span className="font-weight-600 d-inline-block navigation-link-icon">
+			<i className={`${FAIcon}`} />
+		</span>
+		<span className="text-small text-nowrap font-weight-600 d-none-when-collapse-sidebar">{texto}</span>
 	</NavLink>
 }
 function NavigationLinkClose({ onClick }) {
-	return <div className="px-4 py-3 text-nowrap text-decoration-none cursor-pointer navigation-link"
+	return <div className="px-4 text-nowrap text-decoration-none cursor-pointer navigation-link"
 		onClick={onClick}>
-		<span className="mr-2 font-weight-600 d-inline-block navigation-link-icon"><i className="fas fa-sign-out-alt fa-lg" /></span>
-		<span className="text-nowrap font-weight-600 d-none-when-collapse-sidebar">Cerrar sessi&oacute;n</span>
+		<span className="font-weight-600 d-inline-block navigation-link-icon">
+			<i className="far fa-sign-out-alt" />
+		</span>
+		<span className="text-small text-nowrap font-weight-600 d-none-when-collapse-sidebar">Cerrar sessi&oacute;n</span>
 	</div>
+}
+
+function Separador() {
+	return <li className="border-bottom my-3" />;
 }

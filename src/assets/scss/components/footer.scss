@@ -1,95 +1,98 @@
 .footer {
-  background-color: var(--grey-300);
-}
-.footer-item {
-  &:hover {
-    background-color: rgb(224, 224, 224);
+  $color: var(--grey-400);
+  $title-color: var(--grey-300);
+  $bg-color: var(--grey-700);
+
+  background-color: $bg-color;
+  color: $color;
+
+  .color-title {
+    color: $title-color;
   }
-}
-.footer-copy {
-  border-top: 3px solid var(--blue-700);
-  background-color: var(--blue-600);
-  color: white;
-}
-
-.local-horario {
-  .collapse-horarios {
-    display: none;
-    position: absolute;
-    left: 2.5rem;
-    top: 100%;
-    background-color: white;
-  }
-  &.active {
-    .collapse-horarios {
-      display: block;
-    }
-    .abierto-cerrado_fecha{
-      display: none;
-    }
-  }
-}
-.footer-list-links{
-  border-left: 2px solid var(--blue-500);
-}
-
-.socials-footer {
-  display: flex;
-  height: 4rem;
-  width: 100%;
-  background-color: #002a38;
-  line-height: 1.3;
-  font-family: Menlo, monospace;
-
-  ul {
-    display: inline-grid;
-    grid-auto-flow: row;
-    grid-gap: 24px;
-    justify-items: center;
-    margin: auto;
-
-    li:last-child {
-      grid-column: 1 / 2;
-      grid-row: 1 / 2;
-    }
-    li:hover ~ li p {
-      animation: wave-animation 0.3s infinite;
-    }
-  }
-  a {
-    color: white;
-    text-decoration: none;
-    box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
-
+  .footer-item {
     &:hover {
-      box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
+      background-color: rgb(224, 224, 224);
     }
   }
 
-  @keyframes wave-animation {
-    0%,
-    100% {
-      transform: rotate(0deg);
+  .local-horario {
+    .collapse-horarios {
+      display: none;
+      position: absolute;
+      left: 2.5rem;
+      top: 100%;
+      background-color: white;
     }
-    25% {
-      transform: rotate(20deg);
-    }
-    75% {
-      transform: rotate(-15deg);
+    &.active {
+      .collapse-horarios {
+        display: block;
+      }
+      .abierto-cerrado_fecha {
+        display: none;
+      }
     }
   }
-  @media (min-width: 500px) {
+  .footer-list-links {
+    border-left: 2px solid var(--blue-500);
+  }
+
+  .socials-footer {
+    display: flex;
+    height: 4rem;
+    width: 100%;
+    background-color: #002a38;
+    line-height: 1.3;
+    font-family: Menlo, monospace;
+
     ul {
-      grid-auto-flow: column;
+      display: inline-grid;
+      grid-auto-flow: row;
+      grid-gap: 24px;
+      justify-items: center;
+      margin: auto;
+
+      li:last-child {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+      li:hover ~ li p {
+        animation: wave-animation 0.3s infinite;
+      }
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
+
+      &:hover {
+        box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
+      }
+    }
+
+    @keyframes wave-animation {
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(20deg);
+      }
+      75% {
+        transform: rotate(-15deg);
+      }
+    }
+    @media (min-width: 500px) {
+      ul {
+        grid-auto-flow: column;
+      }
     }
   }
 }
-
-.dark-theme{
-  .footer{
+.dark-theme {
+  .footer {
     background-color: var(--grey-700);
   }
-  .footer-copy{
+  .footer-copy {
     background-color: var(--blue-900);
     border-color: var(--grey-600);
   }

@@ -32,7 +32,7 @@ export default function MultiItemsCarousel({ title, grupo, user }) {
                 // en estado car carga
                 setLoading(true);
                 // api que nos muestra los resultados de los grupo links
-                const { data: apiCarouselLinks } = await Axios.get(`/apimuni/carousellinks/grupo/${grupo}`);
+                const { data: apiCarouselLinks } = await Axios.get(`/apimuni/carousellinks/grupo/principal`);
                 // guardando los valores para ser recorridos y mostrados
                 setCarouselLinks(apiCarouselLinks);
                 // se a terminado de obtener y cargar los items de la base de datos
@@ -145,8 +145,8 @@ export default function MultiItemsCarousel({ title, grupo, user }) {
     }
 
     return <>
-        <div className="py-5 multi-items-carousel">
-            <div className="mb-3 d-flex align-items-center container">
+        <div className="my-4 py-3 container bg-white border rounded">
+            <div className="mb-3 d-flex align-items-center">
                 <h4 className="mr-3 mb-0">{title}</h4>
                 {hasPrivilege && (
                     <span className="content-icon rounded-circle icon-plus cursor-pointer"
@@ -162,7 +162,7 @@ export default function MultiItemsCarousel({ title, grupo, user }) {
                 autoPlaySpeed={3000}
                 centerMode={false}
                 className="py-2"
-                containerClass="container pt-2 pb-5 mb-n5"
+                containerClass="pt-2 pb-5 mb-n5"
                 dotListClass=""
                 draggable={false}
                 focusOnSelect={false}

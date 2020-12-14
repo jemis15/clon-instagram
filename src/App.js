@@ -1,7 +1,9 @@
 import Axios from 'axios';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
 import './assets/scss/styles.scss';
+import "react-multi-carousel/lib/styles.css";
 
 import useEsMobil from './Hoocks/useEsMobil';
 import { setToken, deleteToken, getToken } from './Helpers/auth-helpers';
@@ -16,43 +18,40 @@ import Sidebar from './components/Sidebar';
 import Loading from './components/Loading';
 import Alert from './components/Alert';
 
-import Dashboard from './Views/Dashboard/Dashboard';
-import Usuarios from './Views/Usuarios/Usuarios';
-// const Inicio = lazy(() => import('./Views/Inicio'));
-// const Equipo = lazy(() => import('./Views/Equipo'));
-// const Perfil = lazy(() => import('./Views/Perfil'));
-// const Login = lazy(() => import('./Views/Login'));
-// const Historia = lazy(() => import('./Views/Historia'));
-// const Gastronomia = lazy(() => import('./Views/Gastronomia'));
-import Inicio from './Views/Inicio';
-import Equipo from './Views/Equipo';
-import Perfil from './Views/Perfil';
-import Login from './Views/Login';
-import Historia from './Views/Historia';
-import GastronomiaAndTurismo from './Views/GastronomiaAndTurismo';
-import Gastronomia from './Views/Gastronomia/Gastronomia';
-import Turismo from './Views/Turismo/Turismo';
-import Blank from './Views/Blank';
-import Frame from './Views/Frame/Frame'
-import VisionMision from './Views/VisionMision';
-import Certificacion from './Views/Certificacion';
-import Normativa from './Views/Normativa';
-import TributoMuniDocument from './Views/TributoMuniDocument';
-import Licencia from './Views/Licencia';
-import Regidores from './Views/Regidores';
-import PerfilA from './Views/PerfilA';
-import ConvocatoriaCass from './Views/ConvocatoriaCass';
-import Serenazgo from './Views/Serenazgo';
-import Himno from './Views/Himno';
-import Presentacion from './Views/Presentacion';
-import RegistCivilDocument from './Views/RegistCivilDocument';
-import MultiItemsCarousel from './components/MultiItemsCarousel';
-import Pages from './Views/Pages';
-import Comunidad from './Views/Comunidad';
+import CarouselLink from './Views/Home/components/CarouselLink'
+
+const Home = lazy(() => import('./Views/Home'));
+const Equipo = lazy(() => import('./Views/Equipo'));
+const Perfil = lazy(() => import('./Views/Perfil'));
+const Login = lazy(() => import('./Views/Login'));
+const Historia = lazy(() => import('./Views/Historia'));
+const Settings = lazy(() => import('./Views/Settings'));
+const Dashboard = lazy(() => import('./Views/Dashboard/Dashboard'));
+const GastronomiaAndTurismo = lazy(() => import('./Views/GastronomiaAndTurismo'));
+const Gastronomia = lazy(() => import('./Views/Gastronomia/Gastronomia'));
+const Turismo = lazy(() => import('./Views/Turismo/Turismo'));
+const Blank = lazy(() => import('./Views/Blank'));
+const Frame = lazy(() => import('./Views/Frame/Frame'));
+const VisionMision = lazy(() => import('./Views/VisionMision'));
+const Certificacion = lazy(() => import('./Views/Certificacion'));
+const Normativa = lazy(() => import('./Views/Normativa'));
+const TributoMuniDocument = lazy(() => import('./Views/TributoMuniDocument'));
+const Licencia = lazy(() => import('./Views/Licencia'));
+const Regidores = lazy(() => import('./Views/Regidores'));
+const PerfilA = lazy(() => import('./Views/PerfilA'));
+const ConvocatoriaCass = lazy(() => import('./Views/ConvocatoriaCass'));
+const Serenazgo = lazy(() => import('./Views/Serenazgo'));
+const Himno = lazy(() => import('./Views/Himno'));
+const Presentacion = lazy(() => import('./Views/Presentacion'));
+const RegistCivilDocument = lazy(() => import('./Views/RegistCivilDocument'));
+const Pages = lazy(() => import('./Views/Pages'));
+const Comunidad = lazy(() => import('./Views/Comunidad'));
 
 let timeoutAlert;
 function App() {
   const [user, setUser] = useState(null);
+  const [settings, setSettings] = useState(null);
+  const [topbar, setTopbar] = useState(null);
   const [sidebarNavigationMobile, setSidebarNavigationMobile] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -61,6 +60,7 @@ function App() {
     mensaje: '',
     show: false
   });
+  const [carouselLink, setCarouselLink] = useState([]);
   const esMobil = useEsMobil();
 
   useEffect(() => {
@@ -71,6 +71,7 @@ function App() {
       }
 
       try {
+        setLoadingUser(true);
         const { data: apiUser } = await Axios({
           method: 'POST',
           url: '/apimuni/users/whoami',
@@ -85,7 +86,47 @@ function App() {
       }
     }
 
+    async function loadSettings() {
+      try {
+        const { data: apiSettings } = await Axios.get('/apimuni/settings');
+        setSettings(apiSettings);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    async function loadTopbar() {
+      var topbarLocalStorage = localStorage.getItem('topbar');
+
+      if (topbarLocalStorage && topbarLocalStorage === 'hidden') {
+        return;
+      }
+
+      try {
+        // const { data: apiTopbar } = await Axios.get('/apimuni/topbars/active');
+        // verificamos si contiene la clase has-topbar
+        const isClassTopbar = document.body.classList.contains('has-topbar');
+        // si no tiene la clase le agregamos la clase has-topbar
+        !isClassTopbar && document.body.classList.add('has-topbar');
+        setTopbar('__[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image');
+      } catch (error) {
+        console.log(error);
+        // verificamos si contiene la clase has-topbar
+        const isClassTopbar = document.body.classList.contains('has-topbar');
+        // si contiente la clase removemos la clase has-topbar
+        isClassTopbar && document.body.classList.remove('has-topbar');
+      }
+    }
+
+    async function loadCarouselLinkSecundario() {
+      const { data: apiCarouselLink } = await Axios.get(`/apimuni/carousellinks/grupo/secundario`);
+      setCarouselLink(apiCarouselLink);
+    }
+
     loadUser();
+    loadSettings();
+    loadTopbar()
+    loadCarouselLinkSecundario();
   }, []);
 
   async function login(user) {
@@ -104,6 +145,32 @@ function App() {
     deleteToken();
     setUser(null);
     document.body.classList.remove('logged-in');
+  }
+
+  function removeTopbar() {
+    localStorage.setItem('topbar', 'hidden');
+    const isClassTopbar = document.body.classList.contains('has-topbar');
+    isClassTopbar && document.body.classList.remove('has-topbar')
+    setTopbar(null);
+  }
+
+  function showTopbar(valueTopbar) {
+    if (!valueTopbar) {
+      // localStorage.setItem('topbar', 'hidden');
+      // verificamos si contiene la clase has-topbar
+      const isClassTopbar = document.body.classList.contains('has-topbar');
+      // si no tiene la clase le agregamos la clase has-topbar
+      isClassTopbar && document.body.classList.remove('has-topbar');
+      setTopbar(null);
+      return;
+    }
+
+    localStorage.removeItem('topbar');
+    // verificamos si contiene la clase has-topbar
+    const isClassTopbar = document.body.classList.contains('has-topbar');
+    // si no tiene la clase le agregamos la clase has-topbar
+    !isClassTopbar && document.body.classList.add('has-topbar');
+    setTopbar(valueTopbar);
   }
 
   const toggleSidebarMobile = () => {
@@ -125,16 +192,37 @@ function App() {
     clearTimeout(timeoutAlert);
   }
 
+  const updateLink = (linkOriginal, linkUpdated) => {
+    setCarouselLink(carouselLink => {
+      const linksActualizados = carouselLink.map(link => {
+        if (link !== linkOriginal) {
+          return link
+        }
+        return linkUpdated;
+      });
+      return linksActualizados;
+    });
+  }
+  const deleteLink = (linkDeleted) => {
+    setCarouselLink(carouselLink.filter(link => {
+      return link !== linkDeleted;
+    }));
+  }
+
+  const updateSettings = (settingsUpdated) => {
+    setSettings(settingsUpdated);
+  }
+
   return (
     <Router>
       {/* Loading inicial */}
-      {loadingUser && <Loading />}
+      {/* {loadingUser && <Loading />} */}
       {/* Fin Loading inicial */}
 
-      <Topbar />
+      {topbar && <Topbar topbar={topbar} onRemove={removeTopbar} />}
 
       {/* Transparente header */}
-      <Header toggle={toggleSidebarMobile} user={user} />
+      <Header toggle={toggleSidebarMobile} user={user} settings={settings} />
       {esMobil && <SidebarNavigationMobile
         active={sidebarNavigationMobile}
         toggle={toggleSidebarMobile}
@@ -150,47 +238,60 @@ function App() {
       {/* <Banner /> */}
 
       <Switch>
-        {/* protected */}
-        <Route path="/admin" render={() => <Dashboard />} />
-        <Route path="/usuarios" render={() => <Usuarios showAlert={showAlert} />} />
-        <Route path="/frame" render={() => <Frame />} />
-        {/* fin protected */}
+        <Suspense fallback={<Loading />}>
+          {user && <>
+            <Route path="/admin" render={() => <Dashboard />} />
+            <Route path="/frame" render={() => <Frame />} />
+            <Route
+              path="/settings"
+              render={() => <Settings
+                user={user}
+                settings={settings}
+                updateSettings={updateSettings}
+                showAlert={showAlert}
+                showTopbar={showTopbar}
+              />}
+            />
+          </>}
 
-        <Route path="/vision_mision" render={() => <VisionMision />} />
-        <Route path="/Certificacion" render={() => <Certificacion />} />
-        <Route path="/Normativa" render={() => <Normativa />} />
-        <Route path="/TributoMuniDocument" render={() => <TributoMuniDocument />} />
-        <Route path="/Licencia" render={() => <Licencia />} />
-        <Route path="/Regidores" render={() => <Regidores />} />
-        <Route path="/PerfilA" render={() => <PerfilA />} />
-        <Route path="/ConvocatoriaCass" render={() => <ConvocatoriaCass />} />
-        <Route path="/Serenazgo" render={() => <Serenazgo />} />
-        <Route path="/Himno" render={() => <Himno />} />
-        <Route path="/Presentacion" render={() => <Presentacion />} />
-        <Route path="/RegistCivilDocument" render={() => <RegistCivilDocument />} />
+          <Route path="/vision_mision" render={() => <VisionMision />} />
+          <Route path="/Certificacion" render={() => <Certificacion />} />
+          <Route path="/Normativa" render={() => <Normativa />} />
+          <Route path="/TributoMuniDocument" render={() => <TributoMuniDocument />} />
+          <Route path="/Licencia" render={() => <Licencia />} />
+          <Route path="/Regidores" render={() => <Regidores />} />
+          <Route path="/PerfilA" render={() => <PerfilA />} />
+          <Route path="/ConvocatoriaCass" render={() => <ConvocatoriaCass />} />
+          <Route path="/Serenazgo" render={() => <Serenazgo />} />
+          <Route path="/Himno" render={() => <Himno />} />
+          <Route path="/Presentacion" render={() => <Presentacion />} />
+          <Route path="/RegistCivilDocument" render={() => <RegistCivilDocument />} />
 
-        <Route path="/p" render={() => <Pages />} />
-        <Route path="/blank" render={() => <Blank />} />
-        <Route path="/historia" render={() => <Historia />} />
-        <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />
-        <Route path="/gastronomias/:titulo" render={() => <Gastronomia />} />
-        <Route path="/turismos/:titulo" render={() => <Turismo />} />
-        <Route path="/login" exact render={() => <Login login={login} />} />
-        <Route path="/equipo" render={() => <Equipo />} />
-        <Route path="/comunidad" exact render={() => <Comunidad user={user} />} />
-        <Route path="/:user" exact render={() => <Perfil user={user} />} />
-        <Route path="/" render={() => <Inicio user={user} />} />
+          <Route path="/p" render={() => <Pages />} />
+          <Route path="/blank" render={() => <Blank />} />
+          <Route path="/historia" render={() => <Historia />} />
+          <Route exact path="/gastronomiayturismo" render={() => <GastronomiaAndTurismo />} />
+          <Route path="/gastronomias/:titulo" render={() => <Gastronomia />} />
+          <Route path="/turismos/:titulo" render={() => <Turismo />} />
+          <Route path="/login" exact render={() => <Login login={login} />} />
+          <Route path="/equipo" render={() => <Equipo />} />
+          <Route path="/comunidad" exact render={() => <Comunidad user={user} />} />
+          <Route path="/@:user" exact render={() => <Perfil user={user} />} />
+          <Route path="/" exact render={() => <Home user={user} showAlert={showAlert} />} />
+        </Suspense>
       </Switch>
 
-      <MultiItemsCarousel
-        title={<><i className="fas fa-link text-primary" /> <span>Links de interes</span></>}
-        grupo="secundario"
+      <CarouselLinksFooter
+        links={carouselLink}
+        updateLink={updateLink}
+        deleteLink={deleteLink}
+        showAlert={showAlert}
         user={user}
       />
 
       <Alert type={alert.type} show={alert.show} mensaje={alert.mensaje} onHide={hideAlert} />
 
-      <Footer />
+      {settings && <Footer settings={settings} />}
       <Options />
     </Router >
   );
@@ -240,4 +341,75 @@ function Options() {
   </>
 }
 
+function CarouselLinksFooter({ links, user, updateLink, deleteLink, showAlert }) {
+  const params = useLocation()
+  if (withLinks.indexOf(params.pathname) === -1) {
+    return null;
+  }
+
+
+  return <Carousel
+    additionalTransfrom={0}
+    arrows
+    autoPlay
+    autoPlaySpeed={3000}
+    centerMode={false}
+    className="links my-5 pt-3 pb-4 border rounded bg-white"
+    containerClass="container"
+    dotListClass=""
+    draggable={false}
+    focusOnSelect={false}
+    infinite
+    itemClass=""
+    keyBoardControl
+    minimumTouchDrag={80}
+    renderButtonGroupOutside={false}
+    renderDotsOutside
+    responsive={{
+      desktop: {
+        breakpoint: {
+          max: 3000,
+          min: 1024
+        },
+        items: 7,
+        partialVisibilityGutter: 40
+      },
+      mobile: {
+        breakpoint: {
+          max: 464,
+          min: 0
+        },
+        items: 3,
+        partialVisibilityGutter: 30
+      },
+      tablet: {
+        breakpoint: {
+          max: 1024,
+          min: 464
+        },
+        items: 4,
+        partialVisibilityGutter: 30
+      }
+    }}
+    showDots={false}
+    sliderClass=""
+    slidesToSlide={2}
+    swipeable>
+    {links.map((link, key) => (
+      <CarouselLink
+        key={link.id}
+        link={link}
+        number={key + 1}
+        updateLink={updateLink}
+        deleteLink={deleteLink}
+        showAlert={showAlert}
+        editable={user}
+      />
+    ))}
+  </Carousel>
+}
+
 export default App;
+
+
+const withLinks = ['/'];

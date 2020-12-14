@@ -1,57 +1,76 @@
-.transition-personalizado{
-  transform: none;
-}
-
-.indicators-carousel-b {
-  li {
-    border: 1px solid white;
-    background-color: $secondary;
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    &:last-child {
-      margin-left: 0;
-    }
-    &.active {
-      background-color: $danger;
+.carousel_home {
+  @include media-breakpoint-up(xl) {
+    // margin negativo cuando el header es transparent
+    margin-top: calc(var(--transparent-header-height) * -1);
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 30%;
+      width: 100%;
+      z-index: 1;
+      background: linear-gradient(180deg, #000, transparent);
     }
   }
 }
 
-.content-carousel-b {
-  position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translateY(-50%);
-  max-width: 500px;
-}
+.carousel_home-item {
+  .img-container {
+    height: 300px;
+  }
 
-.indicators-carousel-b {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  @include media-breakpoint-up(sm) {
+    .img-container {
+      height: 500px;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .img-container {
+      height: 700px;
+    }
 
-.item2{
-  width: 90%;
-  transition: 0.2s transform ease-in-out;
-  &:hover{
-    transform: scale(1.07);
-    z-index: 100000;
+    .description-container {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      background: linear-gradient(90deg, #000, transparent);
+      border-left: 5px solid var(--blue-500);
+
+      .title {
+        color: white;
+      }
+      .description {
+        color: var(--grey-300);
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .img-container {
+      height: 900px;
+    }
   }
 }
 
 // iconos de left y right
-.react-multiple-carousel__arrow{
+.react-multiple-carousel__arrow {
   z-index: 0 !important;
 }
 
-@include media-breakpoint-up(xl){
-  // margin negativo cuando el header es transparent
-  .carousel-banner-inicio{
-    margin-top: calc(var(--transparent-header-height) * -1);
+.react-multi-carousel-list {
+  &.links {
+    .react-multiple-carousel__arrow {
+      background-color: $primary;
+
+      &.react-multiple-carousel__arrow--left {
+        left: 0;
+      }
+      &.react-multiple-carousel__arrow--right {
+        right: 0;
+      }
+    }
   }
 }

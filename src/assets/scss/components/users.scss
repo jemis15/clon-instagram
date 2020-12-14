@@ -56,3 +56,14 @@
         outline:0;
     }
 }
+
+.select-function{
+  border: 1px solid var(--grey-300);
+  &.active{
+    background-color: var(--blue-900) !important;
+    color: white !important;
+  }
+  &:hover{
+    background-color: var(--grey-300);
+  }
+}
