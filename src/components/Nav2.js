@@ -42,6 +42,21 @@ export default function AppNav() {
                     <hr />
                     <LinkNavigation to="/gastronomiayturismo">
                         Gastronomia y turismo
+                        </LinkNavigation>
+                    <LinkNavigation to="/NavMazamari/Tours">
+                        Turismo
+                    </LinkNavigation>
+                    <LinkNavigation to="/NavMazamari/Restaurantes">
+                        Restaurantes
+                    </LinkNavigation>
+                    <LinkNavigation to="/NavMazamari/Hoteles">
+                        Hoteles
+                    </LinkNavigation>
+                    <LinkNavigation to="/NavMazamari/Agroindustrias">
+                        Agroindustrias
+                    </LinkNavigation>
+                    <LinkNavigation to="/NavMazamari/Platos_Tipicos">
+                        Platos Tipicos
                     </LinkNavigation>
                 </DropMenu>
             </ItemNavigation>
@@ -53,13 +68,13 @@ export default function AppNav() {
                     <LinkNavigation to="/PerfilA">
                         Alcalde
                     </LinkNavigation>
-                    <LinkNavigation to="/Regidores">
+                    <LinkNavigation to="/Presentacion">
                         Regidores
                     </LinkNavigation>
-                    <LinkNavigation to="/login">
+                    <LinkNavigation to="/Funcionarios">
                         Funcionarios municipales
                     </LinkNavigation>
-                    <LinkNavigation to="/login">
+                    <LinkNavigation to="/Funcionarios">
                         Comicion permanentes
                     </LinkNavigation>
                     <LinkNavigation to="/login">
@@ -228,29 +243,29 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/c">
                     Informacion en linea
                 </NavLink>
                 <DropMenu>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c">
                         Tributo Municipal
                     </LinkNavigation>
-                    <LinkNavigation to="/Licencia">
+                    <LinkNavigation to="/c/licencia_funcionamiento">
                         Licencia de Funcionamiento
                     </LinkNavigation>
-                    <LinkNavigation to="/Certificacion">
+                    <LinkNavigation to="/c/RegistroCivil">
                         Registro Civil
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/transporte_publico">
                         Transporte Publico
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/Licencia_Edificacion">
                         Licencias de Edificaciones
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/ComiteControlInterno">
                         Comite de control Interno
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/CodigoEtica">
                         Codigo de Etica
                     </LinkNavigation>
                     <LinkNavigation to="/">
@@ -259,7 +274,7 @@ export default function AppNav() {
                     <LinkNavigation to="/">
                         Saneamiento
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/PresupuestoParticipativo">
                         Presupuesto participativo
                     </LinkNavigation>
                 </DropMenu>
@@ -294,7 +309,7 @@ export default function AppNav() {
                     Seguridad
                 </NavLink>
                 <DropMenu>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Direcctorio">
                         Directorio
                     </LinkNavigation>
                     <LinkNavigation to="/">
@@ -328,11 +343,11 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
+                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/DirectorioTelefono">
                     Contactos
                 </NavLink>
                 <DropMenu>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/DirectorioTelefono">
                         Directorio de telefono
                     </LinkNavigation>
                     <LinkNavigation to="/">
@@ -341,7 +356,7 @@ export default function AppNav() {
                     <LinkNavigation to="/">
                         Sugerencias
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/QuejaReclamo">
                         Libro de reclamaciones y quejas
                     </LinkNavigation>
                 </DropMenu>

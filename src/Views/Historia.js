@@ -5,6 +5,8 @@ import Carousel from 'react-multi-carousel';
 import equipoimage from '../assets/images/paisaje.jpg';
 import codigoimage from '../assets/images/codigo.png';
 import Banner from '../components/Banner';
+import Himno from './Himno';
+import Alcaldes from './Alcaldes';
 
 export default function Historia() {
     return <div>
@@ -121,5 +123,8 @@ export default function Historia() {
                 </Col>
             </Row>
         </Container>
+
+        <Alcaldes/>
+        <Himno/>
     </div >
 }

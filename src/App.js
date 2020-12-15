@@ -33,7 +33,7 @@ const Turismo = lazy(() => import('./Views/Turismo/Turismo'));
 const Blank = lazy(() => import('./Views/Blank'));
 const Frame = lazy(() => import('./Views/Frame/Frame'));
 const VisionMision = lazy(() => import('./Views/VisionMision'));
-const Certificacion = lazy(() => import('./Views/Certificacion'));
+const Certificacion = lazy(() => import('./Views/ConsultasLinea/Certificacion'));
 const Normativa = lazy(() => import('./Views/Normativa'));
 const TributoMuniDocument = lazy(() => import('./Views/TributoMuniDocument'));
 const Licencia = lazy(() => import('./Views/Licencia'));
@@ -46,6 +46,27 @@ const Presentacion = lazy(() => import('./Views/Presentacion'));
 const RegistCivilDocument = lazy(() => import('./Views/RegistCivilDocument'));
 const Pages = lazy(() => import('./Views/Pages'));
 const Comunidad = lazy(() => import('./Views/Comunidad'));
+
+const ConsultaLinea = lazy(() => import('./Views/ConsultasLinea'));
+const QuejaReclamo = lazy(() => import('./Views/QuejaReclamo'));
+const Direcctorio = lazy(() => import('./Views/Direcctorio'));
+const Alcaldes = lazy(() => import('./Views/Alcaldes'));
+const Dise = lazy(() => import('./Views/Dise'));
+const Vis = lazy(() => import('./Views/Vis'));
+const Funcionarios = lazy(() => import('./Views/Funcionarios'));
+const DirectorioTelefono = lazy(() => import('./Views/DirectorioTelefono'));
+const Tours = lazy(() => import('./Views/Tours'));
+const DescripcionTurismo = lazy(() => import('./Views/DescripcionTurismo'));
+const Restaurantes = lazy(() => import('./Views/Restaurantes'));
+const Hoteles = lazy(() => import('./Views/Hoteles'));
+const Platos_Tipicos = lazy(() => import('./Views/Platos_Tipicos'));
+const Agroindustrias = lazy(() => import('./Views/Agroindustrias'));
+const ListaReclamos = lazy(() => import('./Views/ListaReclamos'));
+const NavMazamari = lazy(() => import('./Views/NavMazamari'));
+const Agenda = lazy(() => import('./Views/Agenda'));
+const ListHoteles = lazy(() => import('./Views/ListHoteles'));
+const Noticias = lazy(() => import('./Views/Noticias'));
+const InformacionAgro = lazy(() => import('./Views/InformacionAgro'));
 
 let timeoutAlert;
 function App() {
@@ -267,6 +288,7 @@ function App() {
           <Route path="/Presentacion" render={() => <Presentacion />} />
           <Route path="/RegistCivilDocument" render={() => <RegistCivilDocument />} />
 
+          <Route path="/" exact render={() => <Home user={user} showAlert={showAlert} />} />
           <Route path="/p" render={() => <Pages />} />
           <Route path="/blank" render={() => <Blank />} />
           <Route path="/historia" render={() => <Historia />} />
@@ -277,7 +299,27 @@ function App() {
           <Route path="/equipo" render={() => <Equipo />} />
           <Route path="/comunidad" exact render={() => <Comunidad user={user} />} />
           <Route path="/@:user" exact render={() => <Perfil user={user} />} />
-          <Route path="/" exact render={() => <Home user={user} showAlert={showAlert} />} />
+
+          <Route path="/c" render={() => <ConsultaLinea />} />
+          <Route path="/QuejaReclamo" render={() => <QuejaReclamo />} />
+          <Route path="/Direcctorio" render={() => <Direcctorio />} />
+          <Route path="/Alcaldes" render={() => <Alcaldes />} />
+          <Route path="/Dise" render={() => <Dise />} />
+          <Route path="/Vis" render={() => <Vis />} />
+          <Route path="/Funcionarios" render={() => <Funcionarios />} />
+          <Route path="/DirectorioTelefono" render={() => <DirectorioTelefono />} />
+          <Route path="/Tours" render={() => <Tours />} />
+          <Route path="/Descripcionturismo" render={() => <DescripcionTurismo />} />
+          <Route path="/Restaurantes" render={() => <Restaurantes />} />
+          <Route path="/Hoteles" render={() => <Hoteles />} />
+          <Route path="/Platos_Tipicos" render={() => <Platos_Tipicos />} />
+          <Route path="/Agroindustrias" render={() => <Agroindustrias />} />
+          <Route path="/ListaReclamos" render={() => <ListaReclamos />} />
+          <Route path="/NavMazamari" render={() => <NavMazamari />} />
+          <Route path="/Agenda" render={() => <Agenda />} />
+          <Route path="/ListHoteles" render={() => <ListHoteles />} />
+          <Route path="/Noticias" render={() => <Noticias />} />
+          <Route path="/InformacionAgro" render={() => <InformacionAgro />} />
         </Suspense>
       </Switch>
 
