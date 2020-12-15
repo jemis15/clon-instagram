@@ -46,13 +46,13 @@ export default function Header({ toggle, user, settings }) {
 		}
 	}, [params]);
 
-	if (!settings || !settings.logo) {
-		return <p>No hay configuraci&oacute;n inicial</p>;
+	if (!settings) {
+		return null;
 	}
 
 	return <header
 		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
-		<div className="container-fluid d-flex">
+		<div className="container d-flex align-items-center">
 			<Link className="mr-4" to="/">
 				{settings && settings.logo
 					? <img
@@ -70,7 +70,7 @@ export default function Header({ toggle, user, settings }) {
 				}
 			</Link>
 			<AppNav />
-			<div className="ml-auto d-flex align-self-center align-items-center">
+			<div className="ml-auto d-flex">
 				{user ?
 					<div className="rounded-circle overflow-hidden d-xl-none"
 						onClick={toggle}>

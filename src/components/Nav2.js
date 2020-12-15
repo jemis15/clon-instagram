@@ -5,11 +5,6 @@ export default function AppNav() {
     return <nav className="nav align-self-center ml-auto">
         <ul className="d-flex align-items-center list-unstyled mb-0">
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/">
-                    Inicio
-                </NavLink>
-            </ItemNavigation>
-            <ItemNavigation>
                 <NavLink className="px-0 nav-link text-small font-weight-600" to="/historia">
                     Mazamari
                 </NavLink>
@@ -243,7 +238,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/c">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/c">
                     Informacion en linea
                 </NavLink>
                 <DropMenu>
@@ -343,7 +338,7 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link color-text text-small font-weight-600" to="/DirectorioTelefono">
+                <NavLink className="px-0 nav-link text-small font-weight-600" to="/DirectorioTelefono">
                     Contactos
                 </NavLink>
                 <DropMenu>
