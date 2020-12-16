@@ -19,6 +19,12 @@ import Loading from './components/Loading';
 import Alert from './components/Alert';
 
 import CarouselLink from './Views/Home/components/CarouselLink'
+// D7
+import P1 from './Views/J1'
+import AgregarOperadores from './Views/AgregarOperadores';
+import Comisiones from './Views/Comisiones';
+import AgregarComisiones from './Views/AgregarComisiones';
+import Convocatoria from './Views/Convocaroria';
 
 const Home = lazy(() => import('./Views/Home'));
 const Equipo = lazy(() => import('./Views/Equipo'));
@@ -67,6 +73,8 @@ const Agenda = lazy(() => import('./Views/Agenda'));
 const ListHoteles = lazy(() => import('./Views/ListHoteles'));
 const Noticias = lazy(() => import('./Views/Noticias'));
 const InformacionAgro = lazy(() => import('./Views/InformacionAgro'));
+const LugaresTuristicos = lazy(() => import('./Views/LugaresTuristicos'));
+const RegistroTurismo = lazy(() => import('./Views/RegistroTurismo'));
 
 let timeoutAlert;
 function App() {
@@ -320,6 +328,15 @@ function App() {
           <Route path="/ListHoteles" render={() => <ListHoteles />} />
           <Route path="/Noticias" render={() => <Noticias />} />
           <Route path="/InformacionAgro" render={() => <InformacionAgro />} />
+          <Route path="/LugaresTuristicos" render={() => <LugaresTuristicos />}/>
+          <Route path="/RegistroTurismo" render={() => <RegistroTurismo/>}/>
+          <Route path="/AgregarOperadores" render={() => <AgregarOperadores/>}/>
+          <Route path="/Comisiones" render={() => <Comisiones/>}/>
+          <Route path="/AgregarComisiones" render={() => <AgregarComisiones/>}/>
+          <Route path="/Convocatoria" render={() => <Convocatoria/>}/>
+          {/*drago */}
+          <Route exact path="/J1" render={() => <P1 />} />
+
         </Suspense>
       </Switch>
 

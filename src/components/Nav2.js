@@ -38,7 +38,7 @@ export default function AppNav() {
                     <LinkNavigation to="/gastronomiayturismo">
                         Gastronomia y turismo
                         </LinkNavigation>
-                    <LinkNavigation to="/NavMazamari/Tours">
+                    <LinkNavigation to="/LugaresTuristicos">
                         Turismo
                     </LinkNavigation>
                     <LinkNavigation to="/NavMazamari/Restaurantes">
@@ -69,7 +69,7 @@ export default function AppNav() {
                     <LinkNavigation to="/Funcionarios">
                         Funcionarios municipales
                     </LinkNavigation>
-                    <LinkNavigation to="/Funcionarios">
+                    <LinkNavigation to="/Comisiones">
                         Comicion permanentes
                     </LinkNavigation>
                     <LinkNavigation to="/login">
