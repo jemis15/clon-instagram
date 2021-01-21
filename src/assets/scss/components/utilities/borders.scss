@@ -1,19 +1,61 @@
-.border{
-    border-color: var(--color-border) !important;
+.border {
+  border-color: var(--color-border) !important;
 }
-.border-left{
-    border-color: var(--color-border) !important;
+.border-left {
+  border-color: var(--color-border) !important;
 }
-.border-right{
-    border-color: var(--color-border) !important;
+.border-right {
+  border-color: var(--color-border) !important;
 }
-.border-top{
-    border-color: var(--color-border) !important;
+.border-top {
+  border-color: var(--color-border) !important;
 }
-.border-bottom{
-    border-color: var(--color-border) !important;
+.border-bottom {
+  border-color: var(--color-border) !important;
 }
 
-hr{
-    border-color: var(--color-border) !important;
+.border-dashed {
+  background-image: repeating-linear-gradient(
+      0deg,
+      var(--green-400),
+      var(--green-400) 5px,
+      transparent 0,
+      transparent 15px,
+      var(--green-400) 0
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--green-400),
+      var(--green-400) 5px,
+      transparent 0,
+      transparent 15px,
+      var(--green-400) 0
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--green-400),
+      var(--green-400) 5px,
+      transparent 0,
+      transparent 15px,
+      var(--green-400) 0
+    ),
+    repeating-linear-gradient(
+      270deg,
+      var(--green-400),
+      var(--green-400) 5px,
+      transparent 0,
+      transparent 15px,
+      var(--green-400) 0
+    );
+  background-size: 2px 100%, 100% 2px, 2px 100%, 100% 2px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
+}
+
+.outline-none{
+    outline: none !important;
+}
+
+hr {
+  border-color: var(--color-border) !important;
 }

@@ -1,58 +1,155 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import AppNav from './Nav';
 import Avatar from './utilitarios/Avatar';
+import defaultLogo from '../logo.svg';
 
-import logo from '../assets/images/logo.png';
-import avatar from '../assets/images/faces/face1.jpg';
+export default function Header({ toggle, user, settings }) {
+	const [isHeaderTransparent, setIsHeaderTransparent] = useState(false);
+	const [dropMenuCreate, setDropMenuCreate] = useState(false);
+	const params = useLocation();
+	const location = useLocation();
 
-export default function Header({ toggle, user }) {
+	useEffect(() => {
+		window.addEventListener('scroll', changeHeaderTransparent);
 
-	// useEffect(() => {
-	// 	let classlist = document.body.classList.value;
-	// 	if (classlist.indexOf('with-transparent-header') !== -1) {
-	// 		window.addEventListener('scroll', changeHeaderToSolid);
-	// 	}
+		function changeHeaderTransparent() {
+			if (!document.body.classList.contains('with-transparent-header')) {
+				setIsHeaderTransparent(false);
+				return;
+			}
 
-	// 	function changeHeaderToSolid() {
-	// 		console.log('Hola mundo');
-	// 		// document.documentElement.style.setProperty('--topbar-height', `${divTopbar.clientHeight}px`)
-	// 	}
+			// posicion actual del scroll
+			const scrollY = window.scrollY;
 
-	// 	return () => document.removeEventListener('scroll', changeHeaderToSolid);
-	// }, []);
+			if (scrollY < 20) {
+				setIsHeaderTransparent(true);
+			} else {
+				setIsHeaderTransparent(false);
+			}
+		}
 
+		changeHeaderTransparent();
+		return () => window.removeEventListener('scroll', changeHeaderTransparent);
+	}, []);
 
-	return <header className="header d-flex justify-content-center align-items-center border-bottom">
-		<div className="container-lg d-flex">
+	useEffect(() => {
+		// comparando la url actual con la lista de url's que tienen permitido un header transparent
+		const index = urlWithHeaderTransparent.indexOf(params.pathname)
+		if (index !== -1) {
+			if (window.scrollY < 20) {
+				setIsHeaderTransparent(true);
+			}
+			document.body.classList.add('with-transparent-header');
+		} else {
+			setIsHeaderTransparent(false);
+			document.body.classList.remove('with-transparent-header');
+		}
+	}, [params]);
+
+	if (!settings) {
+		return null;
+	}
+
+	return <header
+		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
+		<div className="container d-flex align-items-center">
 			<Link className="mr-4" to="/">
-				<img src={logo} width="60px" alt="logo mazamari" />
-			</Link>
-			<AppNav />
-			<div className="ml-auto d-none align-self-center align-items-center">
-				{/* <label className="mb-0 header-group-search position-relative border rounded-lg">
-					<input type="text" className="mr-2 py-2 px-3" />
-					<span className="icon-search p-2 text-secondary">
-						<i className="fas fa-search" />
-					</span>
-				</label> */}
-				{user ?
-					<div className="rounded-circle overflow-hidden">
-						<Link to="/james" className="d-inline-block">
-							<Avatar image={avatar} size="sm" initials="FM" className="mb-0" />
-						</Link>
-					</div>
-					:
-					<Link className="btn btn-primary ml-2 button-login" to="/login">Iniciar sessión</Link>
+				{settings && settings.logo
+					? <img
+						src={`/apimuni/images/settings/${settings.logo}`}
+						height="60px"
+						loading="lazy"
+						alt="logo mazamari"
+					/>
+					: <img
+						src={defaultLogo}
+						height="60px"
+						loading="lazy"
+						alt="default logo"
+					/>
 				}
-				<button
-					size="sm"
-					className="border-0 bg-transparent d-inline-block d-lg-none ml-2 button-bars"
-					onClick={toggle}>
-					<i className="fas fa-bars fa-2x" />
-				</button>
-			</div>
+			</Link>
+			{user
+				? <>
+					<div className="ml-auto d-flex align-items-center">
+						<div className="mr-3 position-relative">
+							<button className="btn-color border-0 outline-none bg-transparent"
+								onClick={() => setDropMenuCreate(true)}>
+								<i className="far fa-plus fa-lg" />
+							</button>
+							<DropMenu show={dropMenuCreate} onHide={() => setDropMenuCreate(false)}>
+								<DropLink to={{ pathname: `/img/new`, state: { background: location } }} label="Carousel" />
+								<DropLink to="/links/new" label="Link" />
+								<DropLink to="/markers/new" label="Marker" />
+								<hr className="my-2" />
+								<DropLink to="/users/invitar" label="Invitar usuario" />
+							</DropMenu>
+						</div>
+						<div className="mr-3">
+							<button className="btn-color border-0 outline-none bg-transparent">
+								<i className="far fa-bell fa-lg" />
+							</button>
+						</div>
+						<div className="mr-3 mr-xl-0">
+							<button className="btn-color border-0 outline-none bg-transparent">
+								<i className="far fa-bars fa-lg" />
+							</button>
+						</div>
+						<div className="rounded-circle overflow-hidden d-xl-none"
+							onClick={toggle}>
+							<Avatar
+								image={user.avatar}
+								size="sm"
+								initials={user.nombre[0]}
+								className="mb-0"
+							/>
+						</div>
+					</div>
+				</>
+				: <>
+					<AppNav />
+					<div className="ml-auto d-flex">
+						<Link
+							to="/login"
+							className="mr-2 px-1 d-inline-block d-xl-none">
+							<i className="fas fa-user fa-2x" />
+						</Link>
+						<Link
+							to="/login"
+							className="mr-2 btn btn-outline-success btn-sm text-small font-weight-600 text-decoration-none d-none d-xl-inline-block">
+							Iniciar session
+						</Link>
+						<div
+							className="px-1 bg-transparent d-inline-block d-xl-none"
+							onClick={toggle}>
+							<i className="fas fa-bars fa-2x" />
+						</div>
+					</div>
+				</>
+			}
 		</div>
 	</header>
 }
+
+function DropMenu({ show, onHide, children }) {
+	if (!show) {
+		return null;
+	}
+
+	return <div className="backglass active" onClick={onHide}>
+		<div className="drop-menu py-2 rounded shadow-sm border position-absolute bg-white">
+			{children}
+		</div>
+	</div>
+}
+function DropLink({ label, to }) {
+	return <Link
+		className="px-3 py-1 text-small d-block text-nowrap text-decoration-none link-normal"
+		to={to}>
+		{label}
+	</Link>
+}
+
+const urlWithHeaderTransparent = ['/', '/historia', '/gastronomia', '/@'];

@@ -38,24 +38,6 @@ body {
       height: var(--transparent-header-height);
       background-color: transparent;
       border: transparent;
-      color: var(--grey-300);
-
-      .btn-go_iniciar_session {
-        &:hover {
-          background-color: white;
-          color: var(--black-700);
-        }
-      }
-    }
-  }
-
-  .btn-go_iniciar_session {
-    display: none;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    &:hover {
-      background-color: $primary;
-      color: white;
     }
   }
 }

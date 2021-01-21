@@ -39,50 +39,9 @@ export default function Sidebar({ user, logout }) {
 				</li>
 				<li className="navigation-item">
 					<NavigationLink
-						to="/Cas"
-						FAIcon="far fa-hammer"
-						texto="Cas"
-					/>
-				</li>
-				<li className="navigation-item">
-					<NavigationLink
-						to="/comunidad"
-						FAIcon="far fa-compass"
-						texto="Comunidad"
-					/>
-				</li>
-				<li className="navigation-item">
-					<NavigationLink
-						to="/Blogs"
-						FAIcon="far fa-project-diagram"
-						texto="Blogs"
-					/>
-				</li>
-				<li className="navigation-item">
-					<NavigationLink
-						to="/Comunicados"
-						FAIcon="far fa-bullhorn"
-						texto="Comunicados"
-					/>
-				</li>
-
-				<Separador />
-
-				<li className="navigation-item">
-					<NavigationLink
 						to="/frame"
 						FAIcon="far fa-crop-alt"
 						texto="Espacio de trabajo"
-					/>
-				</li>
-
-				<Separador />
-
-				<li className="navigation-item">
-					<NavigationLink
-						to="/admin"
-						FAIcon="far fa-cog"
-						texto="Configuracion"
 					/>
 				</li>
 				<li className="navigation-item">
@@ -131,5 +90,5 @@ function NavigationLinkClose({ onClick }) {
 }
 
 function Separador() {
-	return <li className="border-bottom my-3" />;
+	return <li className="border-bottom my-2" />;
 }

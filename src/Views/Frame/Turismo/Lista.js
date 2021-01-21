@@ -13,6 +13,7 @@ export default function Lista() {
     const [loadingCargaTurismos, setLoadingCargaTurismos] = useState(true);
 
     useEffect(() => {
+        const source = Axios.CancelToken.source();
         // cargar los lugares turisticos
         async function loadTurismos() {
             try {
@@ -20,13 +21,14 @@ export default function Lista() {
                 setLoadingCargaTurismos(true);
 
                 // peticion para obtener todo los lugares turisticos
-                const { data: turismo } = await Axios.get('/apimuni/turismos');
+                const { data: turismo } = await Axios.get('/apimuni/turismos', { cancelToken: source.token });
                 // guardando los lugares turistico
                 setTurismos(turismo);
 
                 // finalizando la carga de turismos
                 setLoadingCargaTurismos(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
 
                 // finalizando la carga de turismos
@@ -35,6 +37,8 @@ export default function Lista() {
         }
 
         loadTurismos();
+
+        return () => source.cancel('Cancelado');
     }, []);
 
     async function handleSubmit(e) {
@@ -48,7 +52,7 @@ export default function Lista() {
             contenido: '',
         }
         try {
-            const {data: apiTurismo} = await Axios({
+            const { data: apiTurismo } = await Axios({
                 method: 'post',
                 url: '/apimuni/turismos',
                 params: turismo

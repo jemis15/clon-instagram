@@ -61,8 +61,8 @@
 
 :root {
   --main-color: $primary;
-  --color-title: var(--black-700);
-  --color-text: var(--black-700);
+  --color-title: var(--grey-700);
+  --color-text: var(--grey-600);
   --color-text-light: var(--grey-600);
   --color-text-lighter: var(--grey-500);
   --color-border: var(--grey-300);
@@ -72,11 +72,27 @@
   --body-bg: var(--grey-100);
   --body-line-height: 1.6;
   --body-font: "Open Sans", sans-serif;
+  --heading-font: "Raleway", sans-serif;
 
-  --font-size-normal: 1rem;
-  --font-size-small: 0.875rem;
+  --bigger-font-size: 1.75rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --font-size-normal: 0.9375rem;
+  --font-size-small: 0.8125rem;
   --font-size-smaller: 0.75rem;
+  
+  @include media-breakpoint-up(lg) {
+    --bigger-font-size: 2.25rem;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --font-size-normal: 0.1rem;
+    --font-size-small: 0.875rem;
+    --font-size-smaller: 0.8125rem;
+  }
 }
+
 
 body.dark-theme {
   --color-title: var(--grey-100);
@@ -106,7 +122,7 @@ body.dark-theme {
   --transition-collapse: 0.2s;
 
   // Header
-  --topbar-height: 3rem;
+  --topbar-height: 2rem;
   --header-height: 4rem;
   --header-topbar-height: calc(var(--topbar-height) + var(--header-height));
   --header-height-when-collapse-sidebar: 6rem;

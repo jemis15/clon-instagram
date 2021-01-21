@@ -1,11 +1,10 @@
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 import { PortalContent, PortalHeader } from '../../../components/MyPortal';
 import CircleBadge from './CircleBadge';
 import CircleBadgeIcon from './CircleBadgeIcon';
-import Marker from './Marker';
 
 export default function CreateNarker({ onHide, showAlert, grupo, updateNewMarker }) {
     const [marker, setMarker] = useState({
@@ -13,13 +12,28 @@ export default function CreateNarker({ onHide, showAlert, grupo, updateNewMarker
         nombre: '',
         descripcion: '',
         url: '',
-        marker_tipo_id: grupo.id
+        marker_tipo_id: ''
     });
     const [image, setImage] = useState({
         formImage: '',
         base64: ''
     });
+    const [markersTipo, setMarkersTipo] = useState([]);
     const [sending, setSending] = useState(false);
+
+    useEffect(() => {
+        async function loadMarkerTipo() {
+            try {
+                const { data: apiMarkersTipo } = await Axios.get('/apimuni/markertipo');
+                setMarkersTipo(apiMarkersTipo);
+            } catch (error) {
+                console.log(error);
+                onHide();
+            }
+        }
+
+        loadMarkerTipo();
+    }, []);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -52,24 +66,18 @@ export default function CreateNarker({ onHide, showAlert, grupo, updateNewMarker
                 url: '/apimuni/markers',
                 params: { ...marker, image: apiImage.name }
             });
-            updateNewMarker(apiMarker)
-            setSending(false);
-            showAlert('success', 'Nuevo marker.');
-            closePortal();
+            const markerTipoSeleccionado = markersTipo.find(markerTipo => markerTipo.id === parseInt(apiMarker.marker_tipo_id));
+            updateNewMarker({
+                ...apiMarker,
+                marker_tipo: markerTipoSeleccionado
+            });
+            showAlert('success', '1 marker agregado');
+            onHide();
         } catch (error) {
             console.log(error);
-            showAlert('error', 'Upps algo salio mal, vuelva a intentar mas tarde.');
+            showAlert('error', 'Upps algo salio mal, vuelva a intentar mas tarde');
             setSending(false);
         }
-    }
-
-    function closePortal() {
-        const doc = document.getElementById('myportal');
-        if (doc) {
-            document.body.removeChild(doc);
-            document.body.style.removeProperty('overflow');
-        }
-        onHide();
     }
 
     async function handleSelectImage(e) {
@@ -167,14 +175,13 @@ export default function CreateNarker({ onHide, showAlert, grupo, updateNewMarker
                             )}
                         </Form.Group>
                         <Form.Group>
-                            <label>Grupo</label>
-                            <Form.Control
-                                type="text"
-                                name="descripcion"
-                                value={grupo.nombre}
-                                autoComplete="off"
-                                disabled
-                            />
+                            <label>Tipo de marker</label>
+                            <Form.Control as="select" name="marker_tipo_id" onChange={handleInputChange}>
+                                <option>Seleccione</option>
+                                {markersTipo.map(markerTipo => (
+                                    <option key={markerTipo.id} value={markerTipo.id}>{markerTipo.nombre}</option>
+                                ))}
+                            </Form.Control>
                         </Form.Group>
                     </div>
                 </div>

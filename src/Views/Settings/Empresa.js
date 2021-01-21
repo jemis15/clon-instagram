@@ -1,35 +1,14 @@
 import Axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Col, Form, Modal } from 'react-bootstrap';
-import Cropper from 'react-easy-crop';
+import React, { useState } from 'react';
+import { Button, Col, Form } from 'react-bootstrap';
 
 import logo from '../../assets/images/logo.png';
-import { getCroppedImg } from '../../Helpers/canvas-helper';
-import Loading from './components/Loading';
-
 import Title from './components/Title';
 
 export default function Empresa({ data, showAlert, updateSettings }) {
     const [settings, setSettings] = useState(data);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [sending, setSending] = useState(false);
-
-    useEffect(() => {
-        async function loadData() {
-            try {
-                setLoading(true);
-                const { data: apiSetting } = await Axios.get(`/apimuni/settings`);
-                setSettings(apiSetting);
-                setLoading(false)
-            } catch (error) {
-                console.log(error.error);
-                setLoading(false)
-            }
-        }
-
-        loadData();
-    }, []);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -108,10 +87,6 @@ export default function Empresa({ data, showAlert, updateSettings }) {
 
     const handleInputChange = e => setSettings({ ...settings, [e.target.name]: e.target.value });
     const handleCheckChange = e => setSettings({ ...settings, [e.target.name]: e.target.checked ? 1 : 0 });
-
-    if (loading) {
-        return <Loading />
-    }
 
     if (!settings) {
         // implementaremos mas en un futuro.

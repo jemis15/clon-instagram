@@ -1,4 +1,3 @@
-import MDEditor from '@uiw/react-md-editor';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Spinner } from 'react-bootstrap';
@@ -7,26 +6,25 @@ import Title from './components/Title';
 import imgNoTopbars from '../../assets/images/image3.svg';
 import imgError from '../../assets/images/error.png';
 
-export default function Topbars({ showAlert, showTopbar }) {
-    const [titulo, setTitulo] = useState('__[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image');
-    const [topbarId, setTopbarId] = useState(null);
-    const [topbars, setTopbars] = useState([]);
-    const [topbarActive, setTopbarActive] = useState(null);
+export default function Topbars({ showTopbar }) {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+    const [topbar, setTopbar] = useState(null);
+    const [sending, setSending] = useState(false);
 
     useEffect(() => {
+        const source = Axios.CancelToken.source();
+
         async function loadTopbars() {
             try {
                 setLoading(true);
-                // const { data: apiTopbas } = await Axios.get('/apimuni/topbars');
-                setTopbars(simuladorTopbars);
-
-                setTopbarActive(simuladorTopbars.find(topbar => {
-                    return topbar.active === 1;
-                }));
+                const { data: apiTopbar } = await Axios.get('/apimuni/topbar', {
+                    cancelToken: source.token
+                });
+                setTopbar(apiTopbar);
                 setLoading(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
                 setError('Upps sucedio algo inesperado');
                 setLoading(false);
@@ -34,42 +32,32 @@ export default function Topbars({ showAlert, showTopbar }) {
         }
 
         loadTopbars();
-    }, [])
 
-    async function handleActiveTopbar(topbarSelect) {
-        setTopbarActive(topbarSelect);
-        setTopbarId(topbarSelect.id);
-        showTopbar(topbarSelect.contenido);
-        showAlert('success', 'Se cambio el topbar');
-    }
-    async function handleRemoveTopbar(topbarSelect) {
-        setTopbars(topbars.filter(topbar => {
-            return topbar.id !== topbarSelect.id;
-        }));
-        topbarId === topbarSelect.id && setTopbarActive(null);
-        topbarId === topbarSelect.id && showTopbar(null);
-        showAlert('success', 'Se a eliminado un topbar');
-    }
+        return () => source.cancel('Cancelado');
+    }, []);
 
-    async function handleDesactivarTopbar(topbarSelect) {
-        try {
-            // await Axios.patch('/apimuni/topbars/desactivar');
-            setTopbarActive(null);
-            showAlert('success', 'Se desactivo el topbar, ya no sera visible para nadie.')
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    async function handleSubmit(e) {
+        e.preventDefault();
 
-    const handleSelectPreviewTopbar = (topbar) => {
-        if (!topbar) {
-            showTopbar(null);
+        if (sending) {
             return;
         }
 
-        setTopbarId(topbar.id);
-        showTopbar(topbar.contenido);
-    };
+        try {
+            setSending(true);
+            await Axios({
+                method: 'put',
+                url: `/apimuni/topbars/${topbar.id}`,
+                params: topbar
+            });
+            showTopbar(topbar);
+            setSending(false);
+            showTopbar(topbar)
+        } catch (error) {
+            console.log(error);
+            setSending(false);
+        }
+    }
 
     if (loading) {
         return <div className="text-center">
@@ -92,7 +80,7 @@ export default function Topbars({ showAlert, showTopbar }) {
         </div>
     }
 
-    if (topbars.length <= 0) {
+    if (!topbar) {
         return <div className="mx-auto text-center mt-5" style={{ maxWidth: '350px' }}>
             <img
                 className="mb-4"
@@ -108,101 +96,26 @@ export default function Topbars({ showAlert, showTopbar }) {
     }
 
     return <div>
-        <div className="mb-4 d-flex">
-            <Title>Topbars</Title>
-            <div className="ml-auto">
-                <Button size="sm">Nuevo topbar</Button>
-            </div>
-        </div>
+        <Title className="mb-4">Topbars</Title>
 
-        {topbarActive && <>
-            <h5>Actualmente las persona lo pueden ver</h5>
-            <div className="topbar-item rounded mb-5 py-2 px-3 cursor-pointer d-flex">
-                {/* <div
-                    className={`mr-2 ${topbarId === 0 && 'text-success'}`}
-                    onClick={handleSelectPreviewTopbar.bind(this, topbarActive)}>
-                    <i className="far fa-check-circle" />
-                </div> */}
-                <div className="topbar-item_content flex-fill">
-                    <MDEditor.Markdown source={topbarActive.contenido} />
-                </div>
-                <div className="ml-auto text-nowrap">
-                    <span className="d-inline-flex justify-content-center align-items-center rounded-circle icon mr-1 cursor-pointer"
-                        onClick={handleDesactivarTopbar.bind(this, topbarActive)}>
-                        <i className="far fa-arrow-down" />
-                    </span>
-                    <span className="d-inline-flex justify-content-center align-items-center rounded-circle icon cursor-pointer"
-                        onClick={handleRemoveTopbar.bind(this, topbarActive)}>
-                        <i className="far fa-times" />
-                    </span>
-                </div>
-            </div>
-        </>}
-
-        <h5>Lista de topbars personalizados</h5>
-        {topbars.map(topbar => (
-            <div key={topbar.id}
-                className="topbar-item rounded mb-2 py-2 px-3 cursor-pointer d-flex">
-                <div
-                    className={`mr-2 ${topbar.id === topbarId && 'text-success'}`}
-                    onClick={handleSelectPreviewTopbar.bind(this, topbar)}>
-                    <i className="far fa-check-circle" />
-                </div>
-                <div className="flex-fill topbar-item_content">
-                    <MDEditor.Markdown source={topbar.contenido} />
-                </div>
-                {true && (
-                    <div className="ml-auto text-nowrap">
-                        <span className="d-inline-flex justify-content-center align-items-center rounded icon mr-1 cursor-pointer"
-                            onClick={handleActiveTopbar.bind(this, topbar)}>
-                            <i className="far fa-arrow-up" />
-                        </span>
-                        <span className="d-inline-flex justify-content-center align-items-center rounded icon cursor-pointer"
-                            onClick={handleRemoveTopbar.bind(this, topbar)}>
-                            <i className="far fa-times" />
-                        </span>
-                    </div>
-                )}
-            </div>
-        ))}
-        <div className="mb-4" />
-
-        <Form.Control
-            as="textarea"
-            value={titulo}
-            onChange={e => setTitulo(e.target.value)}
-            className="d-none"
-        />
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <label>Topbar</label>
+                <Form.Control
+                    type="text"
+                    value={topbar.descripcion}
+                    onChange={(e) => setTopbar({ ...topbar, descripcion: e.target.value })}
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Check
+                    label="Activo"
+                    id="activar_topbar"
+                    checked={topbar.active}
+                    onChange={e => setTopbar({ ...topbar, active: e.target.checked ? 1 : 0 })}
+                />
+            </Form.Group>
+            <Button type="submit">{sending ? 'Actualizando...' : 'Actualizar'}</Button>
+        </Form>
     </div>
 }
-
-const simuladorTopbars = [
-    {
-        id: 1,
-        contenido: '__[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image',
-        fecha_regresiva: '00',
-        time: 1,
-        active: 1,
-    },
-    {
-        id: 2,
-        contenido: 'Autoconverted link https://github.com/nodeca/pica (enable linkify to see) Autoconverted link https://github.com/nodeca/pica (enable linkify to see)  ',
-        fecha_regresiva: '00',
-        time: 1,
-        active: 0,
-    },
-    {
-        id: 3,
-        contenido: 'see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.',
-        fecha_regresiva: '00',
-        time: 1,
-        active: 0,
-    },
-    {
-        id: 4,
-        contenido: 'The killer feature of `markdown-it` is very effective support of [syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).',
-        fecha_regresiva: '00',
-        time: 1,
-        active: 0,
-    }
-]

@@ -1,80 +1,138 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Table } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Title from './components/Title';
 
-import imageCarousel from '../../assets/images/default.jpg';
-import MyPortal, { PortalContent, PortalHeader } from '../../components/MyPortal';
 import Axios from 'axios';
+import Loading from './components/Loading';
 
-export default function Modals() {
-    const [pantalla, setPantalla] = useState(false);
-    const [modals, setModals] = useState([]);
-
-    const togglePantalla = () => setPantalla(!pantalla);
+export default function Modals({ showAlert }) {
+    const [modalBienvenida, setModalBienvenida] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [sending, setSending] = useState(false);
+    const [image, setImage] = useState({
+        formImage: '',
+        base64: ''
+    });
 
     useEffect(() => {
-        async function loadModals() {
+        const source = Axios.CancelToken.source();
+
+        async function loadModalBienvenida() {
             try {
-                const {data: apiModals} = await Axios.get('/apimuni/modals');
-                setModals(apiModals);
+                setLoading(true);
+                const { data: apiModalBienvenida } = await Axios.get('/apimuni/modalbienvenida', {
+                    cancelToken: source.token
+                });
+                setModalBienvenida(apiModalBienvenida);
+                setLoading(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
+                setLoading(false);
             }
         }
 
-        loadModals();
+        loadModalBienvenida();
+
+        return () => source.cancel('Cancelado');
     }, []);
 
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        if (sending) {
+            return;
+        }
+
+        let modalBienvenidaActualizado = modalBienvenida;
+        try {
+            setSending(true);
+            if (image.formImage !== '') {
+                const formData = new FormData();
+                formData.append('image', image.formImage);
+                formData.append('path', 'modalbienvenida');
+                const { data: apiImage } = await Axios.post('/apimuni/upload/images', formData);
+                console.log(apiImage);
+                modalBienvenidaActualizado.image = apiImage.name;
+            }
+
+            await Axios({
+                method: 'put',
+                url: '/apimuni/modalbienvenida',
+                params: modalBienvenidaActualizado
+            });
+            setModalBienvenida(modalBienvenidaActualizado);
+            showAlert('success', 'Modal principal actualizado');
+            setSending(false);
+        } catch (error) {
+            console.log(error);
+            showAlert('error', 'Upps, sucedio algo inesperado, vuelva a intentar mas tarde');
+            setSending(false);
+        }
+    }
+
+    async function handleSelectImage(e) {
+        const file = e.target.files[0];
+
+        // finalizamos si no se selecciono nada.
+        if (!file) {
+            return;
+        }
+
+        if (file.type.indexOf('image/') === -1) {
+            alert('Esto no parese ser una imagen');
+            return;
+        }
+
+        setImage({
+            formImage: file,
+            base64: await new Promise(resolve => {
+                const reader = new FileReader()
+                reader.addEventListener('load', () => resolve(reader.result), false)
+                reader.readAsDataURL(file)
+            })
+        });
+    }
+
+    if (loading) {
+        return <Loading />
+    }
+
     return <div>
-        <Title>Carousel principal</Title>
-        <Button className="mb-5" size="sm" onClick={togglePantalla}>Nuevo carousel</Button>
-
-        <Table size="sm" bordered>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Detalle</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Saludo para todo mazamari</td>
-                    <td><img
-                        width="50"
-                        className="img-fluid"
-                        src={imageCarousel}
-                        alt="satiludo todo mazamari"
-                    /></td>
-                    <td>
-                        <Button className="mr-2" size="sm"><i className="far fa-pen" /></Button>
-                        <Button className="mr-2" variant="danger" size="sm"><i className="far fa-trash" /></Button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Saludo para todo mazamari</td>
-                    <td><img
-                        width="50"
-                        className="img-fluid"
-                        src={imageCarousel}
-                        alt="satiludo todo mazamari"
-                    /></td>
-                    <td>
-                        <Button className="mr-2" size="sm"><i className="far fa-pen" /></Button>
-                        <Button className="mr-2" variant="danger" size="sm"><i className="far fa-trash" /></Button>
-                    </td>
-                </tr>
-            </tbody>
-        </Table>
-
-        <MyPortal show={pantalla}>
-            <PortalContent>
-                <PortalHeader onHide={togglePantalla} />
-            </PortalContent>
-        </MyPortal>
-
+        <Title>Modal principal</Title>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <label>Image</label>
+                <div className="border" style={{ maxWidth: '500px' }}>
+                    <label className="pb-0">
+                        {image.base64
+                            ? <img className="img-fluid" src={image.base64} alt="modal bienvenida" />
+                            : <img
+                                className="img-fluid"
+                                src={`/apimuni/images/modalbienvenida/${modalBienvenida.image}`}
+                                alt="bienvenido"
+                            />
+                        }
+                        <input
+                            className="d-none"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleSelectImage}
+                        />
+                    </label>
+                </div>
+            </Form.Group>
+            <Form.Group>
+                <Form.Check
+                    label="Activo"
+                    id="activemodalbienvenida"
+                    checked={modalBienvenida.active}
+                    onChange={e => setModalBienvenida({ ...modalBienvenida, active: e.target.checked ? 1 : 0 })}
+                />
+            </Form.Group>
+            <Button type="submit" className="mb-5">
+                {sending ? 'Actualizando...' : 'Actualizar modal'}
+            </Button>
+        </Form>
     </div>
 }

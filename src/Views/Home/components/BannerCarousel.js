@@ -30,7 +30,7 @@ export default function BannerCarousel({
             <h3 className="title">{carousel.titulo}</h3>
             <p className="description mb-0">{carousel.descripcion}</p>
         </div>
-        {user && <div
+        {user && user.is_admin === 1 && <div
             className="position-absolute p-3"
             style={{
                 bottom: 0,
@@ -171,8 +171,8 @@ function EditarCarousel({ data, updateCarousel, closeModal, showAlert }) {
                     border: '1px dashed var(--grey-400)'
                 }}>
                 {image.base64
-                    ? <img src={image.base64} className="img-fluid" />
-                    : <img src={`/apimuni/images/carouselheader/${carousel.image}`} className="img-fluid" />
+                    ? <img src={image.base64} className="img-fluid" alt="carousel" />
+                    : <img src={`/apimuni/images/carouselheader/${carousel.image}`} className="img-fluid" alt="carousel" />
                 }
                 <input
                     type="file"

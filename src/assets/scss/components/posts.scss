@@ -24,8 +24,50 @@
   }
 }
 
-.dark-theme{
-  .post{
+.dark-theme {
+  .post {
     background-color: var(--black-500);
+  }
+}
+
+/*page /posts */
+.link_home-post {
+  &:hover {
+    background-color: var(--grey-300);
+    color: inherit;
+  }
+  &.active {
+    background-color: var(--grey-300);
+  }
+}
+
+.card_video {
+  .icon_play-card_video {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 5;
+    // transform: translate(-50%, -50%);
+    display: none;
+  }
+  &:hover .icon_play-card_video {
+    display: block;
+  }
+}
+
+/* create post */
+.container-select_tipo_post {
+  min-width: 100%;
+  @include media-breakpoint-up(md) {
+    min-width: auto;
+  }
+}
+.tipo_post-create {
+  @include media-breakpoint-up(md) {
+    min-width: 180px;
+  }
+  background-color: white;
+  &:hover {
+    background-color: var(--grey-300);
   }
 }

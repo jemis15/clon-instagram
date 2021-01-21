@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Form, Modal, ModalBody, Row } from 'react-bootstrap';
 import Cuadro, { CuadroLeft, CuadroRight } from '../components/Cuadro';
 
-import imageDefault from '../../../assets/images/img1.jpg';
 import ModalHeader from 'react-bootstrap/esm/ModalHeader';
 
 export default function Lista() {
@@ -17,19 +16,23 @@ export default function Lista() {
     const [modalNew, setModalNew] = useState(false);
 
     useEffect(() => {
+        const source = Axios.CancelToken.source();
+        
         async function loadBanners() {
             try {
                 setLoadingBanners(true);
-                const { data: apiBanners } = await Axios.get('/apimuni/banners');
+                const { data: apiBanners } = await Axios.get('/apimuni/banners', { cancelToken: source.token});
                 setBanners(apiBanners);
                 setLoadingBanners(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
                 setLoadingBanners(false);
             }
         }
-
         loadBanners();
+
+        return () => source.cancel();
     }, []);
 
     async function handleSubmit(e) {
@@ -129,8 +132,8 @@ function BannersLoading() {
     const numbersOfItemLoading = new Array(8).fill(null);
 
     return <div>
-        {numbersOfItemLoading.map(item => (
-            <div className="bg-container mb-3" style={{ height: '100px' }} />
+        {numbersOfItemLoading.map((item, key) => (
+            <div key={key} className="bg-container mb-3" style={{ height: '100px' }} />
         ))}
     </div>
 }

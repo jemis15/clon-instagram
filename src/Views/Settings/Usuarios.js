@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Col, Form, Modal, Row, Spinner } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import moment from 'moment';
 
 import DropdownMenu from '../../components/Dropdown';
@@ -19,19 +19,25 @@ export default function Usuarios({ showAlert }) {
     const toggleModalNewUser = () => setModalNewUser(!modalNewUser);
 
     useEffect(() => {
-        async function loadUsers() {
+        const source = Axios.CancelToken.source();
+
+        let loadUsers = async () => {
             try {
                 setLoading(true);
-                const { data: apiUsers } = await Axios.get('/apimuni/users');
-                setUsers(apiUsers)
+                const { data: apiUsers } = await Axios.get('/apimuni/users', {
+                    cancelToken: source.token
+                });
+                setUsers(apiUsers);
                 setLoading(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
                 setLoading(false);
             }
         }
-
         loadUsers();
+        
+        return () => source.cancel('Cancelado');
     }, []);
 
     function addNewUser(newUser) {

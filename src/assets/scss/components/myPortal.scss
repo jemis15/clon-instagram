@@ -1,3 +1,10 @@
+body {
+  &.portal-open {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
 .my-portal {
   position: fixed;
   top: 0;

@@ -1,5 +1,24 @@
 .frame {
   .frame-header {
+    position: sticky;
+    top: calc(var(--topbar-height) + var(--header-height));
+    z-index: 1;
+    .frame-button {
+      border: 0;
+      background-color: transparent;
+      font-weight: 600;
+      color: var(--color-text-light);
+      font-size: 14px;
+      &:hover {
+        background-color: rgba($primary, 0.15);
+        color: $primary;
+      }
+      &.active {
+        font-weight: 700;
+        background-color: rgba($primary, 0.15);
+        color: $primary;
+      }
+    }
   }
   .frame-body {
     .frame-metadata {

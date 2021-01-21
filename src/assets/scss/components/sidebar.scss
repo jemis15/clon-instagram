@@ -32,16 +32,16 @@ body {
   nav {
     height: calc(100% - var(--header-height));
   }
-  .navigation-link{
+  .navigation-link {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
-    .navigation-link-icon{
+    .navigation-link-icon {
       width: 2rem;
     }
-    &.active{
+    &.active {
       color: $primary;
     }
-    &:hover{
+    &:hover {
       color: $primary;
       background-color: rgba($primary, 0.15);
     }
@@ -50,18 +50,5 @@ body {
     &:hover {
       background-color: var(--grey-300);
     }
-  }
-}
-
-.button-nav-j{
-  border: 0;
-  background-color: transparent;
-  font-weight: 600;
-  &:hover{
-    background-color: rgba($primary, 0.15);
-    color: $primary;
-  }
-  &.active{
-    color: $primary;
   }
 }

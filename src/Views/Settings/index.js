@@ -17,7 +17,6 @@ export default function Index({ user, settings, updateSettings, showAlert, showT
 
     return <>
         <Container className="my-5">
-            {/* <h3 className="pl-3 mb-3">Configurar pagina</h3> */}
             <Row>
                 <Col md="3">
                     <nav className="a_sidenav rounded mb-3">
@@ -94,7 +93,7 @@ export default function Index({ user, settings, updateSettings, showAlert, showT
                         <Route path={`${path}/empresa`} render={() => <Empresa data={settings} showAlert={showAlert} updateSettings={updateSettings} />} />
                         <Route path={`${path}/usuarios`} render={() => <Users showAlert={showAlert} />} />
                         <Route path={`${path}/topbars`} render={() => <Topbars showAlert={showAlert} showTopbar={showTopbar} />} />
-                        <Route path={`${path}/modals`} render={() => <Modals />} />
+                        <Route path={`${path}/modals`} render={() => <Modals showAlert={showAlert} />} />
                     </Switch>
                 </Col>
             </Row>

@@ -50,7 +50,7 @@ export default function CreateLink({ onHide, updateNewLink, grupo, showAlert }) 
                 params: { ...link, image: apiImage.name }
             });
 
-            updateNewLink(apiLink);
+            updateNewLink(apiLink, grupo);
             setSending(false);
             const myportal = document.getElementById('myportal');
             if (myportal) {
@@ -58,20 +58,11 @@ export default function CreateLink({ onHide, updateNewLink, grupo, showAlert }) 
             }
             document.body.style.removeProperty('overflow');
             showAlert('success', 'Nuevo link');
-            closePortal();
+            onHide();
         } catch (error) {
             console.log(error);
             setSending(false);
         }
-    }
-
-    function closePortal() {
-        const doc = document.getElementById('myportal');
-        if (doc) {
-            document.body.removeChild(doc);
-            document.body.style.removeProperty('overflow');
-        }
-        onHide();
     }
 
     async function handleSelectImage(e) {

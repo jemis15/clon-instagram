@@ -13,6 +13,7 @@ export default function Lista() {
     const [loadingCargaGastronomias, setLoadingCargaGastronomias] = useState(true);
 
     useEffect(() => {
+        const source = Axios.CancelToken.source();
         // cargar las gastronomias
         async function loadTurismos() {
             try {
@@ -20,13 +21,14 @@ export default function Lista() {
                 setLoadingCargaGastronomias(true);
 
                 // peticion para obtener toda las gastronomias
-                const { data: apiGastronomias } = await Axios.get('/apimuni/gastronomias');
+                const { data: apiGastronomias } = await Axios.get('/apimuni/gastronomias', { cancelToken: source.token });
                 // guardando las gastronomias
                 setGastronomias(apiGastronomias);
 
                 // finalizando la carga de gastronomias
                 setLoadingCargaGastronomias(false);
             } catch (error) {
+                if (Axios.isCancel) { return; }
                 console.log(error);
 
                 // finalizando la carga de gastronomias
@@ -35,6 +37,8 @@ export default function Lista() {
         }
 
         loadTurismos();
+
+        return () => source.cancel('Cancelado');
     }, []);
 
     async function handleSubmit(e) {
@@ -48,7 +52,7 @@ export default function Lista() {
             contenido: '',
         }
         try {
-            const {data: apiGastronomia} = await Axios({
+            const { data: apiGastronomia } = await Axios({
                 method: 'post',
                 url: '/apimuni/gastronomias',
                 params: gastronomia

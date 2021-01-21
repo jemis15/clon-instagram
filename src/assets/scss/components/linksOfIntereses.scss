@@ -10,23 +10,12 @@
 }
 
 .link-of-intereses {
-  width: 90%;
-  height: 60px;
-  transition: transform 0.3s;
-
-  &:hover {
-    transform: scale(1.1);
-    .options-editable {
-      display: flex;
-    }
-  }
-
   .options-editable {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
+    display: flex;
 
     .option-editable {
       color: white;
@@ -45,31 +34,7 @@
     }
   }
 }
-.link-of-intereses_number {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: $primary;
-  color: white;
-}
-.links-of-intereses_header {
-  .icon {
-    width: 1rem;
-    height: 1rem;
-  }
-  .texto {
-    width: 10rem;
-    height: 1rem;
-  }
-}
+
 .links-of-intereses_loading {
   display: none;
   width: 50%;

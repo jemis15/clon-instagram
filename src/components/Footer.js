@@ -5,19 +5,20 @@ import 'moment/locale/es';
 
 import defaultLogo from '../logo.svg';
 import BtnSocial from './BtnSocial';
+import { useLocation } from 'react-router-dom';
 
-export default function Footer({ settings }) {
+export default function Footer({ settings, visitas }) {
 	const about = {
-		titulo: 'Municipalidad distrital de Mazamari en el 2021',
+		titulo: 'Municipalidad Distrital de Mazamari en el 2021',
 		descripcion: 'Al 2021, Mazamari es un distrito saludable, inclusivo, intercultural, participativo y transparente; con habitantes amables, receptivos y organizados que desarrollan actividades agropecuarias, de transformación y de servicios con criterios de calidad, eficiencia y sostenibilidad”'
 	}
-	const diaHoy = moment().format('dddd');// lunes, martes, miercoles...
+	const diaHoy = moment().format('dddd').normalize("NFD").replace(/[\u0300-\u036f]/g, "");// lunes, martes, miercoles...
 	const isLaborable = settings[`${diaHoy}_laborable`] === 1;// false - true
 	const [isOpen, setIsOpen] = useState(false);
 	const [localHorario, setLocalHorario] = useState(false);
+	const location = useLocation();
 
 	const toggleLocalHorario = () => setLocalHorario(!localHorario);
-
 	useEffect(() => {
 		const interval = setInterval(() => {
 			if (!isLaborable) {
@@ -45,9 +46,30 @@ export default function Footer({ settings }) {
 		return () => clearInterval(interval);
 	}, [settings]);
 
+	function findUrl(paths = []) {
+		let encontrado = false;
+		paths.forEach(path => {
+			if (encontrado) {
+				return;
+			}
+
+			if (path.exact) {
+				encontrado = path.pathname === location.pathname;
+			} else {
+				const index = location.pathname.indexOf(path.pathname);
+				encontrado = index === 0;
+			}
+		});
+		return encontrado;
+	}
+
+	if (!findUrl(pathsWithFooter)) {
+		return null;
+	}
+
 	return <>
 		<footer className="footer">
-			<Container className="py-5">
+			<Container className="pt-4">
 				<Row>
 					<Col md="4" className="mb-4 mb-md-0">
 						<div className="mb-4 mx-auto ml-md-0" style={{ maxWidth: '200px' }}>
@@ -65,26 +87,6 @@ export default function Footer({ settings }) {
 								/>
 							}
 						</div>
-						<div>
-							<ul className="list-unstyled d-flex justify-content-center justify-content-md-start mb-0">
-								{['facebook', 'twitter', 'youtube', 'instagram'].map(social => {
-									if (!settings[social]) {
-										return null;
-									}
-
-									return <li className="mr-2" key={social}>
-										<BtnSocial
-											className="rounded-circle"
-											url={settings[social]}
-											social={social}
-											size="md"
-											fill
-										/>
-									</li>
-								})}
-							</ul>
-						</div>
-
 					</Col>
 					<Col md="4" className="mb-4 mb-md-0 text-center text-md-left">
 						<h4 className="color-title">{about.titulo}</h4>
@@ -92,7 +94,7 @@ export default function Footer({ settings }) {
 					</Col>
 					<Col md="4">
 						<div>
-							<ul className="list-unstyled mb-5">
+							<ul className="list-unstyled mb-4">
 								<li className={`mb-3 position-relative local-horario ${localHorario && 'active'} cursor-pointer`}
 									onClick={toggleLocalHorario}>
 									<span className="mr-4 color-title">
@@ -139,7 +141,7 @@ export default function Footer({ settings }) {
 										<span className="text-small">{settings.telefono}</span>
 									</a>
 								</li>
-								<li className="mb-3">
+								<li>
 									<a href={`mailto:${settings.correo}`}>
 										<span className="mr-4 color-title">
 											<i className="far fa-envelope fa-lg" />
@@ -150,8 +152,8 @@ export default function Footer({ settings }) {
 							</ul>
 
 							<div>
-								<h4 className="color-title text-center text-md-left">Numero de visitantes</h4>
-								<ContadorVisitas />
+								<h4 className="color-title text-center text-md-left">N&uacute;mero de visitantes</h4>
+								{visitas && <ContadorVisitas number={visitas} />}
 							</div>
 						</div>
 					</Col>
@@ -159,6 +161,23 @@ export default function Footer({ settings }) {
 			</Container>
 
 			<Container className="pb-3">
+				<ul className="list-unstyled d-flex justify-content-center mb-2">
+					{['facebook', 'twitter', 'youtube', 'instagram'].map(social => {
+						if (!settings[social]) {
+							return null;
+						}
+
+						return <li className="mr-2" key={social}>
+							<BtnSocial
+								className="rounded-circle"
+								url={settings[social]}
+								social={social}
+								size="md"
+								fill
+							/>
+						</li>
+					})}
+				</ul>
 				<div className="text-center text-smaller">
 					<span>Desarrollado por </span>
 					<a
@@ -173,14 +192,14 @@ export default function Footer({ settings }) {
 	</>;
 }
 
-function ContadorVisitas() {
-	const numberOfVisitas = '562'.split('');
+function ContadorVisitas({ number }) {
+	const numberOfVisitas = number.split('');
 	const cerosFaltantes = new Array(6 - numberOfVisitas.length).fill(0);
 	const numbers = cerosFaltantes.concat(numberOfVisitas);
 
 	const estilos = {
-		backgroundColor: 'var(--grey-900)',
-		color: 'var(--grey-400)'
+		backgroundColor: 'var(--grey-100)',
+		color: 'var(--grey-900)'
 	}
 
 	return <div className="d-flex justify-content-center justify-content-md-start">
@@ -194,3 +213,8 @@ function ContadorVisitas() {
 		))}
 	</div>
 }
+
+const pathsWithFooter = [
+	{ pathname: '/', exact: true },
+	{ pathname: '/@', exact: false },
+];

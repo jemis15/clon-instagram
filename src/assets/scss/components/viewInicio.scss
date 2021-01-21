@@ -7,24 +7,16 @@
   min-width: 300px;
 }
 
-.grid-grupo-links {
-  @include media-breakpoint-up(lg) {
+.grid-links {
+  @include media-breakpoint-up(md) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4rem;
-    row-gap: 2rem;
-  }
-  .grid-links {
-    @include media-breakpoint-up(md) {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
+    gap: 1rem;
   }
 }
 
 /* circle badge */
-.circleBadge{
+.circleBadge {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,12 +26,12 @@
   border-radius: 50%;
   background-color: white;
 
-  &.circleBadge-sm{
+  &.circleBadge-sm {
     width: 2.5em;
     height: 2.5em;
   }
 
-  .circleBadge-icon{
+  .circleBadge-icon {
     max-width: 60%;
     height: auto;
     max-height: 55%;

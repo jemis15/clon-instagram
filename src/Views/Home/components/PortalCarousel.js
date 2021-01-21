@@ -41,21 +41,12 @@ export default function PortalCarousel({ onHide, actualizarNuevoCarousel, showAl
             actualizarNuevoCarousel(apiCarousel);
             showAlert('success', 'Nuevo item para el carousel');
             setSending(false);
-            closePortal();
+            onHide();
         } catch (error) {
             console.log(error);
             showAlert('error', 'Upp algo salio mal, vuelva a intentarlo');
             setSending(false);
         }
-    }
-
-    function closePortal() {
-        const doc = document.getElementById('myportal');
-        if (doc) {
-            document.body.removeChild(doc);
-            document.body.style.removeProperty('overflow');
-        }
-        onHide();
     }
 
     async function handleSelectImage(e) {
@@ -130,7 +121,7 @@ export default function PortalCarousel({ onHide, actualizarNuevoCarousel, showAl
                         />
                     </Form.Group>
                 </div>
-                <div className="mt-auto p-3 shadow border-top">
+                <div className="p-3 shadow border-top">
                     <Button type="submit" block>
                         {sending ? 'Creando...' : 'Crear'}
                     </Button>
@@ -154,7 +145,7 @@ export default function PortalCarousel({ onHide, actualizarNuevoCarousel, showAl
                         : <img
                             src={imageDefault2}
                             className="img-fluid"
-                            alt="image default"
+                            alt="default"
                             style={{ filter: 'grayscale(100%)' }}
                         />
                     }
