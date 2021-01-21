@@ -14,8 +14,8 @@ const [modalNewItem, setModalNewItem] = useState(false);
      }
     return <>
 
-    <div className="cabecera border-bottom mb-3 d-flex flex-nowrap" >
-                <h2 className="py-2">Comite de Control interno</h2>
+    <div className="cabecera  mb-3 d-flex flex-nowrap" style={{borderBottom:'1px solid #EDD016'}}>
+                <h3 className="py-2" style={{ color:'green'}}>Comité de Control interno</h3>
                 <div className="AgregarElemento ml-auto align-self-start">
                   <Button variant="info" onClick={tooggleModalNewGrupo}>
                     <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}

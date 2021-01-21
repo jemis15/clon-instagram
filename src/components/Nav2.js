@@ -1,5 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import mof from '../assets/images/web/MOF.PDF';
+import rof from '../assets/images/web/ROF.PDF';
+import tupa from '../assets/images/web/TUPA 2017.PDF';
+import cap from '../assets/images/web/CAP.PDF';
+import mapro from '../assets/images/web/MAPRO.PDF';
+
 
 export default function AppNav() {
     return <nav className="nav align-self-center ml-auto">
@@ -72,16 +78,16 @@ export default function AppNav() {
                     <LinkNavigation to="/Comisiones">
                         Comicion permanentes
                     </LinkNavigation>
-                    <LinkNavigation to="/login">
+                    <LinkNavigation to="/Organigrama">
                         Organigrama
                     </LinkNavigation>
                     <LinkNavigation to="/Vision_Mision">
                         Mision y Vision
                     </LinkNavigation>
-                    <LinkNavigation to="/login">
+                    <LinkNavigation to="/SistemaControlInterno">
                         Sistema de control interno
                     </LinkNavigation>
-                    <LinkNavigation to="/ConvocatoriaCass">
+                    <LinkNavigation to="/Convocatoria">
                         Convocatoras CAS
                     </LinkNavigation>
                 </DropMenu>
@@ -94,19 +100,19 @@ export default function AppNav() {
                     <h4 className="text-small text-muted">Instrumentos de gestion</h4>
                     <ul className="list-unstyled">
                         <li>
-                            <SubLinkNavigation to="/login">MOF</SubLinkNavigation>
+                            <a HREF={mof} TARGET="_blank">MOF</a>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/login">ROF</SubLinkNavigation>
+                        <a href={rof} target="_blank">ROF</a>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/login">TUPA</SubLinkNavigation>
+                            <a href={tupa} target="_blank">TUPA</a>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/login">CAP</SubLinkNavigation>
+                            <a href={cap} target="_blank">CAP</a>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/login">MAPRO</SubLinkNavigation>
+                            <a href={mapro} target="_blank">MAPRO</a>
                         </li>
                         <li>
                             <SubLinkNavigation to="/login">POI</SubLinkNavigation>
@@ -180,7 +186,7 @@ export default function AppNav() {
                     <LinkNavigation to="/login">
                         Personal contratacion de bienes y servicios
                     </LinkNavigation>
-                    <LinkNavigation to="/login">
+                    <LinkNavigation to="/NormasPublicas">
                         Normas publicas
                     </LinkNavigation>
                     <hr />
@@ -205,32 +211,32 @@ export default function AppNav() {
                             <hr />
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/DocImportantes">
                                 Documentos importantes
                             </SubLinkNavigation>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/DocOCI">
                                 Documentos de OCI
                             </SubLinkNavigation>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/Noticias">
                                 Noticias de la institucion
                             </SubLinkNavigation>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/Anuncios">
                                 Anuncios
                             </SubLinkNavigation>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/Comunicados">
                                 Comunicado y nota de prensa
                             </SubLinkNavigation>
                         </li>
                         <li>
-                            <SubLinkNavigation to="/">
+                            <SubLinkNavigation to="/Boletines">
                                 Boletines
                             </SubLinkNavigation>
                         </li>
@@ -263,10 +269,10 @@ export default function AppNav() {
                     <LinkNavigation to="/c/CodigoEtica">
                         Codigo de Etica
                     </LinkNavigation>
-                    <LinkNavigation to="/">
-                        Programa multianual de invercion
+                    <LinkNavigation to="/c/Multianual">
+                        Programa multianual de inversión
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/c/Saneamiento">
                         Saneamiento
                     </LinkNavigation>
                     <LinkNavigation to="/c/PresupuestoParticipativo">
@@ -279,19 +285,22 @@ export default function AppNav() {
                     Programas
                 </NavLink>
                 <DropMenu>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/VasoLeche">
                         Vaso de Leche
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Demuna">
                         Demuna
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Omaped">
                         Omaped
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/AdultoMayor">
                         Adulto Mayor
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Policlinico">
+                        Policlinico 
+                    </LinkNavigation>
+                    <LinkNavigation to="/Piced">
                         Piced
                     </LinkNavigation>
                     <LinkNavigation to="/">
@@ -307,13 +316,13 @@ export default function AppNav() {
                     <LinkNavigation to="/Direcctorio">
                         Directorio
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Codisec">
                         Codisec
                     </LinkNavigation>
                     <LinkNavigation to="/Serenazgo">
                         Seguridad ciudadana
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/SeguridadSalud">
                         Seguridad y salud en el trabajo
                     </LinkNavigation>
                 </DropMenu>
@@ -326,10 +335,10 @@ export default function AppNav() {
                     <LinkNavigation to="/">
                         Servicio de seguridad ciudadana
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/DefensaCivil">
                         Defenza Civil
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Proyectos">
                         Vivero Municipal
                     </LinkNavigation>
                     <LinkNavigation to="/">
@@ -345,13 +354,13 @@ export default function AppNav() {
                     <LinkNavigation to="/DirectorioTelefono">
                         Directorio de telefono
                     </LinkNavigation>
-                    <LinkNavigation to="/">
+                    <LinkNavigation to="/Sucursal">
                         Sede Principal y Sucursal
                     </LinkNavigation>
                     <LinkNavigation to="/">
                         Sugerencias
                     </LinkNavigation>
-                    <LinkNavigation to="/QuejaReclamo">
+                    <LinkNavigation to="/LibroReclamos">
                         Libro de reclamaciones y quejas
                     </LinkNavigation>
                 </DropMenu>

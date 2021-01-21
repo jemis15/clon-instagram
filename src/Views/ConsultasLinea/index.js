@@ -8,6 +8,8 @@ import TributoMunicipal from './TributoMunicipal';
 import ComiteControlInterno from './ComiteControlInterno';
 import CodigoEtica from './CodigoEtica';
 import PresupuestoParticipativo from './PresupuestoParticipativo';
+import Saneamiento from './Saneamiento';
+import Multianual from './Multianual';
 
 export default function ConsultaLinea () {
 
@@ -16,7 +18,7 @@ export default function ConsultaLinea () {
         <div className="menu_consulta border-right pr-3">
           <div className="d-flex">
             <div className="mr-2"  style={{width:"10px", height:"2rem", background:"green"}}></div>
-            <h2>Consultas en Linea</h2>
+            <h2>Consultas en Línea</h2>
           </div>
           <ul className="list-unstyled mt-3">
             <li className="border-bottom ">
@@ -53,12 +55,12 @@ export default function ConsultaLinea () {
               </NavLink>
             </li>
             <li className="border-bottom ">
-              <NavLink to="/c/PerfilA"  activeClassName="active" className="menunav-link d-block text-decoration-none py-2 px-3">
+              <NavLink to="/c/Multianual"  activeClassName="active" className="menunav-link d-block text-decoration-none py-2 px-3">
                 Programa Multianial de Inversión
               </NavLink>
             </li>
             <li className="border-bottom  ">
-              <NavLink to="/c/PerfilA" activeClassName="active" className="menunav-link d-block text-decoration-none py-2 px-3">Saneamiento</NavLink>
+              <NavLink to="/c/Saneamiento" activeClassName="active" className="menunav-link d-block text-decoration-none py-2 px-3">Saneamiento</NavLink>
             </li>
             <li className="border-bottom">
               <NavLink to="/c/PresupuestoParticipativo"activeClassName="active" className="menunav-link d-block text-decoration-none py-2 px-3">
@@ -99,6 +101,14 @@ export default function ConsultaLinea () {
             //--------------------------------//
             <Route path="/c/PresupuestoParticipativo">
               <PresupuestoParticipativo/>
+            </Route>
+            {/* ----------------- */}
+            <Route path="/c/Saneamiento">
+              <Saneamiento/>
+            </Route>
+            //-------------------------
+            <Route path="/c/Multianual">
+              <Multianual/>
             </Route>
 
             <Redirect to="/c/tributo_municipal" />

@@ -25,6 +25,32 @@ import AgregarOperadores from './Views/AgregarOperadores';
 import Comisiones from './Views/Comisiones';
 import AgregarComisiones from './Views/AgregarComisiones';
 import Convocatoria from './Views/Convocaroria';
+import AgregarConvocatoria from './Views/AgregarConvocatoria';
+import Organigrama from './Views/Organigrama';
+import Proyectos from './Views/Proyectos';
+import DetalleProyecto from './Views/DetalleProyecto';
+import AgregarTransporte from './Views/ConsultasLinea/AgregarTransporte';
+import DefensaCivil from './Views/DefensaCivil';
+import VasoLeche from './Views/VasoLeche';
+import Policlinico from './Views/Policlinico';
+import Demuna from './Views/Demuna';
+import Omaped from './Views/Omaped';
+import AdultoMayor from './Views/AdultoMayor';
+import LibroReclamos from './Views/LibroReclamos';
+import RealizarReclamo from './Views/RealizarReclamo';
+import SeguimientoReclamo from './Views/SeguimientoReclamo';
+import SeguridadSalud from './Views/SeguridadSalud';
+import Codisec from './Views/Codisec';
+import Sucursal from './Views/Sucursal';
+import Piced from './Views/Piced';
+import SistemaControlInterno from './Views/SistemaControlInterno';
+import NormasPublicas from './Views/NormasPublicas';
+import DocImportantes from './Views/DocImportantes';
+import DocOCI from './Views/DocOCI';
+import Comunicados from './Views/Comunicados';
+import Boletines from './Views/Boletines';
+import Anuncios from './Views/Anuncios';
+import DetalleNoticia from './Views/DetalleNoticia';
 
 const Home = lazy(() => import('./Views/Home'));
 const Equipo = lazy(() => import('./Views/Equipo'));
@@ -334,9 +360,33 @@ function App() {
           <Route path="/Comisiones" render={() => <Comisiones/>}/>
           <Route path="/AgregarComisiones" render={() => <AgregarComisiones/>}/>
           <Route path="/Convocatoria" render={() => <Convocatoria/>}/>
-          {/*drago */}
+          <Route path="/AgregarConvocatoria" render={() => <AgregarConvocatoria/>}/>
+          <Route path="/Organigrama" render={() => <Organigrama/>}/>
+          <Route path="/Proyectos" render={() => <Proyectos/>}/>
+          <Route path="/DetalleProyecto" render={() => <DetalleProyecto/>}/>
+          <Route path="/AgregarTransporte" render={() => <AgregarTransporte/>}/>
+          <Route path="/DefensaCivil" render={() => <DefensaCivil/>}/>
+          <Route path="/VasoLeche" render={() => <VasoLeche/>}/>
+          <Route path="/Policlinico" render={() => <Policlinico/>}/>
+          <Route path="/Demuna" render={() => <Demuna/>}/>
+          <Route path="/Omaped" render={() => <Omaped/>}/>
+          <Route path="/AdultoMayor" render={() => <AdultoMayor/>}/>
+          <Route path="/LibroReclamos" render={() => <LibroReclamos/>}/>
+          <Route path="/RealizarReclamo" render={() => <RealizarReclamo/>}/>
+          <Route path="/SeguimientoReclamo" render={() => <SeguimientoReclamo/>}/>
+          <Route path="/SeguridadSalud" render={() => <SeguridadSalud/>}/>
+          <Route path="/Codisec" render={() => <Codisec/>}/>
+          <Route path="/Sucursal" render={() => <Sucursal/>}/>
+          <Route path="/Piced" render={() => <Piced/>}/>
+          <Route path="/SistemaControlInterno" render={() => <SistemaControlInterno/>}/>
+          <Route path="/NormasPublicas" render={() => <NormasPublicas/>}/>
+          <Route path="/DocImportantes" render={() => <DocImportantes/>}/>
+          <Route path="/DocOCI" render={() => <DocOCI/>}/>
+          <Route path="/Comunicados" render={() => <Comunicados/>}/>
+          <Route path="/Boletines" render={() => <Boletines/>}/>
+          <Route path='/Anuncios' render={() => <Anuncios/>}/>
+          <Route path='/DetalleNoticia' render={() => <DetalleNoticia/>}/>
           <Route exact path="/J1" render={() => <P1 />} />
-
         </Suspense>
       </Switch>
 

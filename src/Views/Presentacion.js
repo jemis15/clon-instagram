@@ -1,11 +1,13 @@
 import React from 'react';
-import { Col, Row, Card, Form } from 'react-bootstrap';
+import { Col, Row, Card, Form, Button } from 'react-bootstrap';
 
 import img_perfil from '../assets/images/web/images.jfif';
 
 export default function Presentacion() {
-return <div className="container border rounded my-5" style={{cursor: 'pointer', overflow: 'hidden ', width: '900px'}}>
-    <h1 className="text-center border-bottom p-3 bg-success mx-n3">Regidores de la Municipalidad de Mazamari</h1>
+return <div className="container shadow rounded my-5" style={{cursor: 'pointer', overflow: 'hidden ', width: '900px', border:'2px solid #008000'}}>
+    <div className="mx-n3" style={{backgroundColor:"#008000"}} >
+            <h3 className="text-center  p-3" style={{color:'white'}}>Regidores</h3>
+        </div>
     <div className="buscador mt-3 p-3">
         <Form>
             <Row>
@@ -30,6 +32,9 @@ return <div className="container border rounded my-5" style={{cursor: 'pointer',
                     </button>
                 </Col>
             </Row>
+            <h3 className="text-center mt-3">Regidores</h3>
+            <p className="text-justify">Son representantes de los ciudadanos, elegidos de acuerdo la Ley de Elecciones Municipales para asumir funciones normativas y de fiscalización de la gestión municipal, así como también para la presentación de iniciativas y proyectos de mejora de la gestión municipal. </p>
+
         </Form>
     </div>
 <div className="box-cardspre">

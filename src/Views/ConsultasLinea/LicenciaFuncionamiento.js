@@ -8,8 +8,8 @@ export default function LicenciaFuncionamiento() {
   const toggleModalNewGrupo = () => setModalNewGrupo(!modalNewGrupo);
     return <>
     <Tab.Container defaultActiveKey="#ConsultaRegistro">
-      <div className="cabecera border-bottom  d-flex flex-nowrap">
-                <h2 className="py-2">Licencia Funcionamiento</h2>
+      <div className="cabecera  d-flex flex-nowrap" style={{borderBottom:'1px solid #EDD016'}}>
+                <h3 className="py-2" style={{color:'green'}}>Licencia Funcionamiento</h3>
                 <div className="AgregarElemento ml-auto align-self-start">
                   <Button variant="info" onClick={toggleModalNewGrupo}>
                     <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}
@@ -17,12 +17,12 @@ export default function LicenciaFuncionamiento() {
         </div>
         <Card className="mt-3">
                 <Card.Header>
-                <Nav variant="tabs">
+                <Nav className="d-flex" variant="tabs">
                     <Nav.Item>
                         <Nav.Link action href="#ConsultaRegistro">Consulta</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link action href="#Información_RegistroC">Informacion</Nav.Link>
+                        <Nav.Link action href="#Información_RegistroC">Información</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </Card.Header>
@@ -184,7 +184,9 @@ function AcordionItem({eventKey, titulo}) {
             <i class="fas fa-pencil-alt pr-3  pl-3" onClick={showModalEdit} ></i>
             <i class="fas fa-trash-alt pr-3" onClick={showAletEliminar} ></i>
         </div>
-        <p>1. Codigo de etica N° 0012</p>
+        <ol>
+          <li><a href="#" target="_blank">Requisitos para obtener una nueva Licencia de Funcionamiento (Virtual)</a></li>
+          </ol>
     </li>
   }
   

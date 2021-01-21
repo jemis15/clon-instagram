@@ -26,19 +26,19 @@
 
 .menunav-link{
     &.active{
-        background-color: rgb(14, 14, 184);
+        background-color: #008000;
         color:white;
     }
     &:hover{
-        background-color: rgb(112, 193, 218);
+        background-color: #F8DE5E;
     }
 }
 .menuturismo-link{
     &.active{
-        background-color: var(--yellow-1000);
+        background-color: #008000;
         color:white;
     }
     &:hover{
-        background-color: var(--yellow-300);
+        background-color: #F8DE5E;
     }
 }

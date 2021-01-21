@@ -5,7 +5,7 @@
     --color3: #3b882c;
 }
 .box-cardspre{
-    height: 400px;
+    height: auto;
     width: 90%;
     margin: 20px auto;
     display: flex;
@@ -14,8 +14,7 @@
 }
 .box-cardspre .box{
     background-color: #fff;
-    height: 370px;
-    width: 25%;
+    width: 30%;
     color: #fff;
 }
 .box1{
@@ -36,8 +35,8 @@ border-bottom: 8px solid var(--color3);
         object-fit: cover;
     }
 .box .button-pre{
-padding: 8px;
-width: 70%;
+    padding: 5px;
+width: 80%;
 font-family: sans-serif;
 text-align: center;
 margin: -20px auto;

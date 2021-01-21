@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Accordion, Button, Card, Form, Modal, Nav, Tab } from 'react-bootstrap';
+import { Accordion, Button, Card, Col, Form, InputGroup, Modal, Nav, Row, Tab } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 
@@ -10,26 +10,58 @@ export default function TributoMunicipal(){
 
     return <>
        <Tab.Container  defaultActiveKey="#ConsultaRegistro">
-              <div className="cabecera border-bottom d-flex flex-nowrap">
-                <h2 className="py-2">Tributo Municipal</h2>
+              <div className="cabecera d-flex flex-nowrap" style={{borderBottom:'1px solid #EDD016'}}>
+                <h3 className="py-2" style={{color:'green'}}>Tributo Municipal</h3>
                 <div className="AgregarElemento ml-auto align-self-start">
                   <Button variant="info" onClick={toggleModalNewGrupo}>
                     <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}
                 </div>
               </div>
-            <Card className="mt-3">
+            <Card className="mt-3 ">
                 <Card.Header>
-                <Nav variant="tabs">
+                <Nav className="d-flex" variant="tabs">
                     <Nav.Item>
                         <Nav.Link action href="#ConsultaRegistro">Consulta</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link action href="#Información_RegistroC">Informacion</Nav.Link>
+                        <Nav.Link action href="#Información_RegistroC">Información</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </Card.Header>
                 <Tab.Content className="px-4 my-4">
                     <Tab.Pane eventKey="#ConsultaRegistro">
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                        <Form.Group >
+                            <Form.Label>Código Municipal</Form.Label>
+                            <Form.Control type="text" placeholder="Ingresar Código Municipal" />
+                        </Form.Group>
+                        <Form.Group >
+                            <Form.Label>Clave Virtual</Form.Label>
+                            <Form.Control type="text" placeholder="Ingresar Clave Virtual" />
+                        </Form.Group>
+                        <Form.Group >
+                            <Form.Label>Código de Verificación</Form.Label>
+                            <Row>
+                                <Col>
+                                    <Form.Control type="text" placeholder="Ingresar Código" />
+                                </Col>
+                                <Col>
+                                <InputGroup className="mb-2">
+                                    <Form.Control id="inlineFormInputGroup" placeholder="Código" />
+                                    <InputGroup.Prepend>
+                                    <InputGroup.Text><i class="fas fa-circle-notch"></i></InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                <Form.Label htmlFor="inlineFormInputGroup" srOnly>
+                                    Código
+                                </Form.Label>
+                                </InputGroup>
+                                </Col>
+                            </Row>
+                        </Form.Group>
+                        <Button variant="info" size="lg" block>Consultar</Button>
+                        </Card.Body>
+                    </Card>
                     </Tab.Pane>
 
                     <Tab.Pane eventKey="#Información_RegistroC">
@@ -77,6 +109,7 @@ function NewItem({closeModalitem}) {
             <Form.Group>
                 <Form.File id="exampleFormControlFile1"  />
             </Form.Group>
+            
             <Form.Group className="float-right">
                 <Button variant="secondary" onClick={closeModalitem}>Cancelar</Button>{' '}
                 <Button variant="primary" onClick={GuardarCambios}>Agregar</Button>{' '}

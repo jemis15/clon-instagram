@@ -16,7 +16,7 @@ import GrupoLinksTipoEditar from './GrupoLinksTipo/Editar';
 import PlatoTipicosLista from './PlatoTipicos/Lista'
 import TurismosLista from './Turismo/Lista'
 
-import Blank from '../../Views/Blank';
+import Blank from '../Blank';
 
 export default function Dashboard() {
 	return <>
