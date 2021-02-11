@@ -67,63 +67,46 @@ import imgGerencias from '../assets/images/icons/nav/municipalidad/gerencias.svg
 import imgRegidores from '../assets/images/icons/nav/municipalidad/regidores.svg';
 
 export default function AppNav() {
-    let location = useLocation();
-
-    return <nav className="nav">
+    return <nav className="nav-header">
         <ul className="mb-0 position-relative d-flex align-items-center list-unstyled">
             <ItemNavigation>
-                <NavLink
-                    className="nav-link text-small font-weight-600"
-                    to="/historia">
-                    Mazamari
-                </NavLink>
+                <NavigationItem label="Mazamari" grupo="mazamari" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
-                        <LinkItem to="/historia" image={imgHistoria} titulo="Historia" />
-                        <LinkItem to="/NavMazamari/Tours" image={imgTurismo} titulo="Turismo" />
-                        <LinkItem to="/NavMazamari/Restaurantes" image={imgRestaurante} titulo="Restaurante" />
-                        <LinkItem to="/NavMazamari/Hoteles" image={imgHoteles} titulo="Hoteles" />
-                        <LinkItem to="/NavMazamari/Agroindustrias" image={imgAgroindustria} titulo="Agroindustrias" />
-                        <LinkItem to="/NavMazamari/Platos_Tipicos" image={imgPlatosTipicos} titulo="Platos tipicos" />
-                    </div>
-                    <div className="py-4 d-none" style={{ width: '300px' }}>
-                        <LinkNavigation to="/gastronomiayturismo">Gastronomia y Turismo</LinkNavigation>
-                        <LinkNavigation to="/NavMazamari/Tours">Turismo</LinkNavigation>
-                        <LinkNavigation to="/NavMazamari/Restaurantes">Restaurantes</LinkNavigation>
-                        <LinkNavigation to="/NavMazamari/Hoteles">Hoteles</LinkNavigation>
-                        <LinkNavigation to="/NavMazamari/Agroindustrias">Agroindustrias</LinkNavigation>
-                        <LinkNavigation to="/NavMazamari/Platos_Tipicos">Platos Tipicos</LinkNavigation>
-                        <LinkNavigation to="/historia">Historia</LinkNavigation>
+                        <LinkItem to="/mazamari/historia" image={imgHistoria} titulo="Historia" />
+                        <LinkItem to="/mazamari/turismos" image={imgTurismo} titulo="Turismo" />
+                        <LinkItem to="/mazamari/restaurantes" image={imgRestaurante} titulo="Restaurante" />
+                        <LinkItem to="/mazamari/hoteles" image={imgHoteles} titulo="Hoteles" />
+                        <LinkItem to="/mazamari/agroindustrias" image={imgAgroindustria} titulo="Agroindustrias" />
+                        <LinkItem to="/mazamari/gastronomias" image={imgPlatosTipicos} titulo="Gastronomia" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
-                    Municipalidad
-                </NavLink>
+                <NavigationItem label="Municipalidad" grupo="muni" />
                 <DropMenu>
                     <Row className="py-4">
                         <Col md="4">
-                            <LinkNavigationEspecial image={imgAlcalde} titulo="Alcalde" to="/alcalde" />
-                            <LinkNavigationEspecial image={imgRegidores} titulo="Regidores" to="/" />
+                            <LinkNavigationEspecial image={imgAlcalde} titulo="Alcalde" to="/@alcalde" />
+                            <LinkNavigationEspecial image={imgRegidores} titulo="Regidores" to="/equipo" />
                             <ul className="list-unstyled">
                                 <li>
-                                    <SubLinkNavigation to="/">Funcionarios Municipales</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/funcionarios">Funcionarios Municipales</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">Comición Permanentes</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/comisiones">Comisi&oacute;n Permanentes</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">Organigrama</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/organigrama">Organigrama</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">Misión y Visión</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/vision_mision">Misi&oacute;n y Visi&oacute;n</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">Sistema de Control Interno</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/control_interno">Sistema de Control Interno</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">Convocatorias CAS</SubLinkNavigation>
+                                    <SubLinkNavigation to="/muni/convocatorias">Convocatorias CAS</SubLinkNavigation>
                                 </li>
                             </ul>
                         </Col>
@@ -134,31 +117,31 @@ export default function AppNav() {
                                     <SubLinkNavigation to="/">GERENCIA MUNICIPAL</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACION Y FINANZAS</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACI&Oacute;N Y FINANZAS</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACION TRIBUTARIA</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACI&Oacute;N TRIBUTARIA</SubLinkNavigation>
                                 </li>
                                 <li>
                                     <SubLinkNavigation to="/">GERENCIA DE PLANEAMIENTO Y PRESUPUESTO</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ASESORIA JURIDICA</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE ASESOR&Iacute;A JUR&Iacute;DICA</SubLinkNavigation>
                                 </li>
                                 <li>
                                     <SubLinkNavigation to="/">GERENCIA DE DESARROLLO URBANO Y RURAL</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO ECONOMICO TERRITORIAL</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO ECON&Oacute;MICO TERRITORIAL</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE GESTION AMBIENTAL Y SERVICIOS PUBLICOS</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE GESTION AMBIENTAL Y SERVICIOS P&Uacute;BLICOS</SubLinkNavigation>
                                 </li>
                                 <li>
                                     <SubLinkNavigation to="/">GERENCIA DE DESARROLLO SOCIAL HUMANO</SubLinkNavigation>
                                 </li>
                                 <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO DE COMUNIDADES INDIGENAS</SubLinkNavigation>
+                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO DE COMUNIDADES IN&Iacute;GENAS</SubLinkNavigation>
                                 </li>
                             </ul>
                         </Col>
@@ -166,77 +149,71 @@ export default function AppNav() {
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/Normativa">
-                    Normatividad
-                </NavLink>
+                <NavigationItem label="Normatividad" grupo="normativa" />
                 <DropMenu>
                     <div className="mb-3 pt-4 nav_link-grid">
-                        <LinkItem to="/" image={imgOrdenanzaMunicipal} titulo="Ordenanza Municipal" />
-                        <LinkItem to="/" image={imgAcuerdosConsejo} titulo="Acuerdos de Consejo" />
-                        <LinkItem to="/" image={imgResolucionConsejoMunicipal} titulo="Resoluci&oacute;n de Consejo Municipal" />
-                        <LinkItem to="/" image={imgActa} titulo="Actas de Sessi&oacute;n de Consejo Ordinario" />
-                        <LinkItem to="/" image={imgActa} titulo="Actas de Consejo Extraordinarios" />
-                        <LinkItem to="/" image={imgDecretoAlcaldia} titulo="Decretos de Alcaldia" />
-                        <LinkItem to="/" image={imgResolucionesAlcaldia} titulo="Resoluciones de Alcaldia" />
-                        <LinkItem to="/" image={imgAgendaConsejoOrdinario} titulo="Agenda de Sessi&oacute;n de Consejo Ordinario" />
-                        <LinkItem to="/" image={imgAgendaConsejoExtraOrdinario} titulo="Agenda de Sessi&oacute;n de Consejo Extraordinario" />
-                        <LinkItem to="/" image={imgResolucionesGerencia} titulo="Resoluci&oacute;n de Gerencia Municipal" />
-                        <LinkItem to="/" image={imgDirecctorio} titulo="Directivas Institucionales" />
-                        <LinkItem to="/" image={imgCCI} titulo="CCI Actas de Sessi&oacute;n Extraordinario" />
-                        <LinkItem to="/" image={imgConveniosSuscritos} titulo="Convenios Suscritos" />
+                        <LinkItem to="/normativa?tipo=ordenanzas-municipal" image={imgOrdenanzaMunicipal} titulo="Ordenanza Municipal" />
+                        <LinkItem to="/normativa?tipo=acuerdos-de-consejo" image={imgAcuerdosConsejo} titulo="Acuerdos de Consejo" />
+                        <LinkItem to="/normativa?tipo=resoluciones-de-consejo" image={imgResolucionConsejoMunicipal} titulo="Resoluci&oacute;n de Consejo Municipal" />
+                        <LinkItem to="/normativa?tipo=actas-de-sesion-ordinario" image={imgActa} titulo="Actas de Sesi&oacute;n de Consejo Ordinario" />
+                        <LinkItem to="/normativa?tipo=actas-de-sesion-extraordinario" image={imgActa} titulo="Actas de Consejo Extraordinarios" />
+                        <LinkItem to="/normativa?tipo=decretos-de-alcaldia" image={imgDecretoAlcaldia} titulo="Decretos de Alcaldia" />
+                        <LinkItem to="/normativa?tipo=resoluciones-de-alcaldia" image={imgResolucionesAlcaldia} titulo="Resoluciones de Alcaldia" />
+                        <LinkItem to="/normativa" image={imgAgendaConsejoOrdinario} titulo="Agenda de Sesi&oacute;n de Consejo Ordinario" />
+                        <LinkItem to="/normativa" image={imgAgendaConsejoExtraOrdinario} titulo="Agenda de Sesi&oacute;n de Consejo Extraordinario" />
+                        <LinkItem to="/normativa?tipo=resoluciones-de-gerencia" image={imgResolucionesGerencia} titulo="Resoluci&oacute;nes de Gerencia Municipal" />
+                        <LinkItem to="/normativa?tipo=directivas" image={imgDirecctorio} titulo="Directivas Institucionales" />
+                        <LinkItem to="/normativa" image={imgCCI} titulo="CCI Actas de Sesi&oacute;n Extraordinario" />
+                        <LinkItem to="/normativa" image={imgConveniosSuscritos} titulo="Convenios Suscritos" />
                     </div>
                     <div>
-                        <h4 className="px-4 text-small text-muted">Instrumentos de gestion</h4>
+                        <h4 className="px-4 text-small text-muted">Instrumentos de gesti&oacute;n</h4>
                         <div className="px-3 pb-4">
-                            <SubLinkItem to="/" image={imgPdf} titulo="MOF" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="ROF" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="TUPA" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="CAP" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="MAPRO" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="POI" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="RIC" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="PDC" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="PDC AL 2030" />
-                            <SubLinkItem to="/" image={imgPdf} titulo="PEI" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="MOF" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="ROF" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="TUPA" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="CAP" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="MAPRO" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="POI" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="RIC" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="PDC" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="PDC AL 2030" />
+                            <SubLinkItem to="/normativa" image={imgPdf} titulo="PEI" />
                         </div>
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
-                    Transparencia
-                </NavLink>
+                <NavigationItem label="Transparencia" grupo="transparencia" />
                 <DropMenu>
                     <div className="mb-3 pt-4 nav_link-grid">
-                        <LinkItem to="/" image={imgDatosGenerales} titulo="Datos generales" />
-                        <LinkItem to="/" image={imgPlaneamiento} titulo="Planeamiento" />
-                        <LinkItem to="/" image={imgPresupuesto} titulo="Presupuesto" />
-                        <LinkItem to="/" image={imgProyectosInversion} titulo="Proyectos de Inversi&oacute;n" />
-                        <LinkItem to="/" image={imgParticipacionCiudadana} titulo="Participacion Ciudadana" />
-                        <LinkItem to="/" image={imgPersonal} titulo="Personal" />
-                        <LinkItem to="/" image={imgContratacionBienesServicios} titulo="Contratacion de Bienes y Servicios" />
-                        <LinkItem to="/" image={imgNormasPublicas} titulo="Normas P&uacute;blicas" />
+                        <LinkItem to="/transparencia" image={imgDatosGenerales} titulo="Datos generales" />
+                        <LinkItem to="/transparencia" image={imgPlaneamiento} titulo="Planeamiento" />
+                        <LinkItem to="/transparencia" image={imgPresupuesto} titulo="Presupuesto" />
+                        <LinkItem to="/transparencia" image={imgProyectosInversion} titulo="Proyectos de Inversi&oacute;n" />
+                        <LinkItem to="/transparencia" image={imgParticipacionCiudadana} titulo="Participacion Ciudadana" />
+                        <LinkItem to="/transparencia" image={imgPersonal} titulo="Personal" />
+                        <LinkItem to="/transparencia" image={imgContratacionBienesServicios} titulo="Contratacion de Bienes y Servicios" />
+                        <LinkItem to="/transparencia" image={imgNormasPublicas} titulo="Normas P&uacute;blicas" />
                     </div>
                     <h4 className="px-3 text-color-lighter font-weight-600 text-small">Agenda</h4>
                     <div className="mb-3 nav_link-grid">
-                        <LinkItem to="/" image={imgAlcalde} titulo="Alcalde" />
-                        <LinkItem to="/" image={imgConsejoMunicipal} titulo="Consejo Municipal" />
-                        <LinkItem to="/" image={imgMunicipalidad} titulo="Municipalidad" />
+                        <LinkItem to="/transparencia" image={imgAlcalde} titulo="Alcalde" />
+                        <LinkItem to="/transparencia" image={imgConsejoMunicipal} titulo="Consejo Municipal" />
+                        <LinkItem to="/transparencia" image={imgMunicipalidad} titulo="Municipalidad" />
                     </div>
                     <h4 className="px-3 text-color-lighter font-weight-600 text-small">Documentos importantes</h4>
                     <div className="pb-4 nav_link-grid">
-                        <LinkItem to="/" image={imgDocumentosImportantes} titulo="Documentos de OCI" />
-                        <LinkItem to="/" image={imgNoticiasInstitucion} titulo="Noticias de la Instituci&oacute;n" />
-                        <LinkItem to="/" image={imgAnuncios} titulo="Anuncios" />
-                        <LinkItem to="/" image={imgComunicadosNotaDePrensa} titulo="Comunicados y Nota de Prensa" />
-                        <LinkItem to="/" image={imgBoletines} titulo="Boletines" />
+                        <LinkItem to="/transparencia" image={imgDocumentosImportantes} titulo="Documentos de OCI" />
+                        <LinkItem to="/transparencia" image={imgNoticiasInstitucion} titulo="Noticias de la Instituci&oacute;n" />
+                        <LinkItem to="/transparencia" image={imgAnuncios} titulo="Anuncios" />
+                        <LinkItem to="/transparencia" image={imgComunicadosNotaDePrensa} titulo="Comunicados y Nota de Prensa" />
+                        <LinkItem to="/transparencia" image={imgBoletines} titulo="Boletines" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/c">
-                    Informacion en linea
-                </NavLink>
+                <NavigationItem label="Informaci&oacute;n en l&iacute;nea" grupo="c" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
                         <LinkItem to="/c" image={imgTributoMunicipal} titulo="Tributo Municipal" />
@@ -246,53 +223,47 @@ export default function AppNav() {
                         <LinkItem to="/c/Licencia_Edificacion" image={imgTransportePublico} titulo="Transporte Publico" />
                         <LinkItem to="/c/ComiteControlInterno" image={imgLicenciaEdificaciones} titulo="Licencias de Edificaciones" />
                         <LinkItem to="/c/CodigoEtica" image={imgComiteControlInterno} titulo="Comite de Control Interno" />
-                        <LinkItem to="/c/CodigoEtica" image={imgCodigoEtica} titulo="Codigo Etica" />
-                        <LinkItem to="/" image={imgProgramaMultianualInvercion} titulo="Programa Multianual de Inversi&oacute;n" />
-                        <LinkItem to="/" image={imgSaneamiento} titulo="Saneamiento" />
+                        <LinkItem to="/c/CodigoEtica" image={imgCodigoEtica} titulo="C&oacute;digo &Eacute;tica" />
+                        <LinkItem to="/c" image={imgProgramaMultianualInvercion} titulo="Programa Multianual de Inversi&oacute;n" />
+                        <LinkItem to="/c" image={imgSaneamiento} titulo="Saneamiento" />
                         <LinkItem to="/c/PresupuestoParticipativo" image={imgPresupuestoParticipativo} titulo="Presupuesto Participativo" />
-                        <LinkItem to="/" image={imgSolicitudAccesoInformacion} titulo="Solicitud de Acceso a la Informaci&oacute;n" />
+                        <LinkItem to="/c" image={imgSolicitudAccesoInformacion} titulo="Solicitud de Acceso a la Informaci&oacute;n" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/">
-                    Programas
-                </NavLink>
+                <NavigationItem label="Programas" grupo="programas" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
-                        <LinkItem to="/" image={imgVasoDeLeche} titulo="Vaso de Leche" />
-                        <LinkItem to="/" image={imgDemuna} titulo="Demuna" />
-                        <LinkItem to="/" image={imgOmaped} titulo="Omaped" />
-                        <LinkItem to="/" image={imgAdultoMayor} titulo="Adulto Mayor" />
-                        <LinkItem to="/" image={imgPiced} titulo="Piced" />
-                        <LinkItem to="/" image={imgServir} titulo="Servir" />
+                        <LinkItem to="/programas/vasoleche" image={imgVasoDeLeche} titulo="Vaso de Leche" />
+                        <LinkItem to="/programas/demuna" image={imgDemuna} titulo="Demuna" />
+                        <LinkItem to="/programas/omaped" image={imgOmaped} titulo="Omaped" />
+                        <LinkItem to="/programas/adultomayor" image={imgAdultoMayor} titulo="Adulto Mayor" />
+                        <LinkItem to="/programas/piced" image={imgPiced} titulo="Piced" />
+                        <LinkItem to="/programas/servir" image={imgServir} titulo="Servir" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/login">
-                    Seguridad
-                </NavLink>
+                <NavigationItem label="Seguridad" grupo="seguridad" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
-                        <LinkItem image={imgDirectorio} to="/Direcctorio" titulo="Directorio" />
-                        <LinkItem image={imgCodisec} to="/Direcctorio" titulo="Codisec" />
-                        <LinkItem image={imgSeguridadCiudadana} to="/Serenazgo" titulo="Seguridad Ciudadana" />
-                        <LinkItem image={imgSeguridadYSaludEnElTrabajo} to="/Direcctorio" titulo="Seguridad y Salud en el Trabajo" />
-                        <LinkItem image={imgSerenazgo} to="/" titulo="Serenasgo" />
+                        <LinkItem image={imgDirectorio} to="/seguridad/Direcctorio" titulo="Directorio" />
+                        <LinkItem image={imgCodisec} to="/seguridad/codisec" titulo="Codisec" />
+                        <LinkItem image={imgSeguridadCiudadana} to="/seguridad/Serenazgo" titulo="Seguridad Ciudadana" />
+                        <LinkItem image={imgSeguridadYSaludEnElTrabajo} to="/seguridad/Direcctorio" titulo="Seguridad y Salud en el Trabajo" />
+                        <LinkItem image={imgSerenazgo} to="/seguridad/serenazgo" titulo="Serenazgo" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
-                <NavLink className="px-0 nav-link text-small font-weight-600" to="/DirectorioTelefono">
-                    Contactos
-                </NavLink>
+                <NavigationItem label="Contactos" grupo="contactos" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
-                        <LinkItem to="/" image={imgDirecctorio} titulo="Directorio de Telefono" />
-                        <LinkItem to="/" image={imgSedes} titulo="Sede Principal y Sucursal" />
-                        <LinkItem to="/" image={imgSugerencias} titulo="Sugerencias" />
-                        <LinkItem to="/" image={imgLibroReclamaciones} titulo="Libro de Reclamaciones y Quejas" />
+                        <LinkItem to="/contactos/directorio-telefono" image={imgDirecctorio} titulo="Directorio de Telefono" />
+                        <LinkItem to="/contactos/sucursales" image={imgSedes} titulo="Sede Principal y Sucursal" />
+                        <LinkItem to="/contactos/sugerencias" image={imgSugerencias} titulo="Sugerencias" />
+                        <LinkItem to="/contactos/libroreclamos" image={imgLibroReclamaciones} titulo="Libro de Reclamaciones y Quejas" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
@@ -301,21 +272,15 @@ export default function AppNav() {
 }
 
 function ItemNavigation({ children }) {
-    return <li className="mr-3 item-navigation">
+    return <li className="me-1 item-navigation">
         {children}
     </li>
 }
 
 function DropMenu({ children, className, style }) {
-    return <section className={`drop-menu rounded-lg shadow ${className}`} style={style}>
+    return <section className={`drop-menu rounded-3 shadow ${className}`} style={style}>
         {children}
     </section>
-}
-
-function LinkNavigation({ children, to }) {
-    return <NavLink className="px-4 py-2 text-small font-weight-600 text-decoration-none d-block" to={to}>
-        {children}
-    </NavLink>
 }
 
 function SubLinkNavigation({ children, to }) {
@@ -324,20 +289,20 @@ function SubLinkNavigation({ children, to }) {
     </NavLink>
 }
 
-const LinkItem = ({ image, titulo, descripcion, to }) => (
-    <Link to={to} className="nav_link-item text-decoration-none d-flex align-items-center py-2 px-3 color-text">
-        {image && <div className="mr-4">
+const LinkItem = ({ image, titulo, descripcion, to, nuevo }) => (
+    <Link to={to} className="nav_link-item text-decoration-none d-flex align-items-center py-1 px-3 color-text">
+        {image && <div className="me-3">
             <img width="32" src={image} alt="links header" />
         </div>}
         <div>
-            <p className="mb-0 text-small font-weight-600">{titulo}</p>
+            <p className="mb-0 text-small font-weight-600">{titulo} {nuevo && <SpanNuevo />}</p>
             <p className="mb-0 text-small">{descripcion}</p>
         </div>
     </Link>
 );
 const SubLinkItem = ({ to, image, titulo }) => (
-    <Link to={to} className="mr-3 px-2 rounded link-normal color-text text-decoration-none d-inline-flex align-items-center">
-        {image && <div className="mr-2">
+    <Link to={to} className="me-3 px-2 rounded link-normal color-text text-decoration-none d-inline-flex align-items-center">
+        {image && <div className="me-2">
             <img width="17" src={image} alt="links header" />
         </div>}
         <div>
@@ -346,13 +311,25 @@ const SubLinkItem = ({ to, image, titulo }) => (
     </Link>
 );
 
-const LinkNavigationEspecial = ({ to, image, titulo }) => (
+const LinkNavigationEspecial = ({ to, image, titulo, nuevo }) => (
     <Link to={to} className="nav_link-item text-decoration-none d-flex align-items-center py-2 px-3 color-text">
-        {image && <div className="mr-3">
+        {image && <div className="me-3">
             <img width="17" src={image} alt="links header" />
         </div>}
         <div>
-            <p className="mb-0 text-small font-weight-600">{titulo}</p>
+            <p className="mb-0 text-small font-weight-600">{titulo} {nuevo && <SpanNuevo />}</p>
         </div>
     </Link>
+)
+
+const NavigationItem = ({ label, grupo }) => {
+    const {pathname} = useLocation();
+    const path = pathname.split('/');
+    const active = path[1] === grupo;
+
+    return <div className={`nav__link ${active && 'active'} rounded-pill font-weight-600 text-small`}>{label}</div>
+}
+
+const SpanNuevo = () => (
+    <span className="px-2 rounded-pill small bg-danger text-white">Nuevo</span>
 )

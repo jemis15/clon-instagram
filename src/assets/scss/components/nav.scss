@@ -1,6 +1,6 @@
 @include media-breakpoint-up(xl) {
   .header.is-transparent {
-    .nav {
+    .nav-header {
       color: var(--grey-300);
 
       .btn-color {
@@ -10,27 +10,41 @@
   }
 }
 
-.nav {
+.nav-header {
   $bg-dropmenu: var(--white-bg);
-  $color-hover_link: var(--green-600);
+  $color-hover_link: $danger;
   display: none;
 
   .item-navigation {
-    .nav-link {
-      padding: 0;
+    .nav__link {
+      cursor: default;
+      padding: 0 0.5rem;
+      position: relative;
       &:hover {
         color: $color-hover_link;
+      }
+      &.active {
+        background-color: $danger;
+        color: white;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1rem;
+        bottom: -1rem;
       }
     }
     .drop-menu {
       position: absolute;
-      top: calc(100% + 1rem);
+      top: calc(100% + 0.5rem);
       left: 0;
-      right: 0;
+      transform: translateY(1rem);
+      min-width: 700px;
+      width: 100%;
       z-index: 1;
       color: var(--color-text);
       pointer-events: auto;
-      transform: translateY(1rem);
       background-color: $bg-dropmenu;
       height: 0;
       opacity: 0;
@@ -40,18 +54,11 @@
 
     &:hover {
       .drop-menu {
+        border: 1px solid $gray-200;
         transform: none;
         opacity: 1;
         height: auto;
       }
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 1rem;
-      bottom: -1rem;
     }
   }
   .nav_link-grid {

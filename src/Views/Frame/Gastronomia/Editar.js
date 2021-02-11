@@ -9,24 +9,24 @@ import Cuadro, { CuadroLeft, CuadroRight } from '../components/Cuadro';
 export default function Editar() {
     const { gastronomia_id } = useParams();
     const [gastronomia, setGastronomia] = useState(null);
-    const [loadingGastronomia, setLoadingGastronomia] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // cargar la gastronomia a editar
         async function loadGastronomia() {
             try {
                 // empezando la carga de la gastronomia
-                setLoadingGastronomia(true);
+                setLoading(true);
                 // peticion a la base de datos para obtener la gastronomia
                 const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias/${gastronomia_id}`);
                 setGastronomia(apiGastronomia);
                 // finalizando la carga de la gastronomia
-                setLoadingGastronomia(false);
+                setLoading(false);
             } catch (error) {
                 console.log(error);
 
                 // finalizando la carga de la gastronomia
-                setLoadingGastronomia(false);
+                setLoading(false);
             }
         }
 
@@ -74,7 +74,7 @@ export default function Editar() {
         setGastronomia({ ...gastronomia, publicado: e.target.checked ? 1 : 0 });
     }
 
-    if (!gastronomia) {
+    if (loading) {
         // convertirse en componente general
         return <div className="h-frame-loading d-flex justify-content-center align-items-center">
             <div>
@@ -85,18 +85,22 @@ export default function Editar() {
         </div>;
     }
 
+    if (!gastronomia) {
+        return null;
+    }
+
     return <>
         <Cuadro>
             <CuadroLeft>
                 <h4 className="mb-5">Encabezado</h4>
-                {loadingGastronomia ? <>
+                {loading ? <>
                     <div className="bg-container" style={{ height: '100vh' }}></div>
                 </> : <>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
                                 <label>Imagen</label>
                                 <label className="mb-0 border rounded upload-image text-center cursor-pointer overflow-hidden">
-                                    <img src={`/apimuni/images/gastronomias/${gastronomia.image}`} className="img-fluid" />
+                                    <img src={gastronomia.image} className="img-fluid" />
                                     <span className="upload-image-icon rounded-circle">
                                         <i className="fas fa-arrow-up" />
                                     </span>
@@ -128,8 +132,7 @@ export default function Editar() {
                                     name="contenido"
                                     value={gastronomia.contenido}
                                     onChange={handleInputChange}
-                                    className="input-markdown-editor"
-                                    rows="7"
+                                    rows="15"
                                 />
                             </Form.Group>
 
@@ -158,7 +161,7 @@ export default function Editar() {
             <CuadroRight>
                 <h4 className="mb-5">Vista preliminar</h4>
                 <p>Encabezado</p>
-                {!loadingGastronomia && <>
+                {!loading && <>
                     <Turismos>
                         <Turismo>
                             <div className="py-2 mb-3">
@@ -166,7 +169,7 @@ export default function Editar() {
                                     <Col md="5" className="align-self-center section-image">
                                         <div className="content-image-gastronomia-right overflow-hidden">
                                             {gastronomia.image ? (
-                                                <img src={`/apimuni/images/gastronomias/${gastronomia.image}`}
+                                                <img src={gastronomia.image}
                                                     className="img-fluid rounded-lg img-thumbnail"
                                                     alt="lugar turistico"
                                                 />
@@ -283,7 +286,7 @@ function ImageUtilitarios({ image, onDelete }) {
     return <>
         <div className="content-image-markdown d-flex flex-center border position-relative">
             <img
-                src={`/apimuni/images/gastronomias/${image.url}`}
+                src={image.url}
                 className="cursor-pointer"
                 onClick={toggle}
                 alt="markdown utilitarios"

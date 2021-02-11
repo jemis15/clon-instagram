@@ -10,8 +10,8 @@ export default function PresupuestoParticipativo(){
 
     return <>
  <Tab.Container  defaultActiveKey="#ConsultaRegistro">
-            <div className="cabecera border-bottom">
-                <h2 className="py-2">Presupuesto Participativo</h2>
+            <div className="cabecera " style={{borderBottom:'1px solid #EDD016'}}>
+                <h3 className="py-2" style={{ color:'green'}}>Presupuesto Participativo</h3>
                 <div className="AgregarElemento float-right mt-n5">
                 <Button variant="info" onClick={toggleModalNewGrupo}>
                     <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}
@@ -19,12 +19,12 @@ export default function PresupuestoParticipativo(){
               </div>
             <Card className="mt-3">
                 <Card.Header>
-                <Nav variant="tabs">
+                <Nav className="d-flex" variant="tabs">
                     <Nav.Item>
                         <Nav.Link action href="#ConsultaRegistro">Consulta</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link action href="#Información_RegistroC">Informacion</Nav.Link>
+                        <Nav.Link action href="#Información_RegistroC">Información</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </Card.Header>

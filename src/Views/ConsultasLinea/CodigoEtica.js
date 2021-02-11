@@ -7,8 +7,8 @@ export default function CodigoEtica() {
     const [modalNewGrupo, setModalNewGrupo] = useState(false);
     const toggleModalNewGrupo = ()=> setModalNewGrupo(!modalNewGrupo);
     return <>
-    <div className="cabecera border-bottom mb-3 d-flex flex-nowrap">
-        <h2 className="py-2"> Código de Ética</h2>
+    <div className="cabecera  mb-3 d-flex flex-nowrap" style={{borderBottom:'1px solid #EDD016'}}>
+        <h3 className="py-2" style={{color:'green'}}> Código de Ética</h3>
         <div className="AgregarElemento ml-auto align-self-start">
             <Button variant="info" onClick={toggleModalNewGrupo}>
                 <i className="fas fa-plus pr-2"></i> Nueva información

@@ -20,16 +20,16 @@ export default function BannerCarousel({
         <div
             className="img-container d-flex justify-content-center align-items-center">
             <img
-                src={`/apimuni/images/carouselheader/${carousel.image}`}
-                className="h-100"
+                src={carousel.image}
                 loading="lazy"
                 alt="banner header"
+                style={{ minWidth: '100%', minHeight: '100%' }}
             />
         </div>
-        <div className="description-container container py-2">
+        {/* <div className="description-container container py-2">
             <h3 className="title">{carousel.titulo}</h3>
             <p className="description mb-0">{carousel.descripcion}</p>
-        </div>
+        </div> */}
         {user && user.is_admin === 1 && <div
             className="position-absolute p-3"
             style={{
@@ -172,7 +172,7 @@ function EditarCarousel({ data, updateCarousel, closeModal, showAlert }) {
                 }}>
                 {image.base64
                     ? <img src={image.base64} className="img-fluid" alt="carousel" />
-                    : <img src={`/apimuni/images/carouselheader/${carousel.image}`} className="img-fluid" alt="carousel" />
+                    : <img src={carousel.image} className="img-fluid" alt="carousel" />
                 }
                 <input
                     type="file"

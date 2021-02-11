@@ -23,9 +23,9 @@ export default function Index({ user, settings, updateSettings, showAlert, showT
                         <div className="py-2 px-3 d-flex align-items-center">
                             <div className="mr-2">
                                 <Avatar
-                                    initials="F"
+                                    initials={user.nombre[0]}
                                     size="sm"
-                                    image={user.image && `/apimuni/images/faces/${user.image}`}
+                                    image={user.image}
                                 />
                             </div>
                             <div className="overflow-hidden">

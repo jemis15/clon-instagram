@@ -9,13 +9,17 @@ export default function Gastronomia() {
     const [gastronomia, setGastronomia] = useState(null);
 
     useEffect(() => {
+        const source = Axios.CancelToken.source();
         async function loadGastronomia() {
-            const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias/${getTitulo(titulo)}/titulo`);
+            const { data: apiGastronomia } = await Axios.get(`/apimuni/gastronomias/titulo/${getTitulo(titulo)}`, {
+                cancelToken: source.token
+            });
             setGastronomia(apiGastronomia);
         }
-
         loadGastronomia();
-    }, []);
+
+        return source.cancel('Cancelado');
+    }, [titulo]);
 
     function getTitulo(titulo) {
         let titulo_formateado = titulo.toUpperCase();
@@ -28,10 +32,6 @@ export default function Gastronomia() {
         });
 
         return letra_completo;
-    }
-
-    function getImageFromApi(url) {
-        return '/apimuni/images/gastronomias/' + url;
     }
 
     if (!gastronomia) {
@@ -51,7 +51,7 @@ export default function Gastronomia() {
                         </p>
                     </Col>
                     <Col md="5" className="align-self-center">
-                        <img src={getImageFromApi(gastronomia.image)} className="img-fluid rounded-lg" alt="gastonomia y turismo" />
+                        <img src={gastronomia.image} className="img-fluid rounded-lg" alt="gastonomia y turismo" />
                     </Col>
                 </Row>
             </Container>

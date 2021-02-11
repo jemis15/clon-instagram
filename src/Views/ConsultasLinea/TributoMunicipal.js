@@ -1,169 +1,155 @@
-import React, { useState } from 'react';
-import { Accordion, Button, Card, Form, Modal, Nav, Tab } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss';
+import Axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { Accordion, AccordionContext, Card, ListGroup, Tab, Tabs, useAccordionToggle } from 'react-bootstrap';
 
-export default function TributoMunicipal(){
-    const [modalNewGrupo, setModalNewGrupo] = useState(false);
+export default function TributoMunicipal() {
+    const [group1, setGroup1] = useState([]);
+    const [group2, setGroup2] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const toggleModalNewGrupo = () => setModalNewGrupo(!modalNewGrupo);
+    useEffect(() => {
+        const source = Axios.CancelToken.source();
+        async function loadFiles() {
+            try {
+                setLoading(true);
+                const [apiGroup1, apiGroup2] = await Promise.all([
+                    Axios.get('/apimuni/informacion?section=tributo-municipal&grupo=1', { cancelToken: source.token }).then(({ data }) => data),
+                    Axios.get('/apimuni/informacion?section=tributo-municipal&grupo=2', { cancelToken: source.token }).then(({ data }) => data),
+                ]);
+                setGroup1(apiGroup1);
+                setGroup2(apiGroup2);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                if (Axios.isCancel()) { return; }
+                setError(' Sucedio algo inesperado, vuelve a intentarlo mas tarde.');
+                console.log(error);
+            }
+        }
+        loadFiles();
+
+        return () => source.cancel('Cancelado');
+    }, []);
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+    }
 
     return <>
-       <Tab.Container  defaultActiveKey="#ConsultaRegistro">
-              <div className="cabecera border-bottom d-flex flex-nowrap">
-                <h2 className="py-2">Tributo Municipal</h2>
-                <div className="AgregarElemento ml-auto align-self-start">
-                  <Button variant="info" onClick={toggleModalNewGrupo}>
-                    <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}
+        <h3 className="mb-4 mt-5">Tributo Municipal</h3>
+        <Tabs className="d-flex" defaultActiveKey="home" transition={false} id="noanim-tab-example">
+            {/* Tab Consulta */}
+            <Tab eventKey="home" title="Consulta" className="bg-white border rounded-bottom border-top-0 px-3 py-4">
+                <div className="card mx-auto mb-4" style={{ maxWidth: '350px' }}>
+                    <div className="card-body">
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <label className="form-label">C&oacute;digo Municipal</label>
+                                <input className="form-control" type="text" />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Clave Virtual</label>
+                                <input className="form-control" type="password" />
+                            </div>
+                            <button type="submit" className="btn btn-primary w-100">Ingresar</button>
+                        </form>
+                    </div>
                 </div>
-              </div>
-            <Card className="mt-3">
-                <Card.Header>
-                <Nav variant="tabs">
-                    <Nav.Item>
-                        <Nav.Link action href="#ConsultaRegistro">Consulta</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link action href="#Información_RegistroC">Informacion</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-                </Card.Header>
-                <Tab.Content className="px-4 my-4">
-                    <Tab.Pane eventKey="#ConsultaRegistro">
-                    </Tab.Pane>
+                <p className="text-small mb-0">
+                    Si desconoces tu C&oacute;digo Municipal y/o Clave Virtual, puedes solicitarlo a trav&eacute;s de
+                    la Unidad de Cobranzas en la Gerencia de Gesti&oacute;n Tributaria: llamando al
+                    {' '}<span className="text-primary fw-bold">(064) 548187</span> o escr&iacute;benos tu nombre completo y escanea tu documento de identidad a
+                    {' '}<span className="text-primary fw-bold">munimazamarimcm@hotmail.com</span>.
+                </p>
+            </Tab>
 
-                    <Tab.Pane eventKey="#Información_RegistroC">
-                    <Accordion defaultActiveKey="0" >
-                      <AcordionItem eventKey="0" titulo="Declaración de Deudad de Cobranza Dudosa"/>
-                      <AcordionItem eventKey="1" titulo="Caracteristicas y Forma para Determinar Impuesto Predial"/>
-                      <AcordionItem eventKey="2" titulo="Formas y Lugares de pago"/>
-                      <AcordionItem eventKey="3" titulo="Indicaciones para el llenado de los formularios  Icluyendo Ejemplos Práctivos"/>
-                      <AcordionItem eventKey="4" titulo="Impuestos as Patrimonio Vehicular"/>
-                      <AcordionItem eventKey="5" titulo="Fraccionamiento"/>
-                      <AcordionItem eventKey="6" titulo="Legislación, Tablas, Planos, Tasas, Otros Docuemntos Regulatorios"/>
-                    </Accordion>
-                      
-                    </Tab.Pane>
-                </Tab.Content>
-            </Card>
-            </Tab.Container>
+            {/* Tab Documentos */}
+            <Tab eventKey="profile" title="Informaci&oacute;n" className="bg-white border rounded-bottom border-top-0 px-3 py-4">
+                {loading ? <p>Cargando...</p> : <>
+                    {error ? <p className="text-danger">{error}</p> : <>
+                        {Array.isArray(group1) && group1.length > 0
+                            ? <>
+                                <h4 className="mb-3">Documentos</h4>
+                                <Accordion className="mb-5">
+                                    {group1.map(grupo => (
+                                        <Card className="mb-1">
+                                            <CardHeaderToggle label={grupo.nombre} number={grupo.files.length} eventKey={grupo.ids} />
+                                            <Accordion.Collapse eventKey={grupo.ids}>
+                                                <ListGroup variant="flush">
+                                                    {grupo.files.map(file => (
+                                                        <ListGroup.Item className="d-flex align-items-center">
+                                                            <div className="font-weight-600">{file.nombre}</div>
+                                                            <div className="ms-auto">
+                                                                {file.pdf && <ButtonDrowload url={file.pdf} />}
+                                                            </div>
+                                                        </ListGroup.Item>
+                                                    ))}
+                                                </ListGroup>
+                                            </Accordion.Collapse>
+                                        </Card>
+                                    ))}
+                                </Accordion>
+                            </>
+                            : <p>No encontranos nada que mostrar.</p>
+                        }
 
-            <Modal show={modalNewGrupo} onHide={toggleModalNewGrupo}  animation={false}>
-                <Modal.Header closeButton style={{background:'#DFE8F3'}}>Nueva Información</Modal.Header>
-                <Modal.Body>
-                    <NewGrupo closeModal={toggleModalNewGrupo} />
-                </Modal.Body>
-            </Modal>
+                        {Array.isArray(group2) && group2.length > 0 && <>
+                            <h4 className="mb-3">Consejo Nacional de Tasaciones</h4>
+                            <Accordion className="mb-5">
+                                {group2.map(grupo => (
+                                    <Card className="mb-1">
+                                        <CardHeaderToggle label={grupo.nombre} number={grupo.files.length} eventKey={grupo.ids} />
+                                        <Accordion.Collapse eventKey={grupo.ids}>
+                                            <ListGroup variant="flush">
+                                                {grupo.files.map(file => (
+                                                    <ListGroup.Item className="d-flex align-items-center">
+                                                        <div className="font-weight-600">{file.nombre}</div>
+                                                        <div className="ms-auto">
+                                                            {file.pdf && <ButtonDrowload url={file.pdf} />}
+                                                        </div>
+                                                    </ListGroup.Item>
+                                                ))}
+                                            </ListGroup>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                ))}
+                            </Accordion>
+                        </>}
+                    </>}
+                </>}
+            </Tab>
+        </Tabs>
     </>
-    }
-    function NewGrupo({closeModal}) {
-        return <Form>
-            <Form.Group>
-                <label> Descripción</label>
-            <Form.Control type="text" placeholder="Ingresa Descripción" />
-            </Form.Group>
-            <Form.Group className="float-right">
-                <Button variant="secondary" onClick={closeModal}>Cancelar</Button>{' '}
-                <Button variant="primary" onClick={GuardarCambios}>Agregar</Button>{' '}
-            </Form.Group>
-        </Form>
-}
-function NewItem({closeModalitem}) {
-        return <Form>
-            <Form.Group>
-                <label> Descripción</label>
-            <Form.Control type="text" placeholder="Ingresa Descripción" />
-            </Form.Group>
-            <Form.Group>
-                <Form.File id="exampleFormControlFile1"  />
-            </Form.Group>
-            <Form.Group className="float-right">
-                <Button variant="secondary" onClick={closeModalitem}>Cancelar</Button>{' '}
-                <Button variant="primary" onClick={GuardarCambios}>Agregar</Button>{' '}
-            </Form.Group>
-        </Form>
-}
-function AcordionItem({eventKey, titulo}) {
-    const [modalNewItem, setModalNewItem] = useState(false);
-
-    function toggleModalNewItem() {
-        setModalNewItem(!modalNewItem);
-    }
-
-
-  return <>
-  <Card>
-  <Accordion.Toggle as={Card.Header} eventKey={eventKey}  className="Simbolo d-flex flex-nowrap">
-    <b>{titulo} </b>
-    <div className="ml-auto">
-        <i class="far fa-plus pr-3" onClick={toggleModalNewItem}></i>
-    <i class="fas fa-pencil-alt pr-3" onClick={toggleModalNewItem} ></i>
-    <i class="fas fa-trash-alt pr-3" onClick={showAletEliminar} ></i>
-    <span className="align-self-start">
-    <i class="far fa-angle-down"></i>
-    </span>
-    </div>
-  </Accordion.Toggle>
-  <Accordion.Collapse eventKey={eventKey}>
-    <Card.Body>
-        <div  className="clearfix">
-            <ul className="list-unstyled mt-2">
-               <File showModalEdit={toggleModalNewItem} />
-               <File showModalEdit={toggleModalNewItem}/>
-            </ul>
-        </div>
-    </Card.Body>
-  </Accordion.Collapse>
-</Card>
-
-<Modal show={modalNewItem} onHide={toggleModalNewItem}  animation={false}>
-              <Modal.Header closeButton style={{background:'#DFE8F3'}}>
-                  Agregar Información
-              </Modal.Header>
-              <Modal.Body>
-                  <NewItem closeModalitem={toggleModalNewItem} />
-              </Modal.Body>
-          </Modal>
-</>
-}
-function File({showModalEdit}) {
-    return <li className="border-bottom py-2">
-        <div className="float-right">
-            <Button type="submit" className="btn-success btn-sm">
-                Descargar
-                <i className="far fa-file-pdf pl-2"/>
-            </Button>
-            <i class="fas fa-pencil-alt pr-3  pl-3" onClick={showModalEdit} ></i>
-            <i class="fas fa-trash-alt pr-3" onClick={showAletEliminar} ></i>
-        </div>
-        <p>1. Codigo de etica N° 0012</p>
-    </li>
-}
-function showAletEliminar() {
-    Swal.fire({
-        title: '¿Desea Eliminar?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar!',
-        confirmButtonText: 'Si, Eliminalo!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Eliminado',
-            'correctamente',
-            'success'
-          )
-        }
-      })
-  }
-function GuardarCambios() {
-    Swal.fire({
-        icon: 'success',
-        title: 'Se Guardaron los cambios correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
 }
 
+// hecho con la documentacion de react-bootstrap
+function CardHeaderToggle({ label, number, eventKey, callback }) {
+    const currentEventKey = useContext(AccordionContext);
+
+    const decoratedOnClick = useAccordionToggle(
+        eventKey,
+        () => callback && callback(eventKey),
+    );
+
+    const isCurrentEventKey = currentEventKey === eventKey;
+
+    return (
+        <Card.Header className="clearfix" onClick={decoratedOnClick}>
+            <div className="float-start">{label}</div>
+            <div className="float-end">
+                {number > 0 && <span className="me-3 px-3 py-1 text-small bg-danger text-white d-online-block rounded-pill">{number} archivos</span>}
+                {isCurrentEventKey
+                    ? <i className="far fa-minus" />
+                    : <i className="far fa-plus" />
+                }
+            </div>
+        </Card.Header>
+    );
+}
+
+const ButtonDrowload = ({ url }) => (
+    <a className="btn btn-sm btn-primary" href={url} target="_blank" rel="noopener noreferrer">
+        <i className="far fa-file-pdf" /> {'Descargar'}
+    </a>
+) 

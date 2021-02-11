@@ -47,7 +47,7 @@ export default function Inicio({ user, showAlert }) {
         async function loadCarouselLinks() {
             try {
                 // api que nos muestra los resultados de los grupo links
-                const { data: apiCarouselLinks } = await Axios.get(`/apimuni/carousellinks/grupo/principal`, {cancelToken: source.token});
+                const { data: apiCarouselLinks } = await Axios.get(`/apimuni/carousellinks/grupo/principal`, { cancelToken: source.token });
                 // guardando los valores para ser recorridos y mostrados
                 setCarouselLinks(apiCarouselLinks);
                 // se a terminado de obtener y cargar los items de la base de datos
@@ -161,95 +161,97 @@ export default function Inicio({ user, showAlert }) {
             ))}
         </Carousel>
 
-        <div className="py-3 my-5 container border rounded-lg bg-white">
-            <div className="mb-4 d-flex align-items-center">
-                <h4 className="t4">
-                    <span className="mr-2"><i className="fas fa-link text-primary" /></span>
-                    <span>Links de interes</span>
-                </h4>
-                {user && user.is_admin === 1 && <div className="ml-auto">
-                    <Link to="/frame/linkintereses">
-                        <i className="far fa-cog fa-lg" />
-                    </Link>
-                </div>}
+        {false && (
+            <div className="py-3 my-5 container border rounded-lg bg-white">
+                <div className="mb-4 d-flex align-items-center">
+                    <h4 className="t4">
+                        <span className="mr-2"><i className="fas fa-link text-primary" /></span>
+                        <span>Links de interes</span>
+                    </h4>
+                    {user && user.is_admin === 1 && <div className="ml-auto">
+                        <Link to="/frame/linkintereses">
+                            <i className="far fa-cog fa-lg" />
+                        </Link>
+                    </div>}
+                </div>
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlay
+                    autoPlaySpeed={3000}
+                    centerMode={false}
+                    className="links"
+                    containerClass=""
+                    dotListClass=""
+                    draggable={false}
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="px-2"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={false}
+                    renderDotsOutside
+                    responsive={{
+                        desktop: {
+                            breakpoint: {
+                                max: 3000,
+                                min: 1024
+                            },
+                            items: 7,
+                            partialVisibilityGutter: 40
+                        },
+                        mobile: {
+                            breakpoint: {
+                                max: 464,
+                                min: 0
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 30
+                        },
+                        tablet: {
+                            breakpoint: {
+                                max: 1024,
+                                min: 464
+                            },
+                            items: 4,
+                            partialVisibilityGutter: 30
+                        }
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={2}
+                    swipeable>
+                    {carouselLinks.map(link => (
+                        <CarouselLink key={link.id} link={link} />
+                    ))}
+                </Carousel>
             </div>
-            <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlay
-                autoPlaySpeed={3000}
-                centerMode={false}
-                className="links"
-                containerClass=""
-                dotListClass=""
-                draggable={false}
-                focusOnSelect={false}
-                infinite
-                itemClass="px-2"
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={false}
-                renderDotsOutside
-                responsive={{
-                    desktop: {
-                        breakpoint: {
-                            max: 3000,
-                            min: 1024
-                        },
-                        items: 7,
-                        partialVisibilityGutter: 40
-                    },
-                    mobile: {
-                        breakpoint: {
-                            max: 464,
-                            min: 0
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30
-                    },
-                    tablet: {
-                        breakpoint: {
-                            max: 1024,
-                            min: 464
-                        },
-                        items: 4,
-                        partialVisibilityGutter: 30
-                    }
-                }}
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={2}
-                swipeable>
-                {carouselLinks.map(link => (
-                    <CarouselLink key={link.id} link={link} />
-                ))}
-            </Carousel>
-        </div>
+        )}
 
-        <div className="py-5 bg-red-700 bg-before position-relative overflow-hidden mb-5">
+        <div className="py-5 bg-white position-relative overflow-hidden mb-5">
             <Container>
                 <Row className="align-items-center">
                     <Col lg={{ span: 6, order: 2 }}>
                         <img
-                            className="mb-4 mb-lg-0 w-100 rounded-lg"
+                            className="mb-4 mb-lg-0 w-100 rounded-3 img-thumbnail"
                             src={saludoOfUser.image}
                             alt="alcalde de mazamari"
                             loading="lazy"
                         />
                     </Col>
                     <Col lg={{ span: 6, order: 1 }}>
-                        <h2 className="t1 mb-0 text-white text-center">
+                        <h2 className="t1 mb-0 text-center">
                             {saludoOfUser.nombre}
                         </h2>
-                        <h3 className="mb-4 text-center" style={{ color: 'var(--yellow-300)' }}>
+                        <h3 className="mb-4 text-center text-danger">
                             {saludoOfUser.cargo}
                         </h3>
-                        <p className="mb-0 text-justify" style={{ color: 'var(--red-100)' }}>
-                            <span className="mr-2" style={{ color: 'var(--yellow-300)' }}>
+                        <p className="mb-0">
+                            <span className="mr-2" style={{ color: 'var(--red-400)' }}>
                                 <i className="far fa-quote-left fa-lg" />
                             </span>
                             {saludoOfUser.mensaje}
-                            <span className="ml-2" style={{ color: 'var(--yellow-300)' }}>
+                            <span className="ml-2" style={{ color: 'var(--red-400)' }}>
                                 <i className="far fa-quote-right fa-lg" />
                             </span>
                         </p>
@@ -261,10 +263,10 @@ export default function Inicio({ user, showAlert }) {
         <Container className="mb-5">
             <Row>
                 <Col lg="6">
-                    <div className="px-4 py-3 h-100 border rounded-lg bg-white">
-                        <div className="mb-2 d-flex">
-                            <h4 className="t4 mb-0">Markers 1</h4>
-                            {user && user.is_admin === 1 && <div className="ml-auto">
+                    <div className="px-4 py-3 h-100 border rounded-3 bg-white">
+                        <div className="mb-4 d-flex">
+                            <h4 className="t4 mb-0">Markers</h4>
+                            {user && user.is_admin === 1 && <div className="ms-auto">
                                 <Link to="/frame/markers">
                                     <i className="far fa-cog fa-lg" />
                                 </Link>
@@ -276,7 +278,7 @@ export default function Inicio({ user, showAlert }) {
                                     <Marker
                                         key={marker.id}
                                         url={marker.url}
-                                        image={`/apimuni/images/markers/${marker.image}`}
+                                        image={marker.image}
                                         nombre={marker.nombre}
                                         descripcion={marker.descripcion}
                                     />
@@ -286,9 +288,9 @@ export default function Inicio({ user, showAlert }) {
                     </div>
                 </Col>
                 <Col lg="6">
-                    <div className="px-4 py-3 h-100 border rounded-lg bg-white">
-                        <div className="mb-2 d-flex">
-                            <h4 className="t4 mb-0">Markers 2</h4>
+                    <div className="px-4 py-3 h-100 border rounded-3 bg-white">
+                        <div className="mb-4 d-flex">
+                            <h4 className="t4 mb-0">Mazamari En L&iacute;nea</h4>
                             {user && user.is_admin === 1 && <div className="ml-auto">
                                 <Link to="/frame/markers">
                                     <i className="far fa-cog fa-lg" />
@@ -300,7 +302,7 @@ export default function Inicio({ user, showAlert }) {
                                 <Marker
                                     key={marker.id}
                                     url={marker.url}
-                                    image={`/apimuni/images/markers/${marker.image}`}
+                                    image={marker.image}
                                     nombre={marker.nombre}
                                     descripcion={marker.descripcion}
                                 />
@@ -311,202 +313,212 @@ export default function Inicio({ user, showAlert }) {
             </Row>
         </Container>
 
-        <div className="py-5">
-            <div className="mb-4 text-center">
-                <h2 className="t1">Noticia</h2>
-                <a href="#titulo" className="btn btn-link btn-sm">Ver m&aacute;s</a>
+        {filtarPorTipoContenido(posts, 'noticia').length > 0 && (
+            <div className="py-5">
+                <div className="mb-4 container d-flex justify-content-between align-items-center">
+                    <h2 className="t1">Noticias</h2>
+                    <Link to="/posts?tipo=noticia" className="btn btn-outline-danger">Ver m&aacute;s</Link>
+                </div>
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlay={true}
+                    autoPlaySpeed={5000}
+                    centerMode={false}
+                    className="mb-4"
+                    containerClass="container"
+                    dotListClass=""
+                    draggable={false}
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="pr-4"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={true}
+                    renderDotsOutside
+                    responsive={{
+                        desktop: {
+                            breakpoint: {
+                                max: 3000,
+                                min: 1024
+                            },
+                            items: 4,
+                            partialVisibilityGutter: 40
+                        },
+                        tablet: {
+                            breakpoint: {
+                                max: 1024,
+                                min: 464
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 30
+                        },
+                        mobile: {
+                            breakpoint: {
+                                max: 464,
+                                min: 0
+                            },
+                            items: 1,
+                            partialVisibilityGutter: 30
+                        }
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable>
+                    {filtarPorTipoContenido(posts, 'noticia').map(post => (
+                        <CardPost
+                            key={post.id}
+                            type={post.tipo_contenido}
+                            titulo={post.titulo}
+                            image={post.image}
+                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
+                        />
+                    ))}
+                </Carousel>
             </div>
-            <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlay={true}
-                autoPlaySpeed={5000}
-                centerMode={false}
-                className="mb-4"
-                containerClass="container"
-                dotListClass=""
-                draggable={false}
-                focusOnSelect={false}
-                infinite
-                itemClass="pr-4"
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={true}
-                renderDotsOutside
-                responsive={{
-                    desktop: {
-                        breakpoint: {
-                            max: 3000,
-                            min: 1024
-                        },
-                        items: 4,
-                        partialVisibilityGutter: 40
-                    },
-                    tablet: {
-                        breakpoint: {
-                            max: 1024,
-                            min: 464
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30
-                    },
-                    mobile: {
-                        breakpoint: {
-                            max: 464,
-                            min: 0
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30
-                    }
-                }}
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable>
-                {filtarPorTipoContenido(posts, 'noticia').map(post => (
-                    <CardPost
-                        key={post.id}
-                        type={post.tipo_contenido}
-                        titulo={post.titulo}
-                        image={post.image}
-                        fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                    />
-                ))}
-            </Carousel>
-        </div>
+        )}
 
-        <div className="py-5 bg-white">
-            <div className="text-center mb-4">
-                <h2 className="t1">Videos</h2>
-                <a href="#titulo" className="btn btn-link btn-sm">Ver m&aacute;s <i className="fas fa-long-arrow-alt-right" /></a>
+        {filtarPorTipoContenido(posts, 'video').length > 0 && (
+            <div className="py-5">
+                <div className="mb-4 container d-flex justify-content-between align-items-center">
+                    <h2 className="t1">Videos</h2>
+                    <Link to="/posts?tipo=video" className="btn btn-outline-danger">
+                        {'Ver mas'}
+                    </Link>
+                </div>
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlay={true}
+                    autoPlaySpeed={5000}
+                    centerMode={false}
+                    className="mb-4"
+                    containerClass="container"
+                    dotListClass=""
+                    draggable={false}
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="pr-4"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={true}
+                    renderDotsOutside
+                    responsive={{
+                        desktop: {
+                            breakpoint: {
+                                max: 3000,
+                                min: 1024
+                            },
+                            items: 4,
+                            partialVisibilityGutter: 40
+                        },
+                        tablet: {
+                            breakpoint: {
+                                max: 1024,
+                                min: 464
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 30
+                        },
+                        mobile: {
+                            breakpoint: {
+                                max: 464,
+                                min: 0
+                            },
+                            items: 1,
+                            partialVisibilityGutter: 30
+                        }
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable>
+                    {filtarPorTipoContenido(posts, 'video').map(post => (
+                        <CardPost
+                            key={post.id}
+                            type={post.tipo_contenido}
+                            titulo={post.titulo}
+                            image={post.image}
+                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
+                        />
+                    ))}
+                </Carousel>
             </div>
-            <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlay={true}
-                autoPlaySpeed={5000}
-                centerMode={false}
-                className="mb-4"
-                containerClass="container"
-                dotListClass=""
-                draggable={false}
-                focusOnSelect={false}
-                infinite
-                itemClass="pr-4"
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={true}
-                renderDotsOutside
-                responsive={{
-                    desktop: {
-                        breakpoint: {
-                            max: 3000,
-                            min: 1024
-                        },
-                        items: 4,
-                        partialVisibilityGutter: 40
-                    },
-                    tablet: {
-                        breakpoint: {
-                            max: 1024,
-                            min: 464
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30
-                    },
-                    mobile: {
-                        breakpoint: {
-                            max: 464,
-                            min: 0
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30
-                    }
-                }}
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable>
-                {filtarPorTipoContenido(posts, 'video').map(post => (
-                    <CardPost
-                        key={post.id}
-                        type={post.tipo_contenido}
-                        titulo={post.titulo}
-                        image={post.image}
-                        fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                    />
-                ))}
-            </Carousel>
-        </div>
+        )}
 
-        <div className="py-5">
-            <div className="text-center mb-4">
-                <h2 className="t1">Programas e Iniciativa</h2>
-                <a href="#titulo" className="btn btn-link btn-sm">Ver m&aacute;s <i className="fas fa-long-arrow-alt-right" /></a>
+        {filtarPorTipoContenido(posts, 'image').length > 0 && (
+            <div className="py-5">
+                <div className="mb-4 container d-flex justify-content-between align-items-center">
+                    <h2 className="t1">Programas e Iniciativa</h2>
+                    <Link to="/posts?tipo=programa" className="btn btn-outline-danger">
+                        {'Ver mas'}
+                    </Link>
+                </div>
+                <Carousel
+                    additionalTransfrom={0}
+                    arrows
+                    autoPlay={true}
+                    autoPlaySpeed={5000}
+                    centerMode={false}
+                    className="mb-4"
+                    containerClass="container"
+                    dotListClass=""
+                    draggable={false}
+                    focusOnSelect={false}
+                    infinite
+                    itemClass="ps-4"
+                    keyBoardControl
+                    minimumTouchDrag={80}
+                    renderButtonGroupOutside={true}
+                    renderDotsOutside
+                    responsive={{
+                        desktop: {
+                            breakpoint: {
+                                max: 3000,
+                                min: 1024
+                            },
+                            items: 4,
+                            partialVisibilityGutter: 40
+                        },
+                        tablet: {
+                            breakpoint: {
+                                max: 1024,
+                                min: 464
+                            },
+                            items: 2,
+                            partialVisibilityGutter: 30
+                        },
+                        mobile: {
+                            breakpoint: {
+                                max: 464,
+                                min: 0
+                            },
+                            items: 1,
+                            partialVisibilityGutter: 30
+                        }
+                    }}
+                    showDots={false}
+                    sliderClass=""
+                    slidesToSlide={1}
+                    swipeable>
+                    {filtarPorTipoContenido(posts, 'image').map(post => (
+                        <CardPost
+                            key={post.id}
+                            type={post.tipo_contenido}
+                            titulo={post.titulo}
+                            image={post.image}
+                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
+                        />
+                    ))}
+                </Carousel>
             </div>
-            <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlay={true}
-                autoPlaySpeed={5000}
-                centerMode={false}
-                className="mb-4"
-                containerClass="container"
-                dotListClass=""
-                draggable={false}
-                focusOnSelect={false}
-                infinite
-                itemClass="pr-4"
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={true}
-                renderDotsOutside
-                responsive={{
-                    desktop: {
-                        breakpoint: {
-                            max: 3000,
-                            min: 1024
-                        },
-                        items: 4,
-                        partialVisibilityGutter: 40
-                    },
-                    tablet: {
-                        breakpoint: {
-                            max: 1024,
-                            min: 464
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30
-                    },
-                    mobile: {
-                        breakpoint: {
-                            max: 464,
-                            min: 0
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30
-                    }
-                }}
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable>
-                {filtarPorTipoContenido(posts, 'image').map(post => (
-                    <CardPost
-                        key={post.id}
-                        type={post.tipo_contenido}
-                        titulo={post.titulo}
-                        image={post.image}
-                        fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                    />
-                ))}
-            </Carousel>
-        </div>
+        )}
 
-        <div className="py-5 bg-green-200 text-center">
-            <a href="#libroreclamaciones" className="text-decoration-none d-inline-flex justify-content-center align-items-center">
-                <img className="mr-3" width="50" src="https://www.flaticon.es/svg/static/icons/svg/2232/2232725.svg" alt="libro" />
-                <h2>Libro de reclamaciones</h2>
+        <div className="py-3 mb-5 bg-green-100 text-center" style={{ borderTop: '1px solid var(--green-200)', borderBottom: '1px solid var(--green-200)' }}>
+            <a href="/libroreclamos" className="text-decoration-none d-inline-flex justify-content-center align-items-center">
+                <img className="me-3" width="35" src="https://www.flaticon.es/svg/static/icons/svg/2232/2232725.svg" alt="libro" />
+                <h3 className="text-success mb-0">Libro de reclamaciones</h3>
             </a>
         </div>
 

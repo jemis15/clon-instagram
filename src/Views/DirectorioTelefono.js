@@ -2,9 +2,11 @@ import React from 'react';
 import { Col, Row, Form } from 'react-bootstrap';
 
 export default function DirectorioTelefono(){
-    return <div className="container border rounded my-5" style={{width:'700px'}}>
-        <h1 className="bg-success mx-n4 text-center p-3" style={{color:'white'}}>Direcctorio de Telefonos </h1>
-        <Row className="mt-3 border-bottom my-3">
+    return <div className="container shadow rounded my-5" style={{width:'700px', border:'2px solid #008000'}} >
+        <div className="mx-n3" style={{backgroundColor:"#008000"}} >
+            <h3 className="text-center  p-3" style={{color:'white'}}>Direcctorio de Teléfonos de la Municipalidad </h3>
+        </div>
+        <Row className="mt-3 border-bottom my-3 ">
             <Col>
             <Form.Group >
                 <Form.Label><h4>Anexo</h4></Form.Label>

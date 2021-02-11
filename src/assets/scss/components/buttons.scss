@@ -2,7 +2,7 @@
   border: 0;
   min-width: 50px;
   min-height: 50px;
-  background-color: $secondary;
+  background-color: $primary;
   border-radius: 10px;
   transform: rotateZ(-10deg);
   transform-origin: left bottom;
@@ -16,7 +16,7 @@
   &.primary {
     background-color: $primary;
     &:hover {
-      background-color: rgb(0, 60, 255);
+      background-color: rgba($primary, $alpha: 0.8);
     }
   }
   &.secondary {
@@ -33,13 +33,21 @@
   right: 20px;
 }
 .facebook {
-  border: 1px solid $primary;
-  border-radius: 10px;
-  overflow: hidden;
   position: fixed;
-  bottom: 150px;
-  right: 15px;
-  z-index: 1000;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  height: 500px;
+
+  @include media-breakpoint-up(sm) {
+    width: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    bottom: 15px;
+    right: 100px;
+    z-index: 1000;
+    transform: none;
+  }
 }
 .social {
   transition: 0.3s all ease-in;
@@ -79,14 +87,38 @@
   background-color: #00acee;
 }
 .btn-instagram {
-  color: #405DE6;
-  &:hover{
-    background: linear-gradient(-135deg,#405DE6,#5851DB,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#F77737,#FCAF45,#FFDC80);
+  color: #405de6;
+  &:hover {
+    background: linear-gradient(
+      -135deg,
+      #405de6,
+      #5851db,
+      #833ab4,
+      #c13584,
+      #e1306c,
+      #fd1d1d,
+      #f56040,
+      #f77737,
+      #fcaf45,
+      #ffdc80
+    );
   }
 }
 .btn-instagram-fill {
   color: white;
-  background: linear-gradient(-135deg,#405DE6,#5851DB,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#F77737,#FCAF45,#FFDC80);
+  background: linear-gradient(
+    -135deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d,
+    #f56040,
+    #f77737,
+    #fcaf45,
+    #ffdc80
+  );
 }
 .btn-whatsapp {
   color: #00bb2d;
@@ -111,19 +143,19 @@
 
 // Botón para activar el tema oscuro
 .change-theme-button {
-  font-size   : 20px;
-  font-weight : 600;
-  outline     : none;
-  color       : var(--title-color);
-  background  : none;
-  border      : none;
-  cursor      : pointer;
+  font-size: 20px;
+  font-weight: 600;
+  outline: none;
+  color: var(--title-color);
+  background: none;
+  border: none;
+  cursor: pointer;
 
   &::before {
-    content : '🌞 Tema claro';
+    content: "🌞 Tema claro";
 
     .dark-theme & {
-      content :  '🌝 Tema oscuro';
+      content: "🌝 Tema oscuro";
     }
   }
 }

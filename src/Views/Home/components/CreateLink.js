@@ -138,7 +138,7 @@ export default function CreateLink({ onHide, updateNewLink, grupo, showAlert }) 
                     {link.url && (
                         <div className="text-small text-primary">
                             <span className="mr-2"><i className="far fa-link" /></span>
-                            <a href={link.url} target="_blank">{link.url}</a>
+                            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
                         </div>
                     )}
                 </div>
@@ -168,14 +168,14 @@ export default function CreateLink({ onHide, updateNewLink, grupo, showAlert }) 
                         : <img
                             src={imageDefault2}
                             className="img-fluid"
-                            alt="image default"
+                            alt="default"
                         />
                     }
                 </div>
                 {link.url && (
                     <div className="mx-3 mb-3 text-small">
                         <span className="mr-2"><i className="far fa-link" /></span>
-                        <a href={link.url} target="_blank">{link.url}</a>
+                        <a href={link.url} target="_blank" rel="noopener noreferrer">{link.url}</a>
                     </div>
                 )}
             </div>

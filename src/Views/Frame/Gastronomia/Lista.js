@@ -89,7 +89,7 @@ export default function Lista() {
                                 <Row className="py-3 lista-item-turismo cursor-pointer">
                                     <Col xs="4">
                                         {gastronomia.image ? (
-                                            <img src={`/apimuni/images/gastronomias/${gastronomia.image}`} className="img-fluid" />
+                                            <img src={gastronomia.image} className="img-fluid" />
                                         ) : (
                                                 <div className="border rounded bg-light d-flex justify-content-center align-items-center" style={{ height: '5rem' }}>
                                                     <span>Sin imagen</span>

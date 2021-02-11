@@ -36,11 +36,11 @@
 .tabs-tab {
   .tabs-item {
     &.active {
-      border-bottom: 3px solid $primary;
-      color: $primary;
+      border-bottom: 3px solid $danger;
+      color: $danger;
     }
     &:hover {
-      border-bottom: 3px solid $primary;
+      border-bottom: 3px solid $danger;
     }
   }
 }

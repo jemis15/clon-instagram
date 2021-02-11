@@ -121,7 +121,7 @@ function User({ user, onDelete, update, showAlert }) {
                 <Avatar
                     className="mr-3"
                     initials={user.nombre && user.nombre[0]}
-                    image={user.image && `/apimuni/images/faces/${user.image}`}
+                    image={user.image}
                     size="lg"
                 />
             </div>

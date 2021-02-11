@@ -1,11 +1,11 @@
 import React from 'react';
 import Switch from 'react-bootstrap/esm/Switch';
-import { Link, NavLink, Route } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 import ListAgroindustrias from './ListAgroindustrias';
 import ListPlatosTipicos from './ListPlatosTipicos';
 import ListRestaurantes from './ListRestaurantes';
 import ListHoteles from './ListHoteles';
-import Tours from './Tours';
+// import Tours from './Tours'; //eliminado
 
 export default function (){
     return (<div className="container">
@@ -46,7 +46,7 @@ export default function (){
         <div className="contenido_consulta flex-fill px-4">
           <Switch>
             <Route path="/NavMazamari/Tours">
-                <Tours/>
+                {/* <Tours/> */}
             </Route>
             <Route path="/NavMazamari/Restaurantes">
                 <ListRestaurantes/>

@@ -8,11 +8,17 @@ export default function Sidebar({ user, logout }) {
 		document.body.classList.toggle("collapse-sidebar");
 	}
 
-	return <aside className="border-right sidebar overflow-auto">
-		<header className="border-bottom overflow-hidden user-header d-flex flex-nowrap align-items-center justify-content-start hover-when-collapse-sidebar"
-			onClick={toggleCollapseSidebar}>
+	return <aside className="sidebar overflow-auto" style={{borderRight: '1px solid var(--grey-300)'}}>
+		<header className="overflow-hidden user-header d-flex flex-nowrap align-items-center justify-content-start hover-when-collapse-sidebar"
+			onClick={toggleCollapseSidebar}
+			style={{borderBottom: '1px solid var(--grey-300)'}}>
 			<div className="d-flex align-items-center">
-				<Avatar className="mr-3" image={user.image && `/apimuni/images/faces/${user.image}`} size="sm" initials={user.nombre && user.nombre[0]} />
+				<Avatar
+					className="mr-3"
+					image={user.image}
+					size="sm"
+					initials={user.nombre && user.nombre[0]}
+				/>
 			</div>
 			<div className="align-self-center overflow-hidden flex-fill d-none-when-collapse-sidebar">
 				<p className="mb-0 color-text text-small text-truncate font-weight-700">

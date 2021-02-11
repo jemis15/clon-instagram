@@ -2,40 +2,24 @@
   opacity: 0;
 }
 
-.link {
-  color: black;
-}
-
-.gradient-green-yellow {
-  background: linear-gradient(rgb(8, 165, 8), rgb(10, 110, 27));
-}
-.hover-gradient-gren-yellow {
-  &:hover {
-    background: linear-gradient(rgb(3, 238, 3), rgb(16, 139, 37));
-  }
-}
-.gradient-red-orange {
-  background: linear-gradient(rgb(247, 164, 41) 1%, rgb(231, 9, 9));
-}
-
 .title-1 {
   font-size: 1.5rem;
-  color: $primary;
+  color: $danger;
   font-weight: 600;
 }
 .title-2 {
   font-size: 1.3rem;
-  color: $primary;
+  color: $danger;
   font-weight: 500;
 }
 .title-3 {
   font-size: 1.1rem;
-  color: $primary;
+  color: $danger;
   font-weight: 400;
 }
 .title-4 {
   font-size: 0.95rem;
-  color: $primary;
+  color: $danger;
   font-weight: 400;
 }
 

@@ -68,15 +68,15 @@ export default function Footer({ settings, visitas }) {
 	}
 
 	return <>
-		<footer className="footer">
-			<Container className="pt-4">
-				<Row>
-					<Col md="4" className="mb-4 mb-md-0">
-						<div className="mb-4 mx-auto ml-md-0" style={{ maxWidth: '200px' }}>
+		<footer className="footer pt-4">
+			<Container className="pt-2">
+				<div className="row">
+					<div className="col-md-4 mb-4 mb-md-0">
+						<div className="mx-auto mx-md-0" style={{ maxWidth: '200px' }}>
 							{settings && settings.logo
 								? <img
 									className="img-fluid"
-									src={`/apimuni/images/settings/${settings.logo}`}
+									src={settings.logo}
 									loading="lazy"
 									alt="logo mazamari"
 								/>
@@ -87,17 +87,17 @@ export default function Footer({ settings, visitas }) {
 								/>
 							}
 						</div>
-					</Col>
-					<Col md="4" className="mb-4 mb-md-0 text-center text-md-left">
+					</div>
+					<div className="col-md-4 mb-4 mb-md-0 text-center text-md-start">
 						<h4 className="color-title">{about.titulo}</h4>
 						<div className="text-small mb-3">{about.descripcion}</div>
-					</Col>
-					<Col md="4">
+					</div>
+					<div className="col-md-4">
 						<div>
 							<ul className="list-unstyled mb-4">
 								<li className={`mb-3 position-relative local-horario ${localHorario && 'active'} cursor-pointer`}
 									onClick={toggleLocalHorario}>
-									<span className="mr-4 color-title">
+									<span className="me-3 color-title">
 										<i className="far fa-clock fa-lg" />
 									</span>
 									<div className="d-inline-block text-small">
@@ -114,7 +114,7 @@ export default function Footer({ settings, visitas }) {
 											<tbody>
 												{['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'].map(dia => (
 													<tr key={dia} className={`color-text ${dia === diaHoy && 'font-weight-600'}`}>
-														<td className="pr-2">{dia}</td>
+														<td className="pe-2">{dia}</td>
 														<td>{settings[`${dia}_laborable`]
 															? <>{moment(settings[`${dia}_inicio`], 'HH:mm:ss').format('HH:mm')}–{moment(settings[`${dia}_fin`], 'HH:mm:ss').format('HH:mm')}</>
 															: 'Cerrado'
@@ -126,24 +126,24 @@ export default function Footer({ settings, visitas }) {
 									</div>
 								</li>
 								<li className="mb-3">
-									<a href="https://goo.gl/maps/oRSHrJRTMbUvpbbN7" target="_blank">
-										<span className="mr-4 color-title">
+									<a className="text-decoration-none" href="https://goo.gl/maps/oRSHrJRTMbUvpbbN7" target="_blank">
+										<span className="me-3 color-title">
 											<i className="far fa-globe-americas fa-lg" />
 										</span>
 										<span className="text-small">{settings.direccion}</span>
 									</a>
 								</li>
 								<li className="mb-3">
-									<a href={`tel: (064) ${settings.telefono}`}>
-										<span className="mr-4 color-title">
+									<a className="text-decoration-none" href={`tel: (064) ${settings.telefono}`}>
+										<span className="me-3 color-title">
 											<i className="far fa-phone-alt fa-lg" />
 										</span>
 										<span className="text-small">{settings.telefono}</span>
 									</a>
 								</li>
 								<li>
-									<a href={`mailto:${settings.correo}`}>
-										<span className="mr-4 color-title">
+									<a className="text-decoration-none" href={`mailto:${settings.correo}`}>
+										<span className="me-3 color-title">
 											<i className="far fa-envelope fa-lg" />
 										</span>
 										<span className="text-small">{settings.correo}</span>
@@ -152,12 +152,12 @@ export default function Footer({ settings, visitas }) {
 							</ul>
 
 							<div>
-								<h4 className="color-title text-center text-md-left">N&uacute;mero de visitantes</h4>
+								<h4 className="color-title text-center text-md-start">N&uacute;mero de visitantes</h4>
 								{visitas && <ContadorVisitas number={visitas} />}
 							</div>
 						</div>
-					</Col>
-				</Row>
+					</div>
+				</div>
 			</Container>
 
 			<Container className="pb-3">
@@ -167,7 +167,7 @@ export default function Footer({ settings, visitas }) {
 							return null;
 						}
 
-						return <li className="mr-2" key={social}>
+						return <li className="me-2" key={social}>
 							<BtnSocial
 								className="rounded-circle"
 								url={settings[social]}
@@ -206,7 +206,7 @@ function ContadorVisitas({ number }) {
 		{numbers.map((number, key) => (
 			<div
 				key={key}
-				className="font-weight-800 rounded px-2 py-1 mr-1"
+				className="font-weight-800 rounded px-2 py-1 me-1"
 				style={estilos}>
 				{number}
 			</div>
@@ -217,4 +217,12 @@ function ContadorVisitas({ number }) {
 const pathsWithFooter = [
 	{ pathname: '/', exact: true },
 	{ pathname: '/@', exact: false },
+	{ pathname: '/equipo', exact: false },
+	{ pathname: '/mazamari/gastronomias', exact: true },
+	{ pathname: '/mazamari/turismos', exact: true },
+	{ pathname: '/mazamari/agroindustrias', exact: true },
+	{ pathname: '/mazamari/historia', exact: true },
+	{ pathname: '/mazamari/hoteles', exact: true },
+	{ pathname: '/muni/vision_mision', exact: true },
+	// { pathname: '/muni/comisiones', exact: true },
 ];

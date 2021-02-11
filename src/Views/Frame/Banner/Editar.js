@@ -95,7 +95,7 @@ export default function Editar() {
                     <label>Image</label>
                     <label className="mb-0 border rounded upload-image text-center cursor-pointer overflow-hidden">
                         {uploadImage && 'subiendo imagen'}
-                        <img src={`/apimuni/images/banners/${banner.image}`} className="img-fluid" />
+                        <img src={banner.image} className="img-fluid" />
                         <span className="upload-image-icon rounded-circle">
                             <i className="fas fa-arrow-up" />
                         </span>
@@ -155,7 +155,7 @@ export default function Editar() {
                         </Col>
                         <Col md="5" className="align-self-center">
                             {banner.image ? (
-                                <img src={`/apimuni/images/banners/${banner.image}`}
+                                <img src={banner.image}
                                     className="img-fluid rounded-lg"
                                     alt="gastonomia y turismo"
                                     loading="lazy"

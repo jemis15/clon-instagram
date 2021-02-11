@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 
-function Banner({ id }) {
+function Banner({ id, background, user }) {
   const banner_id = id;
   const [banner, setBanner] = useState(null);
   const [bannerUpdate, setBannerUpdate] = useState({
@@ -65,6 +65,7 @@ function Banner({ id }) {
   }
 
   async function handleSelectImage(e) {
+    console.log('Hola');
     if (uploadingImage) {
       return;
     }
@@ -109,51 +110,54 @@ function Banner({ id }) {
   });
 
   if (loading) {
-    return <p>Cargando...</p>
+    return <p className="text-center py-xl">Cargando...</p>
   }
 
-  return <div className="banner edit">
+  return <div className={`banner ${background} bg-before edit`}>
     <Container>
       <Row>
         <Col md="7" className="align-self-center banner-info">
-          <div className="position-relative">
-            <h1 className="banner-title text-center text-md-left">
+          <div className="position-relative w-75">
+            <h1 className="banner-title text-center text-md-start">
               {banner.titulo}
             </h1>
-            <p className="banner-descripcion text-center text-md-left">
+            <p className="banner-descripcion text-center text-md-start">
               {banner.descripcion}
             </p>
-
-            <div className="options top-right">
-              <span className="icon" onClick={showModalUpdate}>
-                <i className="fas fa-pencil" />
-              </span>
-            </div>
+            {user && user.is_admin && (
+              <div className="options top-right">
+                <span className="icon" onClick={showModalUpdate}>
+                  <i className="fas fa-pencil" />
+                </span>
+              </div>
+            )}
           </div>
         </Col>
         <Col md="5" className="align-self-center img-banner">
           <div className="banner-content-image position-relative">
-            <img src={`/apimuni/images/banners/${banner.image}`}
+            <img src={banner.image}
               className="img-fluid rounded-lg"
               alt="gastonomia y turismo"
               loading="lazy"
             />
-            <div className="options center">
-              <label className="icon mb-0 pb-0">
-                <i className="fas fa-arrow-up" />
-                <input
-                  type="file"
-                  className="d-none"
-                  onChange={handleSelectImage}
-                />
-              </label>
-            </div>
+            {user && user.is_admin === 1 && (
+              <div className="options center">
+                <label className="icon mb-0 pb-0">
+                  <i className="fas fa-arrow-up" />
+                  <input
+                    type="file"
+                    className="d-none"
+                    onChange={handleSelectImage}
+                  />
+                </label>
+              </div>
+            )}
           </div>
         </Col>
       </Row>
     </Container>
 
-    <Modal show={modalUpdate} onHide={hideModalUpdate}>
+    <Modal show={modalUpdate} onHide={hideModalUpdate} animation={false} centered>
       <Modal.Header closeButton>Editar</Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>

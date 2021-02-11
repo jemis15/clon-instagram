@@ -15,7 +15,7 @@ export default function Turismo() {
         }
 
         loadTurismo();
-    }, []);
+    }, [titulo]);
 
     function getTitulo(titulo) {
         let titulo_formateado = titulo.toUpperCase();

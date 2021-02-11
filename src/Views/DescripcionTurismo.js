@@ -1,12 +1,10 @@
 import React from 'react';
 import {Col, Row} from 'react-bootstrap';
 
-import img_turismo from '../assets/images/web/catarata.jpg';
-
 export default function DescripcionTurismo () {
     const style = {
         width: '700px',
-        backgroundImage: `url(${img_turismo})`,
+        backgroundImage: `url(https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg)`,
         backgroundRepeat: 'none',
         backgroundSize: 'cover'
     }
@@ -22,19 +20,19 @@ export default function DescripcionTurismo () {
             <Col className="align-self-center">
               <div className="Imagenes_Turismo ">
                 <div className="container_image_turismo">
-                  <img src={img_turismo} className="imgLugar" alt="turismo" />
+                  <img src="https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg" className="imgLugar" alt="turismo" />
                 </div>
                 <div className="container_image_turismo">
-                  <img src={img_turismo} className="imgLugar" alt="turismo" />
+                  <img src="https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg" className="imgLugar" alt="turismo" />
                 </div>
                 <div className="container_image_turismo">
-                  <img src={img_turismo} className="imgLugar" alt="turismo" />
+                  <img src="https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg" className="imgLugar" alt="turismo" />
                 </div>
                 <div className="container_image_turismo">
-                  <img src={img_turismo} className="imgLugar" alt="turismo" />
+                  <img src="https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg" className="imgLugar" alt="turismo" />
                 </div>
                 <div className="container_image_turismo">
-                  <img src={img_turismo} className="imgLugar" alt="turismo" />
+                  <img src="https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg" className="imgLugar" alt="turismo" />
                 </div>
                 
               </div>

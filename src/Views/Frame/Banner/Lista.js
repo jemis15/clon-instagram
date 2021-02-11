@@ -81,7 +81,7 @@ export default function Lista() {
                                 <Col sm="4">
                                     {banner.image ? (
                                         <img
-                                            src={`/apimuni/images/banners/${banner.image}`}
+                                            src={banner.image}
                                             className="w-100"
                                             alt="default"
                                         />

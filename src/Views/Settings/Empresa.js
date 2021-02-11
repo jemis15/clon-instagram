@@ -99,7 +99,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
             <div className="d-sm-flex align-items-center">
                 <div className="mb-3 mb-sm-0 mr-3 logo-avatar bg-white position-relative d-flex justify-content-center align-items-center"
                     style={{ maxWidth: '400px', minWidth: '250px', height: '200px' }}>
-                    <img src={settings.logo ? `/apimuni/images/settings/${settings.logo}` : logo}
+                    <img src={settings.logo ? settings.logo : logo}
                         alt="logo mazamari"
                         className="img-fluid"
                         style={{ maxWidth: '100%', maxHeight: '100%' }}

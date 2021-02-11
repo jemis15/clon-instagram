@@ -24,10 +24,10 @@ export default function Perfil({ user, update, showAlert }) {
             await Axios({
                 method: 'post',
                 url: `/apimuni/users/${user.id}`,
-                params: {nombre}
+                params: { nombre }
             });
             setActualizandoPerfil(false);
-            update({...user, nombre});
+            update({ ...user, nombre });
             showAlert('success', 'Se cambio el nombre');
         } catch (error) {
             console.log(error);
@@ -42,7 +42,7 @@ export default function Perfil({ user, update, showAlert }) {
         <Title>Avatar</Title>
         <div className="mb-4">
             <div className="d-inline-block position-relative">
-                <Avatar size="xl" image={user.image && `/apimuni/images/faces/${user.image}`} />
+                <Avatar size="xl" image={user.image} />
                 <span
                     className="position-absolute icon-edit border rounded-circle cursor-pointer"
                     onClick={toggleModalChangeImage}>
@@ -77,7 +77,7 @@ export default function Perfil({ user, update, showAlert }) {
     </div>
 }
 
-function UploadImage({ onSubmit }) {
+function UploadImage() {
     const [image, setImage] = useState(null);
     const [error, setError] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });

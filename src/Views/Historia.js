@@ -2,8 +2,6 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
 
-import equipoimage from '../assets/images/paisaje.jpg';
-import codigoimage from '../assets/images/codigo.png';
 import Banner from '../components/Banner';
 import Himno from './Himno';
 import Alcaldes from './Alcaldes';
@@ -60,28 +58,28 @@ export default function Historia() {
                 slidesToSlide={1}
                 swipeable={false}>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
                 <div className="mx-3 bg-dark">
-                    <img src={codigoimage} className="img-fluid" alt="recuerdos" />
+                    <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="recuerdos" />
                 </div>
             </Carousel>
         </div>
@@ -118,7 +116,7 @@ export default function Historia() {
                 </Col>
                 <Col xs="8" className="align-self-center">
                     <div className="rounded-lg overflow-hidden">
-                        <img src={equipoimage} className="img-fluid" alt="equipo" />
+                        <img src="https://image.freepik.com/free-vector/display-template-with-camera_79603-1246.jpg" className="img-fluid" alt="equipo" />
                     </div>
                 </Col>
             </Row>

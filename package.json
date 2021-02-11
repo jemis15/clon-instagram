@@ -1,5 +1,6 @@
 {
   "name": "web-muni",
+  "homepage": "https://munimazamari.gob.pe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -45,5 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost"
+  "proxy": "https://api.centecp.com"
 }

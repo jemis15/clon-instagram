@@ -7,7 +7,7 @@ export default function Marker({ url, image, descripcion, nombre }) {
         href={url}
         target="_blank"
         className="marker hover rounded-lg d-flex text-decoration-none">
-        <div className="mr-3">
+        <div className="me-3">
             <CircleBadge>
                 <CircleBadgeIcon image={image} />
             </CircleBadge>

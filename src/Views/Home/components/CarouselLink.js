@@ -5,13 +5,14 @@ export default function CarouselLink({ link }) {
         return null;
     }
 
-    return <div className="ratio ratio-16x9 bg-grey-300">
+    return <div className="ratio ratio-16x9">
         <a
-            className="d-flex w-100 h-100 justify-content-center align-items-center"
+            className="d-flex justify-content-center align-items-center"
             href={link.url}
-            target="_blank">
+            target="_blank"
+            rel="noopener noreferrer">
             <img
-                src={`/apimuni/images/links/${link.image}`}
+                src={link.image}
                 alt="carousel link"
                 loading="lazy"
                 className="post-image"

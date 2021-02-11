@@ -96,7 +96,7 @@ export default function Editar() {
                             <Form.Group>
                                 <label>Imagen</label>
                                 <label className="mb-0 border rounded upload-image text-center cursor-pointer overflow-hidden">
-                                    <img src={`/apimuni/images/turismos/${turismo.image}`} className="img-fluid" />
+                                    <img src={turismo.image} className="img-fluid" />
                                     <span className="upload-image-icon rounded-circle">
                                         <i className="fas fa-arrow-up" />
                                     </span>
@@ -166,7 +166,7 @@ export default function Editar() {
                                     <Col md="5" className="align-self-center section-image">
                                         <div className="content-image-gastronomia-right overflow-hidden">
                                             {turismo.image ? (
-                                                <img src={`/apimuni/images/turismos/${turismo.image}`}
+                                                <img src={turismo.image}
                                                     className="img-fluid rounded-lg"
                                                     alt="lugar turistico"
                                                 />
@@ -283,7 +283,7 @@ function ImageUtilitarios({ image, onDelete }) {
     return <>
         <div className="content-image-markdown d-flex flex-center border position-relative">
             <img
-                src={`/apimuni/images/turismos/${image.url}`}
+                src={image.url}
                 className="cursor-pointer"
                 onClick={toggle}
                 alt="markdown utilitarios"

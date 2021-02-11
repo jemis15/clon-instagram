@@ -4,8 +4,10 @@ import { Col, Row, Card, Button} from 'react-bootstrap';
 import img_perfil from '../assets/images/web/images.jfif';
 
 export default function Serenazgo() {
-    return <div className="container p-5 " style={{maxWidth: "900px", backgroundColor:"#F5F5F5"}}>
-        <h2 className="text-center" style={{fontFamily:"courier"}} >SERVICIO DE SEGURIDAD CIUDADANA</h2><hr></hr>
+    return <div className="container my-5  shadow" style={{maxWidth: "900px", backgroundColor:"#F5F5F5", border:'2px solid #008000'}}>
+        <div className="mx-n3" style={{backgroundColor:"#008000"}} >
+            <h3 className="text-center  p-3" style={{color:'white'}}>Serenazgos</h3>
+        </div>
         <div class="row p-5" >
             <div class="col-sm-7">
             <p >Hemos implementado la plataforma de atención al vecino que nos permita acudir a una emergencia en cualquier lugar del Distrito
@@ -19,7 +21,7 @@ export default function Serenazgo() {
             <li style= {{listStyle:"none"}}><em><i class="fab fa-whatsapp m-2"></i> Whatsapp:  948675008</em></li>
             </div>
         </div>
-        <div class="row">
+        <div class="row pl-5 pr-5 pb-5">
         <div class="col">
                 <div className="shadow p-3 mb-5 bg-white rounded  p-2">
                             <a href="#" class="text-warning stretched-link align-center">SATIPO ENVÍA AYUDA HUMANITARIA A DAMNIFICADOS</a><br/><br/>

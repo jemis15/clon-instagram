@@ -150,7 +150,7 @@ function Link({ link, grupo, showAlert, updateLink, deleteLink }) {
             <div className="ratio ratio-16x9 border rounded bg-grey-300">
                 <div className="d-flex justify-content-center align-items-center">
                     <img
-                        src={`/apimuni/images/links/${link.image}`}
+                        src={link.image}
                         style={{
                             maxWidth: '100%',
                             maxHeight: '100%'
@@ -299,7 +299,7 @@ function Update({ data, grupo, closeModal, showAlert, updateLink }) {
                             }}
                         />
                         : <img
-                            src={`/apimuni/images/links/${link.image}`}
+                            src={link.image}
                             style={{
                                 maxWidth: '100%',
                                 maxHeight: '100%'

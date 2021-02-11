@@ -102,7 +102,7 @@ export default function Markers({ showAlert }) {
                             <td>
                                 <div style={{ maxWidth: '400px' }}>
                                     <Marker
-                                        image={`/apimuni/images/markers/${marker.image}`}
+                                        image={marker.image}
                                         descripcion={marker.descripcion}
                                         nombre={marker.nombre}
                                     />
@@ -290,7 +290,7 @@ function UpdateMarker({ markerOriginal, updateMarker, closeModal, showAlert }) {
                         <img
                             src={image.base64 !== ''
                                 ? image.base64
-                                : `/apimuni/images/markers/${marker.image}`
+                                : marker.image
                             }
                             className="w-50"
                             alt="marker"

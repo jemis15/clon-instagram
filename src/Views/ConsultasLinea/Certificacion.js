@@ -3,9 +3,9 @@ import {col, Row, Card, Nav, Button} from 'react-bootstrap';
 export default function Certificacion () {
   return (
     <div className="container border rounded pl-4 pr-4" style={{maxWidth: '700px'}}>
-      <div className=" p-3 bg-success mx-n4">
-      <h3 className="text-center">CERTIFICACIONES O COPIAS DE PARTIDAS</h3>
-      <h6 className="text-center">Nacimiento Matrimonio Difuncion</h6>
+      <div className=" p-3  mx-n4" style={{background:'#008000'}}>
+      <h4 className="text-center"  style={{color:'white'}}>CERTIFICACIONES O COPIAS DE PARTIDAS</h4>
+      <h6 className="text-center" style={{color:'white'}}>Nacimiento Matrimonio Difuncion</h6>
       </div>
       <br />
         <div>

@@ -6,10 +6,12 @@ import img_Alcalde from '../assets/images/web/paisaje.jpg';
 export default function PerfilA () {
   return (
     <div
-      className="container border rounded my-5 "
-      style={{maxWidth: '700px'}}>
-        <h1 className="text-center border-bottom p-3 bg-success mx-n3"> Alcalce</h1>
-      <Row className="mt-5 m-3">
+      className="container shadow rounded my-5 "
+      style={{width:'700px', border:'2px solid #008000'}}>
+        <div className="mx-n3" style={{backgroundColor:"#008000"}} >
+            <h3 className="text-center  p-3" style={{color:'white'}}>Alcalde</h3>
+        </div>
+      <Row className="mt-3 m-3">
         <Col xs="auto">
           <img
             src={img_Alcalde}
@@ -31,7 +33,6 @@ export default function PerfilA () {
           </div>
         </Col>
       </Row>
-      <br />
       <h3 className="pl-4">Saludos del Alcalde</h3>
       <div className="float-right border rounded p-2 m-3 mb-5" style={{width:'600px', backgroundColor: '#F5F5F5'}}>
       <p className="text-justify">

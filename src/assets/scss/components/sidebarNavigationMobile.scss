@@ -1,5 +1,6 @@
 .sidebar-navigation-mobile {
   .overlay {
+    position: fixed;
     top: calc(var(--header-height) + var(--topbar-height));
     bottom: 0;
     z-index: 1500;
@@ -44,6 +45,7 @@
     }
   }
   &.active {
+    background-color: rgb(214, 243, 214);
     .navnav {
       right: 0;
     }
@@ -53,8 +55,34 @@
       pointer-events: auto;
     }
   }
+}
 
-  a:active {
-    background-color: rgb(214, 243, 214);
+.nav__item {
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  .nav__item-links {
+    border-top: 1px solid transparent;
+    background-color: $gray-100;
+    display: none;
+  }
+  .icon-chevron {
+    transition: 0.3s transform ease;
+  }
+  .nav__item-link.active{
+    color: $primary;
+  }
+  .separador{
+    width: 92%;
+    border-top: 1px solid $gray-200;
+  }
+  &.expanded {
+    border-color: $gray-200;
+    .nav__item-links {
+      border-color: $gray-200;
+      display: block;
+    }
+    .icon-chevron {
+      transform: rotate(180deg);
+    }
   }
 }

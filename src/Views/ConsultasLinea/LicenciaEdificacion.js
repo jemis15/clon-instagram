@@ -10,8 +10,8 @@ export default function LicenciaEdificacion(){
 
     return <>
     <Tab.Container  defaultActiveKey="#link1">
-    <div className="cabecera border-bottom d-flex flex-nowrap" >
-                <h2 className="py-2">Licencia de Edificación</h2>
+    <div className="cabecera mb-3 d-flex flex-nowrap" style={{borderBottom:'1px solid #EDD016'}}>
+                <h3 className="py-2" style={{color:'green'}}>Licencia de Edificación</h3>
                 <div className="AgregarElemento ml-auto align-self-start">
                   <Button variant="info" onClick={tooggleModalNewGrupo}>
                     <i class="fas fa-plus pr-2"></i>Nueva Información</Button>{' '}
@@ -19,12 +19,12 @@ export default function LicenciaEdificacion(){
               </div>
             <Card className="mt-3">
                 <Card.Header>
-                <Nav variant="tabs">
+                <Nav className="d-flex" variant="tabs">
                     <Nav.Item>
                         <Nav.Link action href="#link1">Consulta</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link action href="#link2">Informacion</Nav.Link>
+                        <Nav.Link action href="#link2">Información</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </Card.Header>

@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
 import {Col, Row, Table} from 'react-bootstrap';
-import img_Agro from '../assets/images/web/cafe.png';
-import img_agro01 from '../assets/images/web/cosechaCafe.jpg';
-import img_agro02 from '../assets/images/web/cafe1.jfif';
-import img_agro03 from '../assets/images/web/granosCafe.jpg';
-import img_producto from '../assets/images/web/producto.png';
 
 export default function InformacionAgro () {
   const [mazamari, setmazamari] = useState ({
@@ -14,7 +9,7 @@ export default function InformacionAgro () {
     telefono: '932168579',
     email: 'AGROI@gmail.com',
     redSocial: 'granos de oro',
-    image: img_Agro
+    image: 'https://image.freepik.com/free-psd/coffee-shop-drink-menu-promotion-social-media-instagram-post-banner-template_159024-225.jpg'
   });
   const [platos_Resta, setplatos_Resta] =useState({
     lugares: 'Restaurantes ',
@@ -128,10 +123,10 @@ export default function InformacionAgro () {
 }
 
 const images = [
-    {id: 1, image: img_agro03},
-    {id: 1, image: img_agro01},
-    {id: 1, image: img_agro02},
-    {id: 1, image: img_agro03}
+    {id: 1, image: 'https://image.freepik.com/free-vector/city-skyline-landmarks-illustration_23-2148810172.jpg'},
+    {id: 1, image: 'https://image.freepik.com/free-psd/telegram-icons-around-smartphone-app-mockup-3d_1379-5099.jpg'},
+    {id: 1, image: 'https://image.freepik.com/free-psd/close-up-hand-holding-phone_23-2148792186.jpg'},
+    {id: 1, image: 'https://image.freepik.com/free-vector/display-template-with-clapperboard-glasses_79603-1244.jpg'}
 ];
 
 const lista =[

@@ -8,7 +8,6 @@ import defaultLogo from '../logo.svg';
 export default function Header({ toggle, user, settings }) {
 	const [isHeaderTransparent, setIsHeaderTransparent] = useState(false);
 	const [dropMenuCreate, setDropMenuCreate] = useState(false);
-	const params = useLocation();
 	const location = useLocation();
 
 	useEffect(() => {
@@ -36,7 +35,7 @@ export default function Header({ toggle, user, settings }) {
 
 	useEffect(() => {
 		// comparando la url actual con la lista de url's que tienen permitido un header transparent
-		const index = urlWithHeaderTransparent.indexOf(params.pathname)
+		const index = urlWithHeaderTransparent.indexOf(location.pathname)
 		if (index !== -1) {
 			if (window.scrollY < 20) {
 				setIsHeaderTransparent(true);
@@ -46,7 +45,7 @@ export default function Header({ toggle, user, settings }) {
 			setIsHeaderTransparent(false);
 			document.body.classList.remove('with-transparent-header');
 		}
-	}, [params]);
+	}, [location]);
 
 	if (!settings) {
 		return null;
@@ -55,10 +54,10 @@ export default function Header({ toggle, user, settings }) {
 	return <header
 		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
 		<div className="container d-flex align-items-center">
-			<Link className="mr-4" to="/">
+			<Link className="me-4" to="/">
 				{settings && settings.logo
 					? <img
-						src={`/apimuni/images/settings/${settings.logo}`}
+						src={settings.logo}
 						height="60px"
 						loading="lazy"
 						alt="logo mazamari"
@@ -73,7 +72,7 @@ export default function Header({ toggle, user, settings }) {
 			</Link>
 			{user
 				? <>
-					<div className="ml-auto d-flex align-items-center">
+					<div className="ms-auto d-flex align-items-center">
 						<div className="mr-3 position-relative">
 							<button className="btn-color border-0 outline-none bg-transparent"
 								onClick={() => setDropMenuCreate(true)}>
@@ -110,17 +109,19 @@ export default function Header({ toggle, user, settings }) {
 				</>
 				: <>
 					<AppNav />
-					<div className="ml-auto d-flex">
+					<div className="ms-auto d-flex">
 						<Link
 							to="/login"
 							className="mr-2 px-1 d-inline-block d-xl-none">
 							<i className="fas fa-user fa-2x" />
 						</Link>
-						<Link
-							to="/login"
-							className="mr-2 btn btn-outline-success btn-sm text-small font-weight-600 text-decoration-none d-none d-xl-inline-block">
-							Iniciar session
-						</Link>
+						<a
+							href="https://mesadepartevitual.munimazamari.gob.pe/inicio.php"
+							target="__blank"
+							rel="noopener noreferrer"
+							className="mr-2 btn btn-primary text-decoration-none d-none d-xl-inline-block">
+							Mesa de parte virtual
+						</a>
 						<div
 							className="px-1 bg-transparent d-inline-block d-xl-none"
 							onClick={toggle}>
@@ -130,6 +131,12 @@ export default function Header({ toggle, user, settings }) {
 				</>
 			}
 		</div>
+		<a
+			href="https://web.munimazamari.gob.pe"
+			accessKey="a"
+			target="__blank"
+			rel="noopener noreferrer"
+		/>
 	</header>
 }
 
@@ -152,4 +159,13 @@ function DropLink({ label, to }) {
 	</Link>
 }
 
-const urlWithHeaderTransparent = ['/', '/historia', '/gastronomia', '/@'];
+const urlWithHeaderTransparent = [
+	'/',
+	'/historia',
+	'/gastronomia',
+	'/mazamari/gastronomias',
+	'/mazamari/turismos',
+	'/mazamari/agroindustrias',
+	'/mazamari/hoteles',
+	'/@'
+];

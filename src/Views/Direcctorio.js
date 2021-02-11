@@ -23,18 +23,21 @@ export default function Direcctorio() {
     fontFamily:'cursive'
   }
   const caja ={
-    border:'1px solid var(--red-700)'
+    border:'1px solid var(--red-700)',
+    height:'140px'
   }
 
-  return <div className="container border my-5 pb-3">
-        <h1 className="text-center border-bottom p-3 bg-success mx-n4"  style={{color:'white'}}>Teléfonos de la Municipalidad  de Mazamari</h1>
+  return <div className="container shadow my-5 pb-3" style={{border:'2px solid #008000'}}>
+        <div className="mx-n3" style={{backgroundColor:"#008000"}} >
+            <h3 className="text-center  p-3" style={{color:'white'}}>Direcctorio de Teléfonos</h3>
+        </div>
     <Row>
-      <Col sm='7'>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32152.931400173315!2d-74.55051917219659!3d-11.324202354620748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x910b95bae025fe01%3A0x24f5accad5bc7182!2sMazamari!5e1!3m2!1ses-419!2spe!4v1607106819285!5m2!1ses-419!2spe" width="100%" height="450" frameborder="0" style={{border:"0"}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      <Col sm='7' className="mt-3">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32152.931400173315!2d-74.55051917219659!3d-11.324202354620748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x910b95bae025fe01%3A0x24f5accad5bc7182!2sMazamari!5e1!3m2!1ses-419!2spe!4v1607106819285!5m2!1ses-419!2spe" width="100%" height="600px" frameborder="0" style={{border:"0"}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
       </Col>
       <Col>
         <div className="policia align-self-center mt-5 mb-4"  align="center">
-          <h2 style={{color:'var(--red-800)'}}>NÚMERO DE EMERGENCIAS</h2>
+          <h2 style={{color:'var(--red-800)'}}>NÚMEROS DE CONTACTO</h2>
           <h3 style={{fontSize:'20pt',color:'var(--red-800)' }} className="font-weight-bold"> 948675008</h3>
         </div>
 
@@ -45,7 +48,7 @@ export default function Direcctorio() {
       }}>
           <div className="policia rounded align-self-center shadow-lg  text-center "  align="center" style={caja}>
             <img loading="lazy" src={img_policia} alt="requisitos" style={styleImg} />
-            <p className="mb-0 font-weight-bold">Policia</p>
+            <p className="mb-0 font-weight-bold">Policía</p>
             <h3 style={letra} className="font-weight-bold">546868698</h3>
           </div>
           <div className="policia rounded align-self-center shadow-lg "  align="center" style={caja}>
@@ -85,7 +88,7 @@ export default function Direcctorio() {
           </div>
           <div className="policia rounded align-self-center shadow-lg "  align="center" style={caja}>
             <img loading="lazy" src={img_salud} alt="requisitos" style={styleImg} />
-            <p className="mb-0 font-weight-bold">Micro Red de Salud</p>
+            <p className="mb-0 font-weight-bold"> Red de Salud</p>
             <h3 style={letra} className="font-weight-bold">546868698</h3>
           </div>
         </div>

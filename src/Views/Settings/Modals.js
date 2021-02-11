@@ -109,7 +109,7 @@ export default function Modals({ showAlert }) {
                             ? <img className="img-fluid" src={image.base64} alt="modal bienvenida" />
                             : <img
                                 className="img-fluid"
-                                src={`/apimuni/images/modalbienvenida/${modalBienvenida.image}`}
+                                src={modalBienvenida.image}
                                 alt="bienvenido"
                             />
                         }

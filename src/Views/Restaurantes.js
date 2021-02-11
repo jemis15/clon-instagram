@@ -1,21 +1,19 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import img_Restaurante from '../assets/images/web/catarata.jpg';
-import img_fondo from '../assets/images/web/fondo_restaurante.jpg';
 
-export default function Restaurantes(){
-    return <div className="container my-5 border contentRes border" style={{width:'700px'}}>
+export default function Restaurantes() {
+    return <div className="container my-5 border contentRes border" style={{ width: '700px' }}>
         <div className="imgRestaurante mx-n3 ">
-            <img src={img_Restaurante} alt="restaurante" />
+            <img src="https://image.freepik.com/free-vector/vietnamese-new-year-concept-tet-viet-mean-lunar-new-year-vietnam_40345-1014.jpg" alt="restaurante" />
         </div>
         <div className="Titulo_Restaurante  mx-n3 ">
             <p>Restaurante y Recepciones</p>
-            <b style={{fontSize:'40pt'}}>La Orilla</b>
+            <b style={{ fontSize: '40pt' }}>La Orilla</b>
         </div>
-        <Row style={{backgroundColor:'rgba(204, 206, 122, 0.795)', backgroundImage: `url(${img_fondo})`}}>
+        <Row style={{ backgroundColor: 'rgba(204, 206, 122, 0.795)', backgroundImage: `url(https://image.freepik.com/free-photo/trendy-house-interior-with-modern-furniture-glass-windows_181624-26452.jpg)` }}>
             <Col>
                 <div className="Descrip_rest p-3 my-3">
-                        <p><b className="mb-2"> Platos Tipicos</b></p>
+                    <p><b className="mb-2"> Platos Tipicos</b></p>
                     <ul className="pl-5 ">
                         <li className="mb-1">Ceviche Mixta</li>
                         <li className="mb-1">Chicharrón de Doncella</li>
@@ -23,7 +21,7 @@ export default function Restaurantes(){
                         <li className="mb-1">Chaufa la cecina</li>
                         <li className="mb-1">Sudado mixto a la cabaña</li>
                     </ul>
-                        <p><b className="mb-2"> Bebidas</b></p>
+                    <p><b className="mb-2"> Bebidas</b></p>
                     <ul className="pl-5 ">
                         <li className="mb-1">Cafe nativa</li>
                         <li className="mb-1">vinos</li>
@@ -35,10 +33,10 @@ export default function Restaurantes(){
             </Col>
             <Col>
                 <div className="Imagenes_Restaurante mt-3">
-                    <img src={img_Restaurante} alt="restaurante" className="img_plato1" />
+                    <img src="https://image.freepik.com/free-vector/vietnamese-new-year-concept-tet-viet-mean-lunar-new-year-vietnam_40345-1014.jpg" alt="restaurante" className="img_plato1" />
                 </div>
-                    <img src={img_Restaurante} alt="restaurante" className="img_plato" />
-                    <img src={img_Restaurante} alt="restaurante" className="img_plato" />
+                <img src="https://image.freepik.com/free-vector/vietnamese-new-year-concept-tet-viet-mean-lunar-new-year-vietnam_40345-1014.jpg" alt="restaurante" className="img_plato" />
+                <img src="https://image.freepik.com/free-vector/vietnamese-new-year-concept-tet-viet-mean-lunar-new-year-vietnam_40345-1014.jpg" alt="restaurante" className="img_plato" />
             </Col>
         </Row>
         <div className="Informes_Restaurantes mx-n3">

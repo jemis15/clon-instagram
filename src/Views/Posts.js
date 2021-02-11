@@ -1,8 +1,9 @@
 import Axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import CardPost from './Home/components/Noticia';
+
+import imgSearch from '../assets/images/search.svg';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -13,7 +14,6 @@ export default function Posts() {
     const [loadingPosts, setLoadingPosts] = useState(true);
     const [loadingMorePosts, setLoadingMorePosts] = useState(false);
     const [posts, setPosts] = useState([]);
-    const btnVerMas = useRef();
 
     useEffect(() => {
         const source = Axios.CancelToken.source();
@@ -49,17 +49,15 @@ export default function Posts() {
         switch (query.get('tipo')) {
             case 'noticia':
                 return 'Noticias';
-                break;
+
             case 'video':
                 return 'Videos';
-                break;
+
             case 'programa':
                 return 'Programas e Iniciativas';
-                break;
 
             default:
                 return 'Noticias';
-                break;
         }
     }
 
@@ -114,32 +112,17 @@ export default function Posts() {
                         </div>
                     </div>
                     <div className="flex-fill">
-                        <div className="mb-4 clearfix">
-                            <h3 className="float-left">{getTitulo()}</h3>
-                            {/* <div className="float-right">
-                                <Link
-                                    to={`?tipo=${query.get('tipo')}`}
-                                    className={`btn btn-sm btn-${!query.get('fecha') ? 'secondary' : 'fecha'} mr-2`}>
-                                    {'Todos'}
-                                </Link>
-                                <Link
-                                    to={`?tipo=${query.get('tipo')}&fecha=semana`}
-                                    className={`btn btn-sm btn-${query.get('fecha') === 'semana' ? 'secondary' : 'light'} mr-2`}>
-                                    {'Esta semana'}
-                                </Link>
-                                <Link
-                                    to={`?tipo=${query.get('tipo')}&fecha=mes`}
-                                    className={`btn btn-sm btn-${query.get('fecha') === 'mes' ? 'secondary' : 'light'} mr-2`}>
-                                    {'Este mes'}
-                                </Link>
-                                <Link
-                                    to={`?tipo=${query.get('tipo')}&fecha=antiguo`}
-                                    className={`btn btn-sm btn-${query.get('fecha') === 'antiguo' ? 'secondary' : 'light'} mr-2`}>
-                                    {'Mas antiguos'}
-                                </Link>
-                            </div> */}
-                        </div>
+                        <h3 className="mb-4">{getTitulo()}</h3>
                         {loadingPosts && <div className="text-center mb-3">Cargando...</div>}
+                        <div className="text-center">
+                            <img
+                                src={imgSearch}
+                                className="mt-5 img-fluid"
+                                alt="sin resultados"
+                                style={{ maxWidth: '100px' }}
+                            />
+                            <h4 className="mt-4">Lo sentimo no encontramos nada.</h4>
+                        </div>
                         <GridPosts>
                             {posts.map(post => {
                                 switch (post.tipo_contenido) {
@@ -150,98 +133,26 @@ export default function Posts() {
                                             titulo={post.titulo}
                                             fecha="10 de agosto del 2020"
                                         />
-                                        break;
+
                                     case 'video':
                                         return <CardVideo
                                             key={post.id}
                                             imageVideo="https://img.youtube.com/vi/ORjLX5KHX1A/0.jpg"
                                             titulo={post.titulo}
                                         />
-                                        break;
+
                                     case 'programa':
                                         return <CardImage
                                             key={post.id}
                                             image={`/apimuni/images/posts/${post.image}`}
                                             titulo={post.titulo}
                                         />
-                                        break;
 
                                     default:
                                         break;
                                 }
                             })}
                         </GridPosts>
-                        {/* {posts.length % 10 === 0 && ( */}
-                        <div className="text-center">
-                            <Button onClick={loadMorePosts}>
-                                {loadingMorePosts ? 'Cargando...' : 'Ver mas'}
-                            </Button>
-                        </div>
-                        {/* )} */}
-
-                        {/* <div
-                            className=""
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                                justifyContent: 'center',
-                                gap: '2rem'
-                            }}>
-                            {posts.map(post => {
-                                switch (post.tipo) {
-                                    case 'noticia':
-                                        return <CardNoticia 
-                                            key={post.id}
-                                            image={`/apimuni/images/posts/${post.image}`}
-                                            titulo={post.titulo}
-                                        />
-                                        break;
-                                    case 'video':
-                                        return <CardVideo
-                                            key={post.id}
-                                            image="https://img.youtube.com/vi/ORjLX5KHX1A/0.jpg"
-                                            titulo={post.titulo}
-                                        />
-                                        break;
-                                    case 'programa':
-                                        return <CardImage
-                                        key={post.id}
-                                        image={`/apimuni/images/posts/${post.image}`}
-                                        titulo={post.titulo}
-                                        />
-                                        break;
-                                
-                                    default:
-                                        break;
-                                }
-                            })}
-                        </div> */}
-                        {/* <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(275px, 1fr))',
-                            gap: '1rem'
-                        }}>
-                            <CardVideo
-                                titulo="Ttiulo del video Ttiulo del video Ttiulo del video Ttiulo del video"
-                                imageVideo="https://img.youtube.com/vi/ORjLX5KHX1A/0.jpg"
-                            />
-                            <CardVideo
-                                titulo="Ttiulo del video"
-                                imageVideo="https://img.youtube.com/vi/KHrfr7twbdI/0.jpg"
-                            />
-                            <CardVideo
-                                titulo="Ttiulo del video"
-                                imageVideo="https://img.youtube.com/vi/KKfVB7ODR4s/0.jpg"
-                            />
-                            <CardVideo
-                                titulo="Ttiulo del video"
-                                imageVideo="https://img.youtube.com/vi/CFeBjW0eowU/0.jpg"
-                            />
-                            <CardVideo
-                                titulo="Ttiulo del video"
-                                imageVideo="https://img.youtube.com/vi/9fGhugRjhqM/0.jpg"
-                            />
-                        </div> */}
                     </div>
                 </div>
             </Container>

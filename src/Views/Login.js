@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 export default function Login({ login }) {
+	const history = useHistory();
 	const [user, setUser] = useState({
 		nickname: '',
 		password: ''
 	});
+	const [sending, setSending] = useState(false);
+	const [error, setError] = useState(null);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
+
+		if (sending) return;
+
 		try {
-			login(user);
-			setUser({ nickname: '', password: '' });
+			setSending(true);
+			await login(user);
+			history.push('/');
 		} catch (error) {
 			console.log(error);
+			if (error.response.status === 400) {
+				setError(error.response.data.mensaje);
+			}
+			setSending(false);
 		}
 	}
 
@@ -33,22 +45,36 @@ export default function Login({ login }) {
 						name="nickname"
 						value={user.nickname}
 						onChange={handleInputChange}
-						placeholder="Ingrese nombre de usuario" />
+						placeholder="Ingrese nombre de usuario"
+						autoComplete="off"
+					/>
 				</Form.Group>
 				<Form.Group>
 					<Form.Label>Contrase&ntilde;a</Form.Label>
 					<Form.Control
-						type="text"
+						type="password"
 						name="password"
 						value={user.password}
 						onChange={handleInputChange}
-						placeholder="Contrase&ntilde;a" />
+						placeholder="Contrase&ntilde;a"
+						autoComplete="off"
+					/>
 				</Form.Group>
-				<Button type="submit" size="lg" block>Iniciar sessi&oacute;n</Button>
+				{error && <div className="alert alert-danger d-flex justify-content-between align-items-start">
+					<div>{error}</div>
+					<button
+						type="button"
+						className="mt-n1 mb-n2 btn btn-sm text-danger"
+						onClick={() => setError(null)}>
+						<i className="far fa-times" />
+					</button>
+				</div>}
+				<Button type="submit" size="lg" block>
+					{sending ? 'Verificando...' : 'Iniciar sessión'}
+				</Button>
 			</Form>
-			<div className="text-center">
-				<a href="#olvide-mi-contraseña">¿Olvidaste tu contrase&ntilde;a?</a>
-			</div>
 		</div>
+
+
 	</div>
 }
