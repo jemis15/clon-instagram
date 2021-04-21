@@ -6,9 +6,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: repeat(2, 1fr);
-  grid-template-areas:
-    "caja1 caja2"
-    "caja1 caja3";
+  grid-template-areas: "caja1 caja2" "caja1 caja3";
 }
 
 .grid-image1 {
@@ -23,14 +21,14 @@
 
 .publication {
   .publication-tag {
-		top: 25px;
-		right: 0;
-		border: 1px solid orange;
-		border-top-left-radius: 10px;
-		border-bottom-left-radius: 10px;
-		background-color: rgb(250, 233, 201);
-		color: orange;
-	}
+    top: 25px;
+    right: 0;
+    border: 1px solid orange;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: rgb(250, 233, 201);
+    color: orange;
+  }
 }
 
 .tabs-tab {
@@ -46,12 +44,12 @@
 }
 
 @include media-breakpoint-up(lg) {
-  .tabs-item{
-		&.active{
-			border-bottom: 0 !important;
-		}
-		&:hover{
-			border-bottom: 0 !important;
-		}
-	}
+  .tabs-item {
+    &.active {
+      border-bottom: 0 !important;
+    }
+    &:hover {
+      border-bottom: 0 !important;
+    }
+  }
 }

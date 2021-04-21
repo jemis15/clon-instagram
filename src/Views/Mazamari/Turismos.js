@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Banner from '../../components/Banner';
 
-export default function Turismos({ user }) {
+export default function Turismos() {
     const [turismos, setTurismos] = useState([]);
     const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(true);
     const [turismoId, setTurismoId] = useState(0);
@@ -32,7 +32,7 @@ export default function Turismos({ user }) {
     }, []);
 
     return <>
-        <Banner id="2" background="bg-green-800" user={user} />
+        <Banner id="2" background="bg-green-800" />
 
         <Container className="py-xl">
             <h1 className="text-center mb-5">El <span className="text-success">Turismo</span> en el Distrito de <span className="text-success">Mazamari</span></h1>

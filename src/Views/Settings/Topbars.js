@@ -24,7 +24,7 @@ export default function Topbars({ showTopbar }) {
                 setTopbar(apiTopbar);
                 setLoading(false);
             } catch (error) {
-                if (Axios.isCancel) { return; }
+                if (Axios.isCancel(error)) { return; }
                 console.log(error);
                 setError('Upps sucedio algo inesperado');
                 setLoading(false);
@@ -46,7 +46,7 @@ export default function Topbars({ showTopbar }) {
         try {
             setSending(true);
             await Axios({
-                method: 'put',
+                method: 'post',
                 url: `/apimuni/topbars/${topbar.id}`,
                 params: topbar
             });
@@ -96,26 +96,26 @@ export default function Topbars({ showTopbar }) {
     }
 
     return <div>
-        <Title className="mb-4">Topbars</Title>
+        <Title className="mb-4">Topbar</Title>
 
         <Form onSubmit={handleSubmit}>
-            <Form.Group>
-                <label>Topbar</label>
+            <div className="mb-3">
+                <label className="form-label">Titulo del topbar</label>
                 <Form.Control
                     type="text"
                     value={topbar.descripcion}
                     onChange={(e) => setTopbar({ ...topbar, descripcion: e.target.value })}
                 />
-            </Form.Group>
-            <Form.Group>
+            </div>
+            <div className="mb-3">
                 <Form.Check
                     label="Activo"
                     id="activar_topbar"
                     checked={topbar.active}
                     onChange={e => setTopbar({ ...topbar, active: e.target.checked ? 1 : 0 })}
                 />
-            </Form.Group>
-            <Button type="submit">{sending ? 'Actualizando...' : 'Actualizar'}</Button>
+            </div>
+            <button type="submit" className="mb-3 btn btn-primary">{sending ? 'Actualizando...' : 'Actualizar'}</button>
         </Form>
     </div>
 }

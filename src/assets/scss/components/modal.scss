@@ -34,3 +34,23 @@
     }
   }
 }
+.modal-bienvenida{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 1500;
+  // background-color: white;
+  button{
+    background: white;
+    outline: none;
+    padding: 0;
+    border: 0;
+
+    &:hover{
+      background: rgb(240, 240, 240);
+    }
+  }
+}

@@ -1,9 +1,11 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { useUser } from '../Context/user-context';
 
-function Banner({ id, background, user }) {
+function Banner({ id, background }) {
   const banner_id = id;
+  const { user } = useUser();
   const [banner, setBanner] = useState(null);
   const [bannerUpdate, setBannerUpdate] = useState({
     titulo: '',
@@ -20,7 +22,7 @@ function Banner({ id, background, user }) {
         // indica que se esta obteniendo datos de la base de datos
         setLoading(true);
         // api para obtener datos de banner desde la base de datos
-        const { data: apiBanner } = await Axios.get(`/apimuni/banners/${banner_id}`);
+        const { data: apiBanner } = await Axios.get(`/v1/banners/${banner_id}`);
         // guardando los datos obtenidos desde la api
         setBanner(apiBanner);
         // se termino de cargar
@@ -33,7 +35,7 @@ function Banner({ id, background, user }) {
     }
 
     loadBanner();
-  }, []);
+  }, [banner_id]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -65,7 +67,6 @@ function Banner({ id, background, user }) {
   }
 
   async function handleSelectImage(e) {
-    console.log('Hola');
     if (uploadingImage) {
       return;
     }

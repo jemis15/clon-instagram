@@ -1,35 +1,127 @@
-.Simbolo{
-    position: relative;
-    display: block;
-    padding: 10px;
-    font-weight: 200;
-    background: --grey-400;
-    color: #000;
-    text-decoration: none;
+.Simbolo {
+  position: relative;
+  display: block;
+  padding: 10px;
+  font-weight: 200;
+  background: --grey-400;
+  color: #000;
+  text-decoration: none;
 }
 .Simbolo.open {
-    background: #16a085;
-    color: #fff;
+  background: #16a085;
+  color: #fff;
 }
 .Simbolo:hover {
-    background: #1abc9c;
+  background: #1abc9c;
 }
 
-.menunav-link{
-    &.active{
-        background-color: #008000;
-        color:white;
-    }
-    &:hover{
-        background-color: #F8DE5E;
-    }
+.menunav-link {
+  &.active {
+    background-color: #008000;
+    color: white;
+  }
+  &:hover {
+    background-color: #f8de5e;
+  }
 }
-.menuturismo-link{
-    &.active{
-        background-color: #008000;
-        color:white;
+
+.tansporte-publico-consulta {
+  @include media-breakpoint-up(sm) {
+    display: flex;
+  }
+
+  .menu-link {
+    border: 0;
+    background-color: transparent;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+    &:hover {
+      background-color: rgb(186, 235, 186);
     }
-    &:hover{
-        background-color: #F8DE5E;
+    &.active {
+      background-color: rgb(186, 235, 186);
+      color: rgba(0, 0, 0, 0.65);
     }
+  }
+}
+
+.lugar {
+  color: var(--red-700);
+}
+
+.informacion-links {
+  .btn {
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+    &:hover {
+      background-color: rgb(186, 235, 186);
+    }
+    &::before {
+      display: inline-block;
+      width: 1.25em;
+      line-height: 0;
+      content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+      transition: transform 0.35s ease;
+      transform-origin: 0.5em 50%;
+    }
+    &[aria-expanded="true"] {
+      color: $dark;
+      &::before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+    margin-top: 0.125rem;
+    margin-left: 1.25rem;
+    padding: 0.1875rem 0.5rem;
+    display: inline-block;
+    &:hover {
+      background-color: rgb(186, 235, 186);
+    }
+  }
+}
+
+.container-info {
+  .t1 {
+  }
+  .t2:not(:first-child) {
+    margin-top: 3rem;
+    // background-color: green;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--grey-400);
+  }
+
+  table,
+  td,
+  th {
+    border: 1px solid var(--grey-400);
+  }
+
+  tbody {
+    tr {
+      border-radius: 10px;
+    }
+  }
+
+  table {
+    margin-bottom: 1rem;
+    th,
+    td {
+      padding: 0.25rem 0.3rem;
+    }
+    thead {
+      font-size: 0.8rem;
+      tr {
+        background-color: red;
+        color: white;
+      }
+    }
+    tbody {
+      font-size: 0.9rem;
+    }
+  }
 }

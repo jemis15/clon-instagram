@@ -16,9 +16,8 @@ export default function BannerCarousel({
     const toggleModalEditarCarousel = () => setModalEditarCarousel(!modalEditarCarousel);
     const toggleModalDeleteCarousel = () => setModalDeleteCarousel(!modalDeleteCarousel);
 
-    return <div className="carousel_home-item position-relative overflow-hidden">
-        <div
-            className="img-container d-flex justify-content-center align-items-center">
+    return <div className="ratio ratio-21x9 carousel_home-item position-relative overflow-hidden">
+        <div className="d-flex justify-content-center align-items-center">
             <img
                 src={carousel.image}
                 loading="lazy"

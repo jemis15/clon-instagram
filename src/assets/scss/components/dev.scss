@@ -5,30 +5,6 @@
 //   }
 // }
 
-.a_sidenav {
-  border: 1px solid var(--grey-400);
-  // background-color: white;
-
-  .a_sidenav-item {
-    border-top: 1px solid var(--grey-400);
-
-    &:last-child {
-      border-bottom: 0;
-    }
-
-    &.active {
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        border-left: 2px solid $primary;
-      }
-    }
-  }
-}
-
 .icon-edit {
   bottom: 0;
   right: 0;

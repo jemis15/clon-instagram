@@ -11,7 +11,7 @@ export default function BtnSocial({ className, size, social, url, fill }) {
       break;
     case "youtube":
       icon = <i className="fab fa-youtube" />;
-      urlSocial = 'https://youtube.com/c/';
+      urlSocial = 'https://youtube.com/channel/';
       break;
     case "twitter":
       icon = <i className="fab fa-twitter" />;

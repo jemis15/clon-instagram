@@ -1,18 +1,18 @@
 import React from 'react';
 
-export default function CarouselLink({ link }) {
-    if (!link.image || !link.url) {
+export default function CarouselLink({ url, image }) {
+    if (!image || !url) {
         return null;
     }
 
-    return <div className="ratio ratio-16x9">
+    return <div className="ratio ratio-16x9 bg-white rounded-3" style={{border: '1px solid var(--grey-300)'}}>
         <a
             className="d-flex justify-content-center align-items-center"
-            href={link.url}
+            href={url}
             target="_blank"
             rel="noopener noreferrer">
             <img
-                src={link.image}
+                src={image}
                 alt="carousel link"
                 loading="lazy"
                 className="post-image"

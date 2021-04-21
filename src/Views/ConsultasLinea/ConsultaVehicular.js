@@ -1,116 +1,94 @@
 import React from 'react';
-import { Col, Form, Row, Table, Button } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-export default function ConsultaVehicular(){
-    const styleScroll = {
-        width: '100%', 
-        height: 'auto', 
-        overflow: 'scroll' ,
-        overflowY:'hidden',
-        whiteSpace: 'nowrap'
-    }
-    return <div className="container my-3 p-3" style={{width:'700px'}}>
-    <Form>
-        <Row>
-            <Col>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Propietario de Vehiculo: </Form.Label>
-                <Form.Control as="select">
-                <option>Jose Ramos Rojas</option>
-                </Form.Control>
-            </Form.Group>
+export default function ConsultaVehicular() {
+
+    return <div>
+        <Row className="mb-5">
+            <Col className="mb-3">
+                <label className="form-label">Propietario de Vehiculo: </label>
+                <select className="form-select">
+                    <option>Jose Ramos Rojas</option>
+                </select>
             </Col>
-            <Col>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Placa:</Form.Label>
-                <Form.Control as="select">
-                <option>iuhfweiu</option>
-                </Form.Control>
-            </Form.Group>
+            <Col className="mb-3">
+                <label className="form-label">Placa:</label>
+                <select className="form-select">
+                    <option>iuhfweiu</option>
+                </select>
             </Col>
-            <Col>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Codigo MDM:</Form.Label>
-                <Form.Control as="select">
-                <option>iuhfweiu</option>
-                </Form.Control>
-            </Form.Group>
+            <Col className="mb-3">
+                <label className="form-label">Codigo MDM:</label>
+                <select className="form-select">
+                    <option>iuhfweiu</option>
+                </select>
             </Col>
         </Row>
-       <div style={styleScroll} className="mb-3">
-            <Table  bordered size="sm"  >
-                <thead className="thead-dark">
+        <div className="table-responsive">
+            <table className="table table-sm table-bordered border-dark">
+                <thead className="text-smaller">
                     <tr>
-                    <th>Placa</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Color</th>
-                    <th>Motor</th>
-                    <th>Conductor</th>
-                    <th>Serie Chasis</th>
-                    <th>Serie Motor</th>
-                    <th>Ejes</th>
-                    <th>Asientos</th>
-                    <th>Ruedas</th>
-                    <th>Carrocería</th>
-                    <th>N° Tarjeta</th>
-                    <th>Titulo</th>
-                    <th>Fecha Titulo</th>
-                    <th>Propietario</th>
-                    <th>Dirección Propietario</th>
-                    <th>Teléfono Propietario</th>
-                    <th>Conductor</th>
-                    <th>N° Licencia</th>
-                    <th>Fecha Emisión Licencia</th>
-                    <th>Fecha Caducidad Lic.</th>
-                    <th>Empresa</th>
-                    <th>N° Flota</th>
-                    <th>N° Poliza</th>
-                    <th>Fecha Inicio Poliza</th>
-                    <th>Fecha Fin Poliza</th>
+                        <th>Placa</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Color</th>
+                        <th>Motor</th>
+                        <th>Conductor</th>
+                        <th className="text-nowrap">Serie Chasis</th>
+                        <th className="text-nowrap">Serie Motor</th>
+                        <th>Ejes</th>
+                        <th>Asientos</th>
+                        <th>Ruedas</th>
+                        <th>Carrocería</th>
+                        <th className="text-nowrap">N° Tarjeta</th>
+                        <th>Titulo</th>
+                        <th className="text-nowrap">Fecha Titulo</th>
+                        <th>Propietario</th>
+                        <th className="text-nowrap">Dirección Propietario</th>
+                        <th className="text-nowrap">Teléfono Propietario</th>
+                        <th>Conductor</th>
+                        <th className="text-nowrap">N° Licencia</th>
+                        <th className="text-nowrap">Fecha Emisión Licencia</th>
+                        <th className="text-nowrap">Fecha Caducidad Lic.</th>
+                        <th>Empresa</th>
+                        <th className="text-nowrap">N° Flota</th>
+                        <th className="text-nowrap">N° Poliza</th>
+                        <th className="text-nowrap">Fecha Inicio Poliza</th>
+                        <th className="text-nowrap">Fecha Fin Poliza</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-small">
                     <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
                     </tr>
                 </tbody>
-                </Table>
-                </div>
-                <Row>
-                    <Col sm="7">
-                        <Button variant="success" size="sm">
-                            Exportar Excel
-                        </Button>
-                    </Col>
-                </Row>
-        </Form>
-    
+            </table>
+        </div>
     </div>
 }

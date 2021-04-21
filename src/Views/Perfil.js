@@ -1,10 +1,10 @@
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import fondo1 from '../assets/images/fondos/fondo1.jpg';
 import foto from '../assets/images/default.jpg';
-import { useParams } from 'react-router-dom';
-import Axios from 'axios';
 
 export default function Perfil() {
 	const { nickname } = useParams();
@@ -60,7 +60,7 @@ export default function Perfil() {
 							{miembro.telefono && (
 								<div className="mb-3">
 									<div className="text-smaller mb-1">
-										<span className="me-2"><i class="far fa-mobile" /></span>
+										<span className="me-2"><i className="far fa-mobile" /></span>
 										<span>N&uacute;mero de celular</span>
 									</div>
 									<div className="text-small text-dark">{miembro.telefono}</div>
@@ -134,7 +134,7 @@ export default function Perfil() {
 							? (
 								<div className="m_card shadow-sm rounded">
 									<div className="m_card-header">
-										<h4 className="mb-0">👋🏻 Saludo</h4>
+										<h4 className="mb-0"><span role="img" aria-label="saludo">👋🏻</span> Saludo</h4>
 									</div>
 									<div className="m_card-body">
 										<p className="mb-0">Tenemos el firme propósito de transformar de manera estructural la gestión del distrito con un enfoque innovador, coherente y eficaz. Nuestro gobierno actuará en tres ejes fundamentales: política pública de desarrollo humano, desarrollo sostenible y economía local. Los vecinos de Mazamari deben tener todas las condiciones para realizar sus actividades en el distrito. Es así que los primeros 90 días de gestión realizaremos, consultas vecinales, un censo socio económico y el presupuesto participativo. Esta información marcará nuestra gestión. Finalmente, quiero transmitirles nuestro ideal de gobierno: "No hay que darle a nuestro distrito el tiempo que nos sobra, sino el tiempo que se merece". Seamos los grandes agentes y voluntarios del cambio. En todos está el poder de construir un nuevo Mazamari. La seguridad es el derecho por excelencia y es nuestra responsabilidad. Es así que nos proponemos crear fronteras vivas, un sistema de video vigilancia articulado para instaurar el orden y a la par generar conciencia de ayuda y apoyo a nuestro prójimo que nos necesita en adversidades. El equilibrio medioambiental y creación de zonas ecoturísticas será uno de nuestros ejes de desarrollo.</p>

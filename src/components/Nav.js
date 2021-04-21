@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import imgHistoria from '../assets/images/icons/nav/mazamari/historia.svg';
@@ -20,7 +19,6 @@ import imgSerenazgo from '../assets/images/icons/nav/seguridad/policeman.svg';
 import imgVasoDeLeche from '../assets/images/icons/nav/programas/leche.svg';
 import imgAdultoMayor from '../assets/images/icons/nav/programas/grandparents.svg';
 import imgPiced from '../assets/images/icons/nav/programas/familia.svg';
-import imgServir from '../assets/images/icons/nav/programas/ayuda.svg';
 import imgDemuna from '../assets/images/icons/nav/programas/demuna.svg';
 import imgOmaped from '../assets/images/icons/nav/programas/persona-discapacitada.svg';
 import imgTributoMunicipal from '../assets/images/icons/nav/informacion-linea/iconos-de-dinero.svg';
@@ -47,24 +45,27 @@ import imgCCI from '../assets/images/icons/nav/normativa/codigocuenta.svg';
 import imgConveniosSuscritos from '../assets/images/icons/nav/normativa/apretonmano.svg';
 import imgPdf from '../assets/images/icons/nav/normativa/google-docs.svg'
 import imgActa from '../assets/images/icons/nav/normativa/actas.svg'
-import imgDatosGenerales from '../assets/images/icons/nav/transparencia/datosgenerales.svg';
-import imgPlaneamiento from '../assets/images/icons/nav/transparencia/planeamiento.svg';
+// import imgDatosGenerales from '../assets/images/icons/nav/transparencia/datosgenerales.svg';
+// import imgPlaneamiento from '../assets/images/icons/nav/transparencia/planeamiento.svg';
 import imgPresupuesto from '../assets/images/icons/nav/transparencia/presupuesto.svg';
 import imgProyectosInversion from '../assets/images/icons/nav/transparencia/proyecto.svg';
-import imgParticipacionCiudadana from '../assets/images/icons/nav/transparencia/participacion.svg';
-import imgPersonal from '../assets/images/icons/nav/transparencia/personal.svg';
-import imgContratacionBienesServicios from '../assets/images/icons/nav/transparencia/contratacion.svg';
-import imgNormasPublicas from '../assets/images/icons/nav/transparencia/normas.svg';
-import imgNoticiasInstitucion from '../assets/images/icons/nav/transparencia/noticias.svg';
-import imgAnuncios from '../assets/images/icons/nav/transparencia/anuncios.svg';
+// import imgParticipacionCiudadana from '../assets/images/icons/nav/transparencia/participacion.svg';
+// import imgPersonal from '../assets/images/icons/nav/transparencia/personal.svg';
+// import imgContratacionBienesServicios from '../assets/images/icons/nav/transparencia/contratacion.svg';
+// import imgNormasPublicas from '../assets/images/icons/nav/transparencia/normas.svg';
+// import imgNoticiasInstitucion from '../assets/images/icons/nav/transparencia/noticias.svg';
+// import imgAnuncios from '../assets/images/icons/nav/transparencia/anuncios.svg';
 import imgComunicadosNotaDePrensa from '../assets/images/icons/nav/transparencia/comunicados.svg';
-import imgBoletines from '../assets/images/icons/nav/transparencia/periodico.svg';
+// import imgBoletines from '../assets/images/icons/nav/transparencia/periodico.svg';
 import imgAlcalde from '../assets/images/icons/nav/transparencia/alcalde.svg';
-import imgConsejoMunicipal from '../assets/images/icons/nav/transparencia/consejomunicipal.svg';
-import imgMunicipalidad from '../assets/images/icons/nav/transparencia/municipalidad.svg';
-import imgDocumentosImportantes from '../assets/images/icons/nav/transparencia/documentosimportantes.svg';
-import imgGerencias from '../assets/images/icons/nav/municipalidad/gerencias.svg';
 import imgRegidores from '../assets/images/icons/nav/municipalidad/regidores.svg';
+import imgGerencias from '../assets/images/icons/nav/municipalidad/gerencias.svg';
+import imgOrganigrama from '../assets/images/icons/nav/municipalidad/estructura-jerarquica.svg';
+import imgVisionMision from '../assets/images/icons/nav/municipalidad/objetivo.svg';
+import imgSistemaControlInterno from '../assets/images/icons/nav/municipalidad/empujar.svg';
+// import imgConsejoMunicipal from '../assets/images/icons/nav/transparencia/consejomunicipal.svg';
+// import imgMunicipalidad from '../assets/images/icons/nav/transparencia/municipalidad.svg';
+// import imgDocumentosImportantes from '../assets/images/icons/nav/transparencia/documentosimportantes.svg';
 
 export default function AppNav() {
     return <nav className="nav-header">
@@ -85,67 +86,17 @@ export default function AppNav() {
             <ItemNavigation>
                 <NavigationItem label="Municipalidad" grupo="muni" />
                 <DropMenu>
-                    <Row className="py-4">
-                        <Col md="4">
-                            <LinkNavigationEspecial image={imgAlcalde} titulo="Alcalde" to="/@alcalde" />
-                            <LinkNavigationEspecial image={imgRegidores} titulo="Regidores" to="/equipo" />
-                            <ul className="list-unstyled">
-                                <li>
-                                    <SubLinkNavigation to="/muni/funcionarios">Funcionarios Municipales</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/muni/comisiones">Comisi&oacute;n Permanentes</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/muni/organigrama">Organigrama</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/muni/vision_mision">Misi&oacute;n y Visi&oacute;n</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/muni/control_interno">Sistema de Control Interno</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/muni/convocatorias">Convocatorias CAS</SubLinkNavigation>
-                                </li>
-                            </ul>
-                        </Col>
-                        <Col>
-                            <LinkNavigationEspecial image={imgGerencias} titulo="Gerencias" to="/" />
-                            <ul className="list-unstyled">
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA MUNICIPAL</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACI&Oacute;N Y FINANZAS</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ADMINISTRACI&Oacute;N TRIBUTARIA</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE PLANEAMIENTO Y PRESUPUESTO</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE ASESOR&Iacute;A JUR&Iacute;DICA</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO URBANO Y RURAL</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO ECON&Oacute;MICO TERRITORIAL</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE GESTION AMBIENTAL Y SERVICIOS P&Uacute;BLICOS</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO SOCIAL HUMANO</SubLinkNavigation>
-                                </li>
-                                <li>
-                                    <SubLinkNavigation to="/">GERENCIA DE DESARROLLO DE COMUNIDADES IN&Iacute;GENAS</SubLinkNavigation>
-                                </li>
-                            </ul>
-                        </Col>
-                    </Row>
+                    <div className="py-4 nav_link-grid">
+                        <LinkItem to="/muni/alcalde" image={imgAlcalde} titulo="Alcalde" />
+                        <LinkItem to="/muni/regidores" image={imgRegidores} titulo="Regidores" />
+                        <LinkItem to="/muni/funcionarios" image={imgGerencias} titulo="Funcionarios" />
+                        <LinkItem to="/muni/comisiones" image={imgPresupuesto} titulo="Comision Permanente" />
+                        <LinkItem to="/muni/organigrama" image={imgOrganigrama} titulo="Organigrama" />
+                        <LinkItem to="/muni/vision_mision" image={imgVisionMision} titulo="Mision y Vision" />
+                        <LinkItem to="/muni/control_interno" image={imgSistemaControlInterno} titulo="Sistema de Control Interno" />
+                        <LinkItem to="/muni/proyectos" image={imgProyectosInversion} titulo="Proyectos" />
+                        <LinkItem to="/muni/convocatorias" image={imgComunicadosNotaDePrensa} titulo="Convocatorias CAS" />
+                    </div>
                 </DropMenu>
             </ItemNavigation>
             <ItemNavigation>
@@ -183,7 +134,7 @@ export default function AppNav() {
                     </div>
                 </DropMenu>
             </ItemNavigation>
-            <ItemNavigation>
+            {/* <ItemNavigation>
                 <NavigationItem label="Transparencia" grupo="transparencia" />
                 <DropMenu>
                     <div className="mb-3 pt-4 nav_link-grid">
@@ -211,21 +162,21 @@ export default function AppNav() {
                         <LinkItem to="/transparencia" image={imgBoletines} titulo="Boletines" />
                     </div>
                 </DropMenu>
-            </ItemNavigation>
+            </ItemNavigation> */}
             <ItemNavigation>
                 <NavigationItem label="Informaci&oacute;n en l&iacute;nea" grupo="c" />
                 <DropMenu>
                     <div className="py-4 nav_link-grid">
-                        <LinkItem to="/c" image={imgTributoMunicipal} titulo="Tributo Municipal" />
+                        <LinkItem to="/c/t/tributos-municipales/formas-y-lugares-de-pago" image={imgTributoMunicipal} titulo="Tributo Municipal" />
                         <LinkItem to="/c/licencia_funcionamiento" image={imgLicenciaFuncionamiento} titulo="Licencia de Funcionamiento" />
-                        <LinkItem to="/c/transporte_publico" image={imgRegistroCivil} titulo="Registro Civil" />
+                        <LinkItem to="/c/registrocivil" image={imgRegistroCivil} titulo="Registro Civil" />
                         <LinkItem to="/c/transporte_publico" image={imgEmergencia} titulo="Defensa Civil" />
-                        <LinkItem to="/c/Licencia_Edificacion" image={imgTransportePublico} titulo="Transporte Publico" />
-                        <LinkItem to="/c/ComiteControlInterno" image={imgLicenciaEdificaciones} titulo="Licencias de Edificaciones" />
-                        <LinkItem to="/c/CodigoEtica" image={imgComiteControlInterno} titulo="Comite de Control Interno" />
+                        <LinkItem to="/c/transporte_publico" image={imgTransportePublico} titulo="Transporte Publico" />
+                        <LinkItem to="/c/Licencia_Edificacion" image={imgLicenciaEdificaciones} titulo="Licencias de Edificaciones" />
+                        <LinkItem to="/c/ComiteControlInterno" image={imgComiteControlInterno} titulo="Comite de Control Interno" />
                         <LinkItem to="/c/CodigoEtica" image={imgCodigoEtica} titulo="C&oacute;digo &Eacute;tica" />
-                        <LinkItem to="/c" image={imgProgramaMultianualInvercion} titulo="Programa Multianual de Inversi&oacute;n" />
-                        <LinkItem to="/c" image={imgSaneamiento} titulo="Saneamiento" />
+                        <LinkItem to="/c/multianual" image={imgProgramaMultianualInvercion} titulo="Programa Multianual de Inversi&oacute;n" />
+                        <LinkItem to="/c/saneamiento" image={imgSaneamiento} titulo="Saneamiento" />
                         <LinkItem to="/c/PresupuestoParticipativo" image={imgPresupuestoParticipativo} titulo="Presupuesto Participativo" />
                         <LinkItem to="/c" image={imgSolicitudAccesoInformacion} titulo="Solicitud de Acceso a la Informaci&oacute;n" />
                     </div>
@@ -240,7 +191,6 @@ export default function AppNav() {
                         <LinkItem to="/programas/omaped" image={imgOmaped} titulo="Omaped" />
                         <LinkItem to="/programas/adultomayor" image={imgAdultoMayor} titulo="Adulto Mayor" />
                         <LinkItem to="/programas/piced" image={imgPiced} titulo="Piced" />
-                        <LinkItem to="/programas/servir" image={imgServir} titulo="Servir" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
@@ -262,8 +212,8 @@ export default function AppNav() {
                     <div className="py-4 nav_link-grid">
                         <LinkItem to="/contactos/directorio-telefono" image={imgDirecctorio} titulo="Directorio de Telefono" />
                         <LinkItem to="/contactos/sucursales" image={imgSedes} titulo="Sede Principal y Sucursal" />
-                        <LinkItem to="/contactos/sugerencias" image={imgSugerencias} titulo="Sugerencias" />
-                        <LinkItem to="/contactos/libroreclamos" image={imgLibroReclamaciones} titulo="Libro de Reclamaciones y Quejas" />
+                        <LinkItem to="/realizarreclamo" image={imgSugerencias} titulo="Sugerencias" />
+                        <LinkItem to="/realizarreclamo" image={imgLibroReclamaciones} titulo="Libro de Reclamaciones y Quejas" />
                     </div>
                 </DropMenu>
             </ItemNavigation>
@@ -323,7 +273,7 @@ const LinkNavigationEspecial = ({ to, image, titulo, nuevo }) => (
 )
 
 const NavigationItem = ({ label, grupo }) => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const path = pathname.split('/');
     const active = path[1] === grupo;
 

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Accordion, Button, Card, Form, Modal } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss';
 
 export default function SeguridadSalud() {
     // const [modalNewGrupo, setModalNewGrupo] = useState(false);
@@ -38,7 +36,7 @@ function File({showModalEdit}) {
                 <i className="far fa-file-pdf pl-2"/>
             </Button>
             <i class="fas fa-pencil-alt pr-3  pl-3" onClick={showModalEdit} ></i>
-            <i class="fas fa-trash-alt pr-3" onClick={showAletEliminar} ></i>
+            <i class="fas fa-trash-alt pr-3" ></i>
         </div>
         <p>1. Codigo de etica N° 0012</p>
     </li>
@@ -66,7 +64,7 @@ function File({showModalEdit}) {
         </Form.Group>
         <Form.Group className="float-right">
             <Button variant="secondary" onClick={closeModalItem}>Cancelar</Button>{' '}
-            <Button variant="primary" onClick={GuardarCambios}>Agregar</Button>{' '}
+            <Button variant="primary">Agregar</Button>{' '}
         </Form.Group>
     </Form>
   }
@@ -85,7 +83,7 @@ function AccordionItem({eventKey, titulo, children}) {
     <div className="ml-auto">
             <i class="far fa-plus pr-3" onClick={toggleModalNewItem}></i>
         <i class="fas fa-pencil-alt pr-3" onClick={toggleModalNewItem} ></i>
-        <i class="fas fa-trash-alt pr-3" onClick={showAletEliminar} ></i>
+        <i class="fas fa-trash-alt pr-3" ></i>
         <span className="align-self-start">
         <i class="far fa-angle-down"></i>
         </span>
@@ -111,32 +109,3 @@ function AccordionItem({eventKey, titulo, children}) {
             </Modal>
   </>
 }
-
-
-function showAletEliminar() {
-    Swal.fire({
-        title: '¿Desea Eliminar?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar!',
-        confirmButtonText: 'Si, Eliminalo!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Eliminado',
-            'correctamente',
-            'success'
-          )
-        }
-      })
-  }
-  function GuardarCambios() {
-    Swal.fire({
-        icon: 'success',
-        title: 'Se Guardaron los cambios correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-  }

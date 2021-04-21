@@ -141,3 +141,40 @@
   width: 100%;
   background: linear-gradient(transparent, black);
 }
+
+.icon-facebook{
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #3b5998;
+  color: white;
+  &:hover{
+    background-color: #3b5998;
+    color: white;
+  }
+}
+.icon-youtube{
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #b00;
+  color: white;
+  &:hover{
+    background-color: #b00;
+    color: white;
+  }
+}
+.icon-whatsapp{
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #24D165;
+  color: white;
+  &:hover{
+    background-color: #24D165;
+    color: white;
+  }
+}

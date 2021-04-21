@@ -1,0 +1,49 @@
+.check-box{
+    position: relative;
+    display: inline-block;
+    width: 1.11rem;
+    height: 1.11rem;
+    border: 2px solid $gray-600;
+    border-radius: 0.2rem;
+    cursor: pointer;
+
+    &.checked{
+        background-color: $dark;
+        border-color: $dark;
+        .check-icon{
+            animation: checkmark-expand 140ms ease-out forwards;
+        }
+    }
+}
+.check-icon{
+    display: inline-block;
+    width: 36%;
+    height: 70%;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    position: absolute;
+    top: 5%;
+    left: 35%;
+    transform: rotate(45deg);
+}
+.check-icon-indeterminate{
+    position: relative;
+    top: 50%;
+    width: 70%;
+    margin: 0 auto;
+    border-style: solid;
+    border-top: none;
+    border-left: none;
+    border-bottom-width: calc(2/18 * 18px);
+    border-color: white;
+    box-sizing: content-box;
+}
+
+@keyframes checkmark-expand {
+    from {
+        transform: scale(0) rotate(45deg);
+    }
+    to {
+        transform: scale(1) rotate(45deg);
+    }
+}

@@ -1,32 +1,35 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useUser } from '../Context/user-context';
 
 import Avatar from './utilitarios/Avatar';
 
-export default function Sidebar({ user, logout }) {
+export default function Sidebar() {
+	const { user, logout } = useUser();
+
 	function toggleCollapseSidebar() {
 		document.body.classList.toggle("collapse-sidebar");
 	}
 
-	return <aside className="sidebar overflow-auto" style={{borderRight: '1px solid var(--grey-300)'}}>
+	return <aside className="sidebar overflow-auto" style={{ borderRight: '1px solid var(--grey-300)' }}>
 		<header className="overflow-hidden user-header d-flex flex-nowrap align-items-center justify-content-start hover-when-collapse-sidebar"
 			onClick={toggleCollapseSidebar}
-			style={{borderBottom: '1px solid var(--grey-300)'}}>
+			style={{ borderBottom: '1px solid var(--grey-300)' }}>
 			<div className="d-flex align-items-center">
 				<Avatar
-					className="mr-3"
+					className="me-3"
 					image={user.image}
 					size="sm"
-					initials={user.nombre && user.nombre[0]}
+					initials={user.name}
 				/>
 			</div>
 			<div className="align-self-center overflow-hidden flex-fill d-none-when-collapse-sidebar">
 				<p className="mb-0 color-text text-small text-truncate font-weight-700">
-					{user.nombre}
+					{user.name}
 				</p>
 				<p className="text-smaller mb-0 text-muted text-truncate">@{user.nickname}</p>
 			</div>
-			<div className="mr-auto d-none-when-collapse-sidebar" onClick={toggleCollapseSidebar}>
+			<div className="me-auto d-none-when-collapse-sidebar" onClick={toggleCollapseSidebar}>
 				<span className="cursor-pointer color-text-light"
 					onClick={toggleCollapseSidebar}>
 					<i className="fas fa-bars fa-lg" />
@@ -48,6 +51,13 @@ export default function Sidebar({ user, logout }) {
 						to="/frame"
 						FAIcon="far fa-crop-alt"
 						texto="Espacio de trabajo"
+					/>
+				</li>
+				<li className="navigation-item">
+					<NavigationLink
+						to="/publicaciones"
+						FAIcon="fab fa-twitch"
+						texto="Publicaciones"
 					/>
 				</li>
 				<li className="navigation-item">
@@ -93,8 +103,4 @@ function NavigationLinkClose({ onClick }) {
 		</span>
 		<span className="text-small text-nowrap font-weight-600 d-none-when-collapse-sidebar">Cerrar sessi&oacute;n</span>
 	</div>
-}
-
-function Separador() {
-	return <li className="border-bottom my-2" />;
 }

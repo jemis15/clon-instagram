@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Banner from '../../components/Banner';
 
-export default function Agroindustrias({ user }) {
+export default function Agroindustrias() {
     const [agroindustrias, setAgroindustrias] = useState([]);
     const [loading, setLoading] = useState(true);
     const [agroindustriaId, setAgroindustriaId] = useState(0);
@@ -29,7 +29,7 @@ export default function Agroindustrias({ user }) {
     }, []);
 
     return <>
-        <Banner id="3" background="bg-green-900" user={user} />
+        <Banner id="3" background="bg-green-900" />
 
         <Container className="py-xl">
             <h1 className="text-center mb-5">La <span className="text-success">Agroindustria</span> en el Distrito de <span className="text-success">Mazamari</span></h1>

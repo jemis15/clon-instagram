@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function SidebarNavigationMobile({ active, toggle, user }) {
 	const [links, setLinks] = useState({});
@@ -40,7 +40,7 @@ export default function SidebarNavigationMobile({ active, toggle, user }) {
 
 			<ul className="list-unstyled">
 				{items.map((item, key) => (
-					<NavigationLink key={key} item={item} />
+					<NavigationLink key={key} item={item} toggle={toggle} />
 				))}
 			</ul >
 		</div>
@@ -54,7 +54,7 @@ function SubMenuLinkPrimary({ label, icon }) {
 	</a>
 }
 
-const NavigationLink = ({ item }) => {
+const NavigationLink = ({ item, toggle }) => {
 	const [active, setActive] = useState(false);
 
 	return <>
@@ -72,18 +72,30 @@ const NavigationLink = ({ item }) => {
 						return <li key={key} className="separador mx-auto my-2"></li>
 					}
 
-					return <li key={key}>
-						<NavLink
-							to={link.url}
-							className="px-5 py-2 nav__item-link d-block text-decoration-none"
-							activeClassName="active">
-							{link.name}
-						</NavLink>
-					</li>
+					return <NLink
+						key={key}
+						url={link.url}
+						toggle={toggle}
+						label={link.name}
+					/>
 				})}
 			</ul>
 		</li>
 	</>
+}
+
+const NLink = ({ url, label, toggle }) => {
+	const { pathname, search } = useLocation();
+	const classActive = url === pathname + search ? 'active' : '';
+
+	return <li>
+		<Link
+			to={url}
+			onClick={toggle}
+			className={`px-5 py-2 nav__item-link ${classActive} d-block text-decoration-none`}>
+			{label}
+		</Link>
+	</li>
 }
 
 const items = [
@@ -112,19 +124,19 @@ const items = [
 		icon: <i className="far fa-file" />,
 		name: 'Normatividad',
 		links: [
-			{ name: 'Ordenanza municipal', url: '/blank/1' },
-			{ name: 'Acuerdo de consejo', url: '/blank/2' },
-			{ name: 'Resolucion de consejo Municipal', url: '/blank/3' },
-			{ name: 'Actas de sesión de consejo ordinario', url: '/blank/4' },
-			{ name: 'Actas de consejo extraordinarios', url: '/blank/4' },
-			{ name: 'Decretos de alcaldia', url: '/blank/5' },
-			{ name: 'Resoluciones de alcaldia', url: '/blank/6' },
-			{ name: 'Agenda de sesión de consejo Ordinario', url: '/blank/7' },
-			{ name: 'Agenda de sesión de consejo Extraordinario', url: '/blank/8' },
-			{ name: 'Resolucion de gerencia municipal', url: '/blank/9' },
-			{ name: 'Directivas intitucionales', url: '/blank/10' },
-			{ name: 'CCI de sesion extraordinario', url: '/blank/11' },
-			{ name: 'Convenios suscritos', url: '/blank/12' },
+			{ name: 'Ordenanza municipal', url: '/normativa?tipo=ordenanza-municipal' },
+			{ name: 'Acuerdo de consejo', url: '/normativa?tipo=acuerdos-de-consejo' },
+			{ name: 'Resolucion de consejo Municipal', url: '/normativa?tipo=resoluciones-de-consejo' },
+			{ name: 'Actas de sesión de consejo ordinario', url: '/normativa?tipo=actas-de-sesion-ordinario' },
+			{ name: 'Actas de consejo extraordinarios', url: '/normativa?tipo=actas-de-sesion-extraordinario' },
+			{ name: 'Decretos de alcaldia', url: '/normativa?tipo=decretos-de-alcaldia' },
+			{ name: 'Resoluciones de alcaldia', url: '/normativa?tipo=resoluciones-de-alcaldia' },
+			{ name: 'Agenda de sesión de consejo Ordinario', url: '/normativa' },
+			{ name: 'Agenda de sesión de consejo Extraordinario', url: '/normativa' },
+			{ name: 'Resolucion de gerencia municipal', url: '/normativa?tipo=tipo=resoluciones-de-gerencia' },
+			{ name: 'Directivas intitucionales', url: '/normativa?tipo=directivas' },
+			{ name: 'CCI de sesion extraordinario', url: '/normativa' },
+			{ name: 'Convenios suscritos', url: '/normativa' },
 		]
 	},
 	{
@@ -139,11 +151,11 @@ const items = [
 			{ name: 'Personal', url: '/personal' },
 			{ name: 'Contratación de bienes y servicios', url: '/blank/6' },
 			{ name: 'Normas públicas', url: '/blank/7' },
-			{ tipo: 'separador'},
+			{ tipo: 'separador' },
 			{ name: 'Alcalde', url: '/blank/8' },
 			{ name: 'Consejo municipal', url: '/blank/9' },
 			{ name: 'Municipalidad', url: '/blank/10' },
-			{ tipo: 'separador'},
+			{ tipo: 'separador' },
 			{ name: 'Documentos de OCI', url: '/blank/12' },
 			{ name: 'Noticias de la institución', url: '/blank/12' },
 			{ name: 'Anuncios', url: '/blank/12' },
@@ -155,51 +167,51 @@ const items = [
 		icon: <i className="far fa-database" />,
 		name: 'Informacion en línea',
 		links: [
-			{ name: 'Tributo municipal', url: '/tributo-municipal' },
-			{ name: 'Licencia de funcionamiento', url: '/licencia-funcionamiento' },
-			{ name: 'Registro civil', url: '/registro-civil' },
-			{ name: 'Defensa civil', url: '/defensa-civil' },
-			{ name: 'Transporte público', url: '/transporte-publico' },
-			{ name: 'Licencia de edificaciones', url: '/licencia-edificaciones' },
-			{ name: 'Comite de control interno', url: '/comite-control-interno' },
-			{ name: 'Codigo etica', url: '/codigo-etica' },
-			{ name: 'Programa multianual', url: '/programa-multianual' },
-			{ name: 'Saneamiento', url: '/saneamiento' },
-			{ name: 'Presupuesto participativo', url: '/presupuesto-participativo' },
-			{ name: 'Solicitud de acceso a la información', url: '/solicitud-acceso-infromacion' },
+			{ name: 'Tributo municipal', url: '/c/tributo-municipal' },
+			{ name: 'Licencia de funcionamiento', url: '/c/licencia-funcionamiento' },
+			{ name: 'Registro civil', url: '/c/registro-civil' },
+			{ name: 'Defensa civil', url: '/c/defensa-civil' },
+			{ name: 'Transporte público', url: '/c/transporte-publico' },
+			{ name: 'Licencia de edificaciones', url: '/c/licencia-edificaciones' },
+			{ name: 'Comite de control interno', url: '/c/comite-control-interno' },
+			{ name: 'Codigo etica', url: '/c/codigo-etica' },
+			{ name: 'Programa multianual', url: '/c/programa-multianual' },
+			{ name: 'Saneamiento', url: '/c/saneamiento' },
+			{ name: 'Presupuesto participativo', url: '/c/presupuesto-participativo' },
+			{ name: 'Solicitud de acceso a la información', url: '/c/solicitud-acceso-infromacion' },
 		]
 	},
 	{
 		icon: <i className="far fa-project-diagram" />,
 		name: 'Programas',
 		links: [
-			{ name: 'Vaso de leche', url: '/vaso-leche' },
-			{ name: 'Demuna', url: '/demuna' },
-			{ name: 'Omaped', url: '/omaped' },
-			{ name: 'Adulto mayor', url: '/adulto-mayor' },
-			{ name: 'piced', url: '/piced' },
-			{ name: 'servir', url: '/servir' }
+			{ name: 'Vaso de leche', url: '/programas/vasoleche' },
+			{ name: 'Demuna', url: '/programas/demuna' },
+			{ name: 'Omaped', url: '/programas/omaped' },
+			{ name: 'Adulto mayor', url: '/programas/adultomayor' },
+			{ name: 'piced', url: '/programas/piced' },
+			{ name: 'servir', url: '/programas/servir' }
 		]
 	},
 	{
 		icon: <i className="far fa-shield-alt" />,
 		name: 'Seguridad',
 		links: [
-			{ name: 'Directorio', url: '/directorio' },
-			{ name: 'Codisec', url: '/codisec' },
-			{ name: 'Seguridad ciudadana', url: '/seguridad-ciudadana' },
-			{ name: 'Seguridad y salud en el trabajo', url: '/seguridad-salud-trabajo' },
-			{ name: 'Serenazgo', url: '/serenazgo' }
+			{ name: 'Directorio', url: '/seguridad/directorio' },
+			{ name: 'Codisec', url: '/seguridad/codisec' },
+			{ name: 'Seguridad ciudadana', url: '/seguridad/seguridad-ciudadana' },
+			{ name: 'Seguridad y salud en el trabajo', url: '/seguridad/seguridad-salud-trabajo' },
+			{ name: 'Serenazgo', url: '/seguridad/serenazgo' }
 		]
 	},
 	{
 		icon: <i className="far fa-headset" />,
 		name: 'Contactos',
 		links: [
-			{ name: 'Directorio de telefono', url: '/directorio-telefono' },
-			{ name: 'Sucursal', url: '/sucursal' },
-			{ name: 'Sugerencias', url: '/sugerencias' },
-			{ name: 'Libro de reclamaciones', url: '/libro-reclamaciones' }
+			{ name: 'Directorio de telefono', url: '/contactos/directorio-telefono' },
+			{ name: 'Sucursal', url: '/contactos/sucursal' },
+			{ name: 'Sugerencias', url: '/contactos/sugerencias' },
+			{ name: 'Libro de reclamaciones', url: '/contactos/libro-reclamaciones' }
 		]
 	}
 ];

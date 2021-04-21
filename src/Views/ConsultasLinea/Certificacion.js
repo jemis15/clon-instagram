@@ -1,57 +1,28 @@
 import React from 'react';
-import {col, Row, Card, Nav, Button} from 'react-bootstrap';
-export default function Certificacion () {
+
+export default function Certificacion() {
   return (
-    <div className="container border rounded pl-4 pr-4" style={{maxWidth: '700px'}}>
-      <div className=" p-3  mx-n4" style={{background:'#008000'}}>
-      <h4 className="text-center"  style={{color:'white'}}>CERTIFICACIONES O COPIAS DE PARTIDAS</h4>
-      <h6 className="text-center" style={{color:'white'}}>Nacimiento Matrimonio Difuncion</h6>
+    <div>
+      <h2 className="text-center">CERTIFICACIONES O COPIAS DE PARTIDAS</h2>
+      <h4 className="mb-4 text-center">Nacimiento Matrimonio Difunci&oacute;n</h4>
+      <div className="mb-4">
+        <b>DESCRIPCI&Oacute;N:</b> Expedimos Partidas de Nacimiento, matrimonio y difuci&oacute;n para el uso en el pa&iacute;s y para uso en el extranjero.
       </div>
-      <br />
-        <div>
-          {' '}
-          <b>DESCRIPCIÓN:</b>
-          <label className="pl-5 mt-2">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed veniam alias molestias corrupti assumenda architecto eos dignissimos, consequuntur temporibus aliquam ducimus, non eum, delectus aperiam distinctio tenetur. Fugit, exercitationem pariatur!
-          </label>
-        </div>
-        <div className="Informacion p-5" >
-            <ul className="list-unstyled mt-3">
-                        <li className="border-bottom py-3">
-                          <b>Requisitos</b>
-                          <div className="float-right font-italic">copia de DNI</div>
-                        </li>
-                        <li className="border-bottom py-3">
-                          <b>Costos</b>
-                          <div className="float-right font-italic">
-                            Copia de partida de nacimiento S/. 451
-                          </div>
-                        </li>
-                        <li className="border-bottom py-3">
-                          <b>Plazo de Entrega</b>
-                          <div className="float-right font-italic">
-                            15 días Hábiles
-                          </div>
-                        </li>
-                        <li className="border-bottom py-3">
-                          <b>Horario</b>
-                          <div className="float-right font-italic">8:00 am- 5:00 pm</div>
-                        </li>
-                        <li className="border-bottom py-3">
-                          <b>Telefono</b>
-                          <div className="float-right font-italic">
-                            962345871
-                          </div>
-                        </li>
-                        <li className="border-bottom py-3">
-                          <b>Email</b>
-                          <div className="float-right font-italic">
-                            RegistroCivil@gmail.com
-                          </div>
-                        </li>
-                      </ul>
-                    
-        </div>
+      <div className="card" >
+        <ul className="mb-0 list-group list-group-flush">
+          <Item titulo="Requisitos" value="---" />
+          <Item titulo="Costos" value="---" />
+          <Item titulo="Plazo de Entrega" value="---" />
+          <Item titulo="Horario" value="---" />
+          <Item titulo="Telefono" value="---" />
+          <Item titulo="Email" value="---" />
+        </ul>
+      </div>
     </div>
   );
 }
+
+const Item = ({ titulo, value }) => <li className="list-group-item clearfix">
+  <div className="float-start">{titulo}</div>
+  <div className="float-end fw-bold">{value}</div>
+</li>

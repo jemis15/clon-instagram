@@ -30,7 +30,7 @@ export default function Usuarios({ showAlert }) {
                 setUsers(apiUsers);
                 setLoading(false);
             } catch (error) {
-                if (Axios.isCancel) { return; }
+                if (Axios.isCancel(error)) { return; }
                 console.log(error);
                 setLoading(false);
             }
@@ -65,17 +65,20 @@ export default function Usuarios({ showAlert }) {
 
     return <div>
         <Title>Usuarios</Title>
-        <div className="d-flex mb-5">
+        {/* <div className="d-flex mb-5">
             <div>
                 <Form.Control type="search" size="sm" placeholder="Buscar usuario..." />
             </div>
-            <div className="ml-auto">
+            <div className="ms-auto">
                 <Button size="sm" onClick={toggleModalInvitarUsuario}>Invitar usuario</Button>
                 <Button size="sm" onClick={toggleModalNewUser}>Agregar</Button>
             </div>
-        </div>
+        </div> */}
 
         <div className="grid-users">
+            <div className="bg-white border rounded d-flex justify-content-center align-items-center cursor-pointer" onClick={toggleModalNewUser}>
+                Nuevo usuario
+            </div>
             {users.map(user => (
                 <User
                     key={user.id}
@@ -119,7 +122,7 @@ function User({ user, onDelete, update, showAlert }) {
         <div className="pb-3 user d-flex position-relative">
             <div>
                 <Avatar
-                    className="mr-3"
+                    className="me-3"
                     initials={user.nombre && user.nombre[0]}
                     image={user.image}
                     size="lg"
@@ -127,14 +130,14 @@ function User({ user, onDelete, update, showAlert }) {
             </div>
             <div>
                 <div className="font-weight-500">
-                    <Link className="font-weight-600" to={`/@${user.nickname}`}>{user.nombre}</Link>
+                    <Link className="font-weight-600 text-decoration-none" to={`/@${user.nickname}`}>{user.nombre}</Link>
                 </div>
-                <div className="text-smaller">{user.nickname} · {moment(user.created_at).format('YYYY/MM/DD')}</div>
+                <div className="mb-2 text-smaller">{user.nickname} · {moment(user.created_at).format('YYYY/MM/DD')}</div>
 
                 <div className="position-relative">
                     <button className="btn-options py-1 px-2 rounded text-small font-weight-600"
                         onClick={toggleDropdown}>
-                        <span className="mr-1">Opciones</span>
+                        <span className="me-1">Opciones</span>
                         <i className="fas fa-caret-down" />
                     </button>
                     <DropdownMenu active={dropdown} toggle={toggleDropdown} className="py-2">
@@ -142,14 +145,14 @@ function User({ user, onDelete, update, showAlert }) {
                             href="#option"
                             className="item-link px-3 py-1 d-block text-decoration-none text-nowrap"
                             onClick={toggleModalChangePassword}>
-                            <span className="mr-2"><i className="fas fa-key" /></span>
+                            <span className="me-2"><i className="fas fa-key" /></span>
                             <span>Cambiar contrase&ntilde;a</span>
                         </a>
-                        <a
+                        {/* <a
                             href="#option"
                             className="item-link px-3 py-1 d-block text-decoration-none"
                             onClick={toggleModalPrivilegios}>
-                            <span className="mr-2"><i className="fas fa-street-view" /></span>
+                            <span className="me-2"><i className="fas fa-street-view" /></span>
                             <span>Privilegios</span>
                         </a>
                         <div className="border-bottom my-1"></div>
@@ -157,14 +160,14 @@ function User({ user, onDelete, update, showAlert }) {
                             href="#option"
                             className="item-link px-3 py-1 d-block text-decoration-none"
                             onClick={toggleModalSuspender}>
-                            <span className="mr-2"><i className="fas fa-user-clock" /></span>
+                            <span className="me-2"><i className="fas fa-user-clock" /></span>
                             <span>Banear cuenta</span>
-                        </a>
+                        </a> */}
                         <a
                             href="#option"
                             className="item-link px-3 py-1 d-block text-decoration-none"
                             onClick={toggleModalDeleteAccount}>
-                            <span className="mr-2"><i className="fas fa-times" /></span>
+                            <span className="me-2"><i className="fas fa-times" /></span>
                             <span>Eliminar cuenta</span>
                         </a>
                     </DropdownMenu>
@@ -172,28 +175,28 @@ function User({ user, onDelete, update, showAlert }) {
             </div>
         </div>
 
-        <Modal show={modalChangePassword} onHide={toggleModalChangePassword} centered>
+        <Modal show={modalChangePassword} onHide={toggleModalChangePassword} animation={false} centered>
             <Modal.Header closeButton>Cambiar contrase&ntilde;a</Modal.Header>
             <Modal.Body>
                 <ChangePassword user={user} successful={toggleModalChangePassword} showAlert={showAlert} />
             </Modal.Body>
         </Modal>
 
-        <Modal show={modalPrivilegios} onHide={toggleModalPrivilegios} centered>
+        <Modal show={modalPrivilegios} onHide={toggleModalPrivilegios} animation={false} centered>
             <Modal.Header closeButton>Privilegios</Modal.Header>
             <Modal.Body>
                 <ChangePrivilegios successful={toggleModalPrivilegios} />
             </Modal.Body>
         </Modal>
 
-        <Modal show={modalSuspender} onHide={toggleModalSuspender} centered>
+        <Modal show={modalSuspender} onHide={toggleModalSuspender} animation={false} centered>
             <Modal.Header closeButton>Opciones de la cuenta</Modal.Header>
             <Modal.Body>
                 <BanearCuenta user={user} successful={toggleModalSuspender} showAlert={showAlert} />
             </Modal.Body>
         </Modal>
 
-        <Modal show={modalDeleteAccount} onHide={toggleModalDeleteAccount} centered>
+        <Modal show={modalDeleteAccount} onHide={toggleModalDeleteAccount} animation={false} centered>
             <Modal.Header closeButton>¿Est&aacute;s seguro?</Modal.Header>
             <Modal.Body className="pt-0">
                 <DeleteAccount user={user} onDelete={onDelete} successful={toggleModalDeleteAccount} showAlert={showAlert} />
@@ -248,8 +251,8 @@ function NewUser({ update, showAlert, successful }) {
 
     return <Form onSubmit={handleSubmit}>
         <h4>Datos personales</h4>
-        <Form.Group className="d-flex align-items-center mb-4">
-            <div className="mr-3">
+        <div className="mb-4 d-flex align-items-center">
+            <div className="me-3">
                 <Avatar initials={user.nombre && user.nombre[0]} />
             </div>
             <Form.Control
@@ -259,12 +262,12 @@ function NewUser({ update, showAlert, successful }) {
                 onChange={handleInputChange}
                 placeholder="Nombre"
             />
-        </Form.Group>
+        </div>
         <h4>Datos para el login</h4>
         <Form.Row>
             <Col>
-                <Form.Group>
-                    <label>Usuario</label>
+                <div className="mb-3">
+                    <label className="form-label">Usuario</label>
                     <Form.Control
                         type="text"
                         name="nickname"
@@ -272,11 +275,11 @@ function NewUser({ update, showAlert, successful }) {
                         onChange={handleInputChange}
                         placeholder="Nombre de usuario"
                     />
-                </Form.Group>
+                </div>
             </Col>
             <Col>
-                <Form.Group>
-                    <label>Contrase&ntilde;a</label>
+                <div className="mb-3">
+                    <label className="form-label">Contrase&ntilde;a</label>
                     <Form.Control
                         type="password"
                         name="password"
@@ -284,12 +287,12 @@ function NewUser({ update, showAlert, successful }) {
                         onChange={handleInputChange}
                         placeholder="Contraseña"
                     />
-                </Form.Group>
+                </div>
             </Col>
         </Form.Row>
-        <Button type="submit" block>
+        <button type="submit" className="btn btn-primary w-100">
             {sending ? 'Creando...' : 'Crear usuario'}
-        </Button>
+        </button>
     </Form>
 }
 
@@ -308,8 +311,8 @@ function InivitarUsuario() {
 
     return <div>
         <Form>
-            <Form.Group>
-                <label>Direccion de correo electronico</label>
+            <div className="mb-3">
+                <label className="form-label">Direccion de correo electronico</label>
                 <Form.Control
                     type="email"
                     id="direccion_correo"
@@ -320,13 +323,13 @@ function InivitarUsuario() {
                     required
                 />
                 <Form.Text>Correo donde le llegara el link para que pueda terminar de registrarse.</Form.Text>
-            </Form.Group>
-            <Form.Group>
-                <label>Funcion</label>
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Funcion</label>
                 <Row noGutters>
                     <Col className={`select-function cursor-pointer d-flex p-2 rounded ${invitacion.funcion === 'basico' && 'active'}`}
                         onClick={() => setInvitacion({ ...invitacion, funcion: 'basico' })}>
-                        <span className="mr-2"><i className="fas fa-user-circle" /></span>
+                        <span className="me-2"><i className="fas fa-user-circle" /></span>
                         <div>
                             <div className="font-weight-600 text-small">Basico</div>
                             <div className="text-smaller">Puede crear post, añadir items al blog.</div>
@@ -334,15 +337,15 @@ function InivitarUsuario() {
                     </Col>
                     <Col className={`select-function cursor-pointer d-flex p-2 rounded ${invitacion.funcion === 'administrador' && 'active'}`}
                         onClick={() => setInvitacion({ ...invitacion, funcion: 'administrador' })}>
-                        <span className="mr-2"><i className="fas fa-crown" /></span>
+                        <span className="me-2"><i className="fas fa-crown" /></span>
                         <div>
                             <div className="font-weight-600 text-small">Administrador</div>
-                            <div className="text-small text-smaller">Puede administra su sitio, determinar el acceso a los usuarios (como usted)</div>
+                            <div className="text-small text-smaller">Puede administra su sitio, determinar el acceso a los usuarios (como usted).</div>
                         </div>
                     </Col>
                 </Row>
-            </Form.Group>
-            <Button type="submit" block>Enviar invitaci&oacute;n</Button>
+            </div>
+            <button type="submit" className="btn btn-primary w-100">Enviar invitaci&oacute;n</button>
         </Form>
     </div>
 }
@@ -387,17 +390,17 @@ function ChangePassword({ user, successful, showAlert }) {
     }
 
     return <Form onSubmit={handleSubmit}>
-        <Form.Group className="d-flex align-items-center">
+        <div className="mb-3 d-flex align-items-center">
             <div>
                 <Avatar
                     initials={user.nombre[0]}
-                    image={user.image && `/apimuni/images/faces/${user.image}`}
-                    className="mr-3"
+                    image={user.image}
+                    className="me-3"
                 />
             </div>
             <h4>{user.nickname}</h4>
-        </Form.Group>
-        <Form.Group>
+        </div>
+        <div className="mb-3">
             <Form.Control
                 type="text"
                 value={newPassword}
@@ -406,17 +409,17 @@ function ChangePassword({ user, successful, showAlert }) {
                 required
                 id="input_change_password"
             />
-        </Form.Group>
-        <Button type="submit" disabled={newPassword === ''} block>
+        </div>
+        <button type="submit" className="btn btn-primary w-100" disabled={newPassword === ''}>
             {sending ? 'Cambiando...' : 'Cambiar contraseña'}
-        </Button>
+        </button>
     </Form>
 }
 
 function ChangePrivilegios() {
     return <>
         <label>
-            <input type="checkbox" className="mr-2" />
+            <input type="checkbox" className="me-2" />
             <span className="font-weight-600">Configuraciones</span>
         </label>
         <ul className="list-unstyled">
@@ -503,7 +506,7 @@ function BanearCuenta({ user, successful, showAlert }) {
             <button type="button"
                 className="btn-options py-1 px-2 rounded text-small font-weight-600"
                 onClick={toggleDropdownTime}>
-                <span className="mr-1">{timeSelected.texto ? timeSelected.texto : 'Opciones'}</span>
+                <span className="me-1">{timeSelected.texto ? timeSelected.texto : 'Opciones'}</span>
                 <i className="fas fa-caret-down" />
             </button>
             <DropdownMenu active={dropdownTime} toggle={toggleDropdownTime} className="py-2">
@@ -520,12 +523,12 @@ function BanearCuenta({ user, successful, showAlert }) {
         </div>
         {timeSelected.fechaFinalizar && <>
             <div className="border rounded bg-container mb-2 px-3 py-2 d-flex mt-4">
-                <div className="mr-2"><i className="fas fa-info-circle fa-lg" /></div>
+                <div className="me-2"><i className="fas fa-info-circle fa-lg" /></div>
                 <div className="text-small">
                     La cuenta sera suspendido hasta el <span className="text-danger">{timeSelected.fechaFinalizar}</span>
                 </div>
             </div>
-            <Button type="submit" block>{sending ? 'Procesando...' : 'Suspender'}</Button>
+            <button type="submit" className="btn btn-primary w-100">{sending ? 'Procesando...' : 'Suspender'}</button>
         </>}
     </Form>
 }
@@ -568,7 +571,7 @@ function DeleteAccount({ user, onDelete, successful, showAlert }) {
     }
 
     return <Form onSubmit={handleSubmit}>
-        <div className="py-3 px-3 mx-n3 mb-3 text-small"
+        <div className="py-3 px-3 mb-3 text-small"
             style={{ borderTop: '1px solid var(--red-400)', borderBottom: '1px solid var(--red-400)', backgroundColor: 'var(--red-100)' }}>
             <span style={{ color: 'var(--red-700)' }}>!Suceder&aacute;n cosas malas e inesperadas si no lee esto¡</span>
         </div>
@@ -580,16 +583,17 @@ function DeleteAccount({ user, onDelete, successful, showAlert }) {
             Escriba <b>{user.nickname}</b> para confirmar.
         </p>
 
-        <Form.Group>
-            <Form.Control
+        <div className="mb-3">
+            <input
                 type="text"
+                className="form-control"
                 id="input_delete_confirm"
                 value={textConfirm}
                 onChange={(e) => setTextConfirm(e.target.value)}
             />
-        </Form.Group>
-        <Button disabled={textConfirm !== user.nickname} variant="danger" type="submit" block>
+        </div>
+        <button disabled={textConfirm !== user.nickname} className="btn btn-danger w-100" type="submit">
             {sending ? 'Eliminando...' : 'Entiendo las consecuencias, elimino esta cuenta'}
-        </Button>
+        </button>
     </Form>
 }

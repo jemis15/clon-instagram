@@ -14,10 +14,10 @@ export default function Nuevo() {
         <div className="container-select_tipo_post px-2">
             <h4 className="mb-3">Elige el tipo de publicaci&oacute;n</h4>
             <div className="d-md-flex">
-                <div className="mb-3 mb-md-0 mr-md-3">
+                <div className="mb-3 mb-md-0 me-md-3">
                     <ItemLink label="Noticia" to={`${url}/noticia`} icon={iconNoticia} />
                 </div>
-                <div className="mb-3 mb-md-0 mr-md-3">
+                <div className="mb-3 mb-md-0 me-md-3">
                     <ItemLink label="Video" to={`${url}/video`} icon={iconVideo} />
                 </div>
                 <div className="mb-3 mb-md-0">

@@ -1,8 +1,8 @@
-.carousel_home {
+.carousel_home_content {
   @include media-breakpoint-up(xl) {
     // margin negativo cuando el header es transparent
     margin-top: calc(var(--transparent-header-height) * -1);
-    &::before {
+    &::after {
       content: "";
       position: absolute;
       top: 0;
@@ -15,62 +15,17 @@
   }
 }
 
-.carousel_home-item {
-  .img-container {
-    height: 300px;
-  }
-
-  @include media-breakpoint-up(sm) {
-    .img-container {
-      height: 500px;
-    }
-  }
-  @include media-breakpoint-up(md) {
-    .img-container {
-      height: 700px;
-    }
-
-    .description-container {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      background: linear-gradient(90deg, #000, transparent);
-      border-left: 5px solid var(--blue-500);
-
-      .title {
-        color: white;
-      }
-      .description {
-        color: var(--grey-300);
-      }
-    }
-  }
-
-  @include media-breakpoint-up(xl) {
-    .img-container {
-      height: 900px;
-    }
-  }
-}
-
 // iconos de left y right
-.react-multiple-carousel__arrow {
-  z-index: 0 !important;
+.glide__arrow{
+  background-color: white;
+  color: $primary;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+} 
+.glide__arrow--left{
+  left: -1rem;
 }
-
-.react-multi-carousel-list {
-  &.links {
-    .react-multiple-carousel__arrow {
-      background-color: $primary;
-
-      &.react-multiple-carousel__arrow--left {
-        left: 0;
-      }
-      &.react-multiple-carousel__arrow--right {
-        right: 0;
-      }
-    }
-  }
+.glide__arrow--right{
+  right: -1rem;
 }

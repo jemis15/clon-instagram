@@ -71,8 +71,8 @@ export default function RealizarReclamo() {
             setSending(true);
             const { data: apiLibro } = await Axios({
                 method: 'post',
-                url: '/apimuni/libroreclamaciones/create',
-                params: state
+                url: '/v1/libroreclamaciones/create',
+                data: state
             });
             if (isAnonimo) {
                 history.push(`/libroreclamaciones/${apiLibro.libroId2}?type=anonimo`);

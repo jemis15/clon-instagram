@@ -1,12 +1,13 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import download from '../Helpers/download';
 
 const date = new Date();
 
 export default function Comisiones() {
     const [year, setYear] = useState(date.getFullYear());
     const [month, setMonth] = useState(montshOfYear[date.getMonth()]);
-    const [linkPdf, setLinkPdf] = useState('https://web.munimazamari.gob.pe/admin/contenido/archivos/agro/1612062300boleta.pdf');
+    const [linkPdf, setLinkPdf] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -14,13 +15,14 @@ export default function Comisiones() {
         async function loadComision() {
             try {
                 setLoading(true);
-                const { data: apiComision } = await Axios.get(`/apimuni/comiciones/${year}/${month}`, {
+                const { data: apiComision } = await Axios.get(`/v1/comisiones/${year}/${month}`, {
                     cancelToken: source.token
                 });
                 setLinkPdf(apiComision.linkPdf);
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
+                if (Axios.isCancel()) {return;}
                 setLinkPdf(null);
                 console.log(error);
             }
@@ -46,13 +48,11 @@ export default function Comisiones() {
                     {loading
                         ? 'cargando...'
                         : <>
-                            {linkPdf && <a
-                                className="text-decoration-none"
-                                href={linkPdf}
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                {'Descargar'}
-                            </a>}
+                            {linkPdf && <button
+                                className="btn"
+                                onClick={() => download(linkPdf, `${year}_comiciones`)}>
+                                <i className="fas fa-cloud-download-alt" /> {'Descargar'}
+                            </button>}
                         </>
                     }
                 </div>

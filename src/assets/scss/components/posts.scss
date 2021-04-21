@@ -71,3 +71,61 @@
     background-color: var(--grey-300);
   }
 }
+
+/*borrador*/
+.home-links {
+  width: 100%;
+  height: 100%;
+  width: 120px;
+  margin-bottom: 1rem;
+
+  .home-links-content-images {
+    border-radius: 1.5rem;
+    border: 5px solid $danger;
+    transition: 0.5s all;
+    width: 75px;
+    height: 75px;
+    & > div {
+      padding: 0.5rem;
+    }
+  }
+
+  img {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s;
+  }
+
+  img:nth-child(2) {
+    display: none;
+  }
+  &:hover {
+    img:first-child {
+      display: none;
+    }
+    img:nth-child(2) {
+      display: inline-block;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .home-links-content-images {
+      background-color: $danger;
+      border-radius: 50%;
+    }
+  }
+}
+
+/*post home*/
+.hover-post {
+  cursor: pointer;
+  img {
+    transition: transform 0.3s;
+  }
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+  }
+}

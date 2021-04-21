@@ -20,9 +20,6 @@
       cursor: default;
       padding: 0 0.5rem;
       position: relative;
-      &:hover {
-        color: $color-hover_link;
-      }
       &.active {
         background-color: $danger;
         color: white;
@@ -53,6 +50,7 @@
     }
 
     &:hover {
+      color: $color-hover_link;
       .drop-menu {
         border: 1px solid $gray-200;
         transform: none;
@@ -80,5 +78,45 @@
 
   @include media-breakpoint-up(xl) {
     display: block;
+  }
+}
+
+.navigations {
+  .navigation-item {
+    padding: 0.4rem 0;
+    background: transparent;
+    border-width: 3px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 3px;
+    color: var(--grey-600);
+
+    &.active {
+      border-bottom-color: $primary;
+      color: $primary;
+    }
+  }
+}
+
+/*
+  items seleccionados desde una tabla o otros
+*/
+.selected_items-content {
+  height: 0;
+  transition: height 250ms cubic-bezier(0, 0, 0.2, 1);
+  &.open{
+    height: 64px;
+  }
+}
+.animation-height {
+  animation: collapse-height 150ms linear forwards;
+}
+
+@keyframes collapse-height {
+  from {
+    height: 0;
+  }
+  to {
+    height: 60px;
   }
 }

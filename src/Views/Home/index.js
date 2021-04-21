@@ -1,35 +1,43 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Container, Row } from 'react-bootstrap';
-import Carousel from 'react-multi-carousel';
+import { Col, Row } from 'react-bootstrap';
+import { useUser } from '../../Context/user-context';
 
-import CarouselLink from './components/CarouselLink';
 import MyPortal from '../../components/MyPortal';
-import BannerCarousel from './components/BannerCarousel';
+import CardPost from '../../components/CardPost';
+import MenuLinks from './components/MenuLinks';
 import PortalCarousel from './components/PortalCarousel';
-import CardPost from './components/Noticia';
-import Marker from '../../components/Marker';
+import CarouselLinksFooter from './components/CarouselLinksFooter';
 import CreateNoticia from './components/CreateNoticia';
 
-export default function Inicio({ user, showAlert }) {
-    const [markers1, setMarkers1] = useState([]);
-    const [markers2, setMarkers2] = useState([]);
+const LinkContext = React.createContext();
+export default function Inicio({ showAlert }) {
+    const [publicaciones, setPublicaciones] = useState([]);
     const [carouseles, setCarouseles] = useState([]);
-    const [carouselLinks, setCarouselLinks] = useState([]);
     const [portalCreateCarousel, setPortalCreateCarousel] = useState(false)
     const [portalCreateNoticia, setPortalCreateNoticia] = useState(false);
+    const [links, setLinks] = useState({
+        importantes: [],
+        enLinea: [],
+        intereses: []
+    });
 
     useEffect(() => {
+        document.title = 'Municipalidad Distrital de Mazamari';
         const source = Axios.CancelToken.source();
         async function loadMarkers() {
             try {
-                const [apiMarkers1, apiMarkers2] = await Promise.all([
-                    Axios.get('/apimuni/markers/tipo/1', { cancelToken: source.token }).then(({ data }) => data),
-                    Axios.get('/apimuni/markers/tipo/2', { cancelToken: source.token }).then(({ data }) => data),
+                const [apiImportantes, apiEnLinea, apiInteres] = await Promise.all([
+                    Axios.get(`/v1/links?groupname=importantes`, { cancelToken: source.token }).then(({ data }) => data),
+                    Axios.get('/v1/links?groupname=mazamari en linea', { cancelToken: source.token }).then(({ data }) => data),
+                    Axios.get('/v1/links?groupname=intereses', { cancelToken: source.token }).then(({ data }) => data)
                 ]);
-                setMarkers1(apiMarkers1);
-                setMarkers2(apiMarkers2);
+                setLinks({
+                    importantes: apiImportantes.data,
+                    enLinea: apiEnLinea.data,
+                    intereses: apiInteres.data
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -37,28 +45,25 @@ export default function Inicio({ user, showAlert }) {
 
         async function loadCarouseles() {
             try {
-                const { data: apiCarouseles } = await Axios.get('/apimuni/carouselheader', { cancelToken: source.token });
-                setCarouseles(apiCarouseles);
+                const { data: apiCarouseles } = await Axios.get('/v1/carouseles', { cancelToken: source.token });
+                setCarouseles(apiCarouseles.data);
             } catch (error) {
                 console.log(error);
             }
         }
 
-        async function loadCarouselLinks() {
+        async function loadPosts() {
             try {
-                // api que nos muestra los resultados de los grupo links
-                const { data: apiCarouselLinks } = await Axios.get(`/apimuni/carousellinks/grupo/principal`, { cancelToken: source.token });
-                // guardando los valores para ser recorridos y mostrados
-                setCarouselLinks(apiCarouselLinks);
-                // se a terminado de obtener y cargar los items de la base de datos
+                const { data: apiPublicaciones } = await Axios.get('/v1/posts?limit=8', { cancelToken: source.token });
+                setPublicaciones(apiPublicaciones.data);
             } catch (error) {
                 console.log(error);
             }
         }
 
+        loadPosts();
         loadMarkers();
         loadCarouseles();
-        loadCarouselLinks();
 
         return () => source.cancel('Cancelado');
     }, []);
@@ -66,461 +71,26 @@ export default function Inicio({ user, showAlert }) {
     function nuevoCarousel(carouselNuevo) {
         setCarouseles([...carouseles, carouselNuevo]);
     }
-    function updateCarousel(carouselOriginal, carouselUpdated) {
-        setCarouseles(carouseles => {
-            const carouselesUpdated = carouseles.map(carousel => {
-                if (carousel !== carouselOriginal) {
-                    return carousel;
-                }
-                return carouselUpdated;
-            });
-            return carouselesUpdated;
-        });
-    }
-    function deleteCarousel(carouselDelete) {
-        setCarouseles(carouseles.filter(carousel => {
-            return carousel !== carouselDelete;
-        }));
-    }
-
-    function nuevoLink(linkNuevo) {
-        setCarouselLinks([...carouselLinks, linkNuevo]);
-    }
-
-    const newMarker = newMarker => {
-        if (newMarker.marker_tipo_id === "1") {
-            setMarkers1([...markers1, newMarker]);
-        } else if (newMarker.marker_tipo_id === "2") {
-            setMarkers2([...markers2, newMarker]);
-        }
-    }
-
-    const filtarPorTipoContenido = (posts, filtro) => {
-        const result = posts.filter(post => post.tipo_contenido === filtro);
-        return result;
-    }
 
     return <div>
-        <Carousel
-            additionalTransfrom={0}
-            arrows
-            autoPlay={true}
-            autoPlaySpeed={5000}
-            centerMode={false}
-            className="carousel_home"
-            containerClass=""
-            dotListClass=""
-            draggable={false}
-            focusOnSelect={false}
-            infinite
-            itemClass=""
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderButtonGroupOutside={false}
-            renderDotsOutside
-            responsive={{
-                desktop: {
-                    breakpoint: {
-                        max: 3000,
-                        min: 1024
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 40
-                },
-                mobile: {
-                    breakpoint: {
-                        max: 464,
-                        min: 0
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 30
-                },
-                tablet: {
-                    breakpoint: {
-                        max: 1024,
-                        min: 464
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 30
-                }
-            }}
-            showDots={false}
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable>
-            {carouseles.map(carousel => (
-                <BannerCarousel
-                    key={carousel.id}
-                    carousel={carousel}
-                    user={user}
-                    onClickButtonCreate={() => setPortalCreateCarousel(true)}
-                    updateCarousel={updateCarousel}
-                    removeCarousel={deleteCarousel}
-                    showAlert={showAlert}
-                />
-            ))}
-        </Carousel>
+        {/* Carousel header home */}
+        <CarouselHome carouseles={carouseles} />
 
-        {false && (
-            <div className="py-3 my-5 container border rounded-lg bg-white">
-                <div className="mb-4 d-flex align-items-center">
-                    <h4 className="t4">
-                        <span className="mr-2"><i className="fas fa-link text-primary" /></span>
-                        <span>Links de interes</span>
-                    </h4>
-                    {user && user.is_admin === 1 && <div className="ml-auto">
-                        <Link to="/frame/linkintereses">
-                            <i className="far fa-cog fa-lg" />
-                        </Link>
-                    </div>}
-                </div>
-                <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlay
-                    autoPlaySpeed={3000}
-                    centerMode={false}
-                    className="links"
-                    containerClass=""
-                    dotListClass=""
-                    draggable={false}
-                    focusOnSelect={false}
-                    infinite
-                    itemClass="px-2"
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    renderButtonGroupOutside={false}
-                    renderDotsOutside
-                    responsive={{
-                        desktop: {
-                            breakpoint: {
-                                max: 3000,
-                                min: 1024
-                            },
-                            items: 7,
-                            partialVisibilityGutter: 40
-                        },
-                        mobile: {
-                            breakpoint: {
-                                max: 464,
-                                min: 0
-                            },
-                            items: 2,
-                            partialVisibilityGutter: 30
-                        },
-                        tablet: {
-                            breakpoint: {
-                                max: 1024,
-                                min: 464
-                            },
-                            items: 4,
-                            partialVisibilityGutter: 30
-                        }
-                    }}
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={2}
-                    swipeable>
-                    {carouselLinks.map(link => (
-                        <CarouselLink key={link.id} link={link} />
-                    ))}
-                </Carousel>
-            </div>
-        )}
+        {/* Links home top */}
+        <MenuLinks />
 
-        <div className="py-5 bg-white position-relative overflow-hidden mb-5">
-            <Container>
-                <Row className="align-items-center">
-                    <Col lg={{ span: 6, order: 2 }}>
-                        <img
-                            className="mb-4 mb-lg-0 w-100 rounded-3 img-thumbnail"
-                            src={saludoOfUser.image}
-                            alt="alcalde de mazamari"
-                            loading="lazy"
-                        />
-                    </Col>
-                    <Col lg={{ span: 6, order: 1 }}>
-                        <h2 className="t1 mb-0 text-center">
-                            {saludoOfUser.nombre}
-                        </h2>
-                        <h3 className="mb-4 text-center text-danger">
-                            {saludoOfUser.cargo}
-                        </h3>
-                        <p className="mb-0">
-                            <span className="mr-2" style={{ color: 'var(--red-400)' }}>
-                                <i className="far fa-quote-left fa-lg" />
-                            </span>
-                            {saludoOfUser.mensaje}
-                            <span className="ml-2" style={{ color: 'var(--red-400)' }}>
-                                <i className="far fa-quote-right fa-lg" />
-                            </span>
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        {/* Saludo del alcalde */}
+        <SaludoDelAlcalde />
 
-        <Container className="mb-5">
-            <Row>
-                <Col lg="6">
-                    <div className="px-4 py-3 h-100 border rounded-3 bg-white">
-                        <div className="mb-4 d-flex">
-                            <h4 className="t4 mb-0">Markers</h4>
-                            {user && user.is_admin === 1 && <div className="ms-auto">
-                                <Link to="/frame/markers">
-                                    <i className="far fa-cog fa-lg" />
-                                </Link>
-                            </div>}
-                        </div>
-                        <div className="grid-links">
-                            {markers1.map(marker => (
-                                <div key={marker.id}>
-                                    <Marker
-                                        key={marker.id}
-                                        url={marker.url}
-                                        image={marker.image}
-                                        nombre={marker.nombre}
-                                        descripcion={marker.descripcion}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </Col>
-                <Col lg="6">
-                    <div className="px-4 py-3 h-100 border rounded-3 bg-white">
-                        <div className="mb-4 d-flex">
-                            <h4 className="t4 mb-0">Mazamari En L&iacute;nea</h4>
-                            {user && user.is_admin === 1 && <div className="ml-auto">
-                                <Link to="/frame/markers">
-                                    <i className="far fa-cog fa-lg" />
-                                </Link>
-                            </div>}
-                        </div>
-                        <div className="grid-links">
-                            {markers2.map(marker => (
-                                <Marker
-                                    key={marker.id}
-                                    url={marker.url}
-                                    image={marker.image}
-                                    nombre={marker.nombre}
-                                    descripcion={marker.descripcion}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+        <LinkProvider>
+            {/* Links importantes y mazamari en linea */}
+            <LinksImportantAndMazamariInLinea links={links} />
 
-        {filtarPorTipoContenido(posts, 'noticia').length > 0 && (
-            <div className="py-5">
-                <div className="mb-4 container d-flex justify-content-between align-items-center">
-                    <h2 className="t1">Noticias</h2>
-                    <Link to="/posts?tipo=noticia" className="btn btn-outline-danger">Ver m&aacute;s</Link>
-                </div>
-                <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlay={true}
-                    autoPlaySpeed={5000}
-                    centerMode={false}
-                    className="mb-4"
-                    containerClass="container"
-                    dotListClass=""
-                    draggable={false}
-                    focusOnSelect={false}
-                    infinite
-                    itemClass="pr-4"
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    renderButtonGroupOutside={true}
-                    renderDotsOutside
-                    responsive={{
-                        desktop: {
-                            breakpoint: {
-                                max: 3000,
-                                min: 1024
-                            },
-                            items: 4,
-                            partialVisibilityGutter: 40
-                        },
-                        tablet: {
-                            breakpoint: {
-                                max: 1024,
-                                min: 464
-                            },
-                            items: 2,
-                            partialVisibilityGutter: 30
-                        },
-                        mobile: {
-                            breakpoint: {
-                                max: 464,
-                                min: 0
-                            },
-                            items: 1,
-                            partialVisibilityGutter: 30
-                        }
-                    }}
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable>
-                    {filtarPorTipoContenido(posts, 'noticia').map(post => (
-                        <CardPost
-                            key={post.id}
-                            type={post.tipo_contenido}
-                            titulo={post.titulo}
-                            image={post.image}
-                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                        />
-                    ))}
-                </Carousel>
-            </div>
-        )}
+            <PublicacionesHome publicaciones={publicaciones} />
 
-        {filtarPorTipoContenido(posts, 'video').length > 0 && (
-            <div className="py-5">
-                <div className="mb-4 container d-flex justify-content-between align-items-center">
-                    <h2 className="t1">Videos</h2>
-                    <Link to="/posts?tipo=video" className="btn btn-outline-danger">
-                        {'Ver mas'}
-                    </Link>
-                </div>
-                <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlay={true}
-                    autoPlaySpeed={5000}
-                    centerMode={false}
-                    className="mb-4"
-                    containerClass="container"
-                    dotListClass=""
-                    draggable={false}
-                    focusOnSelect={false}
-                    infinite
-                    itemClass="pr-4"
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    renderButtonGroupOutside={true}
-                    renderDotsOutside
-                    responsive={{
-                        desktop: {
-                            breakpoint: {
-                                max: 3000,
-                                min: 1024
-                            },
-                            items: 4,
-                            partialVisibilityGutter: 40
-                        },
-                        tablet: {
-                            breakpoint: {
-                                max: 1024,
-                                min: 464
-                            },
-                            items: 2,
-                            partialVisibilityGutter: 30
-                        },
-                        mobile: {
-                            breakpoint: {
-                                max: 464,
-                                min: 0
-                            },
-                            items: 1,
-                            partialVisibilityGutter: 30
-                        }
-                    }}
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable>
-                    {filtarPorTipoContenido(posts, 'video').map(post => (
-                        <CardPost
-                            key={post.id}
-                            type={post.tipo_contenido}
-                            titulo={post.titulo}
-                            image={post.image}
-                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                        />
-                    ))}
-                </Carousel>
-            </div>
-        )}
-
-        {filtarPorTipoContenido(posts, 'image').length > 0 && (
-            <div className="py-5">
-                <div className="mb-4 container d-flex justify-content-between align-items-center">
-                    <h2 className="t1">Programas e Iniciativa</h2>
-                    <Link to="/posts?tipo=programa" className="btn btn-outline-danger">
-                        {'Ver mas'}
-                    </Link>
-                </div>
-                <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlay={true}
-                    autoPlaySpeed={5000}
-                    centerMode={false}
-                    className="mb-4"
-                    containerClass="container"
-                    dotListClass=""
-                    draggable={false}
-                    focusOnSelect={false}
-                    infinite
-                    itemClass="ps-4"
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    renderButtonGroupOutside={true}
-                    renderDotsOutside
-                    responsive={{
-                        desktop: {
-                            breakpoint: {
-                                max: 3000,
-                                min: 1024
-                            },
-                            items: 4,
-                            partialVisibilityGutter: 40
-                        },
-                        tablet: {
-                            breakpoint: {
-                                max: 1024,
-                                min: 464
-                            },
-                            items: 2,
-                            partialVisibilityGutter: 30
-                        },
-                        mobile: {
-                            breakpoint: {
-                                max: 464,
-                                min: 0
-                            },
-                            items: 1,
-                            partialVisibilityGutter: 30
-                        }
-                    }}
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable>
-                    {filtarPorTipoContenido(posts, 'image').map(post => (
-                        <CardPost
-                            key={post.id}
-                            type={post.tipo_contenido}
-                            titulo={post.titulo}
-                            image={post.image}
-                            fecha={<><i className="far fa-clock" /> {post.created_at}</>}
-                        />
-                    ))}
-                </Carousel>
-            </div>
-        )}
-
-        <div className="py-3 mb-5 bg-green-100 text-center" style={{ borderTop: '1px solid var(--green-200)', borderBottom: '1px solid var(--green-200)' }}>
-            <a href="/libroreclamos" className="text-decoration-none d-inline-flex justify-content-center align-items-center">
-                <img className="me-3" width="35" src="https://www.flaticon.es/svg/static/icons/svg/2232/2232725.svg" alt="libro" />
-                <h3 className="text-success mb-0">Libro de reclamaciones</h3>
-            </a>
-        </div>
+            {/* Carousel links footer */}
+            <CarouselLinksFooter />
+        </LinkProvider>
 
         <MyPortal
             show={portalCreateCarousel}
@@ -537,143 +107,197 @@ export default function Inicio({ user, showAlert }) {
     </div >
 }
 
-const posts = [
-    {
-        id: 1,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'video',
-        contenido: 'X0nrCvuSW7o',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 2,
-        image: '/apimuni/images/posts/20201106131901.png',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Danniel Alcides Carrillo" },
-        tipo_contenido: 'video',
-        contenido: 'X0nrCvuSW7o',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 3,
-        image: '/apimuni/images/posts/20201111181430.png',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'video',
-        contenido: 'X0nrCvuSW7o',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 4,
-        image: '/apimuni/images/posts/20201111185002.gif',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'video',
-        contenido: 'X0nrCvuSW7o',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 5,
-        image: '/apimuni/images/posts/20201111185027.png',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'video',
-        contenido: 'X0nrCvuSW7o',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 6,
-        image: '/apimuni/images/posts/20201111185034.png',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'noticia',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 7,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'noticia',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 8,
-        image: '/apimuni/images/posts/20201114074928.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'noticia',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 9,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'noticia',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 10,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'noticia',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 11,
-        image: '/apimuni/images/posts/20201111185027.png',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'image',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 12,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'image',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 13,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'image',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 14,
-        image: '/apimuni/images/posts/20201114074928.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'image',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
-    },
-    {
-        id: 15,
-        image: '/apimuni/images/posts/20201116193742.jpg',
-        titulo: 'Hay muchas variaciones de los pasajes de Lorem Ipsum',
-        user: { id: 1, nombre: "Flores Meza Jafett Jamis" },
-        tipo_contenido: 'image',
-        contenido: '/apimuni/images/faces/face1.jpg',
-        created_at: '2020-10-08 10:08:15'
+function CarouselHome({ carouseles }) {
+    return <div id="carouselHome" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner ratio ratio-21x9 bg-dark carousel_home_content">
+            {carouseles.map((carousel, key) => (
+                <div key={carousel.id} className={`carousel-item ${key === 0 && 'active'}`}>
+                    <div className="d-flex justify-content-center align-items-center border h-100">
+                        <img
+                            src={carousel.image}
+                            alt="mazamari publicidad"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'center center'
+                            }}
+                        />
+                    </div>
+                </div>
+            ))}
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+        </button>
+    </div>
+}
+
+function SaludoDelAlcalde() {
+    return <div className="py-5 border-top border-bottom border-5 border-white position-relative overflow-hidden">
+        <div className="container-xxl">
+            <Row className="align-items-center">
+                <Col lg={{ span: 6, order: 2 }}>
+                    <img
+                        className="mb-4 mb-lg-0 w-100 rounded-3 img-thumbnail"
+                        src={saludoOfUser.image}
+                        alt="alcalde de mazamari"
+                        loading="lazy"
+                    />
+                </Col>
+                <Col lg={{ span: 6, order: 1 }}>
+                    <h2 className="t1 mb-0 text-center">
+                        {saludoOfUser.nombre}
+                    </h2>
+                    <h3 className="mb-4 text-center text-danger">
+                        {saludoOfUser.cargo}
+                    </h3>
+                    <p className="mb-0" style={{ textAlign: 'justify' }}>
+                        {saludoOfUser.mensaje}
+                    </p>
+                </Col>
+            </Row>
+        </div>
+    </div>
+}
+
+function LinksImportantAndMazamariInLinea({ links }) {
+    const { user } = useUser();
+
+    return <div className="py-5 border-top border-bottom border-5 border-white">
+        <div className="container-xxl">
+            <Row>
+                <Col lg="6" className="d-flex flex-column">
+                    <div className="d-flex">
+                        <h4 className="mb-0 px-3 py-2 rounded-top bg-danger text-white">Importante</h4>
+                        {user && user.is_admin === 1 && <div className="ms-auto">
+                            <Link to="/frame/markers">
+                                <i className="far fa-cog fa-lg" />
+                            </Link>
+                        </div>}
+                    </div>
+                    {/* <div className="grid-links"> */}
+                    <div className="h-100 px-5 py-4 shadow-sm bg-white" style={{ border: '1px solid var(--grey-300)' }}>
+                        <div className="px-3" style={{ display: 'grid', rowGap: '1rem', columnGap: '4rem', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+                            {links.importantes.map((link, key) => {
+                                return link.url && <Link key={key} className="d-inline-block" to={link.url}>
+                                    <div className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <img className="img-fluid" src={link.image} alt="marker" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            })}
+                        </div>
+                    </div>
+                </Col>
+                <Col lg="6" className="d-flex flex-column">
+                    <div className="d-flex">
+                        <h4 className="mb-0 px-3 py-2 rounded-top bg-danger text-white">Mazamari en L&iacute;nea</h4>
+                        {user && user.is_admin === 1 && <div className="ms-auto">
+                            <Link to="/frame/markers">
+                                <i className="far fa-cog fa-lg" />
+                            </Link>
+                        </div>}
+                    </div>
+                    <div className="h-100 px-5 py-4 shadow-sm bg-white" style={{ border: '1px solid var(--grey-300)' }}>
+                        <div className="px-3" style={{ display: 'grid', rowGap: '1rem', columnGap: '4rem', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+                            {links.enLinea.map(marker => (
+                                <a key={marker.id}
+                                    href={marker.url}
+                                    className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <img className="img-fluid" src={marker.image} alt="marker" />
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </div>
+    </div >
+}
+
+function PublicacionesHome({ publicaciones }) {
+    return <div className="py-5 border-top border-bottom border-5 border-white">
+        <h3 className="mb-5 text-center fs-2">Publicaciones de <span className="text-danger">Mazamari</span></h3>
+        <div className="container-xxl mb-5"
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px,1fr))', gap: '2rem' }}>
+            {publicaciones.map(publicacion => (
+                <CardPost
+                    key={publicacion.id}
+                    type={publicacion.tipo}
+                    image={publicacion.image}
+                    title={publicacion.titulo}
+                    category={publicacion.categoria}
+                    created_at={publicacion.created_at}
+                    image_of_video={publicacion.image_of_video}
+                    video_from={publicacion.video_from}
+                    user_image={publicacion.user_image}
+                    user_name={publicacion.user_name}
+                />
+            ))}
+        </div>
+        <div className="text-center">
+            <Link to="/publicaciones" className="btn btn-lg btn-danger">Ver mas publicaciones</Link>
+        </div>
+    </div>
+}
+
+export function LinkProvider(props) {
+    const [loadingLinks, setLoadingLinks] = useState(false);
+    const [links, setLinks] = useState({
+        importantes: [],
+        enLinea: [],
+        intereses: []
+    });
+
+    useEffect(() => {
+        const source = Axios.CancelToken.source();
+        async function loadLinks() {
+            try {
+                setLoadingLinks(true)
+                const [apiImportantes, apiEnLinea, apiInteres] = await Promise.all([
+                    Axios.get(`/v1/links?groupname=importantes`, { cancelToken: source.token }).then(({ data }) => data),
+                    Axios.get('/v1/links?groupname=mazamari en linea', { cancelToken: source.token }).then(({ data }) => data),
+                    Axios.get('/v1/links?groupname=intereses', { cancelToken: source.token }).then(({ data }) => data)
+                ]);
+                setLinks({
+                    importantes: apiImportantes.data,
+                    enLinea: apiEnLinea.data,
+                    intereses: apiInteres.data
+                });
+                setLoadingLinks(false);
+            } catch (error) {
+                if (Axios.isCancel(error)) { return; }
+                setLoadingLinks(false);
+                console.log(error);
+            }
+        }
+        loadLinks();
+        return () => source.cancel('cancelado');
+    }, []);
+
+    return <LinkContext.Provider value={{ loadingLinks, links }} {...props} />
+}
+
+export function useLink() {
+    const context = React.useContext(LinkContext);
+
+    if (!context) {
+        throw new Error('useLink deve esta dentro del proveedor LinkContext');
     }
-];
+
+    return context;
+}
 
 const saludoOfUser = {
     nombre: 'Marcelino Camarena Torres',

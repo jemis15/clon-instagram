@@ -1,14 +1,8 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
-
-const useQuery = () => {
-	return new URLSearchParams(useLocation().search);
-}
+import CardTeam from '../components/CardTeam';
 
 export default function Equipo() {
-	const query = useQuery();
 	const [data, setData] = useState([]);// contiene todo los datos del team
 	const [team, setTeam] = useState([]);// contiene los datos que se van a mostrar
 	const [loading, setLoading] = useState(false);
@@ -17,12 +11,9 @@ export default function Equipo() {
 		async function loadTeam() {
 			try {
 				setLoading(true);
-				const [apiTeam] = await Promise.all([
-					Axios.get('/apimuni/team').then(({ data }) => data),
-					//Axios.get('/apimuni/cargoteam').then(({ data }) => data),
-				]);
-				setData(apiTeam);
-				setTeam(apiTeam);
+				const { data: apiTeam } = await Axios.get('/v1/team/group/regidores');
+				setData(apiTeam.data);
+				setTeam(apiTeam.data);
 				setLoading(false);
 			} catch (error) {
 				console.log(error);
@@ -33,15 +24,12 @@ export default function Equipo() {
 		loadTeam();
 	}, []);
 
-	useEffect(() => {
-		setTeam(team.filter(team => team.id = 1));
-	}, [query.get('cargo')]);
-
 	function handleInputChange(e) {
 		const value = e.target.value.toLowerCase();
 
 		const resultados = data.filter(miembro => {
-			return miembro.nombre.toLowerCase().indexOf(value) !== -1;
+			const nombre = miembro.nombre.toLowerCase() + ' ' + miembro.apellido.toLowerCase();
+			return nombre.indexOf(value) !== -1;
 		});
 
 		setTeam(resultados)
@@ -49,13 +37,19 @@ export default function Equipo() {
 
 	function teams() {
 		return team.map(miembro => {
-			return <Article
+			return <CardTeam
 				key={miembro.id}
 				foto={miembro.image}
-				nickname={miembro.nickname}
-				nombre={miembro.nombre}
-				area={miembro.cargo.nombre}
-				texto={miembro.partido_politico}
+				nombre={miembro.nombre + ' ' + miembro.apellido}
+				area={miembro.cargo}
+				hoja_vida={miembro.hoja_vida}
+				resolucion={miembro.resolucion}
+				telefono={miembro.telefono}
+				dni={miembro.dni}
+				grado_academico={miembro.grado_academico}
+				lugar_nacimiento={miembro.lugar_nacimiento}
+				lugar_domicilio={miembro.lugar_domicilio}
+				partido_politico={miembro.partido_politico}
 			/>
 		});
 	}
@@ -74,19 +68,19 @@ export default function Equipo() {
 			borderBottom: '1px solid var(--grey-300)'
 		}}>
 			<div className="container clearfix">
-				<div className="float-start" style={{maxWidth: '300px', width: '100%'}}>
-					<input 
-					className="form-control" 
-					type="search" 
-					onChange={handleInputChange}
-					placeholder="Nombre de la persona" 
+				<div className="float-start" style={{ maxWidth: '300px', width: '100%' }}>
+					<input
+						className="form-control"
+						type="search"
+						onChange={handleInputChange}
+						placeholder="Nombre de la persona"
 					/>
 				</div>
 				<div className="float-end">
 					<div className="d-flex">
 						<label className="me-3 align-self-center">Periodo</label>
 						<select className="form-select">
-							<option value="2019-2020">2019 - 2020</option>
+							<option value="2019-2020">2019 - 2022</option>
 						</select>
 					</div>
 				</div>
@@ -94,7 +88,7 @@ export default function Equipo() {
 		</div>
 
 		<Container>
-			<h2 className="title-1 text-center mt-5">EL EQUIPO DE LA MUNICIPALIDAD DISTRITAL DE MAZAMARI</h2>
+			{/* <h2 className="title-1 text-center mt-5">EL EQUIPO DE LA MUNICIPALIDAD DISTRITAL DE MAZAMARI</h2> */}
 
 			<section className="mt-5 pb-5">
 				{loading && <div className="text-center"><span>Cargando...</span></div>}
@@ -106,26 +100,4 @@ export default function Equipo() {
 	</>
 }
 
-function Article({ foto, nickname, nombre, area, texto }) {
-	return <article className="p-3">
-		<div className="mb-2 text-center">
-			<Link
-				to={`@${nickname.toLowerCase()}`}
-				className="d-inline-block">
-				<img
-					src={foto}
-					className="w-100 h-100 rounded-circle"
-					alt="team"
-					loading="lazy"
-				/>
-			</Link>
-		</div>
-		<div className="text-center">
-			<h4 className="mb-3 text-capitalize">{nombre.toLowerCase()}</h4>
-			<span className="mb-3 btn btn-sm btn-outline-primary text-capitalize">
-				{area.toLowerCase()}
-			</span>
-			<p className="mb-0 text-small fst-italic text-capitalize">{texto.toLowerCase()}</p>
-		</div>
-	</article>
-}
+const Container = (props) => <div className="container-xxl">{props.children}</div>

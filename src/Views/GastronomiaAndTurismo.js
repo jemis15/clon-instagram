@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import Banner from '../components/Banner';
+import { useUser } from '../Context/user-context';
 
 import imgFork from '../assets/images/icons/mazamari/fork.svg';
 import imgForkAndPlato from '../assets/images/icons/mazamari/forkAndPlato.svg';
 
-export default function GastronomiaYTurismo({ user }) {
+export default function GastronomiaYTurismo() {
+    const {user} = useUser();
     const [gastronomias, setGastronomias] = useState([]);
     const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(true);
     const [gastronomiaId, setGastronomiaId] = useState(0);

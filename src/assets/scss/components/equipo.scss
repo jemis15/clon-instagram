@@ -20,3 +20,41 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.card-team {
+  .more-informacion {
+    display: none;
+  }
+  &:hover {
+    .more-informacion {
+      display: inline-block;
+    }
+  }
+}
+
+/*proyectos*/
+.prueba{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto auto;
+  grid-auto-rows: auto;
+
+}
+.prueba-1{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto auto auto;
+  grid-auto-rows: auto;
+
+}
+.button-close-modal{
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+}

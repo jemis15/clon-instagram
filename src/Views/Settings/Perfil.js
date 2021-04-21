@@ -6,8 +6,10 @@ import Cropper from 'react-easy-crop';
 import Title from './components/Title';
 import Avatar from '../../components/utilitarios/Avatar';
 import { getCroppedImg } from '../../Helpers/canvas-helper';
+import { useUser } from '../../Context/user-context';
 
-export default function Perfil({ user, update, showAlert }) {
+export default function Perfil({ showAlert }) {
+    const {user, update} = useUser();
     const [modalChangeImage, setModalChangeImage] = useState(false);
     const [actualizandoPerfil, setActualizandoPerfil] = useState(false);
     const [nombre, setNombre] = useState(user.nombre);
@@ -44,24 +46,24 @@ export default function Perfil({ user, update, showAlert }) {
             <div className="d-inline-block position-relative">
                 <Avatar size="xl" image={user.image} />
                 <span
-                    className="position-absolute icon-edit border rounded-circle cursor-pointer"
-                    onClick={toggleModalChangeImage}>
+                    className="position-absolute icon-edit border rounded-circle cursor-pointer">
                     <i className="fas fa-pen" />
                 </span>
             </div>
         </div>
         <Title>Datos personales</Title>
         <Form onSubmit={handleSubmitUpdatePerfil}>
-            <Form.Group>
-                <label>Nombre</label>
-                <Form.Control
+            <div className="mb-3">
+                <label className="form-label">Nombre</label>
+                <input
                     type="text"
+                    className="form-control"
                     value={nombre}
                     onChange={e => setNombre(e.target.value)}
                     autoComplete="off"
                     required
                 />
-            </Form.Group>
+            </div>
             <Button type="submit">
                 {actualizandoPerfil
                     ? 'Actualizando...'

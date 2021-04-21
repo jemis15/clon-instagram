@@ -1,10 +1,9 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import Banner from '../../components/Banner';
 
-export default function Turismos({ user }) {
-    const [turismos, setTurismos] = useState([]);
+export default function Turismos() {
+    const [hoteles, setHoteles] = useState([]);
     const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(true);
     const [turismoId, setTurismoId] = useState(0);
 
@@ -14,10 +13,10 @@ export default function Turismos({ user }) {
         async function loadTurismo() {
             try {
                 setLoadingTurismosYGastronomias(true);
-                const { data: apiTurismos } = await Axios.get(`/apimuni/jturismos`, {
+                const { data: apiHabitaciones } = await Axios.get(`/apimuni/jhabitaciones`, {
                     cancelToken: source.token
                 });
-                setTurismos(apiTurismos);
+                setHoteles(apiHabitaciones);
                 setLoadingTurismosYGastronomias(false)
             } catch (error) {
                 console.log(error);
@@ -31,24 +30,24 @@ export default function Turismos({ user }) {
     }, []);
 
     return <>
-        <Banner id="4" background="bg-yellow-900" user={user} />
+        <Banner id="4" background="bg-green-800" />
 
-        <Container className="py-xl">
-            <h1 className="text-center mb-5">El <span className="text-success">Turismo</span> en el Distrito de <span className="text-success">Mazamari</span></h1>
+        <div className="container-xxl py-xl">
+            <h1 className="text-center mb-5">El <span className="text-success">Hoteles</span> en el Distrito de <span className="text-success">Mazamari</span></h1>
 
-            {turismos.length > 0
+            {Array.isArray(hoteles) && hoteles.length > 0
                 ? <div className="row">
-                    {/* lista de turismos */}
+                    {/* lista de hoteles */}
                     <div className="col-4 border bg-grey-300 rounded-left-top">
                         <div className="py-4">
                             <ul className="list-unstyled">
                                 {/* continuar qui */}
-                                {turismos.map((turismo, key) => (
+                                {hoteles.map((hotel, key) => (
                                     <li
                                         key={key} onClick={() => setTurismoId(key)}
                                         className={`mazamari-item-verdetalle ${turismoId === key && 'active'} cursor-pointer rounded-3`}>
                                         <div className="text-decoration-none px-3 py-2 border rounded d-block">
-                                            {turismo.nombre}
+                                            {hotel.nombre}
                                         </div>
                                     </li>
                                 ))}
@@ -56,53 +55,49 @@ export default function Turismos({ user }) {
                         </div>
                     </div>
 
-                    {/* contenido de turismos */}
+                    {/* contenido de hoteles */}
                     <div className="col-8 border bg-white">
                         <div className="py-4">
-                            <h3 className="text-center">{turismos[turismoId].nombre}</h3>
-                            <p>{turismos[turismoId].descripcion}</p>
+                            <h3 className="text-center">{hoteles[turismoId].nombre}</h3>
 
-                            {turismos[turismoId].servicios.length > 0 && <>
-                                <h4>Servicios</h4>
+                            <p>
+                                {hoteles[turismoId].direccion && <><b>Direcci&oacute;n:</b> {hoteles[turismoId].direccion}<br /></>}
+                                {hoteles[turismoId].telefono && <><b>Telefono:</b> {hoteles[turismoId].telefono}<br /></>}
+                                {hoteles[turismoId].celular && <><b>Celular:</b> {hoteles[turismoId].celular}<br /></>}
+                            </p>
+
+                            <h4>Atenci&oacute;n</h4>
+                            {hoteles[turismoId].atencion && (
+                                <p>{hoteles[turismoId].atencion}</p>
+                            )}
+
+                            {hoteles[turismoId].habitaciones.length > 0 && <>
+                                <h4>Habitaciones</h4>
                                 <ul>
-                                    {turismos[turismoId].servicios.map((servicio, key) => (
-                                        <li key={key}>{servicio.servicio}</li>
+                                    {hoteles[turismoId].habitaciones.map((habitacion, key) => (
+                                        <li key={key}>{habitacion.nombre}</li>
                                     ))}
                                 </ul>
                             </>}
 
-                            {turismos[turismoId].actividades.length > 0 && <>
-                                <h4>Actividades</h4>
-                                <ul>
-                                    {turismos[turismoId].actividades.map((actividad, key) => (
-                                        <li key={key}>{actividad.actividad}</li>
-                                    ))}
-                                </ul>
-                            </>}
-
-                            <h4>Imagenes</h4>
-                            {turismos[turismoId].images.length > 0
-                                ? <div className="mb-4" style={{
+                            {hoteles[turismoId].images.length > 0 && <>
+                                <h4>Imagenes</h4>
+                                <div className="mb-4" style={{
                                     display: 'grid',
                                     gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
                                     gap: '1rem'
                                 }}>
-                                    {turismos[turismoId].images.map((image, key) => (
+                                    {hoteles[turismoId].images.map((image, key) => (
                                         <div key={key} className="ratio ratio-4x3">
-                                            <div className="overflow-hidden d-flex justify-content-center align-items-center" style={{
-                                                backgroundImage: `url(${image.img})`,
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center'
-                                            }}>
+                                            <div className="ratio ratio-1x1">
+                                                <div>
+                                                    <img className="img-object-fit" src={image.img} alt="hoteles" />
+                                                </div>
                                             </div>
                                         </div>
-
                                     ))}
                                 </div>
-                                : <>
-                                    <p className="">No hay imagenes</p>
-                                </>
-                            }
+                            </>}
                         </div>
                     </div>
                 </div>
@@ -113,6 +108,6 @@ export default function Turismos({ user }) {
                     }
                 </div>
             }
-        </Container>
+        </div>
     </>
 }

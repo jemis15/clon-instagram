@@ -4,10 +4,10 @@ export default function Alert({ show, type, mensaje, onHide }) {
     var icon = null;
     switch (type) {
       case 'error':
-        icon = <span className="mr-3 text-danger"><i className="fas fa-times" /></span>;
+        icon = <span className="me-3 text-danger"><i className="fas fa-times" /></span>;
         break;
       case 'success':
-        icon = <span className="mr-3 text-success"><i className="fas fa-check" /></span>;
+        icon = <span className="me-3 text-success"><i className="fas fa-check" /></span>;
         break;
   
       default:

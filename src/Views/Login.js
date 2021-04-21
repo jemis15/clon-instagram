@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { useUser } from '../Context/user-context';
 
-export default function Login({ login }) {
+export default function Login() {
+	const { login } = useUser();
 	const history = useHistory();
 	const [user, setUser] = useState({
 		nickname: '',
@@ -38,8 +40,8 @@ export default function Login({ login }) {
 		<div className="mx-auto p-3 p-md-0" style={{ maxWidth: '450px', marginBottom: '150px' }}>
 			<h2 className="title-2 color-text font-weight-600 text-center mb-4">INICIA SESSI&Oacute;N</h2>
 			<Form className="mb-3" onSubmit={handleSubmit}>
-				<Form.Group>
-					<Form.Label>Usuario</Form.Label>
+				<div className="mb-3">
+					<label className="form-label">Usuario</label>
 					<Form.Control
 						type="text"
 						name="nickname"
@@ -48,9 +50,9 @@ export default function Login({ login }) {
 						placeholder="Ingrese nombre de usuario"
 						autoComplete="off"
 					/>
-				</Form.Group>
-				<Form.Group>
-					<Form.Label>Contrase&ntilde;a</Form.Label>
+				</div>
+				<div className="mb-3">
+					<label className="form-label">Contrase&ntilde;a</label>
 					<Form.Control
 						type="password"
 						name="password"
@@ -59,7 +61,7 @@ export default function Login({ login }) {
 						placeholder="Contrase&ntilde;a"
 						autoComplete="off"
 					/>
-				</Form.Group>
+				</div>
 				{error && <div className="alert alert-danger d-flex justify-content-between align-items-start">
 					<div>{error}</div>
 					<button
@@ -69,9 +71,9 @@ export default function Login({ login }) {
 						<i className="far fa-times" />
 					</button>
 				</div>}
-				<Button type="submit" size="lg" block>
+				<button type="submit" className="btn btn-lg btn-primary w-100">
 					{sending ? 'Verificando...' : 'Iniciar sessión'}
-				</Button>
+				</button>
 			</Form>
 		</div>
 

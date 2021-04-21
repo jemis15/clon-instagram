@@ -6,11 +6,10 @@
 @import "avatar";
 @import "blackglass";
 @import "borrador";
-@import "borders";
 @import "buttons";
 @import "carousel";
 @import "certificacion";
-@import "Regidores";
+@import "CheckBox";
 @import "colors";
 @import "Consultalinea";
 @import "contadorvisitas";
@@ -22,12 +21,12 @@
 @import "footer";
 @import "frame";
 @import "gastronomia";
-@import "header";
-@import "helpers";
-@import "banners";
-@import "input";
-@import "linksOfIntereses";
 @import "global";
+@import "header";
+@import "Himno";
+@import "Images";
+@import "banners";
+@import "linksOfIntereses";
 @import "loading";
 @import "markdown";
 @import "markers";
@@ -38,7 +37,6 @@
 @import "perfil";
 @import "posts";
 @import "root";
-@import "section";
 @import "settings";
 @import "sidebar";
 @import "sidebarNavigationMobile";
@@ -48,18 +46,11 @@
 @import "users";
 @import "utilitarios";
 @import "vars";
-@import "Presentacion";
-@import "Himno";
 @import "viewInicio";
-@import "Vis";
-@import "DirectorioTelefono";
-@import "Tours";
 @import "DescripcionTurismo";
-@import "Restaurantes";
 @import "Hoteles";
 @import "Agroindustrias";
 @import "Agenda";
-@import "InformacionAgro";
 
 //utitidades
 @import './utilities/index';

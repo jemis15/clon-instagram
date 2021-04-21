@@ -4,8 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import AppNav from './Nav';
 import Avatar from './utilitarios/Avatar';
 import defaultLogo from '../logo.svg';
+import { useUser } from '../Context/user-context';
+import { useSetting } from '../Context/setting-context';
 
-export default function Header({ toggle, user, settings }) {
+export default function Header({ toggle }) {
+	const { user } = useUser();
+	const { settings } = useSetting();
 	const [isHeaderTransparent, setIsHeaderTransparent] = useState(false);
 	const [dropMenuCreate, setDropMenuCreate] = useState(false);
 	const location = useLocation();
@@ -53,7 +57,7 @@ export default function Header({ toggle, user, settings }) {
 
 	return <header
 		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
-		<div className="container d-flex align-items-center">
+		<div className="container-xxl d-flex align-items-center">
 			<Link className="me-4" to="/">
 				{settings && settings.logo
 					? <img
@@ -79,11 +83,7 @@ export default function Header({ toggle, user, settings }) {
 								<i className="far fa-plus fa-lg" />
 							</button>
 							<DropMenu show={dropMenuCreate} onHide={() => setDropMenuCreate(false)}>
-								<DropLink to={{ pathname: `/img/new`, state: { background: location } }} label="Carousel" />
-								<DropLink to="/links/new" label="Link" />
-								<DropLink to="/markers/new" label="Marker" />
-								<hr className="my-2" />
-								<DropLink to="/users/invitar" label="Invitar usuario" />
+								<DropLink to="/publicaciones/nuevo" label="Nueva publicación" />
 							</DropMenu>
 						</div>
 						<div className="mr-3">
@@ -99,9 +99,9 @@ export default function Header({ toggle, user, settings }) {
 						<div className="rounded-circle overflow-hidden d-xl-none"
 							onClick={toggle}>
 							<Avatar
-								image={user.avatar}
+								image={user.image}
 								size="sm"
-								initials={user.nombre[0]}
+								initials={user.name[0]}
 								className="mb-0"
 							/>
 						</div>
@@ -110,18 +110,32 @@ export default function Header({ toggle, user, settings }) {
 				: <>
 					<AppNav />
 					<div className="ms-auto d-flex">
-						<Link
-							to="/login"
-							className="mr-2 px-1 d-inline-block d-xl-none">
-							<i className="fas fa-user fa-2x" />
-						</Link>
-						<a
-							href="https://mesadepartevitual.munimazamari.gob.pe/inicio.php"
-							target="__blank"
-							rel="noopener noreferrer"
-							className="mr-2 btn btn-primary text-decoration-none d-none d-xl-inline-block">
-							Mesa de parte virtual
-						</a>
+						<div className="btn-group">
+							<Link to="/login" type="button" className="btn btn-danger">Iniciar sessi&oacute;n</Link>
+							<button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+								<span className="visually-hidden">Toggle Dropdown</span>
+							</button>
+							<ul className="dropdown-menu dropdown-menu-end">
+								<li>
+									<a
+										className="dropdown-item"
+										href="https://mesadepartevitual.munimazamari.gob.pe/inicio.php"
+										target="_blank"
+										rel="noopener noreferrer">
+										{'Mesa virtual'}
+									</a>
+								</li>
+								<li>
+									<a
+										className="dropdown-item"
+										href="http://181.65.201.166:9002/sistram/"
+										target="_blank"
+										rel="noopener noreferrer">
+										{'Sistram'}
+									</a>
+								</li>
+							</ul>
+						</div>
 						<div
 							className="px-1 bg-transparent d-inline-block d-xl-none"
 							onClick={toggle}>
@@ -132,11 +146,13 @@ export default function Header({ toggle, user, settings }) {
 			}
 		</div>
 		<a
+			className="d-none"
 			href="https://web.munimazamari.gob.pe"
 			accessKey="a"
-			target="__blank"
-			rel="noopener noreferrer"
-		/>
+			target="_blank"
+			rel="noopener noreferrer">
+			{'Login'}
+		</a>
 	</header>
 }
 
@@ -161,11 +177,11 @@ function DropLink({ label, to }) {
 
 const urlWithHeaderTransparent = [
 	'/',
-	'/historia',
-	'/gastronomia',
+	'/mazamari/historia',
 	'/mazamari/gastronomias',
 	'/mazamari/turismos',
 	'/mazamari/agroindustrias',
 	'/mazamari/hoteles',
+	'/mazamari/restaurantes',
 	'/@'
 ];

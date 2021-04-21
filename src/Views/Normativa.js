@@ -47,7 +47,7 @@ export default function Normativa() {
             try {
                 setSearching(true);
                 const tipo = query.get('tipo') ? query.get('tipo') : '';
-                const { data: apiNormativas } = await Axios.get(`/apimuni/normativas?tipo=${tipo}&year=${year}&descripcion=${descripcion}&separador=-`, {
+                const { data: apiNormativas } = await Axios.get(`/v1/normativas?tipo=${tipo}&year=${year}&descripcion=${descripcion}&separador=-`, {
                     cancelToken: source.token
                 });
                 setNormativas(apiNormativas);

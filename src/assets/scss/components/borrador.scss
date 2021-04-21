@@ -2,6 +2,7 @@
     position: fixed;
     bottom: 2rem;
     left: 2rem;
+    z-index: 100;
     width: 100%;
     max-width: 400px;
 
@@ -9,15 +10,17 @@
         position: absolute;
         top: 0;
         right: 0;
-        transform: translateY(-110%);
+        transform: translate(40%, -40%);
         cursor: pointer;
         display: inline-block;
         width: 1.75rem;
         height: 1.75rem;
-        border: 0;
-        background-color: transparent;
+        border: 1px solid var(--grey-300);
+        border-radius: 50%;
+        background-color: $danger;
+        color: white;
         &:hover{
-            background-color: $gray-200;
+            background-color: rgba($danger, $alpha: 0.8);
             border: 1px solid $gray-300;
         }
     }

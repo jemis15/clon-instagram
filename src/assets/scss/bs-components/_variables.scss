@@ -1259,10 +1259,10 @@ $breadcrumb-border-radius:          null !default;
 
 // Carousel
 
-$carousel-control-color:             $white !default;
-$carousel-control-width:             15% !default;
-$carousel-control-opacity:           .5 !default;
-$carousel-control-hover-opacity:     .9 !default;
+$carousel-control-color:             $primary !default;
+$carousel-control-width:             2.5rem !default;
+$carousel-control-opacity:           .7 !default;
+$carousel-control-hover-opacity:     1 !default;
 $carousel-control-transition:        opacity .15s ease !default;
 
 $carousel-indicator-width:           30px !default;

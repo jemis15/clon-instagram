@@ -1,132 +1,122 @@
-import React, { useState } from 'react';
-import { Col, Form, ModalBody, Row, Table, Button, Modal } from 'react-bootstrap';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-export default function Convocatoria(){
-    const styleScroll = {
-        width: '100%', 
-        height: '200px', 
-        overflow: 'scroll' ,
-        overflowY:'hidden',
-        whiteSpace: 'nowrap'
-    }
-    const[modalVer, setModalVer] = useState(false);
-    const toggleModalVer = () => setModalVer(!modalVer);
-return <div className="container my-5 " style={{border:'2px solid #008000'}}>
-        <div className="mx-n3" style={{backgroundColor:"#008000"}} >
-            <h3 className="text-center  p-3" style={{color:'white'}}>Convocatoria CASS </h3>
-        </div>
-    <Form className="p-3">
-    <Button size="sm" className="mr-3 mb-3" variant="info" href="/AgregarConvocatoria"> 
-    Registro
-  </Button>
-    <Row>
-        <Col sm="auto">
-            <label>Año:</label>
-        </Col>
-        <Col>
-        <Form.Control as="select">
-            <option>2020</option>
-        </Form.Control>
-        </Col>
-        <Col  sm='auto'>
-            <label>Mes: </label>
-        </Col>
-        <Col>
-        <Form.Control as="select">
-            <option>Enero</option>
-        </Form.Control>
-        </Col>
-    </Row>
-    <div style={styleScroll} className="mt-3">
-        <Table  className="table table-bordered table-sm">
-                                <thead className="thead-dark">
-                                    <tr>
-                                    <th>Item</th>
-                                    <th>Numero</th>
-                                    <th>Area Solicitante</th>
-                                    <th>
-                                    Bases
-                                    </th>
-                                    <th>Anexos</th>
-                                    <th>Comunicados 1</th>
-                                    <th> Comunicados 2</th>
-                                    <th>Evaluacion CV</th>
-                                    <th>Comunicado 3</th>
-                                    <th>Evaluacion Psicotecnica</th>
-                                    <th>Comunicado 4</th>
-                                    <th>Resultado Final</th>
-                                    <th>Sub Gerencia</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                                    <tr>
-                                    <td>24</td>
-                                    <td>2020</td>
-                                    <td>Enero</td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    <td>
-                                    <Button variant="success" size="sm" onClick={toggleModalVer}>
-                                    Bases
-                                    </Button>
-                                    </td>
-                                    </tr>
-                            </tbody>
-                        </Table>
-                        </div>
-    </Form>
-    <Modal show={modalVer} onHide={toggleModalVer} animation={false}>
-        <Modal.Header closeButton style={{background:'#DFE8F3'}}>
-            Visualizador de pdf
-        </Modal.Header>
-        <Modal.Body>
-            <div id="pdfConvocatoria" className="text-center">
-                    <embed src="file:///C:/Users/usuario/Downloads/77-documento0.pdf" type="application/pdf" style={{width:'90%', height:'650px'}}/>
+export default function Convocatoria() {
+    const [cas, setCas] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [monthCurrent, setMonthCurrent] = useState('');
+    const [yearCurrent, setYearCurrent] = useState(new Date().getFullYear());
+
+    const handleSelectMonth = e => setMonthCurrent(e.target.value);
+    const handleSelectYear = e => setYearCurrent(e.target.value);
+
+    useEffect(() => {
+        async function loadCas() {
+            try {
+                setLoading(true);
+                const { data: apiCas } = await Axios.get(`/v1/cas?year=${yearCurrent}&month=${monthCurrent}&limit=10`);
+                setCas(apiCas);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                console.log(error);
+            }
+        }
+
+        loadCas();
+    }, [yearCurrent, monthCurrent]);
+
+    return <div className="py-3 mt-5 rounded-3 container-xxl bg-white shadow-sm" style={{ border: '1px solid var(--grey-300)' }}>
+        <div className="mb-4 d-flex">
+            <div>
+                <h2>Convocatoria CAS</h2>
+            </div>
+            <div className="ms-auto d-flex">
+                <div className="me-2 d-flex align-items-center">
+                    <label className="me-2">A&ntilde;o</label>
+                    <select className="me-2 form-select" value={yearCurrent} onChange={handleSelectYear}>
+                        <option>2021</option>
+                    </select>
                 </div>
-        </Modal.Body>
-    </Modal>
-</div>
+                <div className="d-flex align-items-center">
+                    <label className="me-2">Mes</label>
+                    <select className="form-select" value={monthCurrent} onChange={handleSelectMonth}>
+                        <option value="">Todos</option>
+                        {[
+                            'Enero',
+                            'Febrero',
+                            'Marzo',
+                            'Abril',
+                            'Mayo',
+                            'Junio',
+                            'Julio',
+                            'Agosto',
+                            'Septiembre',
+                            'Octubre',
+                            'Novienbre',
+                            'Diciembre'
+                        ].map((mes, key) => (
+                            <option key={key} value={key + 1}>{mes}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div className="table-responsive">
+            <table className="table table-bordered table-sm text-smaller">
+                <thead className="table-primary text-primary">
+                    <tr>
+                        <th>N&uacute;mero</th>
+                        <th className="text-center">&Aacute;rea Solicitante</th>
+                        <th>Fecha</th>
+                        <th>Bases</th>
+                        <th>Anexos</th>
+                        <th className="text-center">Comunicado 1</th>
+                        <th className="text-center">Comunicado 2</th>
+                        <th className="text-center">Evaluacion CV</th>
+                        <th className="text-center">Comunicado 3</th>
+                        <th className="text-center">Evaluaci&oacute;n Psicotecnica</th>
+                        <th className="text-center">Comunicado 4</th>
+                        <th className="text-center">Resultado Final</th>
+                        <th className="text-center">Comunicado 5</th>
+                        <th className="text-center">Sub Gerencia</th>
+                    </tr>
+                </thead>
+                <tbody className="text-center">
+                    {loading
+                        ? <tr><td colSpan="14" className="text-center">Cargando...</td></tr>
+                        : <>
+                            {cas.length <= 0
+                                ? <tr><td colSpan="14" className="text-center">No encontramos resultados</td></tr>
+                                : <>
+                                    {cas.map(casItem => (
+                                        <tr key={casItem.id}>
+                                            <td>{casItem.numero}</td>
+                                            <td>{casItem.area}</td>
+                                            <td className="text-nowrap">{casItem.fecha}</td>
+                                            <td>{casItem.base ? <ButtonDescarga url={casItem.base} /> : '---'}</td>
+                                            <td>{casItem.anexo ? <ButtonDescarga url={casItem.anexo} /> : '---'}</td>
+                                            <td>{casItem.comunicado1 ? <ButtonDescarga url={casItem.comunicado1} /> : '---'}</td>
+                                            <td>{casItem.comunicado2 ? <ButtonDescarga url={casItem.comunicado2} /> : '---'}</td>
+                                            <td>{casItem.evaluacion_cv ? <ButtonDescarga url={casItem.evaluacion_cv} /> : '---'}</td>
+                                            <td>{casItem.comunicado3 ? <ButtonDescarga url={casItem.comunicado3} /> : '---'}</td>
+                                            <td>{casItem.evalucaion_psicotecnia ? <ButtonDescarga url={casItem.evalucaion_psicotecnia} /> : '---'}</td>
+                                            <td>{casItem.comunicado4 ? <ButtonDescarga url={casItem.comunicado4} /> : '---'}</td>
+                                            <td>{casItem.resultado ? <ButtonDescarga url={casItem.resultado} /> : '---'}</td>
+                                            <td>{casItem.comunicado5 ? <ButtonDescarga url={casItem.comunicado5} /> : '---'}</td>
+                                            <td>---</td>
+                                        </tr>
+                                    ))}
+                                </>
+                            }
+                        </>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
+
+const ButtonDescarga = (props) => <a className="link-danger" href={props.url} target="_blank" rel="noopener noreferrer">
+    <i className="far fa-file-pdf fa-3x" />
+</a>

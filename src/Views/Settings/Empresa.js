@@ -21,7 +21,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
             setSending(true)
 
             await Axios({
-                method: 'patch',
+                method: 'post',
                 url: '/apimuni/settings',
                 params: settings
             });
@@ -97,7 +97,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
         <Title>Logo</Title>
         <div className="mb-4">
             <div className="d-sm-flex align-items-center">
-                <div className="mb-3 mb-sm-0 mr-3 logo-avatar bg-white position-relative d-flex justify-content-center align-items-center"
+                <div className="mb-3 mb-sm-0 me-3 logo-avatar bg-white position-relative d-flex justify-content-center align-items-center"
                     style={{ maxWidth: '400px', minWidth: '250px', height: '200px' }}>
                     <img src={settings.logo ? settings.logo : logo}
                         alt="logo mazamari"
@@ -105,7 +105,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         style={{ maxWidth: '100%', maxHeight: '100%' }}
                     />
                     <div className="options">
-                        <span className="c_icon cursor-pointer rounded-circle mr-2">
+                        <span className="c_icon cursor-pointer rounded-circle me-2">
                             <i className="icon-image text-white far fa-image" />
                         </span>
                         <span className="c_icon cursor-pointer rounded-circle">
@@ -117,7 +117,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                     <div className="mb-3">
                         <Button as="label"
                             htmlFor="input_change_image"
-                            className="mb-0 mr-2">
+                            className="mb-0 me-2">
                             Cambiar logo
                         </Button>
                         <input
@@ -143,8 +143,8 @@ export default function Empresa({ data, showAlert, updateSettings }) {
         <Form onSubmit={handleSubmit}>
             <Title>Datos Generales</Title>
             <Form.Row className="mb-4">
-                <Form.Group as={Col} sm="6">
-                    <label>Nombre</label>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Nombre</label>
                     <Form.Control
                         type="text"
                         name="nombre_oficial"
@@ -152,9 +152,9 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
-                <Form.Group as={Col} sm="6">
-                    <label>Ruc</label>
+                </div>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Ruc</label>
                     <Form.Control
                         type="text"
                         name="numero_identidad"
@@ -162,9 +162,9 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
-                <Form.Group as={Col} sm="6">
-                    <label>Razon social</label>
+                </div>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Razon social</label>
                     <Form.Control
                         type="text"
                         name="nombre_oficial"
@@ -172,9 +172,9 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
-                <Form.Group as={Col} sm="6">
-                    <label>Direccion</label>
+                </div>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Direccion</label>
                     <Form.Control
                         type="text"
                         name="direccion"
@@ -182,9 +182,9 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
-                <Form.Group as={Col} sm="6">
-                    <label>Telefono</label>
+                </div>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Telefono</label>
                     <Form.Control
                         type="text"
                         name="telefono"
@@ -192,9 +192,9 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
-                <Form.Group as={Col} sm="6">
-                    <label>Correo</label>
+                </div>
+                <div className="mb-3 col-6">
+                    <label className="form-label">Correo</label>
                     <Form.Control
                         type="text"
                         name="correo"
@@ -202,16 +202,16 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                         onChange={handleInputChange}
                         autoComplete="off"
                     />
-                </Form.Group>
+                </div>
             </Form.Row>
 
             <Title>Redes sociales</Title>
             <Form.Row className="mb-4">
-                <Form.Group as={Col} xs="12">
+                <div className="mb-3 col-8">
                     <label className="d-flex">
                         <div>
-                            <div className="text-nowrap mr-2">
-                                <span className="mr-2"><i className="fab fa-facebook" /></span>
+                            <div className="text-nowrap me-2">
+                                <span className="me-2"><i className="fab fa-facebook" /></span>
                                 <span>facebook.com/</span>
                             </div>
                         </div>
@@ -223,12 +223,12 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                             autoComplete="off"
                         />
                     </label>
-                </Form.Group>
-                <Form.Group as={Col} xs="12">
+                </div>
+                <div className="mb-3 col-8">
                     <label className="d-flex">
                         <div>
-                            <div className="text-nowrap mr-2">
-                                <span className="mr-2"><i className="fab fa-youtube" /></span>
+                            <div className="text-nowrap me-2">
+                                <span className="me-2"><i className="fab fa-youtube" /></span>
                                 <span>youtube.com/c/</span>
                             </div>
                         </div>
@@ -240,12 +240,12 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                             autoComplete="off"
                         />
                     </label>
-                </Form.Group>
-                <Form.Group as={Col} xs="12">
+                </div>
+                <div className="mb-3 col-8">
                     <label className="d-flex">
                         <div>
-                            <div className="text-nowrap mr-2">
-                                <span className="mr-2"><i className="fab fa-instagram" /></span>
+                            <div className="text-nowrap me-2">
+                                <span className="me-2"><i className="fab fa-instagram" /></span>
                                 <span>instagram.com/</span>
                             </div>
                         </div>
@@ -257,12 +257,12 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                             autoComplete="off"
                         />
                     </label>
-                </Form.Group>
-                <Form.Group as={Col} xs="12">
+                </div>
+                <div className="mb-3 col-8">
                     <label className="d-flex">
                         <div>
-                            <div className="text-nowrap mr-2">
-                                <span className="mr-2"><i className="fab fa-twitter" /></span>
+                            <div className="text-nowrap me-2">
+                                <span className="me-2"><i className="fab fa-twitter" /></span>
                                 <span>twitter.com/</span>
                             </div>
                         </div>
@@ -274,23 +274,23 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                             autoComplete="off"
                         />
                     </label>
-                </Form.Group>
+                </div>
             </Form.Row>
 
             <Title>Horarios de atenci&oacute;n</Title>
             {['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'].map(dia => (
-                <div key={dia} className="mb-4">
-                    <Form.Check
-                        style={{ width: '150px' }}
-                        className="mb-1 mb-sm-3 text-capitalize d-inline-block"
-                        id={`${dia}-laborable`}
-                        type="checkbox"
-                        name={`${dia}_laborable`}
-                        label={dia}
-                        checked={settings[`${dia}_laborable`]}
-                        onChange={handleCheckChange}
-                        custom
-                    />
+                <div key={dia} className="d-flex mb-4">
+                    <div className="form-check" style={{ width: '150px' }}>
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={`${dia}-laborable`}
+                            name={`${dia}_laborable`}
+                            checked={settings[`${dia}_laborable`]}
+                            onChange={handleCheckChange}
+                        />
+                        <label className="form-check-label" for={`${dia}-laborable`}>{dia}</label>
+                    </div>
                     <div className="d-inline-flex align-items-center">
                         <Form.Control
                             type="time"
@@ -311,7 +311,7 @@ export default function Empresa({ data, showAlert, updateSettings }) {
                 </div>
             ))}
             <div className="mb-4" />
-            <Button type="submit" className="mr-2">
+            <Button type="submit" className="me-2">
                 {sending ? 'Guardando...' : 'Guardar los cambios'}
             </Button>
         </Form>

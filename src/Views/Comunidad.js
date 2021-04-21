@@ -5,7 +5,7 @@ import Markers from '../components/Markers';
 import Post from '../components/Post';
 import Posts from '../components/Posts';
 
-export default function Comunidad({ user }) {
+export default function Comunidad() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
