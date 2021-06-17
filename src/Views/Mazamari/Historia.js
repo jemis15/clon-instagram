@@ -91,15 +91,6 @@ export default function Historia() {
                                         />
                                     </div>
                                 </div>
-                                <div className="ratio ratio-1x1 overflow-hidden rounded-3">
-                                    <div className="">
-                                        <img
-                                            className="object-fit img-thumbnail"
-                                            src="https://selvacentralsite.files.wordpress.com/2017/12/23897825_1618457138212471_2095608532_n.jpg"
-                                            alt="parque ecologico mazamari"
-                                        />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +101,7 @@ export default function Historia() {
 }
 
 const Mazamari = () => <>
-    <div className="p-4 rounded bg-white shadow-sm position-relative" style={{ marginTop: '-100px', zIndex: 10 }}>
+    <div className="p-4 rounded bg-white shadow-sm position-relative" style={{ zIndex: 10 }}>
         <h3 className="mb-3" id="reseña-historia">Rese&ntilde;a Historia</h3>
         <p style={{ textAlign: 'justify' }}>
             {`El 13 de enero de 1928 se da la reforma social firmada por el gobierno de Augusto B. Leguía

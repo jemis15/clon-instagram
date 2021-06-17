@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import 'moment/locale/es';
 import './assets/scss/styles.scss';
 
@@ -18,6 +18,8 @@ import Alert from './components/Alert';
 import Routes from './Routes';
 import ModalBienvenida from './components/ModalBienvenida';
 import Anuncio from './components/Anuncio';
+
+import imgMegafono from './assets/images/icons/utilitarios/megafono.svg';
 
 function James() {
   const { loadingUser } = useUser();
@@ -250,31 +252,27 @@ function Options() {
     }
   }
 
-  if (!settings.facebook) {
-    return null;
-  }
-
   return <>
-    {settings.facebook && (
-      <div className={`facebook shadow ${!facebook && 'd-none'}`}>
+    <div className={`facebook shadow ${!facebook && 'd-none'}`}>
+      <div>
         <div
           className="fb-page"
-          data-href={`https://www.facebook.com/municipalidadmazamari`}
+          data-href="https://www.facebook.com/municipalidadmazamari/"
           data-tabs="timeline"
-          data-width="305"
+          data-width=""
           data-height=""
           data-small-header="false"
           data-adapt-container-width="true"
           data-hide-cover="false"
           data-show-facepile="true">
           <blockquote
-            cite="https://www.facebook.com/municipalidadmazamari"
+            cite="https://www.facebook.com/municipalidadmazamari/"
             className="fb-xfbml-parse-ignore">
-            <a href="https://www.facebook.com/municipalidadmazamari">Municipalidad Distrital De Mazamari</a>
+            <a href="https://www.facebook.com/municipalidadmazamari/">Municipalidad Distrital De Mazamari</a>
           </blockquote>
         </div>
       </div>
-    )}
+    </div>
 
     <div className="options-bottom-right">
       {settings.facebook && (
@@ -330,8 +328,8 @@ const ModalImage = () => {
 }
 
 const LoadAnuncio = () => {
-  const [active, setActive] = useState(false);
-  const [anuncio, setAnuncio] = useState(null);
+  const [active, setActive] = useState(true);
+  const [anuncio, setAnuncio] = useState('Hola mundo');
 
   useEffect(() => {
     let anuncio = setTimeout(() => {
@@ -346,8 +344,23 @@ const LoadAnuncio = () => {
   }
 
   return <>
-    <Anuncio content={anuncio} onHide={() => setActive(false)} />
+    <Anuncio onHide={() => setActive(false)}>
+      <div className="d-md-flex">
+        <div className="me-md-3">
+          <img src={imgMegafono} width="50" />
+        </div>
+        <div>
+          <h4>Convocatoria</h4>
+          <Link to="/muni/convocatorias" className="link-danger small">CONTRATACIÓN ADMINISTRATIVA DE SERVICIOS (CAS) DE PERSONAL PARA LAS DIFERENTES UNIDADES ORGÁNICAS DE LA MUNICIPALIDAD DISTRITAL DE MAZAMARI</Link>
+        </div>
+      </div>
+    </Anuncio>
   </>
+}
+
+const ModalBienvenidaContent = ({ image, url }) => {
+  const [open, setOpen] = useState(true);
+  return <ModalBienvenida url={url} image={image} show={open} onHide={() => setOpen(false)} staticBackdrop />
 }
 
 export default () => (

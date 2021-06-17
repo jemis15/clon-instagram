@@ -37,20 +37,30 @@ export default function AprendoEnCasa() {
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <div className="p-4 rounded bg-white shadow-sm">
-                        <h4>Recursos</h4>
-                        <ul className="mb-0 list-unstyled">
-                            <li><a className="text-decoration-none" href="https://aprendoencasa.pe/#/" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Aprendo en Casa</a></li>
-                            <li><a className="text-decoration-none" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2020/09/30/preguntas-frecuentes/" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Preguntas frecuentes</a></li>
-                        </ul>
-                    </div>
-                    <div className="mt-3 p-4 rounded bg-white shadow-sm">
+                    <div className="mb-3 p-4 rounded bg-white shadow-sm">
                         <h4 className="mb-4">Lamadas telefónicas</h4>
                         <p className="mb-0">
                             <span><IconPhone /></span> <b>01 6155802</b><br />
                             <span><IconPhone /></span> <b>01 6155890</b><br />
                             <small>Horarios: Lunes a viernes: 8:15am - 5:15pm, Savados: 9:00am - 1:00pm</small>
                         </p>
+                    </div>
+                    <div className="mb-3 p-4 rounded bg-white shadow-sm">
+                        <h4>MATERIALES DE APOYO</h4>
+                        <ul className="mb-0 list-unstyled">
+                            <li><a className="text-decoration-none" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2020/10/01/videos-tutoriales/" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Video Tutoriales</a></li>
+                            <li><a className="text-decoration-none" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2020/10/01/guias/" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Guías</a></li>
+                            <li><a className="text-decoration-none" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2021/02/25/centros-de-atencion-al-usuario-cas/" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Centro de atención al usuario (CAS)</a></li>
+                            <li><a className="text-decoration-none" href="https://cierrebrechadigital.aprendoencasa.pe/index.html" target="_blank" rel="noopener noreferrer"><span><IconLink /></span> Conoce más de tu tableta</a></li>
+                        </ul>
+                    </div>
+                    <div className="mb-3">
+                        <a className="mb-3 me-2 d-inline-block" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2020/10/14/normativas/">
+                            <img src="https://autoayuda.minedu.gob.pe/aprendoencasa/wp-content/uploads/sites/34/2020/10/thumbnail_Normativas-1-271x300.png" className="img-fluid" alt="" />
+                        </a>
+                        <a className="mb-3 me-2 d-inline-block" href="https://autoayuda.minedu.gob.pe/aprendoencasa/2020/09/30/preguntas-frecuentes/">
+                            <img src="https://autoayuda.minedu.gob.pe/aprendoencasa/wp-content/uploads/sites/34/2020/10/Banner_03_Mesa-de-trabajo-1-1.jpg" className="img-fluid" alt="" />
+                        </a>
                     </div>
                 </div>
             </div>

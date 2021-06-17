@@ -332,4 +332,5 @@ const pathsWithFooter = [
 	{ pathname: '/muni/funcionarios', exact: true },
 	{ pathname: '/muni/regidores', exact: true },
 	{ pathname: '/aprendoencasa', exact: true },
+	{ pathname: '/c/', exact: false },
 ];

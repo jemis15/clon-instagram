@@ -59,18 +59,11 @@ export default function Header({ toggle }) {
 		className={`header ${isHeaderTransparent && 'is-transparent'} d-flex justify-content-center align-items-center`}>
 		<div className="container-xxl d-flex align-items-center">
 			<Link className="me-4" to="/">
-				{settings && settings.logo
-					? <img
+				{settings && settings.logo && <img
 						src={settings.logo}
 						height="60px"
 						loading="lazy"
 						alt="logo mazamari"
-					/>
-					: <img
-						src={defaultLogo}
-						height="60px"
-						loading="lazy"
-						alt="default logo"
 					/>
 				}
 			</Link>
@@ -111,8 +104,8 @@ export default function Header({ toggle }) {
 					<AppNav />
 					<div className="ms-auto d-flex">
 						<div className="btn-group">
-							<Link to="/login" type="button" className="btn btn-danger">Iniciar sessi&oacute;n</Link>
-							<button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+							<Link to="/login" type="button" className="btn btn-light"><IconUser width="1em" /> Intranet</Link>
+							<button type="button" className="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
 								<span className="visually-hidden">Toggle Dropdown</span>
 							</button>
 							<ul className="dropdown-menu dropdown-menu-end">
@@ -174,6 +167,12 @@ function DropLink({ label, to }) {
 		{label}
 	</Link>
 }
+
+const IconUser = (props) => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={props.width || '1em'} height={props.width || '1em'} fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
+		<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+	</svg>
+)
 
 const urlWithHeaderTransparent = [
 	'/',

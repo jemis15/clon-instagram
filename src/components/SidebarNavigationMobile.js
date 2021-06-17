@@ -108,16 +108,21 @@ const items = [
 			{ name: 'Restaurante', url: '/mazamari/restaurantes' },
 			{ name: 'Hoteles', url: '/mazamari/hoteles' },
 			{ name: 'Agroindustrias', url: '/mazamari/agroindustrias' },
-			{ name: 'Gastronomia', url: '/mazamari/gatronomias' },
+			{ name: 'Gastronomia', url: '/mazamari/gastronomias' },
 		]
 	},
 	{
 		icon: <i className="far fa-building" />,
 		name: 'Municipalidad',
 		links: [
-			{ name: 'Alcalde', url: '/@alcalde' },
-			{ name: 'Regisdores', url: '/equipo' },
-			{ name: 'Gerencias', url: '/gerencias' },
+			{ name: 'Alcalde', url: '/muni/alcalde' },
+			{ name: 'Regisdores', url: '/muni/regidores' },
+			{ name: 'Funcionarios', url: '/muni/funcionarios' },
+			{ name: 'Comision Permanente', url: '/muni/comisiones' },
+			{ name: 'Organigrama', url: '/muni/organigrama' },
+			{ name: 'Visión y Misión', url: '/muni/vision_mision' },
+			{ name: 'Proyectos', url: '/muni/proyectos' },
+			{ name: 'Convocatorias CAS', url: '/muni/convocatorias' },
 		]
 	},
 	{
@@ -140,45 +145,21 @@ const items = [
 		]
 	},
 	{
-		icon: <i className="fab fa-slideshare" />,
-		name: 'Transparencia',
-		links: [
-			{ name: 'Datos generales', url: '/datos_generales' },
-			{ name: 'Planeamiento', url: '/planeamiento' },
-			{ name: 'Presupuesto', url: '/presupuesto' },
-			{ name: 'Proyecto de inversión', url: '/proyecto-inversion' },
-			{ name: 'Participación ciudadana', url: '/participacion-ciudadana' },
-			{ name: 'Personal', url: '/personal' },
-			{ name: 'Contratación de bienes y servicios', url: '/blank/6' },
-			{ name: 'Normas públicas', url: '/blank/7' },
-			{ tipo: 'separador' },
-			{ name: 'Alcalde', url: '/blank/8' },
-			{ name: 'Consejo municipal', url: '/blank/9' },
-			{ name: 'Municipalidad', url: '/blank/10' },
-			{ tipo: 'separador' },
-			{ name: 'Documentos de OCI', url: '/blank/12' },
-			{ name: 'Noticias de la institución', url: '/blank/12' },
-			{ name: 'Anuncios', url: '/blank/12' },
-			{ name: 'Comunicados y nota de prensa', url: '/blank/12' },
-			{ name: 'Boletines', url: '/boletines' },
-		]
-	},
-	{
 		icon: <i className="far fa-database" />,
 		name: 'Informacion en línea',
 		links: [
-			{ name: 'Tributo municipal', url: '/c/tributo-municipal' },
-			{ name: 'Licencia de funcionamiento', url: '/c/licencia-funcionamiento' },
-			{ name: 'Registro civil', url: '/c/registro-civil' },
+			{ name: 'Tributo municipal', url: '/c/t/tributos-municipales/formas-y-lugares-de-pago' },
+			{ name: 'Licencia de funcionamiento', url: '/c/licencia_funcionamiento' },
+			{ name: 'Registro civil', url: '/c/registrocivil' },
 			{ name: 'Defensa civil', url: '/c/defensa-civil' },
-			{ name: 'Transporte público', url: '/c/transporte-publico' },
-			{ name: 'Licencia de edificaciones', url: '/c/licencia-edificaciones' },
-			{ name: 'Comite de control interno', url: '/c/comite-control-interno' },
-			{ name: 'Codigo etica', url: '/c/codigo-etica' },
-			{ name: 'Programa multianual', url: '/c/programa-multianual' },
+			{ name: 'Transporte público', url: '/c/transporte_publico' },
+			{ name: 'Licencia de edificaciones', url: '/c/licencia_edificacion' },
+			{ name: 'Comite de control interno', url: '/c/comitecontrolinterno' },
+			{ name: 'Codigo etica', url: '/c/codigoetica' },
+			{ name: 'Programa multianual', url: '/c/multianual' },
 			{ name: 'Saneamiento', url: '/c/saneamiento' },
-			{ name: 'Presupuesto participativo', url: '/c/presupuesto-participativo' },
-			{ name: 'Solicitud de acceso a la información', url: '/c/solicitud-acceso-infromacion' },
+			{ name: 'Presupuesto participativo', url: '/c/presupuestoparticipativo' },
+			{ name: 'Solicitud de acceso a la información', url: '/c/solicitud-acceso-informacion' },
 		]
 	},
 	{
@@ -190,7 +171,7 @@ const items = [
 			{ name: 'Omaped', url: '/programas/omaped' },
 			{ name: 'Adulto mayor', url: '/programas/adultomayor' },
 			{ name: 'piced', url: '/programas/piced' },
-			{ name: 'servir', url: '/programas/servir' }
+			// { name: 'servir', url: '/programas/servir' }
 		]
 	},
 	{
@@ -199,7 +180,7 @@ const items = [
 		links: [
 			{ name: 'Directorio', url: '/seguridad/directorio' },
 			{ name: 'Codisec', url: '/seguridad/codisec' },
-			{ name: 'Seguridad ciudadana', url: '/seguridad/seguridad-ciudadana' },
+			{ name: 'Seguridad ciudadana', url: '/seguridad/serenazgo' },
 			{ name: 'Seguridad y salud en el trabajo', url: '/seguridad/seguridad-salud-trabajo' },
 			{ name: 'Serenazgo', url: '/seguridad/serenazgo' }
 		]
@@ -210,8 +191,8 @@ const items = [
 		links: [
 			{ name: 'Directorio de telefono', url: '/contactos/directorio-telefono' },
 			{ name: 'Sucursal', url: '/contactos/sucursal' },
-			{ name: 'Sugerencias', url: '/contactos/sugerencias' },
-			{ name: 'Libro de reclamaciones', url: '/contactos/libro-reclamaciones' }
+			{ name: 'Sugerencias', url: '/contactos/realizarreclamo' },
+			{ name: 'Libro de reclamaciones', url: '/contactos/realizarreclamo' }
 		]
 	}
 ];

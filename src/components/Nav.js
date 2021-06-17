@@ -130,6 +130,30 @@ export default function AppNav() {
                             <SubLinkItem to="/normativa" image={imgPdf} titulo="PDC" />
                             <SubLinkItem to="/normativa" image={imgPdf} titulo="PDC AL 2030" />
                             <SubLinkItem to="/normativa" image={imgPdf} titulo="PEI" />
+                            <a href='https://apimuni.centecp.com/storage/documentos/INFORME-DE-EVALUACION-DE-IMPLEMENTACION-DEL-POI-2020.pdf' target="_blank" rel="noopener noreferrer" className="me-3 px-2 rounded link-normal color-text text-decoration-none d-inline-flex align-items-center">
+                                <div className="me-2">
+                                    <img width="17" src={imgPdf} alt="links header" />
+                                </div>
+                                <div>
+                                    <p className="mb-0 text-small">POI 2020</p>
+                                </div>
+                            </a>
+                            <a href='https://apimuni.centecp.com/storage/documentos/INFORME-DE-EVALUACION-DE-IMPLEMENTACION-DEL-POI-2021-PRIMER.pdf' target="_blank" rel="noopener noreferrer" className="me-3 px-2 rounded link-normal color-text text-decoration-none d-inline-flex align-items-center">
+                                <div className="me-2">
+                                    <img width="17" src={imgPdf} alt="links header" />
+                                </div>
+                                <div>
+                                    <p className="mb-0 text-small">POI 2021</p>
+                                </div>
+                            </a>
+                            <a href='https://apimuni.centecp.com/storage/documentos/EVALUACION-PRESUPUESTAL-2020.pdf' target="_blank" rel="noopener noreferrer" className="me-3 px-2 rounded link-normal color-text text-decoration-none d-inline-flex align-items-center">
+                                <div className="me-2">
+                                    <img width="17" src={imgPdf} alt="links header" />
+                                </div>
+                                <div>
+                                    <p className="mb-0 text-small">Evaluci&oacute;n Presupuesta 2020</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </DropMenu>

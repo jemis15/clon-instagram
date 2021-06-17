@@ -5,7 +5,7 @@ import Banner from '../../components/Banner';
 
 export default function Agroindustrias() {
     const [agroindustrias, setAgroindustrias] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [agroindustriaId, setAgroindustriaId] = useState(0);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function Agroindustrias() {
         async function loadAgroindustria() {
             try {
                 setLoading(true);
-                const { data: apiTurismos } = await Axios.get(`/apimuni/jagroindustrias`, {
+                const { data: apiTurismos } = await Axios.get(`/v1/agroindustrias`, {
                     cancelToken: source.token
                 });
                 setAgroindustrias(apiTurismos);

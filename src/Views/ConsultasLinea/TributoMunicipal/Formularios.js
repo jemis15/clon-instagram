@@ -1,10 +1,10 @@
 import React from 'react';
-import {Title1, Title2, MainContent} from '../components/Utilitarios';
+import { Title1, Title2, MainContent, LinkPdf } from '../components/Utilitarios';
 
 const Formularios = () => <MainContent>
     <Title1>FORMULARIOS</Title1>
     <Title2>Hoja Resumen (HR)</Title2>
-    <p>Descargar formato (PDF) / Ver instructivo de llenado (PDF)</p>
+    <p><LinkPdf src="/storage/documentos/pagina-web/formularios/HR-2021.jpg">Descargar formato</LinkPdf></p>
     <p>El formulario Hoja de Resumen (HR) debe contener los siguientes datos:</p>
     <ol>
         <li><b>Identificación del Contribuyente:</b> Se deberá completar la información del propietario del predio (persona natural o jurídica).</li>
@@ -13,7 +13,7 @@ const Formularios = () => <MainContent>
         <li><b>Motivo de la declaración:</b> Se deberá indicar cuál es el motivo de la declaración del (los) predio(s) involucrado(s). Entre los motivos están: por transferencia de propiedad, por modificación de la base imponible, por descargo, por presentación anual de la Declaración Jurada, por rectificatoria, etcétera. Se deberá establecer también el régimen en el cual está involucrado: Afecto, inafecto, exonerado o exonerado parcial.</li>
     </ol>
     <Title1>Predio Urbano (PU)</Title1>
-    <p>Descargar formato (PDF) / Ver instructivo de llenado (PDF)</p>
+    <p><LinkPdf src="/storage/documentos/pagina-web/formularios/PU-2021.jpg">Descargar formato</LinkPdf></p>
     <p>El formulario Predio Urbano (PU) debe contener los siguientes datos:</p>
     <ol>
         <li><b>Identificación del predio:</b> Se deberá completar la información referente a la condición de propiedad (propietario único, sucesión indivisa, poseedor o tenedor, sociedad conyugal, condómino y porcentaje de condominio).</li>
@@ -22,7 +22,7 @@ const Formularios = () => <MainContent>
         <li><b>Datos para determinar el autovalúo:</b> En esta parte del formulario se completará la información específica del predio, teniendo como referencia la Tabla de Valores Unitarios de Edificación que publica cada año el Ministerio de Vivienda y la depreciación establecida en el Reglamento Nacional de Tasaciones.</li>
     </ol>
     <Title2>Predio Rural (PR)</Title2>
-    <p>Descargar formato (PDF) / Ver instructivo de llenado (PDF)</p>
+    <p><LinkPdf src="/storage/documentos/pagina-web/formularios/PR-2021.jpg">Descargar formato</LinkPdf></p>
     <p>El formulario Predio Rural (PR) debe contener los siguientes datos:</p>
     <ol>
         <li><b>Identificación del predio:</b> Se deberá completar la información referente a la condición de propiedad (propietario único, sucesión indivisa, poseedor o tenedor, sociedad conyugal, condómino y porcentaje de condominio).</li>
@@ -31,7 +31,7 @@ const Formularios = () => <MainContent>
         <li><b>Datos para determinar el autovalúo:</b> En esta parte del formulario se completará la información específica del predio, teniendo como referencia la Tabla de Valores Unitarios de Edificación que publica cada año el Ministerio de Vivienda y la depreciación establecida en el Reglamento Nacional de Tasaciones.</li>
     </ol>
     <Title2>Declaración Jurada de Adulto Mayor</Title2>
-    <p>Descargar formato (PDF) / Ver instructivo de llenado (PDF)</p>
+    <p><LinkPdf src="/storage/documentos/pagina-web/formularios/DECLARACION-JURADA-ADULTO-MAYOR.pdf">Descargar formato PDF</LinkPdf></p>
     <p>Este formulario sirve para acceder al beneficio de descuento de 50 UIT de la base imponible del Impuesto Predial a partir del año 2017 a favor de los adultos mayores que cumplan con los requisitos indicados en la Ley N° 30490  “Ley del Adulto Mayor” – DS 401-2016-EF.</p>
 </MainContent>
 

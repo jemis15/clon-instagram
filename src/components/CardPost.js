@@ -12,7 +12,7 @@ export default function CardPost({ type, image, title, category, created_at, ima
         image_publication = `https://img.youtube.com/vi/${image}/0.jpg`;
     }
 
-    return <div className="position-relative hover-post d-flex flex-column bg-white shadow-sm rounded overflow-hidden">
+    return <div className="h-100 position-relative hover-post d-flex flex-column bg-white shadow-sm rounded overflow-hidden">
         <div className="mb-3 ratio ratio-16x9 overflow-hidden">
             <div>
                 <img src={image_publication} className="img-object-fit" />

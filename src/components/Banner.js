@@ -114,6 +114,10 @@ function Banner({ id, background }) {
     return <p className="text-center py-xl">Cargando...</p>
   }
 
+  if (!banner) {
+    return null;
+  }
+
   return <div className={`banner ${background} bg-before edit`}>
     <Container>
       <Row>

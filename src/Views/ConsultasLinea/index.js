@@ -26,7 +26,7 @@ import Contribuyentes from './TributoMunicipal/Contribuyentes';
 
 export default function ConsultaIndex() {
   const { path, url } = useRouteMatch();
-  return <div className="container-xxl my-5">
+  return <div className="container-xxl my-4">
     <Switch>
       <Route path={`${path}/t`} render={() => <ConsultaLinea />} />
       <Route path={`${path}/licencia_funcionamiento`} render={() => <LicenciaFuncionamiento />} />
@@ -46,15 +46,14 @@ export default function ConsultaIndex() {
 function ConsultaLinea() {
   const { path, url } = useRouteMatch();
   return <>
-    <div className="container-xxl my-md-4" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: '1fr 4fr' }}>
-      <aside className="informacion-aside">
+    <div className="row">
+      <aside className="col-md-3">
         <nav className="informacion-links" style={{
           position: 'sticky',
           top: 'calc(var(--header-height) + var(--topbar-height) + 1.5rem)',
           maxHeight: 'calc(100vh - var(--header-height) - var(--topbar-height) - 1.5rem)',
-          overflowY: 'auto'
         }}>
-          <ul className="list-unstyled p-1">
+          <ul className="list-unstyled">
             <LinkCollapsedTributoMunicipal className="mb-1" />
             <LinkCollapsedOrientacionTributaria className="mb-1" />
             <LinkCollapsedTramites className="mb-1" />
@@ -62,8 +61,7 @@ function ConsultaLinea() {
           </ul>
         </nav>
       </aside>
-
-      <div>
+      <div className="col-md-9">
         <Switch>
           <Route path={`${path}/tributos-municipales/formas-y-lugares-de-pago`} render={() => <FormasYLugaresDePago />} />
           <Route path={`${path}/tributos-municipales/plazo-y-cronograma-de-pago`} render={() => <PlazoYCronogramaDePago />} />

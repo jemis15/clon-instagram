@@ -12,27 +12,31 @@ import Modals from './Modals';
 import Perfil from './Perfil';
 import Account from './Account';
 import Seguridad from './Seguridad';
+import { useSetting } from '../../Context/setting-context';
 
-export default function Index({ settings, updateSettings, showAlert, showTopbar }) {
+export default function Index({ updateSettings, showAlert, showTopbar }) {
     const { user } = useUser();
+    const {settings} = useSetting();
     let { path, url } = useRouteMatch();
 
-    if (!settings) {
-        return null;
-    }
+    // if (!settings) {
+    //     return null;
+    // }
+
+    console.log(settings, user);
 
     return <>
         <Container className="my-5">
             <div className="mb-4 d-flex align-items-center">
                 <div className="me-3">
-                    <Avatar
-                        initials={user.nombre[0]}
+                    {/* <Avatar
+                        initials={user.name[0]}
                         size="md"
                         image={user.image}
-                    />
+                    /> */}
                 </div>
                 <div className="overflow-hidden">
-                    <div className="text-dark text-truncate font-weight-600">{user.nombre}</div>
+                    <div className="text-dark text-truncate font-weight-600">{user.name}</div>
                     <div className="text-smaller">@{user.nickname}</div>
                 </div>
             </div>

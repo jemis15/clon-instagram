@@ -18,7 +18,7 @@ export default function Topbars({ showTopbar }) {
         async function loadTopbars() {
             try {
                 setLoading(true);
-                const { data: apiTopbar } = await Axios.get('/apimuni/topbar', {
+                const { data: apiTopbar } = await Axios.get('/v1/topbars', {
                     cancelToken: source.token
                 });
                 setTopbar(apiTopbar);
@@ -47,7 +47,7 @@ export default function Topbars({ showTopbar }) {
             setSending(true);
             await Axios({
                 method: 'post',
-                url: `/apimuni/topbars/${topbar.id}`,
+                url: `/v1/topbars/${topbar.id}`,
                 params: topbar
             });
             showTopbar(topbar);

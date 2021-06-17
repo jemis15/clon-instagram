@@ -6,27 +6,27 @@ import { useParams } from 'react-router-dom';
 export default function GastronomiaDescripcion() {
     const { titulo } = useParams();
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const source = Axios.CancelToken.source();
-        async function loadData() {
-            try {
-                setLoading(true);
-                const { data: apiData } = await Axios.get(`/apimuni/gastronomias/titulo/${titulo}?format=_`, {
-                    cancelToken: source.token
-                });
-                setData(apiData);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            }
-        }
-        loadData();
+    // useEffect(() => {
+    //     const source = Axios.CancelToken.source();
+    //     async function loadData() {
+    //         try {
+    //             setLoading(true);
+    //             const { data: apiData } = await Axios.get(`/apimuni/gastronomias/titulo/${titulo}?format=_`, {
+    //                 cancelToken: source.token
+    //             });
+    //             setData(apiData);
+    //             setLoading(false);
+    //         } catch (error) {
+    //             console.log(error);
+    //             setLoading(false);
+    //         }
+    //     }
+    //     loadData();
 
-        return () => source.cancel('Cancelado');
-    }, [titulo]);
+    //     return () => source.cancel('Cancelado');
+    // }, [titulo]);
 
     if (loading) {
         return <div className="text-center mt-5">Cargando...</div>

@@ -56,7 +56,7 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 0.65);
     &:hover {
-      background-color: rgb(186, 235, 186);
+      background-color: #baebba;
     }
     &::before {
       display: inline-block;
@@ -86,42 +86,75 @@
 }
 
 .container-info {
+  // background-color: white;
+  // padding: 2rem !important;
+  // border: 1px solid #d7d7dc;
+
+  $title-color: $dark;
+  $title-michi-color: #2BD480;
+  $subtitle-color: $dark;
+  $subtitle-michi-color: #2BD480;
+  $table-heade-color: $dark;
+  $table-border-color: #d7d7dc;
+
   .t1 {
+    position: relative;
+    margin-bottom: 1.5rem;
+    color: $title-color;
+    font-size: 1.5rem;
   }
-  .t2:not(:first-child) {
-    margin-top: 3rem;
-    // background-color: green;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--grey-400);
+  .t2 {
+    position: relative;
+    margin-bottom: 1.3rem;
+    font-size: 1.2rem;
+    color: $subtitle-color;
+  }
+  .t2::before {
+    content: "#";
+    position: absolute;
+    left: 0;
+    transform: translateX(-140%);
+  }
+  .t1::before {
+    color: $title-michi-color;
+  }
+  .t2::before {
+    color: $title-michi-color;
+  }
+  p {
+    margin-bottom: 2rem;
+  }
+  ol,
+  ul {
+    margin-bottom: 2rem;
+  }
+  ul {
+    padding-left: 1rem;
+    li {
+      list-style-image: url("../../images/icons/utilitarios/verified.png");
+      // list-style: none;
+      // background-image: url("../../images/icons/utilitarios/check-circle.svg");
+      // background-repeat: no-repeat;
+      // background-size: 1em 1em;
+    }
   }
 
   table,
   td,
   th {
-    border: 1px solid var(--grey-400);
-  }
-
-  tbody {
-    tr {
-      border-radius: 10px;
-    }
+    padding: 10px;
+    border: 1px solid $table-border-color;
   }
 
   table {
-    margin-bottom: 1rem;
-    th,
-    td {
-      padding: 0.25rem 0.3rem;
-    }
-    thead {
-      font-size: 0.8rem;
-      tr {
-        background-color: red;
-        color: white;
-      }
+    width: 100%;
+    margin-bottom: 2rem;
+
+    th {
+      color: $table-heade-color;
     }
     tbody {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
   }
 }

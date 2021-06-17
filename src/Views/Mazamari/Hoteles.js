@@ -4,7 +4,7 @@ import Banner from '../../components/Banner';
 
 export default function Turismos() {
     const [hoteles, setHoteles] = useState([]);
-    const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(true);
+    const [loadingTurismosYGastronomias, setLoadingTurismosYGastronomias] = useState(false);
     const [turismoId, setTurismoId] = useState(0);
 
     // inicio
@@ -13,7 +13,7 @@ export default function Turismos() {
         async function loadTurismo() {
             try {
                 setLoadingTurismosYGastronomias(true);
-                const { data: apiHabitaciones } = await Axios.get(`/apimuni/jhabitaciones`, {
+                const { data: apiHabitaciones } = await Axios.get(`/v1/habitaciones`, {
                     cancelToken: source.token
                 });
                 setHoteles(apiHabitaciones);

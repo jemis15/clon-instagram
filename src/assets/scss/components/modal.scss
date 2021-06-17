@@ -18,7 +18,6 @@
     }
   }
   .modal-body {
-
   }
   .modal-footer {
     border-top: 0;
@@ -28,29 +27,47 @@
       display: block;
       width: 100%;
       margin-bottom: 0;
-      &:last-child{
+      &:last-child {
         margin-bottom: 0;
       }
     }
   }
 }
-.modal-bienvenida{
+.modal-bienvenida {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   max-width: 90vw;
   max-height: 90vh;
   z-index: 1500;
   // background-color: white;
-  button{
+  .btn-close-modal,
+  .btn-download {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    font-size: 1.3rem;
+  }
+  .btn-close-modal {
     background: white;
-    outline: none;
-    padding: 0;
-    border: 0;
+    color: $gray-600;
 
-    &:hover{
-      background: rgb(240, 240, 240);
+    &:hover {
+      background: $gray-200;
+      color: $gray-800;
+    }
+  }
+  .btn-download {
+    background-color: $red-500;
+    color: white;
+    &:hover {
+      background-color: $red-600;
     }
   }
 }

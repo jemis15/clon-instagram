@@ -1,6 +1,6 @@
 {
   "name": "web-muni",
-  "homepage": "https://dev-mazamari.munimazamari.gob.pe",
+  "homepage": "https://munimazamari.gob.pe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

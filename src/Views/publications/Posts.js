@@ -79,28 +79,28 @@ export default function Posts() {
     }
 
     if (loadingPosts) {
-        return <div className="mt-5 text-center">Cargando...</div>
+        return <div className="mt-4 text-center">Cargando...</div>
     }
 
     return <>
-        <div className="py-5 container-xxl">
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+        <div className="py-4 container">
+            <ul className="list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                 {posts.map(post => {
-                    return <CardPost
-                        key={post.id}
-                        type={post.tipo}
-                        image={post.image}
-                        title={post.titulo}
-                        category={post.categoria}
-                        created_at={post.created_at}
-                        image_of_video={post.image_of_video}
-                        video_from={post.video_from}
-                        user_image={post.user_image}
-                        user_name={post.user_name}
-                    />
+                    return <li key={post.id} className="col">
+                        <CardPost
+                            type={post.tipo}
+                            image={post.image}
+                            title={post.titulo}
+                            category={post.categoria}
+                            created_at={post.created_at}
+                            image_of_video={post.image_of_video}
+                            video_from={post.video_from}
+                            user_image={post.user_image}
+                            user_name={post.user_name}
+                        />
+                    </li>
                 })}
-            </div>
+            </ul>
         </div>
     </>
 

@@ -169,10 +169,11 @@ function SaludoDelAlcalde() {
 function LinksImportantAndMazamariInLinea({ links }) {
     const { user } = useUser();
 
+
     return <div className="py-5 border-top border-bottom border-5 border-white">
         <div className="container-xxl">
-            <Row>
-                <Col lg="6" className="d-flex flex-column">
+            <div className="row">
+                <div className="col-md-6 d-flex flex-column">
                     <div className="d-flex">
                         <h4 className="mb-0 px-3 py-2 rounded-top bg-danger text-white">Importante</h4>
                         {user && user.is_admin === 1 && <div className="ms-auto">
@@ -182,21 +183,23 @@ function LinksImportantAndMazamariInLinea({ links }) {
                         </div>}
                     </div>
                     {/* <div className="grid-links"> */}
-                    <div className="h-100 px-5 py-4 shadow-sm bg-white" style={{ border: '1px solid var(--grey-300)' }}>
-                        <div className="px-3" style={{ display: 'grid', rowGap: '1rem', columnGap: '4rem', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+                    <div className="h-100 px-3 px-sm-5 px-md-3 px-lg-5 py-4 shadow-sm bg-white">
+                        <ul className="row row-cols-2 g-1 g-sm-3 g-md-3 list-unstyled">
                             {links.importantes.map((link, key) => {
-                                return link.url && <Link key={key} className="d-inline-block" to={link.url}>
-                                    <div className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <img className="img-fluid" src={link.image} alt="marker" />
+                                return link.redirect_to && <li key={key} className="col">
+                                    <a className="d-block" href={link.redirect_to} target="_blank" rel="noopener noreferrer">
+                                        <div className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover">
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <img className="img-fluid" src={link.image} alt="marker" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </Link>
+                                    </a>
+                                </li>
                             })}
-                        </div>
+                        </ul>
                     </div>
-                </Col>
-                <Col lg="6" className="d-flex flex-column">
+                </div>
+                <div className="col-md-6 d-flex flex-column">
                     <div className="d-flex">
                         <h4 className="mb-0 px-3 py-2 rounded-top bg-danger text-white">Mazamari en L&iacute;nea</h4>
                         {user && user.is_admin === 1 && <div className="ms-auto">
@@ -205,23 +208,28 @@ function LinksImportantAndMazamariInLinea({ links }) {
                             </Link>
                         </div>}
                     </div>
-                    <div className="h-100 px-5 py-4 shadow-sm bg-white" style={{ border: '1px solid var(--grey-300)' }}>
-                        <div className="px-3" style={{ display: 'grid', rowGap: '1rem', columnGap: '4rem', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
-                            {links.enLinea.map(marker => (
-                                <a key={marker.id}
-                                    href={marker.url}
-                                    className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover"
-                                    target="_blank"
-                                    rel="noopener noreferrer">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <img className="img-fluid" src={marker.image} alt="marker" />
-                                    </div>
-                                </a>
+                    <div className="h-100 px-3 px-sm-5 px-md-3 px-lg-5 py-4 shadow-sm bg-white">
+                        <ul className="row row-cols-2 g-1 g-sm-3 g-md-3 list-unstyled">
+                            {links.enLinea.map(link => (
+                                <li key={link.id} className="col">
+                                    <a href={link.redirect_to} className="d-block" target="_blank" rel="noopener noreferrer">
+                                        <div className="shadow-sm ratio ratio-21x9 border rounded rounded-3 marker hover">
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <img className="img-fluid" src={link.image} alt="marker" />
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
                             ))}
-                        </div>
+                            <li className="col">
+                                <Link to="/aprendoencasa">
+                                    <img src="https://1.bp.blogspot.com/-hwE6QgyuLu8/XrIddYhEXTI/AAAAAAAAieo/nPdgfypGEugEHMLaZznFkQjbhrTWRfr3gCLcBGAsYHQ/s1600/logo%2BAprendo%2Ben%2Bcasa_Secundaria.png" className="img-fluid" />
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     </div >
 }
