@@ -33,6 +33,47 @@
     }
   }
 }
+
+.modal-bienvenida2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+
+  // * {
+  //   width: 100%;
+  //   max-width: 1300px;
+  //   align-self: center;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
+}
+
+.video-facebook-container {
+  width: 100vw;
+  max-width: 1000px;
+  max-height: 100vh;
+  height: 100vh;
+  background-color: royalblue;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-image-modal{
+  width: 100vw;
+  height: 100vh;
+  background-color: yellow;
+}
+
+.fb-video{
+  max-width: 1000px;
+  width: 1000px;
+}
+
 .modal-bienvenida {
   position: fixed;
   top: 50%;

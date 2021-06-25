@@ -39,3 +39,75 @@
         padding: 1rem;
     }
 }
+
+.style-scroll::-webkit-scrollbar {
+    width: 8px;
+    /* Tamaño del scroll en vertical */
+    height: 8px;
+    /* Tamaño del scroll en horizontal */
+    display: none;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.style-scroll::-webkit-scrollbar-thumb {
+    background: rgb(194, 194, 194);
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.style-scroll::-webkit-scrollbar-thumb:hover {
+    background: #cacaca;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.style-scroll::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del track */
+.style-scroll::-webkit-scrollbar-track {
+    background: #f7f7f7;
+    border-radius: 4px;
+}
+
+.carousel-normativa{
+    background-color: white;
+    border: 1px solid $gray-200;
+    border-radius: 5px;
+    &:hover{
+        background-color: $green-500;
+        .title{
+            color: $green-100;
+        }
+        .content, .date{
+            color: $green-200;
+        }
+    }
+
+    .title{
+        color: $green-400;
+    }
+    .content{
+        color: $gray-600;
+    }
+    .date{
+        color: $gray-600;
+    }
+}
+
+.border-left-rounded{
+    padding-left: 2rem;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        border-top-right-radius: 2rem 5rem;
+        border-bottom-right-radius: 2rem 5rem;
+        width: 0.5rem;
+        height: 100%;
+        background-color: $primary;
+    }
+}

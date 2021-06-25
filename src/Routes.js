@@ -99,6 +99,7 @@ const Error404 = lazy(() => import('./Views/Error404'));
 const Publications = lazy(() => import('./Views/publicaciones/Lista'));
 const PostDetails = lazy(() => import('./Views/publicaciones/DetalleNoticia'));
 const PostNew = lazy(() => import('./Views/publicaciones/New'));
+const DocumentosGestion = lazy(() => import('./Views/DocumentosGestion'));
 
 const MyStyle = lazy(() => import('./Views/MyStyle'));
 
@@ -206,6 +207,7 @@ function Rutas({ showAlert, showTopbar, carouselLinks }) {
                 <Route path="/Comunicados" render={() => <Comunicados />} />
                 <Route path="/Boletines" render={() => <Boletines />} />
                 <Route path='/Anuncios' render={() => <Anuncios />} />
+                <Route path="/documentos-de-gestion" render={() => <DocumentosGestion />} />
                 <Route exact path="/" render={() => <Home showAlert={showAlert} carouselLinks={carouselLinks} />} />
 
                 {user && <>

@@ -28,10 +28,12 @@ function James() {
   return <>
     {(loadingUser || loadingSettings) && <Loading />}
     <Router>
+      <TopbarContent />
       <HeaderAndSidebar />
       <Routes />
       <AppFooter />
       <Options />
+      <ModalBienvenidaContent />
     </Router>
   </>
 }
@@ -358,9 +360,81 @@ const LoadAnuncio = () => {
   </>
 }
 
-const ModalBienvenidaContent = ({ image, url }) => {
+const ModalBienvenidaContent = () => {
   const [open, setOpen] = useState(true);
-  return <ModalBienvenida url={url} image={image} show={open} onHide={() => setOpen(false)} staticBackdrop />
+  const [modals, setModals] = useState([]);
+  // const listaModales = [
+  //   { type: 'video-facebook', url: 'https://www.facebook.com/municipalidadmazamari/videos/486043292471449/' },
+  //   { type: 'image', url: '/storage/images/modalbienvenida/imagen1.jpg' },
+  //   { type: 'image', url: '/storage/images/modalbienvenida/imagen2.jpg' },
+  //   { type: 'image', url: '/storage/images/modalbienvenida/imagen3.jpg' },
+  //   { type: 'image', url: '/storage/images/modalbienvenida/imagen4.jpg' },
+  //   { type: 'image', url: '/storage/images/modalbienvenida/imagen5.jpg' }
+  // ];
+
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    async function loadModals() {
+      try {
+        const { data: apiModals } = await Axios.get('/v1/notificationmodal/actives', {
+          cancelToken: source.token
+        });
+        setModals(apiModals.data);
+      } catch (error) {
+        if (Axios.isCancel(error)) { return; }
+        console.log(error);
+      }
+    }
+
+    loadModals();
+    return () => source.cancel('Cancelado!!');
+  }, []);
+
+  if (!open) {
+    return null;
+  }
+
+  if (!modals.length) {
+    return null;
+  }
+
+  return <ModalBienvenida onHide={() => setOpen(false)} data={modals} />
+}
+
+
+function TopbarContent() {
+  const [topbar, setTopbar] = useState();
+
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    async function loadTobar() {
+      try {
+        const { data: apiTopbar } = await Axios.get('v1/topbars/actives', { cancelToken: source.token });
+        setTopbar(apiTopbar.data);
+      } catch (error) {
+        if (Axios.isCancel(error)) { return; }
+        console.log(error);
+      }
+    }
+
+    loadTobar();
+    return () => source.cancel('Cancelado');
+  }, []);
+
+  if (!topbar) {
+    // verificamos si contiene la clase has-topbar
+    const isClassTopbar = document.body.classList.contains('has-topbar');
+    // si contiente la clase removemos la clase has-topbar
+    isClassTopbar && document.body.classList.remove('has-topbar');
+    return null;
+  }
+
+  // verificamos si contiene la clase has-topbar
+  const isClassTopbar = document.body.classList.contains('has-topbar');
+  // si no tiene la clase le agregamos la clase has-topbar
+  !isClassTopbar && document.body.classList.add('has-topbar');
+
+  return <Topbar topbar={topbar.descripcion} />
 }
 
 export default () => (

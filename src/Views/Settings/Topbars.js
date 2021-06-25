@@ -11,6 +11,7 @@ export default function Topbars({ showTopbar }) {
     const [error, setError] = useState(null);
     const [topbar, setTopbar] = useState(null);
     const [sending, setSending] = useState(false);
+    const [topbars, setTopbars] = useState([]);
 
     useEffect(() => {
         const source = Axios.CancelToken.source();
@@ -22,6 +23,7 @@ export default function Topbars({ showTopbar }) {
                     cancelToken: source.token
                 });
                 setTopbar(apiTopbar);
+                setTopbars(apiTopbar.data);
                 setLoading(false);
             } catch (error) {
                 if (Axios.isCancel(error)) { return; }
@@ -97,6 +99,14 @@ export default function Topbars({ showTopbar }) {
 
     return <div>
         <Title className="mb-4">Topbar</Title>
+
+        <div>
+            {topbars.map(topbar => (
+                <div>
+                    {topbar.descripcion}
+                </div>
+            ))}
+        </div>
 
         <Form onSubmit={handleSubmit}>
             <div className="mb-3">

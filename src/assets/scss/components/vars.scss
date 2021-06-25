@@ -123,17 +123,17 @@ body.dark-theme {
   --transition-collapse: 0.2s;
 
   // Header
-  --topbar-height: 2rem;
+  --topbar-height: 2.5rem;
   --header-height: 4rem;
   --header-topbar-height: calc(var(--topbar-height) + var(--header-height));
   --header-height-when-collapse-sidebar: 6rem;
-  --transparent-header-height: 6rem;
+  --transparent-header-height: 7rem;
 
   // Sidevar
   --sidebar-width: 16.25rem;
   --sidebar-collapse-width: 4.25rem;
 
   @include media-breakpoint-up(xl) {
-    --header-height: 4rem;
+    --header-height: 4.5rem;
   }
 }

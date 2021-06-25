@@ -10,6 +10,7 @@ import MenuLinks from './components/MenuLinks';
 import PortalCarousel from './components/PortalCarousel';
 import CarouselLinksFooter from './components/CarouselLinksFooter';
 import CreateNoticia from './components/CreateNoticia';
+import CarouselDocumentosGestion from './components/CarouselDocumentosGestion';
 
 const LinkContext = React.createContext();
 export default function Inicio({ showAlert }) {
@@ -81,6 +82,8 @@ export default function Inicio({ showAlert }) {
 
         {/* Saludo del alcalde */}
         <SaludoDelAlcalde />
+
+        <CarouselDocumentosGestion />
 
         <LinkProvider>
             {/* Links importantes y mazamari en linea */}
@@ -154,7 +157,7 @@ function SaludoDelAlcalde() {
                     <h2 className="t1 mb-0 text-center">
                         {saludoOfUser.nombre}
                     </h2>
-                    <h3 className="mb-4 text-center text-danger">
+                    <h3 className="mb-4 text-center text-primary">
                         {saludoOfUser.cargo}
                     </h3>
                     <p className="mb-0" style={{ textAlign: 'justify' }}>
@@ -168,7 +171,6 @@ function SaludoDelAlcalde() {
 
 function LinksImportantAndMazamariInLinea({ links }) {
     const { user } = useUser();
-
 
     return <div className="py-5 border-top border-bottom border-5 border-white">
         <div className="container-xxl">
